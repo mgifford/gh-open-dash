@@ -1,0 +1,136 @@
+:root {
+  --primary: #004488;
+  --bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --text: #333;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 8px;
+  color: var(--primary);
+}
+
+.meta {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.controls {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.controls label {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+select {
+  padding: 6px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+section {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Leaderboard */
+.leaderboard {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th.num, td.num {
+  text-align: right;
+}
+
+tr:hover {
+  background: #f9f9f9;
+}
+
+tr.selected {
+  background: #eef4ff;
+  border-left: 4px solid var(--primary);
+}
+
+.author-cell {
+  font-weight: 500;
+}
+
+.more-info {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  font-size: 1.2rem;
+  color: #666;
+}
