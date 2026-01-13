@@ -1,0 +1,15 @@
+{
+  "name": "ca-open-dashboard-scripts",
+  "version": "1.0.0",
+  "description": "Data pipeline for ca-open-dashboard",
+  "type": "module",
+  "scripts": {
+    "update": "node scripts/update_sqlite.mjs",
+    "export": "node scripts/export_metrics.mjs"
+  },
+  "dependencies": {
+    "@octokit/graphql": "^8.0.0",
+    "better-sqlite3": "^9.0.0",
+    "dotenv": "^16.0.0"
+  }
+}
