@@ -3,3 +3,4 @@ site/node_modules
 site/dist
 .DS_Store
 .env
+scripts/staff_allowlist.json

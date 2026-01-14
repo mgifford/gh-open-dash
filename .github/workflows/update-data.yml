@@ -24,13 +24,27 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Write staff allowlist from secret
+        run: |
+          if [ -z "${STAFF_ALLOWLIST_JSON}" ]; then
+            echo "STAFF_ALLOWLIST_JSON secret not set" >&2
+            exit 1
+          fi
+          printf '%s\n' "${STAFF_ALLOWLIST_JSON}" > scripts/staff_allowlist.json
+        env:
+          STAFF_ALLOWLIST_JSON: ${{ secrets.STAFF_ALLOWLIST_JSON }}
+
       - name: Update SQLite
         run: node scripts/update_sqlite.mjs
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_READ_ORG_TOKEN || secrets.GITHUB_TOKEN }}
+          ORG_ALLOWLIST: ${{ vars.ORG_ALLOWLIST || 'civicactions' }}
+          HISTORY_WEEKS: ${{ vars.HISTORY_WEEKS || 260 }}
 
       - name: Export Metrics
         run: node scripts/export_metrics.mjs
+        env:
+          ORG_ALLOWLIST: ${{ vars.ORG_ALLOWLIST || 'civicactions' }}
 
       - name: Commit and Push
         run: |
