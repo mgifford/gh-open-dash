@@ -10,7 +10,12 @@ This repository builds and publishes a GitHub Pages dashboard for **public, open
 
 1a. **Multiple public orgs allowed**
    - You may query a configured allowlist of public GitHub orgs (e.g., `civicactions` plus partners/upstreams) using the same weekly, org-wide searches.
-   - Keep requests org-scoped (no per-repo/per-person queries) to remain rate-limit safe.
+   - Keep requests org-scoped to remain rate-limit safe unless using the staff per-person mode described below.
+
+1b. **Staff per-person mode (public only)**
+   - You may run weekly, time-bounded, per-person queries for users in the configured staff allowlist to capture their public activity across all public repos (including personal and other-org repos), still respecting all other constraints below.
+   - Per-person queries MUST be limited to the staff allowlist; do not query arbitrary users.
+   - Keep weekly windows and counts-only responses to stay rate-limit safe.
 
 2. **No content leakage**
     - The dataset MUST NOT contain any of:
@@ -23,8 +28,8 @@ This repository builds and publishes a GitHub Pages dashboard for **public, open
     - Store and publish counts only. Repo names are allowed.
 
 3. **Rate-limit safe**
-   - Do not query per-person or per-repo.
-   - Use org-wide weekly queries across the allowed org list and aggregate locally.
+   - Default mode: org-wide weekly queries across the allowed org list.
+   - Staff mode: per-person weekly queries ONLY for staff allowlist users; no arbitrary users. Keep weekly windows and minimal fields.
    - Keep GraphQL requests bounded by weekly activity.
 
 4. **Week-by-week, complete weeks only**
@@ -62,10 +67,11 @@ Primary keys prevent duplicates:
 - `(week_start, author, repo)`
 
 ### GraphQL usage
-- Use `search` with `type: ISSUE` and qualifiers per allowed org:
+- Org mode: `search` with `type: ISSUE` and qualifiers per allowed org:
    - `org:ORGNAME is:pr created:START..END`
    - `org:ORGNAME is:pr merged:START..END`
    - `org:ORGNAME is:issue created:START..END`
+- Staff per-person mode: for each staff allowlist user, weekly queries limited to public data, e.g. `author:USERNAME is:pr created:START..END`, `author:USERNAME is:issue created:START..END`, and similar for merged PRs using `involves:` or other bounded qualifiers, while still filtering by OSS license.
 - Fetch only:
    - `author.login`
    - `repository.nameWithOwner`

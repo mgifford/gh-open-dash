@@ -5,6 +5,7 @@ import path from 'path';
 
 const DB_PATH = path.join('data', 'participation.sqlite');
 const ALLOWLIST_PATH = path.join('scripts', 'oss_spdx_allowlist.json');
+const STAFF_ALLOWLIST_PATH = path.join('scripts', 'staff_allowlist.json');
 const ORG_ALLOWLIST = (process.env.ORG_ALLOWLIST || 'civicactions')
   .split(',')
   .map((s) => s.trim())
@@ -21,6 +22,7 @@ if (!fs.existsSync('data')) {
 
 // Load allowlist
 const allowList = JSON.parse(fs.readFileSync(ALLOWLIST_PATH, 'utf8'));
+const staffAllowList = loadStaffAllowList();
 
 // Initialize DB
 const db = new Database(DB_PATH);
@@ -86,6 +88,25 @@ function toISODate(d) {
   return d.toISOString().split('T')[0];
 }
 
+function loadStaffAllowList() {
+  if (process.env.STAFF_ALLOWLIST_JSON) {
+    try {
+      return JSON.parse(process.env.STAFF_ALLOWLIST_JSON);
+    } catch (err) {
+      console.warn('Failed to parse STAFF_ALLOWLIST_JSON env; falling back to file if present:', err.message);
+    }
+  }
+  if (fs.existsSync(STAFF_ALLOWLIST_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(STAFF_ALLOWLIST_PATH, 'utf8'));
+    } catch (err) {
+      console.warn('Failed to parse staff_allowlist.json; defaulting to empty list:', err.message);
+      return [];
+    }
+  }
+  return [];
+}
+
 // Main logic
 async function run() {
   const token = process.env.GITHUB_TOKEN;
@@ -117,6 +138,8 @@ async function run() {
 
   console.log(`Last complete week start: ${toISODate(lastCompleteWeekStart)}`);
   console.log(`Start processing from: ${toISODate(startProcessingDate)}`);
+  console.log(`Org allowlist: ${ORG_ALLOWLIST.join(', ')}`);
+  console.log(`Staff allowlist size: ${staffAllowList.length}`);
 
   let pointer = startProcessingDate;
   while (pointer <= lastCompleteWeekStart) {
@@ -133,12 +156,19 @@ async function run() {
       await processMetric(graphqlClient, 'issue_opened', weekStartStr, `org:${org} is:issue created:${rangeStart}..${rangeEnd}`, org);
     }
 
+    for (const user of staffAllowList) {
+      const label = `staff:${user}`;
+      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `author:${user} is:pr created:${rangeStart}..${rangeEnd}`, label);
+      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `author:${user} is:pr merged:${rangeStart}..${rangeEnd}`, label);
+      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `author:${user} is:issue created:${rangeStart}..${rangeEnd}`, label);
+    }
+
     setMeta('processed_through_week', weekStartStr);
     pointer = addDays(pointer, 7);
   }
 }
 
-async function processMetric(client, table, weekStart, query, orgLabel) {
+async function processMetric(client, table, weekStart, query, contextLabel) {
   let hasNextPage = true;
   let cursor = null;
   const items = [];
@@ -146,9 +176,10 @@ async function processMetric(client, table, weekStart, query, orgLabel) {
   let skippedMissingLicense = 0;
   let skippedDisallowedLicense = 0;
   let skippedMissingAuthor = 0;
+  let skippedPrivateRepo = 0;
 
   while (hasNextPage) {
-    const data = await fetchSearchPage(client, query, cursor, `${table}:${orgLabel}`);
+    const data = await fetchSearchPage(client, query, cursor, `${table}:${contextLabel}`);
 
     const search = data.search;
     hasNextPage = search.pageInfo.hasNextPage;
@@ -156,6 +187,7 @@ async function processMetric(client, table, weekStart, query, orgLabel) {
 
     for (const node of search.nodes) {
       if (!node.repository) { skippedMissingRepo++; continue; }
+      if (node.repository.isPrivate) { skippedPrivateRepo++; continue; }
       if (!node.repository.licenseInfo) { skippedMissingLicense++; continue; }
       if (!node.author || !node.author.login) { skippedMissingAuthor++; continue; }
 
@@ -182,12 +214,12 @@ async function processMetric(client, table, weekStart, query, orgLabel) {
 
   if (items.length > 0) {
     insertMany(items);
-    console.log(`  Inserted ${items.length} records for ${table} (${orgLabel})`);
+    console.log(`  Inserted ${items.length} records for ${table} (${contextLabel})`);
   }
 
-  const skippedTotal = skippedMissingRepo + skippedMissingLicense + skippedDisallowedLicense + skippedMissingAuthor;
+  const skippedTotal = skippedMissingRepo + skippedMissingLicense + skippedDisallowedLicense + skippedMissingAuthor + skippedPrivateRepo;
   if (skippedTotal > 0) {
-    console.log(`  Skipped ${skippedTotal} records for ${table} (${orgLabel}) (missing repo: ${skippedMissingRepo}, missing license: ${skippedMissingLicense}, disallowed license: ${skippedDisallowedLicense}, missing author: ${skippedMissingAuthor})`);
+    console.log(`  Skipped ${skippedTotal} records for ${table} (${contextLabel}) (missing repo: ${skippedMissingRepo}, private repo: ${skippedPrivateRepo}, missing license: ${skippedMissingLicense}, disallowed license: ${skippedDisallowedLicense}, missing author: ${skippedMissingAuthor})`);
   }
 }
 
@@ -207,6 +239,7 @@ async function fetchSearchPage(client, query, cursor, contextLabel) {
                 repository {
                   nameWithOwner
                   licenseInfo { spdxId }
+                  isPrivate
                 }
               }
               ... on Issue {
@@ -214,6 +247,7 @@ async function fetchSearchPage(client, query, cursor, contextLabel) {
                 repository {
                   nameWithOwner
                   licenseInfo { spdxId }
+                  isPrivate
                 }
               }
             }
