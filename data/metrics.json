@@ -1,6 +1,9 @@
 {
-  "generated_at": "2026-01-13T22:52:48.018Z",
+  "generated_at": "2026-01-14T01:28:41.750Z",
   "org": "civicactions",
+  "orgs": [
+    "civicactions"
+  ],
   "weeks": [
     "2025-01-27",
     "2025-02-17",
@@ -444,6 +447,485 @@
           "prs_merged": 0,
           "issues_opened": 0
         },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    }
+  ],
+  "staff_allowlist": [
+    "aaronpava",
+    "acabouet",
+    "adamsrach",
+    "adriancooke",
+    "ajoseph0",
+    "akaroleff",
+    "alanna-blinn",
+    "alex9000",
+    "amiabd",
+    "andyhawks",
+    "arisaves",
+    "ashish1605",
+    "Becapa",
+    "beeyayjay",
+    "BlakeOrgan",
+    "bobschmitt-civicactions",
+    "brdunfield",
+    "brentonkelly1982",
+    "brianseek",
+    "Bridgette2022",
+    "cameronprince",
+    "cfbauer",
+    "ChristianRAnderson",
+    "civicactionsbot",
+    "conleya6",
+    "Croftcheck",
+    "curtis-civicActions",
+    "dafeder",
+    "DanActions",
+    "dasumner",
+    "davidmpickett",
+    "dcgoodwin2112",
+    "dgading",
+    "dmundra",
+    "eknapier",
+    "elizabethraley",
+    "erichuffman",
+    "farooqzakhilwal",
+    "grugnog",
+    "hpoole",
+    "iris-i",
+    "janette",
+    "jastraat",
+    "jcw-ca",
+    "jennawaszak",
+    "jerseycheese",
+    "jfremer",
+    "joduinn",
+    "jonbot",
+    "joshuaminarick",
+    "jschmidt-civicactions",
+    "julieadair73",
+    "kaise-lafrai",
+    "kducharm",
+    "KeithKawasaki",
+    "kellysmith1008",
+    "KitLykos",
+    "kkxy-alex",
+    "kristenjernigan",
+    "lhouse24",
+    "llanford",
+    "maggiewachs",
+    "marissaleighfox",
+    "MattPowellCA",
+    "melindaburgess",
+    "mgifford",
+    "mikemarsello",
+    "msielski",
+    "nehal-desai",
+    "netboss",
+    "npoku",
+    "opendata-bot",
+    "openprivacy",
+    "paul-m",
+    "peteketcham",
+    "prasuna-m",
+    "ptkoroma",
+    "qjac",
+    "rey-e",
+    "rovcase",
+    "sammydelao",
+    "schiavo",
+    "sfmcgee",
+    "sharjeelaziz",
+    "sheryl26han",
+    "starsinmypockets",
+    "stephkschultz",
+    "stevecurtis",
+    "suzanne-gray",
+    "swirtSJW",
+    "synterra",
+    "TerraCoders",
+    "TheBoatyMcBoatFace",
+    "TheETupper",
+    "thejordanwood",
+    "thesarahbaron",
+    "tiffneybare",
+    "timozura",
+    "Tom-Camp",
+    "tonytaylor",
+    "valerierunde",
+    "webbywe",
+    "wullaski",
+    "zedmonds96"
+  ],
+  "staff_authors": [
+    "adriancooke",
+    "alanna-blinn",
+    "civicactionsbot",
+    "davidmpickett",
+    "dmundra",
+    "grugnog",
+    "iris-i",
+    "mgifford",
+    "openprivacy",
+    "TheBoatyMcBoatFace",
+    "Tom-Camp"
+  ],
+  "staff_series": [
+    {
+      "week_start": "2025-01-27",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-02-17",
+      "byAuthor": {
+        "grugnog": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-03-03",
+      "byAuthor": {
+        "grugnog": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-03-10",
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "openprivacy": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-03-17",
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "openprivacy": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-04-07",
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "grugnog": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "openprivacy": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-04-14",
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-04-21",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "openprivacy": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-04-28",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-05-05",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-05-12",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-05-19",
+      "byAuthor": {
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "civicactionsbot": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-06-02",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "grugnog": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-06-09",
+      "byAuthor": {
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-06-16",
+      "byAuthor": {
+        "civicactionsbot": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-06-23",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-07-14",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-07-28",
+      "byAuthor": {
+        "alanna-blinn": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-09-08",
+      "byAuthor": {
+        "openprivacy": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-09-22",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "iris-i": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-09-29",
+      "byAuthor": {
+        "civicactionsbot": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-13",
+      "byAuthor": {
+        "adriancooke": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "alanna-blinn": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-20",
+      "byAuthor": {
+        "civicactionsbot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-27",
+      "byAuthor": {
+        "iris-i": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2025-11-10",
+      "byAuthor": {}
+    },
+    {
+      "week_start": "2025-12-01",
+      "byAuthor": {}
+    },
+    {
+      "week_start": "2025-12-15",
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2026-01-05",
+      "byAuthor": {
         "TheBoatyMcBoatFace": {
           "prs_opened": 0,
           "prs_merged": 0,
