@@ -2,9 +2,16 @@ name: Update participation data
 
 on:
   schedule:
-    # Mondays 06:00 UTC
-    - cron: "0 6 * * 1"
-  workflow_dispatch: {}
+    # Temporarily run daily at 06:00 UTC for burn-in; revert to weekly once stable.
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      reprocess_from_week:
+        description: "ISO Monday date (YYYY-MM-DD) to restart processing from"
+        required: false
+      reprocess_weeks:
+        description: "Number of full weeks to reprocess from the last complete week"
+        required: false
 
 permissions:
   contents: write
@@ -41,6 +48,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_READ_ORG_TOKEN || secrets.GITHUB_TOKEN }}
           ORG_ALLOWLIST: ${{ vars.ORG_ALLOWLIST || 'civicactions' }}
           HISTORY_WEEKS: ${{ vars.HISTORY_WEEKS || 260 }}
+          MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 12 }}
+          REPROCESS_FROM_WEEK: ${{ inputs.reprocess_from_week || vars.REPROCESS_FROM_WEEK || '' }}
+          REPROCESS_WEEKS: ${{ inputs.reprocess_weeks || vars.REPROCESS_WEEKS || '' }}
 
       - name: Export Metrics
         run: node scripts/export_metrics.mjs

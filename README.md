@@ -11,8 +11,8 @@ To track and visualize engagement in open source projects over time, ensuring we
 This system allows us to publish metrics without exposing private data or hitting GitHub API rate limits at runtime.
 
 1.  **Data Pipeline (`scripts/`)**:
-    *   Runs weekly via GitHub Actions.
-    *   Queries GitHub GraphQL API for PRs and Issues in `civicactions` org.
+    *   Runs on a scheduled GitHub Action (temporarily daily for burn-in; usually weekly).
+    *   Queries GitHub GraphQL API for PRs and Issues in the allowed org list.
     *   Filters for repositories with Open Source licenses (SPDX allowlist).
     *   Stores counts in a local SQLite database (`data/participation.sqlite`) incrementally (only fetches new weeks).
     *   Exports aggregated anonymous JSON metrics to `data/metrics.json`.
@@ -63,6 +63,21 @@ npm install
     npm run export
     ```
     This generates `data/metrics.json`.
+
+### Configuration defaults
+
+Defaults live in `scripts/config.json` (org allowlist, history window, max weeks per run). Repo/environment variables override these values; secrets are **not** required for these knobs.
+
+### Reprocessing history after allowlist changes
+
+If you change the org allowlist or staff allowlist and need historical data recomputed with the new lists:
+
+1. Update allowlists: set `ORG_ALLOWLIST` repo variable and/or `STAFF_ALLOWLIST_JSON` secret (JSON array of usernames). Keep them public-only per AGENTS.md rules.
+2. Trigger **Update participation data** via **Run workflow** and supply one of:
+   - `reprocess_from_week` (YYYY-MM-DD Monday) to restart from that week, or
+   - `reprocess_weeks` (number) to rebuild that many full weeks back from the last complete week.
+   These map to `REPROCESS_FROM_WEEK` / `REPROCESS_WEEKS` envs consumed by `scripts/update_sqlite.mjs`.
+3. Let the workflow finish; it will rewrite `data/participation.sqlite` and `data/metrics.json` for the specified window, then the Pages deploy will publish the new aggregates.
 
 ### Running the Frontend Locally
 
