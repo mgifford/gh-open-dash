@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import Database from 'better-sqlite3';
 import { graphql } from '@octokit/graphql';
 import fs from 'fs';
