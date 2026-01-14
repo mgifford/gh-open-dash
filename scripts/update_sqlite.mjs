@@ -5,6 +5,12 @@ import path from 'path';
 
 const DB_PATH = path.join('data', 'participation.sqlite');
 const ALLOWLIST_PATH = path.join('scripts', 'oss_spdx_allowlist.json');
+const ORG_ALLOWLIST = (process.env.ORG_ALLOWLIST || 'civicactions')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+const parsedHistoryWeeks = Number.parseInt(process.env.HISTORY_WEEKS || '260', 10);
+const HISTORY_WEEKS = Number.isFinite(parsedHistoryWeeks) ? parsedHistoryWeeks : 260;
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 2000;
 
@@ -103,8 +109,8 @@ async function run() {
   let startProcessingDate;
 
   if (!processedThrough) {
-    console.log('No history found. Defaulting to 52 weeks ago.');
-    startProcessingDate = addDays(lastCompleteWeekStart, -52 * 7);
+    console.log(`No history found. Defaulting to ${HISTORY_WEEKS} weeks ago.`);
+    startProcessingDate = addDays(lastCompleteWeekStart, -HISTORY_WEEKS * 7);
   } else {
     startProcessingDate = addDays(new Date(processedThrough), 7);
   }
@@ -121,16 +127,18 @@ async function run() {
 
     console.log(`Processing week: ${weekStartStr}`);
 
-    await processMetric(graphqlClient, 'pr_opened', weekStartStr, `org:civicactions is:pr created:${rangeStart}..${rangeEnd}`);
-    await processMetric(graphqlClient, 'pr_merged', weekStartStr, `org:civicactions is:pr merged:${rangeStart}..${rangeEnd}`);
-    await processMetric(graphqlClient, 'issue_opened', weekStartStr, `org:civicactions is:issue created:${rangeStart}..${rangeEnd}`);
+    for (const org of ORG_ALLOWLIST) {
+      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `org:${org} is:pr created:${rangeStart}..${rangeEnd}`, org);
+      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `org:${org} is:pr merged:${rangeStart}..${rangeEnd}`, org);
+      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `org:${org} is:issue created:${rangeStart}..${rangeEnd}`, org);
+    }
 
     setMeta('processed_through_week', weekStartStr);
     pointer = addDays(pointer, 7);
   }
 }
 
-async function processMetric(client, table, weekStart, query) {
+async function processMetric(client, table, weekStart, query, orgLabel) {
   let hasNextPage = true;
   let cursor = null;
   const items = [];
@@ -140,7 +148,7 @@ async function processMetric(client, table, weekStart, query) {
   let skippedMissingAuthor = 0;
 
   while (hasNextPage) {
-    const data = await fetchSearchPage(client, query, cursor, table);
+    const data = await fetchSearchPage(client, query, cursor, `${table}:${orgLabel}`);
 
     const search = data.search;
     hasNextPage = search.pageInfo.hasNextPage;
@@ -174,12 +182,12 @@ async function processMetric(client, table, weekStart, query) {
 
   if (items.length > 0) {
     insertMany(items);
-    console.log(`  Inserted ${items.length} records for ${table}`);
+    console.log(`  Inserted ${items.length} records for ${table} (${orgLabel})`);
   }
 
   const skippedTotal = skippedMissingRepo + skippedMissingLicense + skippedDisallowedLicense + skippedMissingAuthor;
   if (skippedTotal > 0) {
-    console.log(`  Skipped ${skippedTotal} records for ${table} (missing repo: ${skippedMissingRepo}, missing license: ${skippedMissingLicense}, disallowed license: ${skippedDisallowedLicense}, missing author: ${skippedMissingAuthor})`);
+    console.log(`  Skipped ${skippedTotal} records for ${table} (${orgLabel}) (missing repo: ${skippedMissingRepo}, missing license: ${skippedMissingLicense}, disallowed license: ${skippedDisallowedLicense}, missing author: ${skippedMissingAuthor})`);
   }
 }
 

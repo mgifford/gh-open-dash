@@ -4,6 +4,11 @@ import path from 'path';
 
 const DB_PATH = path.join('data', 'participation.sqlite');
 const OUT_PATH = path.join('data', 'metrics.json');
+const STAFF_ALLOWLIST_PATH = path.join('scripts', 'staff_allowlist.json');
+const ORG_ALLOWLIST = (process.env.ORG_ALLOWLIST || 'civicactions')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
 
 if (!fs.existsSync(DB_PATH)) {
   console.error('Database not found');
@@ -11,6 +16,12 @@ if (!fs.existsSync(DB_PATH)) {
 }
 
 const db = new Database(DB_PATH);
+
+// Load staff allowlist for segmentation (post-processing only)
+let staffAllowList = [];
+if (fs.existsSync(STAFF_ALLOWLIST_PATH)) {
+  staffAllowList = JSON.parse(fs.readFileSync(STAFF_ALLOWLIST_PATH, 'utf8'));
+}
 
 // Fetch all weeks
 const weeks = db.prepare(`
@@ -31,6 +42,8 @@ const authors = db.prepare(`
   SELECT DISTINCT author FROM issue_opened
   ORDER BY author COLLATE NOCASE
 `).all().map(r => r.author);
+
+const staffAuthors = authors.filter(a => staffAllowList.includes(a));
 
 // Aggregate data
 // We need to query each table and aggregate counts per (week, author)
@@ -78,12 +91,27 @@ fill(issuesOpenedRaw, 'issues_opened');
 
 const series = Array.from(seriesMap.values());
 
+// Staff-only filtered series to enable staff segmentation without per-person queries
+const staffSeries = series.map(week => {
+  const filtered = {};
+  for (const [author, metrics] of Object.entries(week.byAuthor)) {
+    if (staffAllowList.includes(author)) {
+      filtered[author] = metrics;
+    }
+  }
+  return { week_start: week.week_start, byAuthor: filtered };
+});
+
 const output = {
   generated_at: new Date().toISOString(),
-  org: "civicactions",
+  org: ORG_ALLOWLIST[0] || "",
+  orgs: ORG_ALLOWLIST,
   weeks: weeks,
   authors: authors,
-  series: series
+  series: series,
+  staff_allowlist: staffAllowList,
+  staff_authors: staffAuthors,
+  staff_series: staffSeries
 };
 
 fs.writeFileSync(OUT_PATH, JSON.stringify(output, null, 2));
