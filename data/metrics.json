@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-14T14:07:37.457Z",
+  "generated_at": "2026-01-14T15:13:02.854Z",
   "org": "civicactions",
   "orgs": [
     "civicactions",
@@ -17,10 +17,25 @@
     "2021-03-08",
     "2021-03-15",
     "2021-03-22",
-    "2021-03-29"
+    "2021-03-29",
+    "2021-04-05",
+    "2021-04-12",
+    "2021-04-19",
+    "2021-04-26",
+    "2021-05-03",
+    "2021-05-10",
+    "2021-05-17",
+    "2021-05-24",
+    "2021-05-31",
+    "2021-06-07",
+    "2021-06-14",
+    "2021-06-21"
   ],
   "authors": [
+    "akaroleff",
+    "alex9000",
     "brdunfield",
+    "brianseek",
     "CodeShtuff",
     "dafeder",
     "dasumner",
@@ -33,13 +48,17 @@
     "iris-i",
     "janette",
     "joduinn",
+    "jonbot",
     "kaise-lafrai",
     "maggiewachs",
     "melindaburgess",
     "mgifford",
+    "mlazzeri",
     "paul-m",
+    "sharjeelaziz",
     "swirtSJW",
     "synterra",
+    "TheBoatyMcBoatFace",
     "woodt"
   ],
   "series": [
@@ -587,6 +606,496 @@
           "issues_opened": 1
         }
       }
+    },
+    {
+      "week_start": "2021-04-05",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 2
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "woodt": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "janette": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 2
+        }
+      }
+    },
+    {
+      "week_start": "2021-04-12",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "joduinn": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jonbot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "synterra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 2
+        },
+        "woodt": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-04-19",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "dasumner": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mlazzeri": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-04-26",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-05-03",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 3,
+          "prs_merged": 3,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "grugnog": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2021-05-10",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 3,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dependabot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "grugnog": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-05-17",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 3,
+          "prs_merged": 3,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "sharjeelaziz": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 5
+        }
+      }
+    },
+    {
+      "week_start": "2021-05-24",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 3,
+          "prs_merged": 3,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dependabot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 2,
+          "prs_merged": 0,
+          "issues_opened": 2
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "woodt": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "akaroleff": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "grugnog": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-05-31",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "janette": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "alex9000": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 5
+        }
+      }
+    },
+    {
+      "week_start": "2021-06-07",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 2
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "sharjeelaziz": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "akaroleff": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 2
+        }
+      }
+    },
+    {
+      "week_start": "2021-06-14",
+      "byAuthor": {
+        "CodeShtuff": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 1
+        },
+        "dependabot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "akaroleff": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-06-21",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 3,
+          "prs_merged": 2,
+          "issues_opened": 1
+        },
+        "janette": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "sharjeelaziz": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "synterra": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "akaroleff": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "woodt": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
     }
   ],
   "staff_allowlist": [
@@ -696,7 +1205,10 @@
     "zedmonds96"
   ],
   "staff_authors": [
+    "akaroleff",
+    "alex9000",
     "brdunfield",
+    "brianseek",
     "dafeder",
     "dasumner",
     "dcgoodwin2112",
@@ -705,13 +1217,16 @@
     "iris-i",
     "janette",
     "joduinn",
+    "jonbot",
     "kaise-lafrai",
     "maggiewachs",
     "melindaburgess",
     "mgifford",
     "paul-m",
+    "sharjeelaziz",
     "swirtSJW",
-    "synterra"
+    "synterra",
+    "TheBoatyMcBoatFace"
   ],
   "staff_series": [
     {
@@ -1200,6 +1715,451 @@
         "swirtSJW": {
           "prs_opened": 1,
           "prs_merged": 1,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-04-05",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 2
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "janette": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 2
+        }
+      }
+    },
+    {
+      "week_start": "2021-04-12",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "joduinn": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jonbot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "synterra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 2
+        }
+      }
+    },
+    {
+      "week_start": "2021-04-19",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "dasumner": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-04-26",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-05-03",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 3,
+          "prs_merged": 3,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "grugnog": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        }
+      }
+    },
+    {
+      "week_start": "2021-05-10",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 3,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "grugnog": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-05-17",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 3,
+          "prs_merged": 3,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "sharjeelaziz": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 5
+        }
+      }
+    },
+    {
+      "week_start": "2021-05-24",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 3,
+          "prs_merged": 3,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 2,
+          "prs_merged": 0,
+          "issues_opened": 2
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "akaroleff": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "grugnog": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-05-31",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "janette": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "alex9000": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 5
+        }
+      }
+    },
+    {
+      "week_start": "2021-06-07",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 2
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "sharjeelaziz": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "akaroleff": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 2
+        }
+      }
+    },
+    {
+      "week_start": "2021-06-14",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 1
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "akaroleff": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2021-06-21",
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 3,
+          "prs_merged": 2,
+          "issues_opened": 1
+        },
+        "janette": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "sharjeelaziz": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "synterra": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "akaroleff": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 0,
           "issues_opened": 1
         }
       }
