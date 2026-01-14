@@ -7,12 +7,30 @@ import path from 'path';
 const DB_PATH = path.join('data', 'participation.sqlite');
 const ALLOWLIST_PATH = path.join('scripts', 'oss_spdx_allowlist.json');
 const STAFF_ALLOWLIST_PATH = path.join('scripts', 'staff_allowlist.json');
-const ORG_ALLOWLIST = (process.env.ORG_ALLOWLIST || 'civicactions')
+const CONFIG_PATH = path.join('scripts', 'config.json');
+
+const defaultConfig = {
+  orgAllowlist: ['civicactions'],
+  historyWeeks: 260,
+  maxWeeksPerRun: 12
+};
+
+const fileConfig = loadConfig();
+
+const ORG_ALLOWLIST = (process.env.ORG_ALLOWLIST || fileConfig.orgAllowlist || defaultConfig.orgAllowlist)
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean);
-const parsedHistoryWeeks = Number.parseInt(process.env.HISTORY_WEEKS || '260', 10);
-const HISTORY_WEEKS = Number.isFinite(parsedHistoryWeeks) ? parsedHistoryWeeks : 260;
+
+const parsedHistoryWeeks = Number.parseInt(process.env.HISTORY_WEEKS || fileConfig.historyWeeks || defaultConfig.historyWeeks, 10);
+const HISTORY_WEEKS = Number.isFinite(parsedHistoryWeeks) ? parsedHistoryWeeks : defaultConfig.historyWeeks;
+
+const parsedMaxWeeksPerRun = Number.parseInt(process.env.MAX_WEEKS_PER_RUN || fileConfig.maxWeeksPerRun || defaultConfig.maxWeeksPerRun, 10);
+const MAX_WEEKS_PER_RUN = Number.isFinite(parsedMaxWeeksPerRun) ? parsedMaxWeeksPerRun : defaultConfig.maxWeeksPerRun;
+
+const reprocessFromWeekEnv = process.env.REPROCESS_FROM_WEEK;
+const parsedReprocessWeeks = Number.parseInt(process.env.REPROCESS_WEEKS || '0', 10);
+const RATE_LIMIT_BUFFER_MS = 5000;
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 2000;
 
@@ -108,6 +126,17 @@ function loadStaffAllowList() {
   return [];
 }
 
+function loadConfig() {
+  if (fs.existsSync(CONFIG_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+    } catch (err) {
+      console.warn('Failed to parse config.json; defaulting to built-in defaults:', err.message);
+    }
+  }
+  return { ...defaultConfig };
+}
+
 // Main logic
 async function run() {
   const token = process.env.GITHUB_TOKEN;
@@ -130,10 +159,25 @@ async function run() {
   let processedThrough = getMeta('processed_through_week');
   let startProcessingDate;
 
-  if (!processedThrough) {
+  if (reprocessFromWeekEnv) {
+    const candidate = new Date(reprocessFromWeekEnv);
+    if (Number.isNaN(candidate.getTime())) {
+      console.warn(`REPROCESS_FROM_WEEK is invalid (${reprocessFromWeekEnv}); falling back to history/meta.`);
+    } else {
+      startProcessingDate = candidate;
+      console.log(`Reprocessing from week override: ${toISODate(startProcessingDate)}`);
+    }
+  }
+
+  if (!startProcessingDate && parsedReprocessWeeks > 0) {
+    startProcessingDate = addDays(lastCompleteWeekStart, -parsedReprocessWeeks * 7);
+    console.log(`Reprocessing last ${parsedReprocessWeeks} weeks.`);
+  }
+
+  if (!startProcessingDate && !processedThrough) {
     console.log(`No history found. Defaulting to ${HISTORY_WEEKS} weeks ago.`);
     startProcessingDate = addDays(lastCompleteWeekStart, -HISTORY_WEEKS * 7);
-  } else {
+  } else if (!startProcessingDate) {
     startProcessingDate = addDays(new Date(processedThrough), 7);
   }
 
@@ -141,9 +185,16 @@ async function run() {
   console.log(`Start processing from: ${toISODate(startProcessingDate)}`);
   console.log(`Org allowlist: ${ORG_ALLOWLIST.join(', ')}`);
   console.log(`Staff allowlist size: ${staffAllowList.length}`);
+  console.log(`Max weeks this run: ${MAX_WEEKS_PER_RUN}`);
 
   let pointer = startProcessingDate;
+  let weeksThisRun = 0;
   while (pointer <= lastCompleteWeekStart) {
+    if (weeksThisRun >= MAX_WEEKS_PER_RUN) {
+      console.log(`Reached MAX_WEEKS_PER_RUN=${MAX_WEEKS_PER_RUN}; stop here and resume next run.`);
+      break;
+    }
+
     const weekStartStr = toISODate(pointer);
     const weekEnd = addDays(pointer, 7); 
     const rangeStart = pointer.toISOString();
@@ -152,20 +203,21 @@ async function run() {
     console.log(`Processing week: ${weekStartStr}`);
 
     for (const org of ORG_ALLOWLIST) {
-      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `org:${org} is:pr created:${rangeStart}..${rangeEnd}`, org);
-      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `org:${org} is:pr merged:${rangeStart}..${rangeEnd}`, org);
-      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `org:${org} is:issue created:${rangeStart}..${rangeEnd}`, org);
+      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `org:${org} is:public is:pr created:${rangeStart}..${rangeEnd}`, org);
+      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `org:${org} is:public is:pr merged:${rangeStart}..${rangeEnd}`, org);
+      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `org:${org} is:public is:issue created:${rangeStart}..${rangeEnd}`, org);
     }
 
     for (const user of staffAllowList) {
       const label = `staff:${user}`;
-      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `author:${user} is:pr created:${rangeStart}..${rangeEnd}`, label);
-      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `author:${user} is:pr merged:${rangeStart}..${rangeEnd}`, label);
-      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `author:${user} is:issue created:${rangeStart}..${rangeEnd}`, label);
+      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `author:${user} is:public is:pr created:${rangeStart}..${rangeEnd}`, label);
+      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `author:${user} is:public is:pr merged:${rangeStart}..${rangeEnd}`, label);
+      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `author:${user} is:public is:issue created:${rangeStart}..${rangeEnd}`, label);
     }
 
     setMeta('processed_through_week', weekStartStr);
     pointer = addDays(pointer, 7);
+    weeksThisRun++;
   }
 }
 
@@ -260,13 +312,26 @@ async function fetchSearchPage(client, query, cursor, contextLabel) {
       });
     } catch (err) {
       const isLastAttempt = attempt === MAX_RETRIES;
-      const rateLimited = Array.isArray(err.errors) && err.errors.some(e => e.type === 'RATE_LIMITED');
+      const rateLimited = Array.isArray(err.errors) && err.errors.some(e => e.type === 'RATE_LIMIT' || e.type === 'RATE_LIMITED');
       const status = err.status || 'unknown';
       const message = err.message || 'Unknown GraphQL error';
+      const resetAt = Number(err.headers?.['x-ratelimit-reset']) || null;
+      const now = Date.now();
+      const waitMsFromReset = resetAt ? Math.max(resetAt * 1000 - now + RATE_LIMIT_BUFFER_MS, RETRY_DELAY_MS * attempt) : RETRY_DELAY_MS * attempt;
+
       console.warn(`[${contextLabel}] GraphQL fetch failed (attempt ${attempt}/${MAX_RETRIES}, status ${status}, rateLimited=${rateLimited}): ${message}`);
 
-      if (isLastAttempt) {
+      if (isLastAttempt && !rateLimited) {
         throw err;
+      }
+
+      if (rateLimited) {
+        const waitSeconds = Math.ceil(waitMsFromReset / 1000);
+        console.log(`[${contextLabel}] Hit rate limit; waiting ${waitSeconds}s before retry.`);
+        await sleep(waitMsFromReset);
+        // Do not advance attempt counter on rate-limit waits so we keep retrying after reset.
+        attempt--;
+        continue;
       }
 
       const delay = RETRY_DELAY_MS * attempt;

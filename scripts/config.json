@@ -1,0 +1,5 @@
+{
+  "orgAllowlist": ["civicactions"],
+  "historyWeeks": 260,
+  "maxWeeksPerRun": 12
+}
