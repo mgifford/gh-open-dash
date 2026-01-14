@@ -5,6 +5,8 @@ import path from 'path';
 
 const DB_PATH = path.join('data', 'participation.sqlite');
 const ALLOWLIST_PATH = path.join('scripts', 'oss_spdx_allowlist.json');
+const MAX_RETRIES = 3;
+const RETRY_DELAY_MS = 2000;
 
 // Ensure data directory exists
 if (!fs.existsSync('data')) {
@@ -55,6 +57,8 @@ const getMeta = (key) => {
 const setMeta = (key, value) => {
   db.prepare('INSERT OR REPLACE INTO meta (key, value) VALUES (?, ?)').run(key, value);
 };
+
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Date helpers
 function getMonday(d) {
@@ -130,10 +134,59 @@ async function processMetric(client, table, weekStart, query) {
   let hasNextPage = true;
   let cursor = null;
   const items = [];
+  let skippedMissingRepo = 0;
+  let skippedMissingLicense = 0;
+  let skippedDisallowedLicense = 0;
+  let skippedMissingAuthor = 0;
 
   while (hasNextPage) {
+    const data = await fetchSearchPage(client, query, cursor, table);
+
+    const search = data.search;
+    hasNextPage = search.pageInfo.hasNextPage;
+    cursor = search.pageInfo.endCursor;
+
+    for (const node of search.nodes) {
+      if (!node.repository) { skippedMissingRepo++; continue; }
+      if (!node.repository.licenseInfo) { skippedMissingLicense++; continue; }
+      if (!node.author || !node.author.login) { skippedMissingAuthor++; continue; }
+
+      const spdx = node.repository.licenseInfo.spdxId;
+
+      // Check allowlist
+      if (!allowList.includes(spdx)) { skippedDisallowedLicense++; continue; }
+
+      items.push({
+        author: node.author.login,
+        repo: node.repository.nameWithOwner,
+        spdx: spdx
+      });
+    }
+  }
+  
+  // Batch insert
+  const stmt = db.prepare(`INSERT OR IGNORE INTO ${table} (week_start, author, repo, spdx) VALUES (?, ?, ?, ?)`);
+  const insertMany = db.transaction((rows) => {
+    for (const row of rows) {
+      stmt.run(weekStart, row.author, row.repo, row.spdx);
+    }
+  });
+
+  if (items.length > 0) {
+    insertMany(items);
+    console.log(`  Inserted ${items.length} records for ${table}`);
+  }
+
+  const skippedTotal = skippedMissingRepo + skippedMissingLicense + skippedDisallowedLicense + skippedMissingAuthor;
+  if (skippedTotal > 0) {
+    console.log(`  Skipped ${skippedTotal} records for ${table} (missing repo: ${skippedMissingRepo}, missing license: ${skippedMissingLicense}, disallowed license: ${skippedDisallowedLicense}, missing author: ${skippedMissingAuthor})`);
+  }
+}
+
+async function fetchSearchPage(client, query, cursor, contextLabel) {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const data = await client(`
+      return await client(`
         query($q: String!, $cursor: String) {
           search(query: $q, type: ISSUE, first: 100, after: $cursor) {
             pageInfo {
@@ -162,41 +215,20 @@ async function processMetric(client, table, weekStart, query) {
         q: query,
         cursor: cursor
       });
-
-      const search = data.search;
-      hasNextPage = search.pageInfo.hasNextPage;
-      cursor = search.pageInfo.endCursor;
-
-      for (const node of search.nodes) {
-        if (!node.repository || !node.repository.licenseInfo || !node.author) continue;
-        const spdx = node.repository.licenseInfo.spdxId;
-        
-        // Check allowlist
-        if (!allowList.includes(spdx)) continue;
-
-        items.push({
-          author: node.author.login,
-          repo: node.repository.nameWithOwner,
-          spdx: spdx
-        });
-      }
     } catch (err) {
-      console.error('Error fetching data:', err);
-      throw err;
-    }
-  }
-  
-  // Batch insert
-  const stmt = db.prepare(`INSERT OR IGNORE INTO ${table} (week_start, author, repo, spdx) VALUES (?, ?, ?, ?)`);
-  const insertMany = db.transaction((rows) => {
-    for (const row of rows) {
-      stmt.run(weekStart, row.author, row.repo, row.spdx);
-    }
-  });
+      const isLastAttempt = attempt === MAX_RETRIES;
+      const rateLimited = Array.isArray(err.errors) && err.errors.some(e => e.type === 'RATE_LIMITED');
+      const status = err.status || 'unknown';
+      const message = err.message || 'Unknown GraphQL error';
+      console.warn(`[${contextLabel}] GraphQL fetch failed (attempt ${attempt}/${MAX_RETRIES}, status ${status}, rateLimited=${rateLimited}): ${message}`);
 
-  if (items.length > 0) {
-    insertMany(items);
-    console.log(`  Inserted ${items.length} records for ${table}`);
+      if (isLastAttempt) {
+        throw err;
+      }
+
+      const delay = RETRY_DELAY_MS * attempt;
+      await sleep(delay);
+    }
   }
 }
 
