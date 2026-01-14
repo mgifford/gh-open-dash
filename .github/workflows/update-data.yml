@@ -24,13 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Write staff allowlist from secret
+      - name: Write staff allowlist from secret (or empty)
         run: |
           if [ -z "${STAFF_ALLOWLIST_JSON}" ]; then
-            echo "STAFF_ALLOWLIST_JSON secret not set" >&2
-            exit 1
+            echo "STAFF_ALLOWLIST_JSON not set; writing empty list" >&2
+            echo "[]" > scripts/staff_allowlist.json
+          else
+            printf '%s\n' "${STAFF_ALLOWLIST_JSON}" > scripts/staff_allowlist.json
           fi
-          printf '%s\n' "${STAFF_ALLOWLIST_JSON}" > scripts/staff_allowlist.json
         env:
           STAFF_ALLOWLIST_JSON: ${{ secrets.STAFF_ALLOWLIST_JSON }}
 
