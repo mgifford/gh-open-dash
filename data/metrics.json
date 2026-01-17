@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-16T06:30:32.504Z",
+  "generated_at": "2026-01-17T06:26:28.433Z",
   "org": "civicactions",
   "orgs": [
     "civicactions",
@@ -65,13 +65,27 @@
     "2025-08-18",
     "2025-08-25",
     "2025-09-01",
-    "2025-09-08"
+    "2025-09-08",
+    "2025-09-15",
+    "2025-09-22",
+    "2025-09-29",
+    "2025-10-06",
+    "2025-10-13",
+    "2025-10-20",
+    "2025-10-27",
+    "2025-11-03",
+    "2025-11-10",
+    "2025-11-17",
+    "2025-11-24",
+    "2025-12-01"
   ],
   "authors": [
+    "adriancooke",
     "akaroleff",
     "alanna-blinn",
     "alex9000",
     "andyhawks",
+    "Becapa",
     "beeyayjay",
     "brdunfield",
     "brianseek",
@@ -88,6 +102,7 @@
     "dependabot",
     "dgading",
     "dmundra",
+    "erichuffman",
     "github-actions",
     "grugnog",
     "iris-i",
@@ -105,6 +120,7 @@
     "mlazzeri",
     "openprivacy",
     "paul-m",
+    "qjac",
     "rovcase",
     "sharjeelaziz",
     "swirtSJW",
@@ -2973,6 +2989,776 @@
           "issues_opened": 1
         }
       }
+    },
+    {
+      "week_start": "2025-09-15",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "paul-m": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-09-22",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "Tom-Camp": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 1
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 3,
+          "prs_merged": 2,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "grugnog": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "iris-i": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-09-29",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "civicactionsbot": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 4,
+          "prs_merged": 4,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "Becapa": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "grugnog": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-06",
+      "byAuthor": {
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 3,
+          "prs_merged": 3,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "paul-m": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "TheETupper": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-13",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "adriancooke": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "alanna-blinn": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "jonbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-20",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "civicactionsbot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "paul-m": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "TheETupper": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 2
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-27",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "iris-i": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 2
+        },
+        "paul-m": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "jonbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-11-03",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-11-10",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dependabot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-11-17",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 2,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "wullaski": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 2
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-11-24",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 3
+        },
+        "brianseek": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-12-01",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dependabot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "erichuffman": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "openprivacy": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
     }
   ],
   "staff_allowlist": [
@@ -3082,10 +3868,12 @@
     "zedmonds96"
   ],
   "staff_authors": [
+    "adriancooke",
     "akaroleff",
     "alanna-blinn",
     "alex9000",
     "andyhawks",
+    "Becapa",
     "beeyayjay",
     "brdunfield",
     "brianseek",
@@ -3099,6 +3887,7 @@
     "dcgoodwin2112",
     "dgading",
     "dmundra",
+    "erichuffman",
     "grugnog",
     "iris-i",
     "janette",
@@ -3114,6 +3903,7 @@
     "mgifford",
     "openprivacy",
     "paul-m",
+    "qjac",
     "rovcase",
     "sharjeelaziz",
     "swirtSJW",
@@ -5846,6 +6636,766 @@
           "issues_opened": 0
         },
         "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-09-15",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "paul-m": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-09-22",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "Tom-Camp": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 1
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 3,
+          "prs_merged": 2,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "grugnog": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "iris-i": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-09-29",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "civicactionsbot": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 4,
+          "prs_merged": 4,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "Becapa": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "grugnog": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-06",
+      "byAuthor": {
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 3,
+          "prs_merged": 3,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "paul-m": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "TheETupper": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-13",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "adriancooke": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "alanna-blinn": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "jonbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-20",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "civicactionsbot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "paul-m": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "TheETupper": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 2
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-10-27",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "iris-i": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 2
+        },
+        "paul-m": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "jonbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-11-03",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-11-10",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dafeder": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-11-17",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 2,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "wullaski": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 2
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-11-24",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 3
+        },
+        "brianseek": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2025-12-01",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "erichuffman": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "kaise-lafrai": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "openprivacy": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "qjac": {
           "prs_opened": 0,
           "prs_merged": 0,
           "issues_opened": 1
