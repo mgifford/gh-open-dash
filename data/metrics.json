@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-18T06:18:22.296Z",
+  "generated_at": "2026-01-19T06:19:30.096Z",
   "org": "civicactions",
   "orgs": [
     "civicactions",
@@ -82,7 +82,8 @@
     "2025-12-15",
     "2025-12-22",
     "2025-12-29",
-    "2026-01-05"
+    "2026-01-05",
+    "2026-01-12"
   ],
   "authors": [
     "adriancooke",
@@ -4039,6 +4040,61 @@
           "issues_opened": 4
         }
       }
+    },
+    {
+      "week_start": "2026-01-12",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "brianseek": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 3
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
     }
   ],
   "staff_allowlist": [
@@ -7949,6 +8005,61 @@
           "prs_opened": 0,
           "prs_merged": 0,
           "issues_opened": 4
+        }
+      }
+    },
+    {
+      "week_start": "2026-01-12",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "brianseek": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 3
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
         }
       }
     }
