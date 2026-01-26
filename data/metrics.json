@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-25T06:13:02.378Z",
+  "generated_at": "2026-01-26T06:17:38.439Z",
   "org": "civicactions",
   "orgs": [
     "civicactions",
@@ -83,7 +83,8 @@
     "2025-12-22",
     "2025-12-29",
     "2026-01-05",
-    "2026-01-12"
+    "2026-01-12",
+    "2026-01-19"
   ],
   "authors": [
     "adriancooke",
@@ -4095,6 +4096,51 @@
           "issues_opened": 1
         }
       }
+    },
+    {
+      "week_start": "2026-01-19",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 3
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
     }
   ],
   "staff_allowlist": [
@@ -8049,6 +8095,51 @@
         "davidmpickett": {
           "prs_opened": 0,
           "prs_merged": 0,
+          "issues_opened": 1
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 3
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "issues_opened": 1
+        }
+      }
+    },
+    {
+      "week_start": "2026-01-19",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "issues_opened": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "issues_opened": 1
+        },
+        "dgading": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "issues_opened": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
           "issues_opened": 1
         },
         "mgifford": {
