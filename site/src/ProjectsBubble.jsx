@@ -17,6 +17,7 @@ function scaleRadius(val) {
 }
 
 export default function ProjectsBubble({ repos = [], selectedAuthor = 'all', metric = 'issues_opened' }) {
+export default function ProjectsBubble({ repos = [], selectedAuthor = 'all', metric = 'issues_opened', onRepoClick }) {
   // Build bubble points: x = PR activity, y = Issue activity, r = selected metric count
   const points = repos.map(r => {
     const byAuthor = r.byAuthor || {};
@@ -69,6 +70,16 @@ export default function ProjectsBubble({ repos = [], selectedAuthor = 'all', met
     scales: {
       x: { title: { display: true, text: 'PR activity (count)' }, beginAtZero: true },
       y: { title: { display: true, text: 'Issue activity (count)' }, beginAtZero: true }
+    }
+    },
+    onClick: (evt, elements, chart) => {
+      if (!elements || elements.length === 0) return;
+      const el = elements[0];
+      const ds = chart.data.datasets[el.datasetIndex];
+      const point = ds.data[el.index];
+      if (point && point.raw && typeof onRepoClick === 'function') {
+        onRepoClick(point.raw.repo);
+      }
     }
   };
 
