@@ -98,6 +98,40 @@ fill(commitsRaw, 'commits');
 
 const series = Array.from(seriesMap.values());
 
+// Aggregate per-repo totals (across all time) and per-author per-repo counts
+const repoMap = new Map();
+
+const addRepoRow = (row, key) => {
+  if (!row || !row.repo) return;
+  const repo = row.repo;
+  const spdx = row.spdx || null;
+  if (!repoMap.has(repo)) {
+    repoMap.set(repo, { repo, spdx, totals: { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 }, byAuthor: {} });
+  }
+  const entry = repoMap.get(repo);
+  if (!entry.byAuthor[row.author]) entry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 };
+  entry.byAuthor[row.author][key] = (entry.byAuthor[row.author][key] || 0) + row.count;
+  entry.totals[key] = (entry.totals[key] || 0) + row.count;
+  if (!entry.spdx && row.spdx) entry.spdx = row.spdx;
+};
+
+// fetch per-repo per-author counts for each table
+const prOpenedByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM pr_opened GROUP BY repo, author`).all();
+const prMergedByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM pr_merged GROUP BY repo, author`).all();
+const prClosedByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM pr_closed GROUP BY repo, author`).all();
+const issuesOpenedByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM issue_opened GROUP BY repo, author`).all();
+const issuesClosedByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM issue_closed GROUP BY repo, author`).all();
+const commitsByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM commits GROUP BY repo, author`).all();
+
+prOpenedByRepo.forEach(r => addRepoRow(r, 'prs_opened'));
+prMergedByRepo.forEach(r => addRepoRow(r, 'prs_merged'));
+prClosedByRepo.forEach(r => addRepoRow(r, 'prs_closed'));
+issuesOpenedByRepo.forEach(r => addRepoRow(r, 'issues_opened'));
+issuesClosedByRepo.forEach(r => addRepoRow(r, 'issues_closed'));
+commitsByRepo.forEach(r => addRepoRow(r, 'commits'));
+
+const repos = Array.from(repoMap.values());
+
 // Staff-only filtered series to enable staff segmentation without per-person queries
 const staffSeries = series.map(week => {
   const filtered = {};
@@ -119,6 +153,7 @@ const output = {
   staff_allowlist: staffAllowList,
   staff_authors: staffAuthors,
   staff_series: staffSeries
+  ,repos: repos
 };
 
 // Include config flags for frontend visibility

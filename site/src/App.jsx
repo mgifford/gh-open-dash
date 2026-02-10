@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Leaderboard from "./Leaderboard.jsx";
 import WeeklyChart from "./WeeklyChart.jsx";
+import Projects from "./Projects.jsx";
 import "./styles.css";
 
 async function loadMetrics() {
@@ -36,6 +37,7 @@ function App() {
   const [range, setRange] = useState("12");
   const [selectedAuthor, setSelectedAuthor] = useState("all");
   const [displayConfig, setDisplayConfig] = useState({ collectAllPublic: false, licenseFilter: 'oss' });
+  const [view, setView] = useState('dashboard');
 
   // Shared metric keys and accessible style map for chart and legend
   const metricKeys = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits'];
@@ -153,7 +155,13 @@ function App() {
   return (
     <div className="container">
       <header>
-        <h1>CivicActions Open Source Participation</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h1 style={{ margin: 0 }}>CivicActions Open Source Participation</h1>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button onClick={() => setView('dashboard')} disabled={view === 'dashboard'}>Dashboard</button>
+            <button onClick={() => setView('projects')} disabled={view === 'projects'}>Projects</button>
+          </div>
+        </div>
         <p>
           Aggregation of public contributions from the CivicActions team on GitHub.
         </p>
@@ -210,7 +218,9 @@ function App() {
       </div>
 
       <div className="dashboard-grid">
-        <section className="chart-section">
+        {view === 'dashboard' && (
+          <>
+            <section className="chart-section">
           <h2>Weekly Trend: {METRIC_OPTIONS.find(m => m.key === metric).label}</h2>
           <WeeklyChart data={processedData.chartData} />
           <div className="legend" aria-hidden>
@@ -234,12 +244,24 @@ function App() {
               );
             })}
           </div>
-        </section>
+            </section>
 
-        <section className="leaderboard-section">
-          <h2>Top Contributors ({range === 'all' ? 'All Time' : `Last ${range} Weeks`})</h2>
-          <Leaderboard items={processedData.leaderboard} onSelectAuthor={setSelectedAuthor} selectedAuthor={selectedAuthor} />
-        </section>
+            <section className="leaderboard-section">
+              <h2>Top Contributors ({range === 'all' ? 'All Time' : `Last ${range} Weeks`})</h2>
+              <Leaderboard items={processedData.leaderboard} onSelectAuthor={setSelectedAuthor} selectedAuthor={selectedAuthor} />
+            </section>
+          </>
+        )}
+
+        {view === 'projects' && (
+          <section className="projects-section">
+            <h2>Projects & Repositories</h2>
+            {/* lazy-load Projects to avoid increasing bundle size too much */}
+            <React.Suspense fallback={<div>Loading projects...</div>}>
+              <Projects data={data} />
+            </React.Suspense>
+          </section>
+        )}
       </div>
 
       <footer style={{ marginTop: 18, borderTop: '1px solid #eee', paddingTop: 12, fontSize: '0.9em', color: '#444' }}>

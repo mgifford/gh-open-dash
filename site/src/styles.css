@@ -157,3 +157,29 @@ tr.selected {
   height: 10px;
   border-radius: 2px;
 }
+
+/* Projects grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.repo-card {
+  padding: 12px;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #eee;
+}
+.repo-header { display:flex; justify-content:space-between; align-items:center }
+.repo-name { font-weight:600 }
+.repo-totals { display:flex; gap:12px; margin-top:8px; font-size:0.95rem }
+.repo-top { margin-top:8px }
+
+.projects-empty { padding: 20px; color: #666 }
