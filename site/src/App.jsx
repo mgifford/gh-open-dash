@@ -6,13 +6,21 @@ import "./styles.css";
 async function loadMetrics() {
   const res = await fetch("./data/metrics.json", { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to load metrics.json (${res.status})`);
-  return res.json();
+  const text = await res.text();
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    throw new Error(`Failed to parse metrics.json: ${err.message}\nResponse body:\n${text.slice(0, 2000)}`);
+  }
 }
 
 const METRIC_OPTIONS = [
+  { key: "all_metrics", label: "All Metrics" },
   { key: "prs_opened", label: "PRs Opened" },
+  { key: "prs_closed", label: "PRs Closed" },
   { key: "prs_merged", label: "PRs Merged" },
-  { key: "issues_opened", label: "Issues Opened" }
+  { key: "issues_opened", label: "Issues Opened" },
+  { key: "issues_closed", label: "Issues Closed" }
 ];
 
 const RANGE_OPTIONS = [
@@ -24,15 +32,33 @@ const RANGE_OPTIONS = [
 
 function App() {
   const [data, setData] = useState(null);
-  const [metric, setMetric] = useState("prs_opened");
+  const [metric, setMetric] = useState("all_metrics");
   const [range, setRange] = useState("12");
   const [selectedAuthor, setSelectedAuthor] = useState("all");
+  const [displayConfig, setDisplayConfig] = useState({ collectAllPublic: false, licenseFilter: 'oss' });
+
+  // Shared metric keys and accessible style map for chart and legend
+  const metricKeys = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits'];
+  const styleMap = {
+    prs_opened:  { color: '#005a9c', bg: 'rgba(0,90,156,0.15)', dash: [], marker: 'circle' },
+    prs_closed:  { color: '#0078d4', bg: 'rgba(0,120,212,0.12)', dash: [6,4], marker: 'rect' },
+    prs_merged:  { color: '#107c10', bg: 'rgba(16,124,16,0.12)', dash: [2,4], marker: 'triangle' },
+    issues_opened:{ color: '#a80000', bg: 'rgba(168,0,0,0.12)', dash: [1,3], marker: 'diamond' },
+    issues_closed:{ color: '#e81123', bg: 'rgba(232,17,35,0.12)', dash: [8,4,2,4], marker: 'cross' },
+    commits:     { color: '#444444', bg: 'rgba(68,68,68,0.08)', dash: [4,2], marker: 'line' }
+  };
 
   useEffect(() => {
     loadMetrics()
       .then(setData)
       .catch((err) => console.error(err));
   }, []);
+
+  useEffect(() => {
+    if (data && data.collectAllPublic !== undefined) {
+      setDisplayConfig({ collectAllPublic: !!data.collectAllPublic, licenseFilter: data.licenseFilter || 'oss' });
+    }
+  }, [data]);
 
   const processedData = useMemo(() => {
     if (!data) return null;
@@ -55,7 +81,13 @@ function App() {
     series.forEach(week => {
       const byAuthor = week.byAuthor;
       for (const author in byAuthor) {
-        authorTotals[author] = (authorTotals[author] || 0) + (byAuthor[author][metric] || 0);
+        if (metric === 'all_metrics') {
+          // sum all tracked metric keys for the leaderboard
+          const sum = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits'].reduce((s, k) => s + ((byAuthor[author] && byAuthor[author][k]) || 0), 0);
+          authorTotals[author] = (authorTotals[author] || 0) + sum;
+        } else {
+          authorTotals[author] = (authorTotals[author] || 0) + (byAuthor[author][metric] || 0);
+        }
       }
     });
 
@@ -66,37 +98,50 @@ function App() {
 
     // 3. Prepare Chart Data
     // labels: weeks
-    // points: depends on selectedAuthor
+    // points: depends on selectedAuthor and metric
     const chartData = {
       labels: weeks,
       datasets: []
     };
 
-    if (selectedAuthor === "all") {
-      // Show total org activity for this metric
+    
+
+    const pushDataset = (key, label) => {
       const points = series.map(s => {
-        let total = 0;
-        for (const auth in s.byAuthor) {
-          total += (s.byAuthor[auth][metric] || 0);
+        if (selectedAuthor === 'all') {
+          let total = 0;
+          for (const auth in s.byAuthor) {
+            total += (s.byAuthor[auth][key] || 0);
+          }
+          return total;
         }
-        return total;
+        return (s.byAuthor[selectedAuthor] && s.byAuthor[selectedAuthor][key]) || 0;
       });
+      const style = styleMap[key] || { color: '#333', bg: 'rgba(0,0,0,0.08)', dash: [], marker: 'circle' };
       chartData.datasets.push({
-        label: "All Contributors",
+        label,
         data: points,
-        borderColor: "#005a9c",
-        backgroundColor: "rgba(0, 90, 156, 0.5)",
+        borderColor: style.color,
+        backgroundColor: style.bg,
+        borderDash: style.dash,
+        borderWidth: 2,
+        pointStyle: style.marker,
+        pointRadius: 3,
+        tension: 0.15
       });
+    };
+
+    if (metric === 'all_metrics') {
+      // show all metrics as separate lines
+      pushDataset('prs_opened', 'PRs Opened');
+      pushDataset('prs_closed', 'PRs Closed');
+      pushDataset('prs_merged', 'PRs Merged');
+      pushDataset('issues_opened', 'Issues Opened');
+      pushDataset('issues_closed', 'Issues Closed');
     } else {
-      const points = series.map(s => {
-        return (s.byAuthor[selectedAuthor] && s.byAuthor[selectedAuthor][metric]) || 0;
-      });
-      chartData.datasets.push({
-        label: selectedAuthor,
-        data: points,
-        borderColor: "#e52f00",
-        backgroundColor: "rgba(229, 47, 0, 0.5)",
-      });
+      // single metric selected
+      const opt = METRIC_OPTIONS.find(m => m.key === metric) || { label: metric };
+      pushDataset(metric, opt.label || metric);
     }
 
     return { leaderboard, chartData, authors: data.authors };
@@ -110,8 +155,7 @@ function App() {
       <header>
         <h1>CivicActions Open Source Participation</h1>
         <p>
-          Aggregation of public contributions to Civicactions organization repositories
-          (Open Source licenses only).
+          Aggregation of public contributions from the CivicActions team on GitHub.
         </p>
         <div className="meta">
           Last updated: {new Date(data.generated_at).toLocaleString()}
@@ -140,12 +184,56 @@ function App() {
             {data.authors.map(a => <option key={a} value={a}>{a}</option>)}
           </select>
         </label>
+        <label>
+          Collection mode:
+          <select value={displayConfig.collectAllPublic ? 'all_public' : 'org_only'} onChange={(e) => {
+            const v = e.target.value === 'all_public';
+            setDisplayConfig(d => ({ ...d, collectAllPublic: v }));
+          }}>
+            <option value="org_only">Org-only (default)</option>
+            <option value="all_public">All public contributions</option>
+          </select>
+          <div className="meta" style={{ marginTop: 6, fontWeight: 'normal', fontSize: '0.9em', color: '#666' }}>
+            Org-only limits queries to CivicActions.
+          </div>
+        </label>
+
+        <label>
+          License filter:
+          <select value={displayConfig.licenseFilter} onChange={(e) => setDisplayConfig(d => ({ ...d, licenseFilter: e.target.value }))}>
+            <option value="oss">Open-source licenses only</option>
+            <option value="all">Any</option>
+          </select>
+        </label>
+
+        {/* collector command moved to footer */}
       </div>
 
       <div className="dashboard-grid">
         <section className="chart-section">
           <h2>Weekly Trend: {METRIC_OPTIONS.find(m => m.key === metric).label}</h2>
           <WeeklyChart data={processedData.chartData} />
+          <div className="legend" aria-hidden>
+            {metricKeys.map(k => {
+              const s = styleMap[k];
+              const label = k === 'prs_opened' ? 'PRs Opened' : k === 'prs_closed' ? 'PRs Closed' : k === 'prs_merged' ? 'PRs Merged' : k === 'issues_opened' ? 'Issues Opened' : k === 'issues_closed' ? 'Issues Closed' : 'Commits';
+              const dashAttr = (s.dash && s.dash.length) ? s.dash.join(',') : null;
+              return (
+                <div key={k} className="legend-item">
+                  <svg width="56" height="16" viewBox="0 0 56 16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={label + ' legend'}>
+                    <line x1="4" y1="8" x2="52" y2="8" stroke={s.color} strokeWidth="3" strokeDasharray={dashAttr} strokeLinecap="round" />
+                    {s.marker === 'circle' && <circle cx="28" cy="8" r="3" fill={s.color} />}
+                    {s.marker === 'rect' && <rect x="25" y="5" width="6" height="6" fill={s.color} />}
+                    {s.marker === 'triangle' && <polygon points="28,4 24,12 32,12" fill={s.color} />}
+                    {s.marker === 'diamond' && <polygon points="28,6 26,8 28,10 30,8" fill={s.color} />}
+                    {s.marker === 'cross' && <g stroke={s.color} strokeWidth="2"><line x1="26" y1="6" x2="30" y2="10" /><line x1="30" y1="6" x2="26" y2="10" /></g>}
+                    {s.marker === 'line' && <line x1="26" y1="8" x2="30" y2="8" stroke={s.color} strokeWidth="3" />}
+                  </svg>
+                  {label}
+                </div>
+              );
+            })}
+          </div>
         </section>
 
         <section className="leaderboard-section">
@@ -153,6 +241,25 @@ function App() {
           <Leaderboard items={processedData.leaderboard} onSelectAuthor={setSelectedAuthor} selectedAuthor={selectedAuthor} />
         </section>
       </div>
+
+      <footer style={{ marginTop: 18, borderTop: '1px solid #eee', paddingTop: 12, fontSize: '0.9em', color: '#444' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+          <div style={{ color: '#666' }}>Org-only limits queries to CivicActions.</div>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <div>
+              <span style={{ marginRight: 8 }}>Apply to collector:</span>
+              <code>node scripts/set_config.mjs --collectAllPublic={displayConfig.collectAllPublic ? 'true' : 'false'} --licenseFilter={displayConfig.licenseFilter}</code>
+            </div>
+            <div>
+              <a href="https://github.com/mgifford/gh-open-dash" target="_blank" rel="noopener noreferrer" aria-label="Open gh-open-dash repository on GitHub (opens in new tab)">
+                <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 012.01-.27c.68 0 1.36.09 2.01.27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

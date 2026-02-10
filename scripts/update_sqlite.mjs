@@ -17,6 +17,10 @@ const defaultConfig = {
 
 const fileConfig = loadConfig();
 
+// Backwards compatible defaults for new features
+if (typeof fileConfig.collectAllPublic === 'undefined') fileConfig.collectAllPublic = false;
+if (typeof fileConfig.licenseFilter === 'undefined') fileConfig.licenseFilter = 'oss';
+
 const ORG_ALLOWLIST = (process.env.ORG_ALLOWLIST || fileConfig.orgAllowlist || defaultConfig.orgAllowlist)
   .split(',')
   .map((s) => s.trim())
@@ -63,7 +67,28 @@ db.exec(`
     spdx TEXT,
     PRIMARY KEY (week_start, author, repo)
   );
+  CREATE TABLE IF NOT EXISTS pr_closed (
+    week_start TEXT,
+    author TEXT,
+    repo TEXT,
+    spdx TEXT,
+    PRIMARY KEY (week_start, author, repo)
+  );
+  CREATE TABLE IF NOT EXISTS commits (
+    week_start TEXT,
+    author TEXT,
+    repo TEXT,
+    spdx TEXT,
+    PRIMARY KEY (week_start, author, repo)
+  );
   CREATE TABLE IF NOT EXISTS issue_opened (
+    week_start TEXT,
+    author TEXT,
+    repo TEXT,
+    spdx TEXT,
+    PRIMARY KEY (week_start, author, repo)
+  );
+  CREATE TABLE IF NOT EXISTS issue_closed (
     week_start TEXT,
     author TEXT,
     repo TEXT,
@@ -203,16 +228,25 @@ async function run() {
     console.log(`Processing week: ${weekStartStr}`);
 
     for (const org of ORG_ALLOWLIST) {
-      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `org:${org} is:public is:pr created:${rangeStart}..${rangeEnd}`, org);
-      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `org:${org} is:public is:pr merged:${rangeStart}..${rangeEnd}`, org);
-      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `org:${org} is:public is:issue created:${rangeStart}..${rangeEnd}`, org);
+      const baseQualifier = fileConfig.collectAllPublic ? `is:public` : `org:${org} is:public`;
+      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr created:${rangeStart}..${rangeEnd}`, org);
+      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr merged:${rangeStart}..${rangeEnd}`, org);
+      await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr closed:${rangeStart}..${rangeEnd}`, org);
+      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue created:${rangeStart}..${rangeEnd}`, org);
+      await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue closed:${rangeStart}..${rangeEnd}`, org);
     }
 
     for (const user of staffAllowList) {
       const label = `staff:${user}`;
-      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `author:${user} is:public is:pr created:${rangeStart}..${rangeEnd}`, label);
-      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `author:${user} is:public is:pr merged:${rangeStart}..${rangeEnd}`, label);
-      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `author:${user} is:public is:issue created:${rangeStart}..${rangeEnd}`, label);
+      const baseQualifier = fileConfig.collectAllPublic ? `is:public` : `author:${user} is:public`;
+      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr created:${rangeStart}..${rangeEnd}`, label);
+      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr merged:${rangeStart}..${rangeEnd}`, label);
+      await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr closed:${rangeStart}..${rangeEnd}`, label);
+      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue created:${rangeStart}..${rangeEnd}`, label);
+      await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue closed:${rangeStart}..${rangeEnd}`, label);
+        if (fileConfig.collectStaffCommits) {
+          await processStaffCommits(weekStartStr, rangeStart, rangeEnd, user);
+        }
     }
 
     setMeta('processed_through_week', weekStartStr);
@@ -241,13 +275,13 @@ async function processMetric(client, table, weekStart, query, contextLabel) {
     for (const node of search.nodes) {
       if (!node.repository) { skippedMissingRepo++; continue; }
       if (node.repository.isPrivate) { skippedPrivateRepo++; continue; }
-      if (!node.repository.licenseInfo) { skippedMissingLicense++; continue; }
+      // licenseInfo may be null; when licenseFilter is 'oss' we require a known spdx in allowList
+      const spdx = node.repository.licenseInfo ? node.repository.licenseInfo.spdxId : null;
+      if (fileConfig.licenseFilter === 'oss') {
+        if (!spdx) { skippedMissingLicense++; continue; }
+        if (!allowList.includes(spdx)) { skippedDisallowedLicense++; continue; }
+      }
       if (!node.author || !node.author.login) { skippedMissingAuthor++; continue; }
-
-      const spdx = node.repository.licenseInfo.spdxId;
-
-      // Check allowlist
-      if (!allowList.includes(spdx)) { skippedDisallowedLicense++; continue; }
 
       items.push({
         author: node.author.login,
@@ -274,6 +308,90 @@ async function processMetric(client, table, weekStart, query, contextLabel) {
   if (skippedTotal > 0) {
     console.log(`  Skipped ${skippedTotal} records for ${table} (${contextLabel}) (missing repo: ${skippedMissingRepo}, private repo: ${skippedPrivateRepo}, missing license: ${skippedMissingLicense}, disallowed license: ${skippedDisallowedLicense}, missing author: ${skippedMissingAuthor})`);
   }
+}
+
+async function processStaffCommits(weekStart, rangeStartISO, rangeEndISO, user) {
+  // Use REST commit search: GET /search/commits?q=author:USER+committer-date:START..END
+  // Requires Accept: application/vnd.github.cloak-preview
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) {
+    console.warn('GITHUB_TOKEN missing; skipping commit collection');
+    return;
+  }
+
+  const perPage = 100;
+  let page = 1;
+  const items = [];
+  const repoLicenseCache = new Map();
+
+  while (true) {
+    const q = `author:${user} committer-date:${rangeStartISO}..${rangeEndISO}`;
+    const url = `https://api.github.com/search/commits?q=${encodeURIComponent(q)}&per_page=${perPage}&page=${page}`;
+    const res = await fetch(url, {
+      headers: {
+        authorization: `token ${token}`,
+        accept: 'application/vnd.github.cloak-preview'
+      }
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.warn(`Failed commit search page ${page} for ${user}: ${res.status} ${text}`);
+      break;
+    }
+
+    const data = await res.json();
+    if (!data.items || data.items.length === 0) break;
+
+    for (const node of data.items) {
+      // node.repository should be present in commit search preview
+      const repoFull = node.repository && (node.repository.full_name || node.repository.fullName || node.repository.name);
+      const authorLogin = node.author && node.author.login;
+      if (!repoFull || !authorLogin) continue;
+
+      // license check: when licenseFilter === 'oss', require allowList membership
+      let spdx = null;
+      if (repoLicenseCache.has(repoFull)) {
+        spdx = repoLicenseCache.get(repoFull);
+      } else {
+        // fetch repo metadata
+        const repoUrl = `https://api.github.com/repos/${repoFull}`;
+        try {
+          const r2 = await fetch(repoUrl, { headers: { authorization: `token ${token}` } });
+          if (r2.ok) {
+            const meta = await r2.json();
+            spdx = meta.license && meta.license.spdx_id ? meta.license.spdx_id : null;
+          }
+        } catch (err) {
+          console.warn('Failed repo metadata fetch for', repoFull, err.message || err);
+        }
+        repoLicenseCache.set(repoFull, spdx);
+      }
+
+      if (fileConfig.licenseFilter === 'oss') {
+        if (!spdx) continue;
+        if (!allowList.includes(spdx)) continue;
+      }
+
+      items.push({ author: authorLogin, repo: repoFull, spdx });
+    }
+
+    // pagination
+    const link = res.headers.get('link');
+    if (!link || !link.includes('rel="next"')) break;
+    page++;
+  }
+
+  if (items.length === 0) return;
+
+  const stmt = db.prepare(`INSERT OR IGNORE INTO commits (week_start, author, repo, spdx) VALUES (?, ?, ?, ?)`);
+  const insertMany = db.transaction((rows) => {
+    for (const row of rows) {
+      stmt.run(weekStart, row.author, row.repo, row.spdx);
+    }
+  });
+  insertMany(items);
+  console.log(`  Inserted ${items.length} commit records for staff:${user} (${weekStart})`);
 }
 
 async function fetchSearchPage(client, query, cursor, contextLabel) {

@@ -61,7 +61,10 @@ const getData = (table) => {
 
 const prOpenedRaw = getData('pr_opened');
 const prMergedRaw = getData('pr_merged');
+const prClosedRaw = getData('pr_closed');
 const issuesOpenedRaw = getData('issue_opened');
+const issuesClosedRaw = getData('issue_closed');
+const commitsRaw = db.prepare(`SELECT week_start, author, count(*) as count FROM commits GROUP BY week_start, author`).all();
 
 // Build structure
 const seriesMap = new Map(); // week_start -> { byAuthor: {} }
@@ -80,7 +83,7 @@ const fill = (data, key) => {
     if (!weekEntry) return; // Should not happen given weeks list derivation
     
     if (!weekEntry.byAuthor[row.author]) {
-      weekEntry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, issues_opened: 0 };
+      weekEntry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 };
     }
     weekEntry.byAuthor[row.author][key] = row.count;
   });
@@ -88,7 +91,10 @@ const fill = (data, key) => {
 
 fill(prOpenedRaw, 'prs_opened');
 fill(prMergedRaw, 'prs_merged');
+fill(prClosedRaw, 'prs_closed');
 fill(issuesOpenedRaw, 'issues_opened');
+fill(issuesClosedRaw, 'issues_closed');
+fill(commitsRaw, 'commits');
 
 const series = Array.from(seriesMap.values());
 
@@ -114,6 +120,22 @@ const output = {
   staff_authors: staffAuthors,
   staff_series: staffSeries
 };
+
+// Include config flags for frontend visibility
+try {
+  const CONFIG_PATH = path.join('scripts', 'config.json');
+  if (fs.existsSync(CONFIG_PATH)) {
+    const cfg = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+    output.collectAllPublic = cfg.collectAllPublic || false;
+    output.licenseFilter = cfg.licenseFilter || 'oss';
+  } else {
+    output.collectAllPublic = false;
+    output.licenseFilter = 'oss';
+  }
+} catch (err) {
+  output.collectAllPublic = false;
+  output.licenseFilter = 'oss';
+}
 
 fs.writeFileSync(OUT_PATH, JSON.stringify(output, null, 2));
 console.log(`Exported metrics to ${OUT_PATH}`);
