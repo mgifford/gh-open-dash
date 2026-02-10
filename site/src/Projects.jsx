@@ -1,4 +1,5 @@
 import React from 'react';
+import ProjectsBubble from './ProjectsBubble.jsx';
 
 function RepoCard({ repo }) {
   const topContributors = Object.entries(repo.byAuthor || {})
@@ -30,7 +31,7 @@ function RepoCard({ repo }) {
   );
 }
 
-export default function Projects({ data }) {
+export default function Projects({ data, selectedAuthor = 'all', metric = 'issues_opened' }) {
   if (!data || !data.repos || data.repos.length === 0) {
     return (
       <div className="projects-empty">No per-repo data present. Run the exporter to include repo aggregates.</div>
@@ -38,8 +39,11 @@ export default function Projects({ data }) {
   }
 
   return (
-    <div className="projects-grid">
-      {data.repos.map(r => <RepoCard key={r.repo} repo={r} />)}
+    <div>
+      <ProjectsBubble repos={data.repos} selectedAuthor={selectedAuthor} metric={metric} />
+      <div className="projects-grid">
+        {data.repos.map(r => <RepoCard key={r.repo} repo={r} />)}
+      </div>
     </div>
   );
 }

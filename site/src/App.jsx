@@ -257,9 +257,9 @@ function App() {
           <section className="projects-section">
             <h2>Projects & Repositories</h2>
             {/* lazy-load Projects to avoid increasing bundle size too much */}
-            <React.Suspense fallback={<div>Loading projects...</div>}>
-              <Projects data={data} />
-            </React.Suspense>
+              <React.Suspense fallback={<div>Loading projects...</div>}>
+                <Projects data={data} selectedAuthor={selectedAuthor} metric={metric} />
+              </React.Suspense>
           </section>
         )}
       </div>
