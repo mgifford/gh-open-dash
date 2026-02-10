@@ -5,4 +5,8 @@
   "collectAllPublic": false,
   "licenseFilter": "oss"
   ,"collectStaffCommits": false
+  ,"repoExcludePatterns": [
+    "BigBeautifulBoycott",
+    "Open-Climate-Resilience-Policies/OCRP"
+  ]
 }

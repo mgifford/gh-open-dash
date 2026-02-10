@@ -46,6 +46,24 @@ if (!fs.existsSync('data')) {
 // Load allowlist
 const allowList = JSON.parse(fs.readFileSync(ALLOWLIST_PATH, 'utf8'));
 const staffAllowList = loadStaffAllowList();
+// Load repo exclude patterns from config (owner or owner/repo or substring)
+const repoExcludePatterns = (fileConfig.repoExcludePatterns && Array.isArray(fileConfig.repoExcludePatterns)) ? fileConfig.repoExcludePatterns.map(p => String(p).trim()).filter(Boolean) : [];
+
+function repoShouldBeExcluded(repoName) {
+  if (!repoName || repoExcludePatterns.length === 0) return false;
+  const lower = repoName.toLowerCase();
+  for (const pat of repoExcludePatterns) {
+    const p = pat.toLowerCase();
+    if (p.includes('/')) {
+      // full owner/repo or prefix
+      if (lower === p || lower.startsWith(p + '/')) return true;
+    }
+    const owner = lower.split('/')[0];
+    if (owner === p) return true;
+    if (lower.includes(p)) return true;
+  }
+  return false;
+}
 
 // Initialize DB
 const db = new Database(DB_PATH);
@@ -282,6 +300,12 @@ async function processMetric(client, table, weekStart, query, contextLabel) {
         if (!allowList.includes(spdx)) { skippedDisallowedLicense++; continue; }
       }
       if (!node.author || !node.author.login) { skippedMissingAuthor++; continue; }
+      // repo exclusion patterns
+      const repoFull = node.repository.nameWithOwner;
+      if (repoShouldBeExcluded(repoFull)) {
+        skippedPrivateRepo++; // count as skipped
+        continue;
+      }
 
       items.push({
         author: node.author.login,
@@ -348,6 +372,8 @@ async function processStaffCommits(weekStart, rangeStartISO, rangeEndISO, user) 
       const repoFull = node.repository && (node.repository.full_name || node.repository.fullName || node.repository.name);
       const authorLogin = node.author && node.author.login;
       if (!repoFull || !authorLogin) continue;
+
+    if (repoShouldBeExcluded(repoFull)) continue;
 
       // license check: when licenseFilter === 'oss', require allowList membership
       let spdx = null;

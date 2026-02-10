@@ -98,24 +98,49 @@ fill(commitsRaw, 'commits');
 
 const series = Array.from(seriesMap.values());
 
-// Aggregate per-repo totals (across all time) and per-author per-repo counts
+// Aggregate per-repo totals (across all time), per-author per-repo counts,
+// and weekly per-repo aggregates so the UI can filter bubbles by time range.
 const repoMap = new Map();
+
+const ensureRepo = (repo, spdx) => {
+  if (!repoMap.has(repo)) {
+    repoMap.set(repo, {
+      repo,
+      spdx: spdx || null,
+      totals: { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 },
+      byAuthor: {},
+      weekly: new Map() // week_start -> totals
+    });
+  }
+  const e = repoMap.get(repo);
+  if (!e.spdx && spdx) e.spdx = spdx;
+  return e;
+};
 
 const addRepoRow = (row, key) => {
   if (!row || !row.repo) return;
   const repo = row.repo;
   const spdx = row.spdx || null;
-  if (!repoMap.has(repo)) {
-    repoMap.set(repo, { repo, spdx, totals: { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 }, byAuthor: {} });
-  }
-  const entry = repoMap.get(repo);
+  const entry = ensureRepo(repo, spdx);
   if (!entry.byAuthor[row.author]) entry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 };
   entry.byAuthor[row.author][key] = (entry.byAuthor[row.author][key] || 0) + row.count;
   entry.totals[key] = (entry.totals[key] || 0) + row.count;
-  if (!entry.spdx && row.spdx) entry.spdx = row.spdx;
 };
 
-// fetch per-repo per-author counts for each table
+const addRepoWeekRow = (row, key) => {
+  if (!row || !row.repo || !row.week_start) return;
+  const repo = row.repo;
+  const spdx = row.spdx || null;
+  const entry = ensureRepo(repo, spdx);
+  const week = row.week_start;
+  if (!entry.weekly.has(week)) {
+    entry.weekly.set(week, { week_start: week, totals: { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 } });
+  }
+  const w = entry.weekly.get(week);
+  w.totals[key] = (w.totals[key] || 0) + row.count;
+};
+
+// fetch per-repo per-author counts for each table (all-time)
 const prOpenedByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM pr_opened GROUP BY repo, author`).all();
 const prMergedByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM pr_merged GROUP BY repo, author`).all();
 const prClosedByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM pr_closed GROUP BY repo, author`).all();
@@ -130,7 +155,63 @@ issuesOpenedByRepo.forEach(r => addRepoRow(r, 'issues_opened'));
 issuesClosedByRepo.forEach(r => addRepoRow(r, 'issues_closed'));
 commitsByRepo.forEach(r => addRepoRow(r, 'commits'));
 
-const repos = Array.from(repoMap.values());
+// fetch per-repo per-week totals so the UI can produce time-windowed repo aggregates
+const prOpenedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM pr_opened GROUP BY repo, week_start`).all();
+const prMergedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM pr_merged GROUP BY repo, week_start`).all();
+const prClosedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM pr_closed GROUP BY repo, week_start`).all();
+const issuesOpenedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM issue_opened GROUP BY repo, week_start`).all();
+const issuesClosedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM issue_closed GROUP BY repo, week_start`).all();
+const commitsByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM commits GROUP BY repo, week_start`).all();
+
+prOpenedByRepoWeek.forEach(r => addRepoWeekRow(r, 'prs_opened'));
+prMergedByRepoWeek.forEach(r => addRepoWeekRow(r, 'prs_merged'));
+prClosedByRepoWeek.forEach(r => addRepoWeekRow(r, 'prs_closed'));
+issuesOpenedByRepoWeek.forEach(r => addRepoWeekRow(r, 'issues_opened'));
+issuesClosedByRepoWeek.forEach(r => addRepoWeekRow(r, 'issues_closed'));
+commitsByRepoWeek.forEach(r => addRepoWeekRow(r, 'commits'));
+
+// finalize repos array, converting weekly Maps to arrays sorted by week_start
+const repos = Array.from(repoMap.values()).map(e => {
+  const weekly = Array.from(e.weekly.values()).sort((a,b) => a.week_start.localeCompare(b.week_start));
+  return { repo: e.repo, spdx: e.spdx, totals: e.totals, byAuthor: e.byAuthor, weekly };
+});
+
+// Apply repo exclusion patterns from config (optional)
+let repoExcludePatterns = [];
+try {
+  const CONFIG_PATH = path.join('scripts', 'config.json');
+  if (fs.existsSync(CONFIG_PATH)) {
+    const cfg = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+    repoExcludePatterns = cfg.repoExcludePatterns || [];
+  }
+} catch (err) {
+  repoExcludePatterns = [];
+}
+
+if (repoExcludePatterns && repoExcludePatterns.length > 0) {
+  const patterns = repoExcludePatterns.map(p => p.trim()).filter(Boolean);
+  const shouldExclude = (repoName) => {
+    if (!repoName) return false;
+    for (const pat of patterns) {
+      if (pat.includes('/')) {
+        // full owner/repo or prefix match
+        if (repoName.toLowerCase() === pat.toLowerCase() || repoName.toLowerCase().startsWith(pat.toLowerCase()+"/")) return true;
+      }
+      // owner-only match or substring
+      const owner = repoName.split('/')[0];
+      if (owner.toLowerCase() === pat.toLowerCase()) return true;
+      if (repoName.toLowerCase().includes(pat.toLowerCase())) return true;
+    }
+    return false;
+  };
+
+  const before = repos.length;
+  const filtered = repos.filter(r => !shouldExclude(r.repo));
+  console.log(`Filtered ${before - filtered.length} repos via repoExcludePatterns`);
+  // replace repos with filtered list
+  repos.length = 0;
+  filtered.forEach(x => repos.push(x));
+}
 
 // Staff-only filtered series to enable staff segmentation without per-person queries
 const staffSeries = series.map(week => {
