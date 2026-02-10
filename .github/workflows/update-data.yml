@@ -9,9 +9,11 @@ on:
       reprocess_from_week:
         description: "ISO Monday date (YYYY-MM-DD) to restart processing from"
         required: false
+        default: "2026-02-10"
       reprocess_weeks:
         description: "Number of full weeks to reprocess from the last complete week"
         required: false
+        default: "52"
 
 permissions:
   contents: write
