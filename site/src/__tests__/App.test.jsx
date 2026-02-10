@@ -21,7 +21,7 @@ const sampleMetrics = {
 };
 
 beforeEach(() => {
-  global.fetch = vi.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve(sampleMetrics) }));
+  global.fetch = vi.fn(() => Promise.resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(sampleMetrics)), json: () => Promise.resolve(sampleMetrics) }));
 });
 
 afterEach(() => {
@@ -44,6 +44,6 @@ test('renders app and shows All Metrics heading by default', async () => {
 test('shows collection mode CLI suggestion', async () => {
   render(<App />);
   await waitFor(() => expect(global.fetch).toHaveBeenCalled());
-  // allow for StrictMode double-render by checking at least one match
-  expect(screen.getAllByText(/To apply these settings to the data collector/i).length).toBeGreaterThan(0);
+  // allow for StrictMode double-render by checking the footer command is present
+  expect(screen.getAllByText(/Apply to collector:/i).length).toBeGreaterThan(0);
 });
