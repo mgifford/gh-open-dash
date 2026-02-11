@@ -102,6 +102,9 @@ function App() {
           const sum = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_issue','comments_pr_review','comments_commit']
             .reduce((s, k) => s + ((byAuthor[author] && byAuthor[author][k]) || 0), 0);
           authorTotals[author] = (authorTotals[author] || 0) + sum;
+        } else if (metric === 'comments_total') {
+           const sum = ((byAuthor[author]['comments_issue'] || 0) + (byAuthor[author]['comments_pr_review'] || 0) + (byAuthor[author]['comments_commit'] || 0));
+           authorTotals[author] = (authorTotals[author] || 0) + sum;
         } else {
           authorTotals[author] = (authorTotals[author] || 0) + (byAuthor[author][metric] || 0);
         }

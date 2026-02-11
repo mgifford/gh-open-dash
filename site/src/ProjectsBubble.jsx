@@ -29,13 +29,21 @@ export default function ProjectsBubble({ repos = [], selectedAuthor = 'all', met
     if (selectedAuthor === 'all') {
       for (const a of Object.keys(byAuthor)) {
         const c = byAuthor[a] || {};
-        metricValue += c[metric] || 0;
+        if (metric === 'comments_total') {
+          metricValue += (c.comments_issue || 0) + (c.comments_pr_review || 0) + (c.comments_commit || 0);
+        } else {
+          metricValue += c[metric] || 0;
+        }
         prs += (c.prs_opened || 0) + (c.prs_merged || 0) + (c.prs_closed || 0);
         issues += (c.issues_opened || 0) + (c.issues_closed || 0);
       }
     } else {
       const c = byAuthor[selectedAuthor] || {};
-      metricValue = c[metric] || 0;
+      if (metric === 'comments_total') {
+        metricValue = (c.comments_issue || 0) + (c.comments_pr_review || 0) + (c.comments_commit || 0);
+      } else {
+        metricValue = c[metric] || 0;
+      }
       prs = (c.prs_opened || 0) + (c.prs_merged || 0) + (c.prs_closed || 0);
       issues = (c.issues_opened || 0) + (c.issues_closed || 0);
     }
