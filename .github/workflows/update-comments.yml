@@ -25,6 +25,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Ensure DB schema (create tables)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/update_sqlite.mjs || true
+
       - name: Run comments update
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
