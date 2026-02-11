@@ -63,7 +63,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/participation.sqlite data/metrics.json
+          # Only commit the exported metrics JSON; DB files are intentionally gitignored
+          git add data/metrics.json
           # Only commit if there are changes
           git diff --staged --quiet || git commit -m "Update participation data"
           git push
