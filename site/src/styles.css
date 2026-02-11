@@ -24,6 +24,33 @@ header {
   text-align: center;
 }
 
+/* Header nav links */
+header a {
+  display: inline-block;
+  margin: 0 6px;
+  padding: 8px 12px;
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+header a:hover {
+  background: rgba(0,90,156,0.06);
+}
+
+header a.active, header a[aria-current="page"] {
+  background: var(--primary);
+  color: #fff;
+  border-color: rgba(0,0,0,0.06);
+}
+
+header a:focus {
+  outline: 3px solid rgba(0,90,156,0.18);
+  outline-offset: 2px;
+}
+
 h1 {
   margin: 0 0 8px;
   color: var(--primary);
