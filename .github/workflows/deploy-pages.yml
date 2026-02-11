@@ -32,9 +32,9 @@ jobs:
         with:
           persist-credentials: true
       - name: Prepare data
+        # Use the scripted copy which checks multiple candidate locations and fails with a clear message
         run: |
-          mkdir -p site/public/data
-          cp data/metrics.json site/public/data/
+          node ../scripts/copy_metrics_to_site.mjs
 
       - name: Build site
         run: |
