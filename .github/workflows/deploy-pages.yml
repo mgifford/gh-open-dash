@@ -29,15 +29,17 @@ jobs:
         working-directory: site
     steps:
       - uses: actions/checkout@v4
-      
+      - name: Prepare data
+        run: |
+          mkdir -p site/public/data
+          cp data/metrics.json site/public/data/
+
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.GH_PAGES_PAT }}
           publish_dir: './site/dist'
-          mkdir -p public/data
-          cp ../data/metrics.json public/data/
-          
       - name: Build
         run: npm run build
         
