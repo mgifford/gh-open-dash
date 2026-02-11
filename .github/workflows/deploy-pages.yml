@@ -9,7 +9,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -29,28 +29,20 @@ jobs:
         working-directory: site
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - name: Prepare data
         run: |
           mkdir -p site/public/data
           cp data/metrics.json site/public/data/
 
+      - name: Build site
+        run: |
+          npm ci
+          npm run build
+
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          personal_token: ${{ secrets.GH_PAGES_PAT }}
           publish_dir: './site/dist'
-      - name: Build
-        run: npm run build
-        
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-        
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: './site/dist'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
