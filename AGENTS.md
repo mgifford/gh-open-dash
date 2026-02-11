@@ -164,3 +164,57 @@ Not allowed:
  - [ ] `data/metrics.json` is present in the deployed Pages site (workflow `update-metrics.yml` produces and includes it).
  - [ ] Closed metrics (`pr_closed`, `issue_closed`) are present in `data/metrics.json` after export.
  - [ ] `scripts/config.json` flags `collectAllPublic` and `licenseFilter` are documented and used intentionally.
+
+## GitHub Pages consolidation and ensuring `main` is authoritative
+
+- **Goal:** Keep the repository canonical on `main` and avoid a separate long-lived `gh-pages` branch that causes confusion.
+
+- **Quick overview:** There are two common deployment patterns for GitHub Pages used by repositories like this:
+   - Serve the built site from the `gh-pages` branch (typical when using actions that push built output to that branch).
+   - Serve the built site from the `main` branch (by committing build output into a folder such as `/docs` or `/site/dist`).
+
+- **Consolidate `gh-pages` into `main` (safe steps):**
+   1. Fetch the published branch and create a temporary working branch locally:
+
+       ```bash
+       git fetch origin gh-pages:tmp-gh-pages
+       git checkout main
+       git pull origin main
+       ```
+
+   2. Copy the content from `tmp-gh-pages` into your chosen location on `main` (example uses `site/dist` — adjust to your build output folder):
+
+       ```bash
+       git checkout tmp-gh-pages
+       rsync -a --delete ./ ./site/dist/
+       git checkout main
+       git add site/dist
+       git commit -m "Import published site from gh-pages into main/site/dist"
+       git push origin main
+       ```
+
+   3. Verify the imported files look correct on `main` (via GitHub UI or a local build). When satisfied, delete the temporary branch and (optionally) the remote `gh-pages` branch:
+
+       ```bash
+       git branch -D tmp-gh-pages
+       git push origin --delete gh-pages
+       ```
+
+   4. Reconfigure GitHub Pages to serve from `main` and the folder you chose (e.g., `/site/dist` or `/docs`) in repository Settings → Pages.
+
+- **Prevent future commits to `gh-pages`:**
+   - Update your Actions workflows to stop pushing to `gh-pages`. Instead either:
+      - Commit build artifacts into `main` (e.g., into `/site/dist` or `/docs`) as part of the workflow, or
+      - Use an Action that deploys directly to Pages without creating a long-lived `gh-pages` branch (GitHub Pages can be served from `main`), or
+      - If you still use `peaceiris/actions-gh-pages`, change the action to not create or push a permanent `gh-pages` branch (or remove it entirely).
+
+- **Recommended workflow change:**
+   - Have CI build the site and commit only the built `data/metrics.json` (and/or the build output into `site/dist`) to `main` (not the full DB). Keep the deployment step targeted at the Pages source you configured in the Settings panel.
+
+- **Permissions & protection:**
+   - Add a branch protection rule for `main` if you want to prevent accidental direct pushes, and limit who/what can update the Pages source.
+   - Keep deploy tokens or secrets scoped to the CI job that is meant to publish (do not give broad push rights to other jobs).
+
+- **If you want me to apply changes:** say which option you prefer (commit build output into `main/site/dist` or keep `gh-pages` and make `main` authoritative). I can then:
+   - Update `.github/workflows/deploy-pages.yml` to stop pushing to `gh-pages` and instead copy into `site/dist` and commit to `main`,
+   - Or remove the deploy push entirely and switch Pages settings to read from `main` after you import the files.
