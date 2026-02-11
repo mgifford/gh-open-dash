@@ -40,6 +40,18 @@ function App() {
   const [displayConfig, setDisplayConfig] = useState({ collectAllPublic: false, licenseFilter: 'oss' });
   const [view, setView] = useState('dashboard');
 
+  // Initialize view from URL hash (simple hash routing)
+  useEffect(() => {
+    const loadFromHash = () => {
+      const h = (window.location.hash || '').replace(/^#\/?/, '');
+      if (h === 'projects' || h === 'dashboard') setView(h);
+    };
+    loadFromHash();
+    const onHash = () => loadFromHash();
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
   // Shared metric keys and accessible style map for chart and legend
   const metricKeys = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_total'];
   const styleMap = {
@@ -168,8 +180,8 @@ function App() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h1 style={{ margin: 0 }}>CivicActions Open Source Participation</h1>
           <div style={{ display: 'flex', gap: 8 }}>
-            <button onClick={() => setView('dashboard')} disabled={view === 'dashboard'}>Dashboard</button>
-            <button onClick={() => setView('projects')} disabled={view === 'projects'}>Projects</button>
+            <button onClick={() => { window.location.hash = '/dashboard'; setView('dashboard'); }} disabled={view === 'dashboard'}>Dashboard</button>
+            <button onClick={() => { window.location.hash = '/projects'; setView('projects'); }} disabled={view === 'projects'}>Projects</button>
           </div>
         </div>
         <p>
