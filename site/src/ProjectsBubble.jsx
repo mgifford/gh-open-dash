@@ -11,11 +11,12 @@ import { Bubble } from 'react-chartjs-2';
 
 ChartJS.register(LinearScale, PointElement, Tooltip, Legend, Title);
 
-function scaleRadius(val, maxVal = 1, maxRadius = 40, minRadius = 6) {
+function scaleRadius(val, maxVal = 1, maxRadius = 72, minRadius = 6) {
   if (!val || val <= 0) return minRadius;
   // scale by sqrt to reduce skew, then normalize by maxVal
-  const norm = Math.sqrt(val) / Math.sqrt(Math.max(1, maxVal));
-  return Math.max(minRadius, Math.min(maxRadius, Math.round(norm * maxRadius)));
+  const ratio = Math.sqrt(val) / Math.sqrt(Math.max(1, maxVal));
+  const r = Math.round(minRadius + (maxRadius - minRadius) * Math.min(1, ratio));
+  return Math.max(minRadius, Math.min(maxRadius, r));
 }
 
 export default function ProjectsBubble({ repos = [], selectedAuthor = 'all', metric = 'issues_opened', onRepoClick }) {
@@ -94,7 +95,9 @@ export default function ProjectsBubble({ repos = [], selectedAuthor = 'all', met
           }
         }
       },
-      title: { display: true, text: 'Repository contributions (PRs vs Issues)' }
+      title: { display: true, text: 'Repository contributions (PRs vs Issues)' },
+      // hide the verbose legend — it creates too many labels for repositories
+      legend: { display: false }
     },
     scales: {
       x: { title: { display: true, text: 'PR activity (count)' }, beginAtZero: true },
