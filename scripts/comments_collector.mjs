@@ -40,12 +40,70 @@ function repoShouldBeExcluded(repoName) {
 const db = new Database(DB_PATH);
 db.pragma('journal_mode = WAL');
 
+// Create a small cache table for org repo lists to reduce repeated listing
+db.exec(`
+  CREATE TABLE IF NOT EXISTS org_repos_cache (
+    org TEXT,
+    repo TEXT,
+    spdx TEXT,
+    updated_at INTEGER,
+    PRIMARY KEY (org, repo)
+  );
+`);
+
+const RATE_LIMIT_BUFFER_MS = 5000;
+const MAX_RETRIES = 5;
+
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+async function fetchWithRetry(url, options = {}, attempt = 1) {
+  const token = process.env.GITHUB_TOKEN;
+  const headers = { authorization: `token ${token}`, ...(options.headers || {}) };
+  try {
+    const res = await fetch(url, { ...options, headers });
+    if (res.ok) return res;
+
+    // Handle rate limit (403) or 429
+    if (res.status === 403 || res.status === 429) {
+      const text = await res.text();
+      let waitMs = RETRY_DELAY_MS * attempt;
+      const reset = res.headers.get('x-ratelimit-reset');
+      if (reset) {
+        const resetAt = Number(reset) * 1000;
+        const now = Date.now();
+        waitMs = Math.max(resetAt - now + RATE_LIMIT_BUFFER_MS, waitMs);
+      }
+      if (attempt >= MAX_RETRIES) {
+        // re-create a Response-like error
+        const err = new Error(`HTTP ${res.status}: ${text}`);
+        err.status = res.status;
+        throw err;
+      }
+      console.log(`Rate limited on ${url} (status ${res.status}); waiting ${Math.ceil(waitMs/1000)}s before retry (attempt ${attempt}/${MAX_RETRIES})`);
+      await sleep(waitMs);
+      return fetchWithRetry(url, options, attempt + 1);
+    }
+
+    // other non-ok
+    return res;
+  } catch (err) {
+    if (attempt >= MAX_RETRIES) throw err;
+    const delay = RETRY_DELAY_MS * attempt;
+    console.warn(`Fetch error for ${url} (attempt ${attempt}): ${err.message}. Retrying in ${delay}ms.`);
+    await sleep(delay);
+    return fetchWithRetry(url, options, attempt + 1);
+  }
+}
+
+// Ensure RETRY_DELAY_MS is defined
+const RETRY_DELAY_MS = 2000;
+
 async function fetchPaged(url, headers = {}) {
   const token = process.env.GITHUB_TOKEN;
   const out = [];
   let next = url;
   while (next) {
-    const res = await fetch(next, { headers: { authorization: `token ${token}`, ...headers } });
+    const res = await fetchWithRetry(next, { headers: { ...(headers || {}) } });
     if (!res.ok) {
       const text = await res.text();
       throw new Error(`HTTP ${res.status}: ${text}`);
@@ -67,6 +125,28 @@ async function fetchPaged(url, headers = {}) {
   return out;
 }
 
+function nowMs() { return Date.now(); }
+
+function getCachedOrgRepos(org, ttlMs = 1000 * 60 * 60 * 24 * 7) { // default 7 days
+  const cutoff = nowMs() - ttlMs;
+  const rows = db.prepare(`SELECT repo, spdx, updated_at FROM org_repos_cache WHERE org = ?`).all(org);
+  if (!rows || rows.length === 0) return null;
+  // if any row is older than cutoff, treat cache as stale
+  for (const r of rows) {
+    if (!r.updated_at || r.updated_at < cutoff) return null;
+  }
+  return rows.map(r => ({ repo: r.repo, spdx: r.spdx }));
+}
+
+function cacheOrgRepos(org, repos) {
+  const now = Math.floor(nowMs() / 1000);
+  const insert = db.prepare(`INSERT OR REPLACE INTO org_repos_cache (org, repo, spdx, updated_at) VALUES (?, ?, ?, ?)`);
+  const tx = db.transaction((rows) => {
+    for (const r of rows) insert.run(org, r.repo, r.spdx || null, now);
+  });
+  tx(repos);
+}
+
 export async function processCommentsForOrg(weekStart, rangeStartISO, rangeEndISO, org) {
   const token = process.env.GITHUB_TOKEN;
   if (!token) {
@@ -78,31 +158,33 @@ export async function processCommentsForOrg(weekStart, rangeStartISO, rangeEndIS
   const repoLicenseCache = new Map();
   const counts = new Map(); // key `${author}||${repo}||${kind}` -> number
 
-  // List public repos for org
-  let page = 1;
-  while (true) {
-    const url = `https://api.github.com/orgs/${encodeURIComponent(org)}/repos?per_page=${perPage}&page=${page}&type=public`;
-    const res = await fetch(url, { headers: { authorization: `token ${token}` } });
-    if (!res.ok) {
-      const txt = await res.text();
-      console.warn(`Failed to list repos for ${org}: ${res.status} ${txt}`);
-      break;
-    }
-    const repos = await res.json();
-    if (!repos || repos.length === 0) break;
+  // Attempt to use cached org repo list first
+  let repoEntries = getCachedOrgRepos(org);
+  if (!repoEntries) {
+    // fetch and build list of { repo, spdx }
+    repoEntries = [];
+    let page = 1;
+    while (true) {
+      const url = `https://api.github.com/orgs/${encodeURIComponent(org)}/repos?per_page=${perPage}&page=${page}&type=public`;
+      let res;
+      try {
+        res = await fetchWithRetry(url, {});
+      } catch (err) {
+        console.warn(`Failed to list repos for ${org}: ${err.status || 'error'} ${err.message}`);
+        break;
+      }
+      const repos = await res.json();
+      if (!repos || repos.length === 0) break;
 
-    for (const r of repos) {
-      const repoFull = r.full_name || r.fullName || r.name && `${r.owner && r.owner.login}/${r.name}`;
-      if (!repoFull) continue;
-      if (repoShouldBeExcluded(repoFull)) continue;
-      // license check
-      let spdx = null;
-      if (repoLicenseCache.has(repoFull)) {
-        spdx = repoLicenseCache.get(repoFull);
-      } else {
+      for (const r of repos) {
+        const repoFull = r.full_name || r.fullName || r.name && `${r.owner && r.owner.login}/${r.name}`;
+        if (!repoFull) continue;
+        if (repoShouldBeExcluded(repoFull)) continue;
+        // fetch metadata for SPDX
+        let spdx = null;
         try {
           const repoMetaUrl = `https://api.github.com/repos/${repoFull}`;
-          const rmeta = await fetch(repoMetaUrl, { headers: { authorization: `token ${token}` } });
+          const rmeta = await fetchWithRetry(repoMetaUrl, {});
           if (rmeta.ok) {
             const jm = await rmeta.json();
             spdx = jm.license && jm.license.spdx_id ? jm.license.spdx_id : null;
@@ -110,69 +192,97 @@ export async function processCommentsForOrg(weekStart, rangeStartISO, rangeEndIS
         } catch (err) {
           console.warn('Failed to fetch repo metadata for', repoFull, err.message || err);
         }
-        repoLicenseCache.set(repoFull, spdx);
-      }
-      if (fileConfig.licenseFilter === 'oss') {
-        if (!spdx) continue;
-        if (!allowList.includes(spdx)) continue;
+        repoEntries.push({ repo: repoFull, spdx });
       }
 
-      // Fetch issue comments (includes issue & PR issue comments)
-      try {
-        const issuesUrl = `https://api.github.com/repos/${repoFull}/issues/comments?since=${encodeURIComponent(rangeStartISO)}&per_page=${perPage}`;
-        const issueComments = await fetchPaged(issuesUrl, {});
-        for (const c of issueComments) {
-          const created = c.created_at;
-          if (!created) continue;
-          if (created < rangeStartISO || created > rangeEndISO) continue;
-          const author = c.user && c.user.login;
-          if (!author) continue;
-          const key = `${author}||${repoFull}||issue_comment`;
-          counts.set(key, (counts.get(key) || 0) + 1);
-        }
-      } catch (err) {
-        console.warn(`Issue comments fetch failed for ${repoFull}:`, err.message || err);
-      }
-
-      // Fetch PR review comments
-      try {
-        const prReviewsUrl = `https://api.github.com/repos/${repoFull}/pulls/comments?since=${encodeURIComponent(rangeStartISO)}&per_page=${perPage}`;
-        const prReviewComments = await fetchPaged(prReviewsUrl, {});
-        for (const c of prReviewComments) {
-          const created = c.created_at;
-          if (!created) continue;
-          if (created < rangeStartISO || created > rangeEndISO) continue;
-          const author = c.user && c.user.login;
-          if (!author) continue;
-          const key = `${author}||${repoFull}||pr_review_comment`;
-          counts.set(key, (counts.get(key) || 0) + 1);
-        }
-      } catch (err) {
-        console.warn(`PR review comments fetch failed for ${repoFull}:`, err.message || err);
-      }
-
-      // Fetch commit comments
-      try {
-        const commitCommentsUrl = `https://api.github.com/repos/${repoFull}/comments?since=${encodeURIComponent(rangeStartISO)}&per_page=${perPage}`;
-        const commitComments = await fetchPaged(commitCommentsUrl, {});
-        for (const c of commitComments) {
-          const created = c.created_at || c.updated_at;
-          if (!created) continue;
-          if (created < rangeStartISO || created > rangeEndISO) continue;
-          const author = c.user && c.user.login;
-          if (!author) continue;
-          const key = `${author}||${repoFull}||commit_comment`;
-          counts.set(key, (counts.get(key) || 0) + 1);
-        }
-      } catch (err) {
-        console.warn(`Commit comments fetch failed for ${repoFull}:`, err.message || err);
-      }
+      const link = res.headers.get('link');
+      if (!link || !link.includes('rel="next"')) break;
+      page++;
     }
 
-    // pagination for org repos
-    const link = res.headers.get('link');
-    if (!link || !link.includes('rel="next"')) break;
-    page++;
+    // store into cache (even empty list) to avoid repeated listing
+    try { cacheOrgRepos(org, repoEntries); } catch (e) { console.warn('Failed to cache org repos:', e.message || e); }
+  }
+
+  // iterate cached/fetched repo entries and fetch comments
+  for (const entry of repoEntries) {
+    const repoFull = entry.repo;
+    const spdxFromEntry = entry.spdx || null;
+    if (!repoFull) continue;
+    if (repoShouldBeExcluded(repoFull)) continue;
+    // populate repoLicenseCache from entry if present
+    if (spdxFromEntry) repoLicenseCache.set(repoFull, spdxFromEntry);
+
+    // license check
+    let spdx = repoLicenseCache.has(repoFull) ? repoLicenseCache.get(repoFull) : null;
+    if (!spdx) {
+      try {
+        const repoMetaUrl = `https://api.github.com/repos/${repoFull}`;
+        const rmeta = await fetchWithRetry(repoMetaUrl, {});
+        if (rmeta.ok) {
+          const jm = await rmeta.json();
+          spdx = jm.license && jm.license.spdx_id ? jm.license.spdx_id : null;
+        }
+      } catch (err) {
+        console.warn('Failed to fetch repo metadata for', repoFull, err.message || err);
+      }
+      repoLicenseCache.set(repoFull, spdx);
+    }
+    if (fileConfig.licenseFilter === 'oss') {
+      if (!spdx) continue;
+      if (!allowList.includes(spdx)) continue;
+    }
+
+    // Fetch issue comments (includes issue & PR issue comments)
+    try {
+      const issuesUrl = `https://api.github.com/repos/${repoFull}/issues/comments?since=${encodeURIComponent(rangeStartISO)}&per_page=${perPage}`;
+      const issueComments = await fetchPaged(issuesUrl, {});
+      for (const c of issueComments) {
+        const created = c.created_at;
+        if (!created) continue;
+        if (created < rangeStartISO || created > rangeEndISO) continue;
+        const author = c.user && c.user.login;
+        if (!author) continue;
+        const key = `${author}||${repoFull}||issue_comment`;
+        counts.set(key, (counts.get(key) || 0) + 1);
+      }
+    } catch (err) {
+      console.warn(`Issue comments fetch failed for ${repoFull}:`, err.message || err);
+    }
+
+    // Fetch PR review comments
+    try {
+      const prReviewsUrl = `https://api.github.com/repos/${repoFull}/pulls/comments?since=${encodeURIComponent(rangeStartISO)}&per_page=${perPage}`;
+      const prReviewComments = await fetchPaged(prReviewsUrl, {});
+      for (const c of prReviewComments) {
+        const created = c.created_at;
+        if (!created) continue;
+        if (created < rangeStartISO || created > rangeEndISO) continue;
+        const author = c.user && c.user.login;
+        if (!author) continue;
+        const key = `${author}||${repoFull}||pr_review_comment`;
+        counts.set(key, (counts.get(key) || 0) + 1);
+      }
+    } catch (err) {
+      console.warn(`PR review comments fetch failed for ${repoFull}:`, err.message || err);
+    }
+
+    // Fetch commit comments
+    try {
+      const commitCommentsUrl = `https://api.github.com/repos/${repoFull}/comments?since=${encodeURIComponent(rangeStartISO)}&per_page=${perPage}`;
+      const commitComments = await fetchPaged(commitCommentsUrl, {});
+      for (const c of commitComments) {
+        const created = c.created_at || c.updated_at;
+        if (!created) continue;
+        if (created < rangeStartISO || created > rangeEndISO) continue;
+        const author = c.user && c.user.login;
+        if (!author) continue;
+        const key = `${author}||${repoFull}||commit_comment`;
+        counts.set(key, (counts.get(key) || 0) + 1);
+      }
+    } catch (err) {
+      console.warn(`Commit comments fetch failed for ${repoFull}:`, err.message || err);
+    }
   }
 
   if (counts.size === 0) return;

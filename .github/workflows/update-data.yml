@@ -50,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_READ_ORG_TOKEN || secrets.GITHUB_TOKEN }}
           ORG_ALLOWLIST: ${{ vars.ORG_ALLOWLIST || 'civicactions' }}
           HISTORY_WEEKS: ${{ vars.HISTORY_WEEKS || 260 }}
-          MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 12 }}
+          MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 4 }}
           REPROCESS_FROM_WEEK: ${{ inputs.reprocess_from_week || vars.REPROCESS_FROM_WEEK || '' }}
           REPROCESS_WEEKS: ${{ inputs.reprocess_weeks || vars.REPROCESS_WEEKS || '' }}
 
