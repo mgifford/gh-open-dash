@@ -38,8 +38,33 @@ jobs:
           node scripts/update_sqlite.mjs || true
 
       - name: Export metrics.json (includes per-repo aggregates)
+        continue-on-error: true
         run: |
-          node scripts/export_metrics.mjs
+          set -o pipefail
+          mkdir -p logs
+          node scripts/export_metrics.mjs 2>&1 | tee logs/export_metrics.log
+          echo "${PIPESTATUS[0]}" > logs/export_metrics.exit
+
+      - name: Upload export artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: export-debug
+          path: |
+            logs/export_metrics.log
+            logs/export_metrics.exit
+            data/participation.sqlite
+            data/participation.sqlite-wal
+            data/participation.sqlite-shm
+            data/metrics.json
+
+      - name: Fail if export_metrics failed
+        if: always()
+        run: |
+          if [ -f logs/export_metrics.exit ] && [ "$(cat logs/export_metrics.exit)" -ne 0 ]; then
+            echo "export_metrics failed; see 'export-debug' artifact for logs and DB" >&2
+            exit 1
+          fi
 
       - name: Copy metrics into site public
         run: |

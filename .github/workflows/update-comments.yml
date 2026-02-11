@@ -32,7 +32,32 @@ jobs:
           node scripts/update_sqlite.mjs || true
 
       - name: Run comments update
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          node scripts/update_comments.mjs
+          set -o pipefail
+          mkdir -p logs
+          node scripts/update_comments.mjs 2>&1 | tee logs/update_comments.log
+          echo "${PIPESTATUS[0]}" > logs/update_comments.exit
+
+      - name: Upload comments artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: comments-debug
+          path: |
+            logs/update_comments.log
+            logs/update_comments.exit
+            data/participation.sqlite
+            data/participation.sqlite-wal
+            data/participation.sqlite-shm
+            data/metrics.json
+
+      - name: Fail if comments job failed
+        if: always()
+        run: |
+          if [ -f logs/update_comments.exit ] && [ "$(cat logs/update_comments.exit)" -ne 0 ]; then
+            echo "update_comments failed; see 'comments-debug' artifact for logs and DB" >&2
+            exit 1
+          fi
