@@ -33,6 +33,7 @@ jobs:
       - name: Update SQLite (collect week buckets)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAX_WEEKS_PER_RUN: 0
         run: |
           node scripts/update_sqlite.mjs || true
 
