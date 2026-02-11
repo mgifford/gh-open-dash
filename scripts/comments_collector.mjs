@@ -79,7 +79,7 @@ async function fetchWithRetry(url, options = {}, attempt = 1) {
         err.status = res.status;
         throw err;
       }
-      console.log(`Rate limited on ${url} (status ${res.status}); waiting ${Math.ceil(waitMs/1000)}s before retry (attempt ${attempt}/${MAX_RETRIES})`);
+      console.log(`Rate limited on ${url} (status ${res.status}); waiting ${Math.ceil(waitMs/1000)}s until API window resets (attempt ${attempt}/${MAX_RETRIES})`);
       await sleep(waitMs);
       return fetchWithRetry(url, options, attempt + 1);
     }

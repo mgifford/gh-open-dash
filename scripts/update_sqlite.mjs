@@ -492,7 +492,7 @@ async function fetchSearchPage(client, query, cursor, contextLabel) {
 
       if (rateLimited) {
         const waitSeconds = Math.ceil(waitMsFromReset / 1000);
-        console.log(`[${contextLabel}] Hit rate limit; waiting ${waitSeconds}s before retry.`);
+        console.log(`[${contextLabel}] Hit rate limit; waiting ${waitSeconds}s until API window resets before retry.`);
         await sleep(waitMsFromReset);
         // Do not advance attempt counter on rate-limit waits so we keep retrying after reset.
         attempt--;
