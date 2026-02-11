@@ -58,10 +58,15 @@ jobs:
             data/participation.sqlite-shm
             data/metrics.json
 
-      - name: Fail if export_metrics failed
+      - name: Fail if export_metrics failed or exit code missing
         if: always()
         run: |
-          if [ -f logs/export_metrics.exit ] && [ "$(cat logs/export_metrics.exit)" -ne 0 ]; then
+          if [ ! -f logs/export_metrics.exit ]; then
+            echo "export_metrics did not produce exit file; failing to prevent downstream steps" >&2
+            ls -la logs || true
+            exit 1
+          fi
+          if [ "$(cat logs/export_metrics.exit)" -ne 0 ]; then
             echo "export_metrics failed; see 'export-debug' artifact for logs and DB" >&2
             exit 1
           fi
