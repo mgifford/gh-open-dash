@@ -12,7 +12,7 @@ const CONFIG_PATH = path.join('scripts', 'config.json');
 
 const defaultConfig = {
   orgAllowlist: ['civicactions'],
-  historyWeeks: 260,
+  historyWeeks: 52,
   maxWeeksPerRun: 12
 };
 

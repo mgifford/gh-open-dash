@@ -7,7 +7,7 @@ import Database from 'better-sqlite3';
 const DB_PATH = path.join('data', 'participation.sqlite');
 const CONFIG_PATH = path.join('scripts', 'config.json');
 
-const defaultConfig = { historyWeeks: 260, maxWeeksPerRun: 12, orgAllowlist: ['civicactions'] };
+const defaultConfig = { historyWeeks: 52, maxWeeksPerRun: 12, orgAllowlist: ['civicactions'] };
 
 function loadConfig() {
   if (fs.existsSync(CONFIG_PATH)) {

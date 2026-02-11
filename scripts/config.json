@@ -1,6 +1,6 @@
 {
   "orgAllowlist": ["civicactions"],
-  "historyWeeks": 260,
+  "historyWeeks": 52,
   "maxWeeksPerRun": 12,
   "collectAllPublic": false,
   "licenseFilter": "oss"
