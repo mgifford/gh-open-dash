@@ -11,14 +11,16 @@ import { Bubble } from 'react-chartjs-2';
 
 ChartJS.register(LinearScale, PointElement, Tooltip, Legend, Title);
 
-function scaleRadius(val) {
-  if (!val || val <= 0) return 2;
-  return Math.min(40, Math.sqrt(val) * 2);
+function scaleRadius(val, maxVal = 1, maxRadius = 40, minRadius = 6) {
+  if (!val || val <= 0) return minRadius;
+  // scale by sqrt to reduce skew, then normalize by maxVal
+  const norm = Math.sqrt(val) / Math.sqrt(Math.max(1, maxVal));
+  return Math.max(minRadius, Math.min(maxRadius, Math.round(norm * maxRadius)));
 }
 
 export default function ProjectsBubble({ repos = [], selectedAuthor = 'all', metric = 'issues_opened', onRepoClick }) {
   // Build bubble points: x = PR activity, y = Issue activity, r = selected metric count
-  const points = repos.map(r => {
+  const computed = repos.map(r => {
     const byAuthor = r.byAuthor || {};
     let metricValue = 0;
     let prs = 0;
@@ -36,23 +38,51 @@ export default function ProjectsBubble({ repos = [], selectedAuthor = 'all', met
       prs = (c.prs_opened || 0) + (c.prs_merged || 0) + (c.prs_closed || 0);
       issues = (c.issues_opened || 0) + (c.issues_closed || 0);
     }
-    return {
-      x: prs,
-      y: issues,
-      r: scaleRadius(metricValue),
-      raw: { repo: r.repo, metricValue, prs, issues }
-    };
-  }).filter(p => p.raw.metricValue > 0 || p.x > 0 || p.y > 0);
+    const parts = (r.repo || '').split('/');
+    const org = parts[0] || 'unknown';
+    return { repo: r.repo, org, metricValue, prs, issues };
+  }).filter(p => p.metricValue > 0 || p.prs > 0 || p.issues > 0);
 
-  const data = {
-    datasets: [
-      {
-        label: 'Repositories',
-        data: points,
-        backgroundColor: 'rgba(75, 135, 185, 0.7)'
-      }
-    ]
+  const maxMetric = computed.reduce((m, v) => Math.max(m, v.metricValue || 0), 0);
+
+  // color map: organization-specific colors, case-insensitive keys
+  const orgColorMap = {
+    'civicactions': '#1f77b4',
+    'getdkan': '#ff7f0e',
+    'httparchive': '#2ca02c'
   };
+  const palette = ['#636efa', '#ef553b', '#00cc96', '#ab63fa', '#19d3f3', '#e763fa', '#f4a261'];
+  const orgIndexMap = {};
+
+  // group by org
+  const groups = {};
+  computed.forEach((p, i) => {
+    const orgKey = (p.org || 'unknown').toLowerCase();
+    if (!groups[orgKey]) groups[orgKey] = [];
+    const point = {
+      x: p.prs,
+      y: p.issues,
+      r: scaleRadius(p.metricValue, maxMetric, 48, 6),
+      raw: { repo: p.repo, org: p.org, metricValue: p.metricValue, prs: p.prs, issues: p.issues }
+    };
+    groups[orgKey].push(point);
+    if (!(orgKey in orgIndexMap)) {
+      orgIndexMap[orgKey] = Object.keys(orgIndexMap).length;
+    }
+  });
+
+  const datasets = Object.keys(groups).map((orgKey) => {
+    const displayOrg = orgKey;
+    const baseColor = orgColorMap[orgKey] || palette[orgIndexMap[orgKey] % palette.length];
+    return {
+      label: displayOrg,
+      data: groups[orgKey],
+      backgroundColor: baseColor + 'cc',
+      borderColor: baseColor,
+    };
+  });
+
+  const data = { datasets };
 
   const options = {
     plugins: {
