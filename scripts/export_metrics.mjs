@@ -30,6 +30,22 @@ const tableExists = (name) => {
   return !!row;
 };
 
+// Ensure comment_counts table exists (create schema-only when missing)
+if (!tableExists('comment_counts')) {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS comment_counts (
+      week_start TEXT,
+      author TEXT,
+      repo TEXT,
+      spdx TEXT,
+      kind TEXT,
+      count INTEGER,
+      PRIMARY KEY (week_start, author, repo, kind)
+    );
+  `);
+  console.log('Created missing table: comment_counts (schema-only)');
+}
+
 const weeksQueryParts = [
   "SELECT DISTINCT week_start FROM pr_opened",
   "SELECT DISTINCT week_start FROM pr_merged",
