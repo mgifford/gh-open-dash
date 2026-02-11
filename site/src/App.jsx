@@ -180,8 +180,8 @@ function App() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h1 style={{ margin: 0 }}>CivicActions Open Source Participation</h1>
           <div style={{ display: 'flex', gap: 8 }}>
-            <button onClick={() => { window.location.hash = '/dashboard'; setView('dashboard'); }} disabled={view === 'dashboard'}>Dashboard</button>
-            <button onClick={() => { window.location.hash = '/projects'; setView('projects'); }} disabled={view === 'projects'}>Projects</button>
+            <a href="#/dashboard" onClick={() => setView('dashboard')} className={view === 'dashboard' ? 'active' : ''} aria-current={view === 'dashboard' ? 'page' : undefined}>Dashboard</a>
+            <a href="#/projects" onClick={() => setView('projects')} className={view === 'projects' ? 'active' : ''} aria-current={view === 'projects' ? 'page' : undefined}>Projects</a>
           </div>
         </div>
         <p>
