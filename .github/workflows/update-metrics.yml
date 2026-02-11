@@ -34,7 +34,10 @@ jobs:
       - name: Update SQLite (collect week buckets)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MAX_WEEKS_PER_RUN: 0
+          # Collect data (default to 52 weeks if starting empty, or respect vars)
+          MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 52 }}
+          HISTORY_WEEKS: ${{ vars.HISTORY_WEEKS || 52 }}
+          ORG_ALLOWLIST: ${{ vars.ORG_ALLOWLIST || 'civicactions' }}
         run: |
           node scripts/update_sqlite.mjs || true
 
