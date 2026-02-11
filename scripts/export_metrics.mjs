@@ -25,28 +25,31 @@ if (fs.existsSync(STAFF_ALLOWLIST_PATH)) {
 }
 
 // Fetch all weeks
-const weeks = db.prepare(`
-  SELECT DISTINCT week_start FROM pr_opened
-  UNION
-  SELECT DISTINCT week_start FROM pr_merged
-  UNION
-  SELECT DISTINCT week_start FROM issue_opened
-  UNION
-  SELECT DISTINCT week_start FROM comment_counts
-  ORDER BY week_start
-`).all().map(r => r.week_start);
+const tableExists = (name) => {
+  const row = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name = ?`).get(name);
+  return !!row;
+};
+
+const weeksQueryParts = [
+  "SELECT DISTINCT week_start FROM pr_opened",
+  "SELECT DISTINCT week_start FROM pr_merged",
+  "SELECT DISTINCT week_start FROM issue_opened"
+];
+if (tableExists('comment_counts')) {
+  weeksQueryParts.push("SELECT DISTINCT week_start FROM comment_counts");
+}
+const weeks = db.prepare(`${weeksQueryParts.join('\nUNION\n')}\nORDER BY week_start`).all().map(r => r.week_start);
 
 // Fetch all authors
-const authors = db.prepare(`
-  SELECT DISTINCT author FROM pr_opened
-  UNION
-  SELECT DISTINCT author FROM pr_merged
-  UNION
-  SELECT DISTINCT author FROM issue_opened
-  UNION
-  SELECT DISTINCT author FROM comment_counts
-  ORDER BY author COLLATE NOCASE
-`).all().map(r => r.author);
+const authorQueryParts = [
+  "SELECT DISTINCT author FROM pr_opened",
+  "SELECT DISTINCT author FROM pr_merged",
+  "SELECT DISTINCT author FROM issue_opened"
+];
+if (tableExists('comment_counts')) {
+  authorQueryParts.push("SELECT DISTINCT author FROM comment_counts");
+}
+const authors = db.prepare(`${authorQueryParts.join('\nUNION\n')}\nORDER BY author COLLATE NOCASE`).all().map(r => r.author);
 
 const staffAuthors = authors.filter(a => staffAllowList.includes(a));
 
@@ -70,7 +73,10 @@ const issuesOpenedRaw = getData('issue_opened');
 const issuesClosedRaw = getData('issue_closed');
 const commitsRaw = db.prepare(`SELECT week_start, author, count(*) as count FROM commits GROUP BY week_start, author`).all();
 // comment counts grouped by week/author/kind
-const commentCountsRaw = db.prepare(`SELECT week_start, author, kind, SUM(count) as count FROM comment_counts GROUP BY week_start, author, kind`).all();
+let commentCountsRaw = [];
+if (tableExists('comment_counts')) {
+  commentCountsRaw = db.prepare(`SELECT week_start, author, kind, SUM(count) as count FROM comment_counts GROUP BY week_start, author, kind`).all();
+}
 
 // Build structure
 const seriesMap = new Map(); // week_start -> { byAuthor: {} }
