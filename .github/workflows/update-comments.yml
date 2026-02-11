@@ -28,13 +28,17 @@ jobs:
       - name: Ensure DB schema (create tables)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Run schema-only (do not process weeks) to avoid re-collecting PR/issue data
+          MAX_WEEKS_PER_RUN: 0
         run: |
           node scripts/update_sqlite.mjs || true
+
 
       - name: Run comments update
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 4 }}
         run: |
           set -o pipefail
           mkdir -p logs
