@@ -3,6 +3,7 @@ import Database from 'better-sqlite3';
 import { graphql } from '@octokit/graphql';
 import fs from 'fs';
 import path from 'path';
+import { processCommentsForOrg } from './comments_collector.mjs';
 
 const DB_PATH = path.join('data', 'participation.sqlite');
 const ALLOWLIST_PATH = path.join('scripts', 'oss_spdx_allowlist.json');
@@ -98,6 +99,15 @@ db.exec(`
     repo TEXT,
     spdx TEXT,
     PRIMARY KEY (week_start, author, repo)
+  );
+  CREATE TABLE IF NOT EXISTS comment_counts (
+    week_start TEXT,
+    author TEXT,
+    repo TEXT,
+    spdx TEXT,
+    kind TEXT,
+    count INTEGER,
+    PRIMARY KEY (week_start, author, repo, kind)
   );
   CREATE TABLE IF NOT EXISTS issue_opened (
     week_start TEXT,
@@ -252,6 +262,12 @@ async function run() {
       await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr closed:${rangeStart}..${rangeEnd}`, org);
       await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue created:${rangeStart}..${rangeEnd}`, org);
       await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue closed:${rangeStart}..${rangeEnd}`, org);
+      // Collect comment counts (issue comments, PR review comments, commit comments) per repo/author for this org and week
+      try {
+        await processCommentsForOrg(weekStartStr, rangeStart, rangeEnd, org);
+      } catch (err) {
+        console.warn(`Failed to collect comments for org ${org} (${weekStartStr}):`, err.message || err);
+      }
     }
 
     for (const user of staffAllowList) {
@@ -419,6 +435,8 @@ async function processStaffCommits(weekStart, rangeStartISO, rangeEndISO, user) 
   insertMany(items);
   console.log(`  Inserted ${items.length} commit records for staff:${user} (${weekStart})`);
 }
+
+// comment collection logic moved to scripts/comments_collector.mjs
 
 async function fetchSearchPage(client, query, cursor, contextLabel) {
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {

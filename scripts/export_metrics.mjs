@@ -31,6 +31,8 @@ const weeks = db.prepare(`
   SELECT DISTINCT week_start FROM pr_merged
   UNION
   SELECT DISTINCT week_start FROM issue_opened
+  UNION
+  SELECT DISTINCT week_start FROM comment_counts
   ORDER BY week_start
 `).all().map(r => r.week_start);
 
@@ -41,6 +43,8 @@ const authors = db.prepare(`
   SELECT DISTINCT author FROM pr_merged
   UNION
   SELECT DISTINCT author FROM issue_opened
+  UNION
+  SELECT DISTINCT author FROM comment_counts
   ORDER BY author COLLATE NOCASE
 `).all().map(r => r.author);
 
@@ -65,6 +69,8 @@ const prClosedRaw = getData('pr_closed');
 const issuesOpenedRaw = getData('issue_opened');
 const issuesClosedRaw = getData('issue_closed');
 const commitsRaw = db.prepare(`SELECT week_start, author, count(*) as count FROM commits GROUP BY week_start, author`).all();
+// comment counts grouped by week/author/kind
+const commentCountsRaw = db.prepare(`SELECT week_start, author, kind, SUM(count) as count FROM comment_counts GROUP BY week_start, author, kind`).all();
 
 // Build structure
 const seriesMap = new Map(); // week_start -> { byAuthor: {} }
@@ -83,7 +89,7 @@ const fill = (data, key) => {
     if (!weekEntry) return; // Should not happen given weeks list derivation
     
     if (!weekEntry.byAuthor[row.author]) {
-      weekEntry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 };
+      weekEntry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0 };
     }
     weekEntry.byAuthor[row.author][key] = row.count;
   });
@@ -97,6 +103,22 @@ fill(issuesClosedRaw, 'issues_closed');
 fill(commitsRaw, 'commits');
 
 const series = Array.from(seriesMap.values());
+
+// apply comment counts into series
+const kindToKey = {
+  issue_comment: 'comments_issue',
+  pr_review_comment: 'comments_pr_review',
+  commit_comment: 'comments_commit'
+};
+commentCountsRaw.forEach(row => {
+  const weekEntry = seriesMap.get(row.week_start);
+  if (!weekEntry) return;
+  if (!weekEntry.byAuthor[row.author]) {
+    weekEntry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0 };
+  }
+  const k = kindToKey[row.kind] || null;
+  if (k) weekEntry.byAuthor[row.author][k] = row.count;
+});
 
 // Aggregate per-repo totals (across all time), per-author per-repo counts,
 // and weekly per-repo aggregates so the UI can filter bubbles by time range.
@@ -155,6 +177,14 @@ issuesOpenedByRepo.forEach(r => addRepoRow(r, 'issues_opened'));
 issuesClosedByRepo.forEach(r => addRepoRow(r, 'issues_closed'));
 commitsByRepo.forEach(r => addRepoRow(r, 'commits'));
 
+// comment counts per-repo per-author (all-time)
+const commentsByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, kind, SUM(count) as count FROM comment_counts GROUP BY repo, author, kind`).all();
+commentsByRepo.forEach(r => {
+  const kindKeyMap = { issue_comment: 'comments_issue', pr_review_comment: 'comments_pr_review', commit_comment: 'comments_commit' };
+  const key = kindKeyMap[r.kind];
+  if (key) addRepoRow({ repo: r.repo, spdx: r.spdx, author: r.author, count: r.count }, key);
+});
+
 // fetch per-repo per-week totals so the UI can produce time-windowed repo aggregates
 const prOpenedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM pr_opened GROUP BY repo, week_start`).all();
 const prMergedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM pr_merged GROUP BY repo, week_start`).all();
@@ -169,6 +199,14 @@ prClosedByRepoWeek.forEach(r => addRepoWeekRow(r, 'prs_closed'));
 issuesOpenedByRepoWeek.forEach(r => addRepoWeekRow(r, 'issues_opened'));
 issuesClosedByRepoWeek.forEach(r => addRepoWeekRow(r, 'issues_closed'));
 commitsByRepoWeek.forEach(r => addRepoWeekRow(r, 'commits'));
+
+// comment counts per-repo per-week
+const commentsByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, kind, SUM(count) as count FROM comment_counts GROUP BY repo, week_start, kind`).all();
+commentsByRepoWeek.forEach(r => {
+  const kindKeyMap = { issue_comment: 'comments_issue', pr_review_comment: 'comments_pr_review', commit_comment: 'comments_commit' };
+  const key = kindKeyMap[r.kind];
+  if (key) addRepoWeekRow({ repo: r.repo, spdx: r.spdx, week_start: r.week_start, count: r.count }, key);
+});
 
 // finalize repos array, converting weekly Maps to arrays sorted by week_start
 const repos = Array.from(repoMap.values()).map(e => {
