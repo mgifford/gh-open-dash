@@ -6,10 +6,13 @@ import path from 'path';
 const DB_PATH = path.join('data', 'participation.sqlite');
 const OUT_PATH = path.join('data', 'metrics.json');
 const STAFF_ALLOWLIST_PATH = path.join('scripts', 'staff_allowlist.json');
-const ORG_ALLOWLIST = (process.env.ORG_ALLOWLIST || 'civicactions')
-  .split(',')
-  .map((s) => s.trim())
-  .filter(Boolean);
+function parseAllowlist(input, fallback) {
+  const raw = (typeof input === 'undefined' || input === null) ? fallback : input;
+  if (Array.isArray(raw)) return raw.map(s => String(s).trim()).filter(Boolean);
+  return String(raw).split(',').map(s => s.trim()).filter(Boolean);
+}
+
+const ORG_ALLOWLIST = parseAllowlist(process.env.ORG_ALLOWLIST, 'civicactions');
 
 if (!fs.existsSync(DB_PATH)) {
   console.error('Database not found');

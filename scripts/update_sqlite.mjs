@@ -22,10 +22,13 @@ const fileConfig = loadConfig();
 if (typeof fileConfig.collectAllPublic === 'undefined') fileConfig.collectAllPublic = false;
 if (typeof fileConfig.licenseFilter === 'undefined') fileConfig.licenseFilter = 'oss';
 
-const ORG_ALLOWLIST = (process.env.ORG_ALLOWLIST || fileConfig.orgAllowlist || defaultConfig.orgAllowlist)
-  .split(',')
-  .map((s) => s.trim())
-  .filter(Boolean);
+function parseAllowlist(input, fallback) {
+  const raw = (typeof input === 'undefined' || input === null) ? fallback : input;
+  if (Array.isArray(raw)) return raw.map(s => String(s).trim()).filter(Boolean);
+  return String(raw).split(',').map(s => s.trim()).filter(Boolean);
+}
+
+const ORG_ALLOWLIST = parseAllowlist(process.env.ORG_ALLOWLIST, fileConfig.orgAllowlist || defaultConfig.orgAllowlist);
 
 const parsedHistoryWeeks = Number.parseInt(process.env.HISTORY_WEEKS || fileConfig.historyWeeks || defaultConfig.historyWeeks, 10);
 const HISTORY_WEEKS = Number.isFinite(parsedHistoryWeeks) ? parsedHistoryWeeks : defaultConfig.historyWeeks;
