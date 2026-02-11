@@ -71,19 +71,14 @@ jobs:
             exit 1
           fi
 
-      - name: Copy metrics into site public
+      - name: Commit metrics.json to main
         run: |
-          node scripts/copy_metrics_to_site.mjs || true
-
-      - name: Build site
-        run: |
-          cd site
-          npm ci
-          npm run build
-
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          personal_token: ${{ secrets.GH_PAGES_PAT }}
-          publish_dir: site/dist
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/metrics.json
+          if git diff --staged --quiet; then
+            echo "No changes to data/metrics.json"
+          else
+            git commit -m "chore(metrics): update data/metrics.json [skip ci]"
+            git push origin main
+          fi
