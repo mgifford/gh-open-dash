@@ -1,6 +1,5 @@
 node_modules
-site/node_modules
-site/dist
+.site/node_modules
 .DS_Store
 .env
 scripts/staff_allowlist.json
