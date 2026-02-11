@@ -71,14 +71,21 @@ jobs:
             exit 1
           fi
 
-      - name: Commit metrics.json to main
+      - name: Copy metrics into site public
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/metrics.json
-          if git diff --staged --quiet; then
-            echo "No changes to data/metrics.json"
-          else
-            git commit -m "chore(metrics): update data/metrics.json [skip ci]"
-            git push origin main
-          fi
+          node scripts/copy_metrics_to_site.mjs
+
+      - name: Build site
+        run: |
+          cd site
+          npm ci
+          npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./site/dist
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v1
