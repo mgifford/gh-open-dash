@@ -17,6 +17,7 @@ async function loadMetrics() {
 
 const METRIC_OPTIONS = [
   { key: "all_metrics", label: "All Metrics" },
+  { key: "comments_total", label: "Comments" },
   { key: "prs_opened", label: "PRs Opened" },
   { key: "prs_closed", label: "PRs Closed" },
   { key: "prs_merged", label: "PRs Merged" },
@@ -40,14 +41,15 @@ function App() {
   const [view, setView] = useState('dashboard');
 
   // Shared metric keys and accessible style map for chart and legend
-  const metricKeys = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits'];
+  const metricKeys = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_total'];
   const styleMap = {
     prs_opened:  { color: '#005a9c', bg: 'rgba(0,90,156,0.15)', dash: [], marker: 'circle' },
     prs_closed:  { color: '#0078d4', bg: 'rgba(0,120,212,0.12)', dash: [6,4], marker: 'rect' },
     prs_merged:  { color: '#107c10', bg: 'rgba(16,124,16,0.12)', dash: [2,4], marker: 'triangle' },
     issues_opened:{ color: '#a80000', bg: 'rgba(168,0,0,0.12)', dash: [1,3], marker: 'diamond' },
     issues_closed:{ color: '#e81123', bg: 'rgba(232,17,35,0.12)', dash: [8,4,2,4], marker: 'cross' },
-    commits:     { color: '#444444', bg: 'rgba(68,68,68,0.08)', dash: [4,2], marker: 'line' }
+    commits:     { color: '#444444', bg: 'rgba(68,68,68,0.08)', dash: [4,2], marker: 'line' },
+    comments_total: { color: '#6b5cff', bg: 'rgba(107,92,255,0.08)', dash: [2,2], marker: 'circle' }
   };
 
   useEffect(() => {
@@ -83,9 +85,10 @@ function App() {
     series.forEach(week => {
       const byAuthor = week.byAuthor;
       for (const author in byAuthor) {
-        if (metric === 'all_metrics') {
+          if (metric === 'all_metrics') {
           // sum all tracked metric keys for the leaderboard
-          const sum = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits'].reduce((s, k) => s + ((byAuthor[author] && byAuthor[author][k]) || 0), 0);
+          const sum = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_issue','comments_pr_review','comments_commit']
+            .reduce((s, k) => s + ((byAuthor[author] && byAuthor[author][k]) || 0), 0);
           authorTotals[author] = (authorTotals[author] || 0) + sum;
         } else {
           authorTotals[author] = (authorTotals[author] || 0) + (byAuthor[author][metric] || 0);
@@ -113,9 +116,16 @@ function App() {
         if (selectedAuthor === 'all') {
           let total = 0;
           for (const auth in s.byAuthor) {
-            total += (s.byAuthor[auth][key] || 0);
+            if (key === 'comments_total') {
+              total += ((s.byAuthor[auth]['comments_issue'] || 0) + (s.byAuthor[auth]['comments_pr_review'] || 0) + (s.byAuthor[auth]['comments_commit'] || 0));
+            } else {
+              total += (s.byAuthor[auth][key] || 0);
+            }
           }
           return total;
+        }
+        if (key === 'comments_total') {
+          return ((s.byAuthor[selectedAuthor] && ((s.byAuthor[selectedAuthor]['comments_issue'] || 0) + (s.byAuthor[selectedAuthor]['comments_pr_review'] || 0) + (s.byAuthor[selectedAuthor]['comments_commit'] || 0))) || 0);
         }
         return (s.byAuthor[selectedAuthor] && s.byAuthor[selectedAuthor][key]) || 0;
       });
@@ -166,7 +176,21 @@ function App() {
           Aggregation of public contributions from the CivicActions team on GitHub.
         </p>
         <div className="meta">
-          Last updated: {new Date(data.generated_at).toLocaleString()}
+          {(() => {
+            try {
+              const generatedAt = new Date(data.generated_at);
+              const local = generatedAt.toLocaleString(undefined, { timeZoneName: 'short' });
+              const ageSeconds = Math.floor((Date.now() - generatedAt.getTime()) / 1000);
+              let ageText = '';
+              if (ageSeconds < 60) ageText = 'just now';
+              else if (ageSeconds < 3600) ageText = `${Math.floor(ageSeconds/60)} minute${Math.floor(ageSeconds/60)===1? '':'s'} ago`;
+              else if (ageSeconds < 86400) ageText = `${Math.floor(ageSeconds/3600)} hour${Math.floor(ageSeconds/3600)===1? '':'s'} ago`;
+              else ageText = `${Math.floor(ageSeconds/86400)} day${Math.floor(ageSeconds/86400)===1? '':'s'} ago`;
+              return <>Last updated: {local} ({ageText})</>;
+            } catch (e) {
+              return <>Last updated: {new Date(data.generated_at).toLocaleString()}</>;
+            }
+          })()}
         </div>
       </header>
 
