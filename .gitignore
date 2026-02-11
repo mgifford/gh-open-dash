@@ -4,3 +4,9 @@ site/dist
 .DS_Store
 .env
 scripts/staff_allowlist.json
+
+# SQLite DB artifacts
+data/participation.sqlite
+data/participation.sqlite-*
+data/*.sqlite
+data/*.sqlite-*
