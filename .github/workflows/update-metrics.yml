@@ -1,0 +1,58 @@
+name: Update metrics
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # weekly on Monday UTC
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+
+jobs:
+  update-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # allow pushing back to the repo
+          persist-credentials: true
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install root dependencies
+        run: |
+          npm ci
+
+      - name: Update SQLite (collect week buckets)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/update_sqlite.mjs || true
+
+      - name: Export metrics.json (includes per-repo aggregates)
+        run: |
+          node scripts/export_metrics.mjs
+
+      - name: Copy metrics into site public
+        run: |
+          node scripts/copy_metrics_to_site.mjs || true
+
+      - name: Build site
+        run: |
+          cd site
+          npm ci
+          npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: site/dist
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1

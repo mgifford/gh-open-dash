@@ -111,19 +111,25 @@ node scripts/set_config.mjs --collectAllPublic=true --licenseFilter=all
 
 #### What that command does
 
-- Runs the small helper `scripts/set_config.mjs` which edits `scripts/config.json`.
-- `--collectAllPublic=true` sets the `collectAllPublic` flag to `true`, telling the collector to run weekly queries across all public repositories (opt-in; may increase GraphQL usage and rate-limit pressure).
-- `--licenseFilter=...` sets `licenseFilter` to either `oss` (default) or `all`. Using `oss` restricts results to repositories whose `repository.licenseInfo.spdxId` is in `scripts/oss_spdx_allowlist.json`.
-- After changing `scripts/config.json` you must re-run the collector and exporter to apply the new configuration:
+   - Runs the small helper `scripts/set_config.mjs` which edits `scripts/config.json`.
+   - `--collectAllPublic=true` sets the `collectAllPublic` flag to `true`, telling the collector to run weekly queries across all public repositories (opt-in; may increase GraphQL usage and rate-limit pressure).
+   - `--licenseFilter=...` sets `licenseFilter` to either `oss` (default) or `all`. Using `oss` restricts results to repositories whose `repository.licenseInfo.spdxId` is in `scripts/oss_spdx_allowlist.json`.
+
+After changing `scripts/config.json` you have two options to apply the new configuration:
+
+- Run locally (for development):
 
 ```
 node scripts/update_sqlite.mjs
 node scripts/export_metrics.mjs
+node scripts/copy_metrics_to_site.mjs
 ```
 
-Note: changing to `collectAllPublic=true` can dramatically increase API usage; only enable it when you have monitoring and adequate rate-limit capacity.
+   This updates `data/participation.sqlite`, regenerates `data/metrics.json` (including per-repo aggregates), and copies the result into `site/public/data/metrics.json` for local testing.
 
-When you change collector configuration, re-run `scripts/update_sqlite.mjs` to apply new collection rules and then `scripts/export_metrics.mjs` to refresh `data/metrics.json`.
+- Use the automated GitHub Actions workflow `update-metrics.yml` (recommended for production): the workflow runs the collector and exporter on Node 18, builds the site, and deploys the Pages site with the generated metrics included. You can trigger it manually via the Actions UI or wait for the scheduled weekly run.
+
+Note: enabling `collectAllPublic=true` can dramatically increase API usage; only enable it when you have monitoring and adequate rate-limit capacity.
 
 ### Incremental processing
 - Track last processed week in `meta.processed_through_week`.
@@ -135,10 +141,8 @@ When you change collector configuration, re-run `scripts/update_sqlite.mjs` to a
 
 ## Publishing rules
 
-- GitHub Actions updates:
-  - `data/participation.sqlite`
-  - `data/metrics.json`
-- The Pages build must copy `data/metrics.json` into `site/public/data/metrics.json`.
+- GitHub Actions updates the source SQLite cache and the exported metrics via the `update-metrics.yml` workflow (or equivalent).
+- The repository's Pages deployment is built from the `site` output and the workflow ensures the generated `site/public/data/metrics.json` is included in the deployed site.
 - The deployed site must not call GitHub APIs at runtime.
 
 ## Adding a “deeper” page later
@@ -157,6 +161,6 @@ Not allowed:
 - [ ] GraphQL queries are org-wide by week (not per-person/per-repo loops).
 - [ ] Current partial week is excluded.
 - [ ] OSS license filtering is applied consistently via allowlist.
-- [ ] `deploy-pages.yml` copies `data/metrics.json` into `site/public/data/`.
+ - [ ] `data/metrics.json` is present in the deployed Pages site (workflow `update-metrics.yml` produces and includes it).
  - [ ] Closed metrics (`pr_closed`, `issue_closed`) are present in `data/metrics.json` after export.
  - [ ] `scripts/config.json` flags `collectAllPublic` and `licenseFilter` are documented and used intentionally.
