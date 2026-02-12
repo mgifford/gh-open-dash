@@ -258,7 +258,7 @@ async function run() {
     console.log(`Processing week: ${weekStartStr}`);
 
     for (const org of ORG_ALLOWLIST) {
-      const baseQualifier = fileConfig.collectAllPublic ? `is:public` : `org:${org} is:public`;
+      const baseQualifier = `org:${org} is:public`;
       await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr created:${rangeStart}..${rangeEnd}`, org);
       await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr merged:${rangeStart}..${rangeEnd}`, org);
       await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr closed:${rangeStart}..${rangeEnd}`, org);
