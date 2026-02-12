@@ -2,7 +2,7 @@ name: Update metrics
 
 on:
   schedule:
-    - cron: '0 6 * * 1' # weekly on Monday UTC
+    - cron: '0 7 * * 1' # weekly on Monday UTC
   workflow_dispatch: {}
   push:
     branches:
