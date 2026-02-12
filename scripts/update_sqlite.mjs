@@ -269,15 +269,21 @@ async function run() {
 
     for (const user of staffAllowList) {
       const label = `staff:${user}`;
-      const baseQualifier = fileConfig.collectAllPublic ? `is:public` : `author:${user} is:public`;
-      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr created:${rangeStart}..${rangeEnd}`, label);
-      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr merged:${rangeStart}..${rangeEnd}`, label);
-      await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr closed:${rangeStart}..${rangeEnd}`, label);
-      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue created:${rangeStart}..${rangeEnd}`, label);
-      await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue closed:${rangeStart}..${rangeEnd}`, label);
-        if (fileConfig.collectStaffCommits) {
-          await processStaffCommits(weekStartStr, rangeStart, rangeEnd, user);
-        }
+      
+      // Only run per-person global public search if collectAllPublic is true.
+      // If false, we rely on the org-based collection above.
+      if (fileConfig.collectAllPublic) {
+        const baseQualifier = `author:${user} is:public`;
+        await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr created:${rangeStart}..${rangeEnd}`, label);
+        await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr merged:${rangeStart}..${rangeEnd}`, label);
+        await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr closed:${rangeStart}..${rangeEnd}`, label);
+        await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue created:${rangeStart}..${rangeEnd}`, label);
+        await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue closed:${rangeStart}..${rangeEnd}`, label);
+      }
+      
+      if (fileConfig.collectStaffCommits) {
+        await processStaffCommits(weekStartStr, rangeStart, rangeEnd, user);
+      }
     }
 
     setMeta('processed_through_week', weekStartStr);
