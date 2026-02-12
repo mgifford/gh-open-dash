@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-12T15:04:14.953Z",
+  "generated_at": "2026-02-12T18:02:42.959Z",
   "org": "civicactions",
   "orgs": [
     "civicactions",
@@ -117,6 +117,6 @@
   "staff_authors": [],
   "staff_series": [],
   "repos": [],
-  "collectAllPublic": false,
-  "licenseFilter": "oss"
+  "collectAllPublic": true,
+  "licenseFilter": "all"
 }
