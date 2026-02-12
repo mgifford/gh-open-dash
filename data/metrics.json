@@ -1,60 +1,49 @@
 {
-  "generated_at": "2026-02-12T19:14:56.405Z",
+  "generated_at": "2026-02-12T19:28:18.271Z",
   "org": "civicactions",
   "orgs": [
     "civicactions",
     "otherorg"
   ],
   "weeks": [
-    "2025-02-03",
-    "2025-02-10",
-    "2025-02-17",
-    "2025-02-24"
+    "2026-01-05",
+    "2026-01-12",
+    "2026-01-19",
+    "2026-01-26",
+    "2026-02-02"
   ],
   "authors": [
-    "acabouet",
-    "adamsrach",
-    "andyhawks",
+    "adriancooke",
+    "Becapa",
     "beeyayjay",
-    "bobschmitt-civicactions",
     "brdunfield",
+    "brentonkelly1982",
     "brianseek",
-    "cameronprince",
-    "CodeShtuff",
     "dafeder",
     "davidmpickett",
     "dcgoodwin2112",
     "dependabot",
     "dgading",
     "dmundra",
-    "erichuffman",
-    "farooqzakhilwal",
-    "github-actions",
-    "grugnog",
-    "iris-i",
+    "elizabethraley",
     "janette",
-    "kaise-lafrai",
-    "kellysmith1008",
-    "kristenjernigan",
+    "jerseycheese",
+    "maggiewachs",
     "mgifford",
     "openprivacy",
     "paul-m",
-    "pre-commit-ci",
-    "rovcase",
+    "qjac",
     "swirtSJW",
-    "tatianahernandez",
     "TheBoatyMcBoatFace",
-    "TheETupper",
+    "thejordanwood",
     "Tom-Camp",
-    "vauxia",
-    "wullaski",
-    "zedmonds96"
+    "wullaski"
   ],
   "series": [
     {
-      "week_start": "2025-02-03",
+      "week_start": "2026-01-05",
       "byAuthor": {
-        "acabouet": {
+        "Becapa": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
@@ -65,7 +54,18 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "brdunfield": {
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brentonkelly1982": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
@@ -81,285 +81,318 @@
           "prs_merged": 1,
           "prs_closed": 1,
           "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 2,
+          "prs_closed": 2,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dependabot": {
+          "prs_opened": 3,
+          "prs_merged": 2,
+          "prs_closed": 3,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "paul-m": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brdunfield": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 6,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "wullaski": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "civicactionsbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        }
+      }
+    },
+    {
+      "week_start": "2026-01-12",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "prs_closed": 2,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brentonkelly1982": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dcgoodwin2112": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dependabot": {
+          "prs_opened": 4,
+          "prs_merged": 3,
+          "prs_closed": 3,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dmundra": {
+          "prs_opened": 4,
+          "prs_merged": 3,
+          "prs_closed": 3,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "elizabethraley": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "mgifford": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 7,
           "issues_closed": 3,
           "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "cameronprince": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dafeder": {
-          "prs_opened": 2,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "davidmpickett": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dcgoodwin2112": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dependabot": {
-          "prs_opened": 2,
-          "prs_merged": 2,
-          "prs_closed": 2,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dgading": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dmundra": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "pre-commit-ci": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "rovcase": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "vauxia": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "beeyayjay": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "janette": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "paul-m": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "wullaski": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kellysmith1008": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kristenjernigan": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        }
-      }
-    },
-    {
-      "week_start": "2025-02-10",
-      "byAuthor": {
-        "CodeShtuff": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "Tom-Camp": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "acabouet": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "adamsrach": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "andyhawks": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "beeyayjay": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "bobschmitt-civicactions": {
-          "prs_opened": 1,
-          "prs_merged": 2,
-          "prs_closed": 2,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
         "brianseek": {
-          "prs_opened": 3,
-          "prs_merged": 3,
-          "prs_closed": 3,
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
           "commits": 0,
@@ -367,63 +400,8 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "cameronprince": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dafeder": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dcgoodwin2112": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dependabot": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dgading": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dmundra": {
-          "prs_opened": 1,
+        "davidmpickett": {
+          "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
           "issues_opened": 1,
@@ -433,166 +411,23 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "erichuffman": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "farooqzakhilwal": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "iris-i": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kristenjernigan": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "mgifford": {
-          "prs_opened": 2,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "openprivacy": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "swirtSJW": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "vauxia": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "wullaski": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "brdunfield": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "davidmpickett": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kaise-lafrai": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "paul-m": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "tatianahernandez": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "TheBoatyMcBoatFace": {
+        "maggiewachs": {
           "prs_opened": 0,
           "prs_merged": 0,
-          "prs_closed": 1,
-          "issues_opened": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
           "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
           "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
@@ -602,6 +437,28 @@
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "wullaski": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 1,
           "commits": 0,
@@ -612,8 +469,30 @@
       }
     },
     {
-      "week_start": "2025-02-17",
+      "week_start": "2026-01-19",
       "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
         "brdunfield": {
           "prs_opened": 1,
           "prs_merged": 1,
@@ -625,18 +504,7 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "brianseek": {
-          "prs_opened": 2,
-          "prs_merged": 2,
-          "prs_closed": 2,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "cameronprince": {
+        "brentonkelly1982": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
@@ -647,21 +515,43 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "dafeder": {
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dcgoodwin2112": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dependabot": {
           "prs_opened": 5,
-          "prs_merged": 4,
-          "prs_closed": 4,
-          "issues_opened": 2,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dependabot": {
-          "prs_opened": 2,
-          "prs_merged": 2,
-          "prs_closed": 2,
+          "prs_merged": 5,
+          "prs_closed": 5,
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 0,
@@ -671,233 +561,19 @@
         },
         "dgading": {
           "prs_opened": 2,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "grugnog": {
-          "prs_opened": 1,
           "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kaise-lafrai": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "mgifford": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "swirtSJW": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dmundra": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "tatianahernandez": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "bobschmitt-civicactions": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "davidmpickett": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "janette": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "wullaski": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kellysmith1008": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kristenjernigan": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "thejordanwood": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        }
-      }
-    },
-    {
-      "week_start": "2025-02-24",
-      "byAuthor": {
-        "adamsrach": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "beeyayjay": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "cameronprince": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dafeder": {
-          "prs_opened": 1,
-          "prs_merged": 2,
-          "prs_closed": 2,
-          "issues_opened": 2,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dependabot": {
-          "prs_opened": 2,
-          "prs_merged": 2,
           "prs_closed": 2,
           "issues_opened": 0,
-          "issues_closed": 0,
+          "issues_closed": 1,
           "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "dgading": {
+        "jerseycheese": {
           "prs_opened": 1,
-          "prs_merged": 2,
-          "prs_closed": 2,
+          "prs_merged": 1,
+          "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 2,
           "commits": 0,
@@ -905,7 +581,89 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "github-actions": {
+        "mgifford": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 9,
+          "issues_closed": 2,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 2,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        }
+      }
+    },
+    {
+      "week_start": "2026-01-26",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 2,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brentonkelly1982": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
@@ -916,10 +674,10 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "mgifford": {
-          "prs_opened": 4,
-          "prs_merged": 2,
-          "prs_closed": 2,
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
           "commits": 0,
@@ -927,8 +685,277 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "swirtSJW": {
+        "dafeder": {
           "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dcgoodwin2112": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dependabot": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dgading": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 2,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "mgifford": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 5,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "Becapa": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "janette": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "paul-m": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 2,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        }
+      }
+    },
+    {
+      "week_start": "2026-02-02",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brentonkelly1982": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dcgoodwin2112": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dependabot": {
+          "prs_opened": 3,
+          "prs_merged": 3,
+          "prs_closed": 3,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dgading": {
+          "prs_opened": 4,
+          "prs_merged": 4,
+          "prs_closed": 4,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "paul-m": {
+          "prs_opened": 3,
           "prs_merged": 1,
           "prs_closed": 1,
           "issues_opened": 0,
@@ -949,66 +976,11 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "brianseek": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kaise-lafrai": {
+        "dmundra": {
           "prs_opened": 0,
           "prs_merged": 1,
           "prs_closed": 1,
           "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "paul-m": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "zedmonds96": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "TheETupper": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 2,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "bobschmitt-civicactions": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
           "issues_closed": 0,
           "commits": 0,
           "comments_issue": 0,
@@ -1020,13 +992,57 @@
           "prs_merged": 0,
           "prs_closed": 0,
           "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
           "issues_closed": 1,
           "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "janette": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 4,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "openprivacy": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "swirtSJW": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -1147,43 +1163,36 @@
     "zedmonds96"
   ],
   "staff_authors": [
-    "acabouet",
-    "adamsrach",
-    "andyhawks",
+    "adriancooke",
+    "Becapa",
     "beeyayjay",
-    "bobschmitt-civicactions",
     "brdunfield",
+    "brentonkelly1982",
     "brianseek",
-    "cameronprince",
     "dafeder",
     "davidmpickett",
     "dcgoodwin2112",
     "dgading",
     "dmundra",
-    "erichuffman",
-    "farooqzakhilwal",
-    "grugnog",
-    "iris-i",
+    "elizabethraley",
     "janette",
-    "kaise-lafrai",
-    "kellysmith1008",
-    "kristenjernigan",
+    "jerseycheese",
+    "maggiewachs",
     "mgifford",
     "openprivacy",
     "paul-m",
-    "rovcase",
+    "qjac",
     "swirtSJW",
     "TheBoatyMcBoatFace",
-    "TheETupper",
+    "thejordanwood",
     "Tom-Camp",
-    "wullaski",
-    "zedmonds96"
+    "wullaski"
   ],
   "staff_series": [
     {
-      "week_start": "2025-02-03",
+      "week_start": "2026-01-05",
       "byAuthor": {
-        "acabouet": {
+        "Becapa": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
@@ -1194,7 +1203,18 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "brdunfield": {
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brentonkelly1982": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
@@ -1210,13 +1230,397 @@
           "prs_merged": 1,
           "prs_closed": 1,
           "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 2,
+          "prs_closed": 2,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "paul-m": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "TheBoatyMcBoatFace": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brdunfield": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 6,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "wullaski": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "civicactionsbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        }
+      }
+    },
+    {
+      "week_start": "2026-01-12",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "prs_closed": 2,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brentonkelly1982": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dcgoodwin2112": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dmundra": {
+          "prs_opened": 4,
+          "prs_merged": 3,
+          "prs_closed": 3,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "elizabethraley": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "mgifford": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 7,
           "issues_closed": 3,
           "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "cameronprince": {
+        "brianseek": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "wullaski": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "swirtSJW": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        }
+      }
+    },
+    {
+      "week_start": "2026-01-19",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brdunfield": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
@@ -1227,8 +1631,19 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "dafeder": {
-          "prs_opened": 2,
+        "brentonkelly1982": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
           "issues_opened": 1,
@@ -1240,10 +1655,10 @@
         },
         "davidmpickett": {
           "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
           "issues_opened": 1,
-          "issues_closed": 1,
+          "issues_closed": 0,
           "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
@@ -1261,425 +1676,8 @@
           "comments_commit": 0
         },
         "dgading": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dmundra": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "rovcase": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "beeyayjay": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "janette": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "paul-m": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "wullaski": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kellysmith1008": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kristenjernigan": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        }
-      }
-    },
-    {
-      "week_start": "2025-02-10",
-      "byAuthor": {
-        "Tom-Camp": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "acabouet": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "adamsrach": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "andyhawks": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "beeyayjay": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "bobschmitt-civicactions": {
-          "prs_opened": 1,
-          "prs_merged": 2,
-          "prs_closed": 2,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "brianseek": {
-          "prs_opened": 3,
-          "prs_merged": 3,
-          "prs_closed": 3,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "cameronprince": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dafeder": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dcgoodwin2112": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dgading": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dmundra": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "erichuffman": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "farooqzakhilwal": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "iris-i": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kristenjernigan": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "mgifford": {
           "prs_opened": 2,
           "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "openprivacy": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "swirtSJW": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "wullaski": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "brdunfield": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "davidmpickett": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kaise-lafrai": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "paul-m": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "thejordanwood": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        }
-      }
-    },
-    {
-      "week_start": "2025-02-17",
-      "byAuthor": {
-        "brdunfield": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "brianseek": {
-          "prs_opened": 2,
-          "prs_merged": 2,
           "prs_closed": 2,
           "issues_opened": 0,
           "issues_closed": 1,
@@ -1688,235 +1686,10 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "cameronprince": {
+        "jerseycheese": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dafeder": {
-          "prs_opened": 5,
-          "prs_merged": 4,
-          "prs_closed": 4,
-          "issues_opened": 2,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dgading": {
-          "prs_opened": 2,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "grugnog": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kaise-lafrai": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "mgifford": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "swirtSJW": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dmundra": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "bobschmitt-civicactions": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "davidmpickett": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "janette": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "wullaski": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kellysmith1008": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kristenjernigan": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "thejordanwood": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        }
-      }
-    },
-    {
-      "week_start": "2025-02-24",
-      "byAuthor": {
-        "adamsrach": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "beeyayjay": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "cameronprince": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dafeder": {
-          "prs_opened": 1,
-          "prs_merged": 2,
-          "prs_closed": 2,
-          "issues_opened": 2,
-          "issues_closed": 1,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "dgading": {
-          "prs_opened": 1,
-          "prs_merged": 2,
-          "prs_closed": 2,
           "issues_opened": 1,
           "issues_closed": 2,
           "commits": 0,
@@ -1925,9 +1698,20 @@
           "comments_commit": 0
         },
         "mgifford": {
-          "prs_opened": 4,
-          "prs_merged": 2,
-          "prs_closed": 2,
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 9,
+          "issues_closed": 2,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
           "commits": 0,
@@ -1935,8 +1719,337 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "swirtSJW": {
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 2,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        }
+      }
+    },
+    {
+      "week_start": "2026-01-26",
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 2,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brdunfield": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brentonkelly1982": {
           "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dcgoodwin2112": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dgading": {
+          "prs_opened": 2,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 2,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "mgifford": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 5,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "wullaski": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "Becapa": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "beeyayjay": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "janette": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "paul-m": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 2,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "davidmpickett": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        }
+      }
+    },
+    {
+      "week_start": "2026-02-02",
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brentonkelly1982": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brianseek": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dafeder": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dcgoodwin2112": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "dgading": {
+          "prs_opened": 4,
+          "prs_merged": 4,
+          "prs_closed": 4,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "jerseycheese": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "paul-m": {
+          "prs_opened": 3,
           "prs_merged": 1,
           "prs_closed": 1,
           "issues_opened": 0,
@@ -1957,66 +2070,11 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "brianseek": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "kaise-lafrai": {
+        "dmundra": {
           "prs_opened": 0,
           "prs_merged": 1,
           "prs_closed": 1,
           "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "paul-m": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "zedmonds96": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "TheETupper": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 2,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "bobschmitt-civicactions": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
           "issues_closed": 0,
           "commits": 0,
           "comments_issue": 0,
@@ -2028,13 +2086,57 @@
           "prs_merged": 0,
           "prs_closed": 0,
           "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
           "issues_closed": 1,
           "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "janette": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 4,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "openprivacy": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "swirtSJW": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -2054,33 +2156,33 @@
       "spdx": "NOASSERTION",
       "totals": {
         "prs_opened": 2,
-        "prs_merged": 1,
-        "prs_closed": 1,
-        "issues_opened": 0,
+        "prs_merged": 2,
+        "prs_closed": 2,
+        "issues_opened": 1,
         "issues_closed": 0,
         "commits": 0
       },
       "byAuthor": {
         "dependabot": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "prs_closed": 2,
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 0
         },
         "mgifford": {
-          "prs_opened": 1,
+          "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
-          "issues_opened": 0,
+          "issues_opened": 1,
           "issues_closed": 0,
           "commits": 0
         }
       },
       "weekly": [
         {
-          "week_start": "2025-02-17",
+          "week_start": "2026-01-19",
           "totals": {
             "prs_opened": 1,
             "prs_merged": 1,
@@ -2091,7 +2193,42 @@
           }
         },
         {
-          "week_start": "2025-02-24",
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "CivicActions/allusgov",
+      "spdx": "GPL-3.0",
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-26",
           "totals": {
             "prs_opened": 1,
             "prs_merged": 0,
@@ -2107,44 +2244,9 @@
       "repo": "CivicActions/ca-jekyll-vanilla",
       "spdx": "NOASSERTION",
       "totals": {
-        "prs_opened": 1,
-        "prs_merged": 1,
-        "prs_closed": 1,
-        "issues_opened": 0,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "dependabot": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "CivicActions/cypress-tests",
-      "spdx": "NOASSERTION",
-      "totals": {
-        "prs_opened": 3,
-        "prs_merged": 3,
-        "prs_closed": 3,
+        "prs_opened": 4,
+        "prs_merged": 4,
+        "prs_closed": 4,
         "issues_opened": 0,
         "issues_closed": 0,
         "commits": 0
@@ -2154,79 +2256,6 @@
           "prs_opened": 3,
           "prs_merged": 3,
           "prs_closed": 3,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-03",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-10",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-24",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "CivicActions/guidebook",
-      "spdx": "CC-BY-4.0",
-      "totals": {
-        "prs_opened": 14,
-        "prs_merged": 14,
-        "prs_closed": 15,
-        "issues_opened": 0,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "adamsrach": {
-          "prs_opened": 2,
-          "prs_merged": 2,
-          "prs_closed": 2,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "andyhawks": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "dependabot": {
-          "prs_opened": 2,
-          "prs_merged": 2,
-          "prs_closed": 2,
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 0
@@ -2238,59 +2267,60 @@
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 2,
+            "prs_merged": 2,
+            "prs_closed": 2,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
         },
-        "farooqzakhilwal": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
         },
-        "github-actions": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "grugnog": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "mgifford": {
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "CivicActions/civicactions-a11ysite",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "dependabot": {
           "prs_opened": 1,
           "prs_merged": 0,
           "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "pre-commit-ci": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "swirtSJW": {
-          "prs_opened": 3,
-          "prs_merged": 3,
-          "prs_closed": 3,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "tatianahernandez": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 2,
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 0
@@ -2298,44 +2328,225 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-03",
+          "week_start": "2026-01-12",
           "totals": {
-            "prs_opened": 3,
-            "prs_merged": 3,
-            "prs_closed": 3,
+            "prs_opened": 1,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "CivicActions/cypress-tests",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 5,
+        "prs_merged": 5,
+        "prs_closed": 5,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "dependabot": {
+          "prs_opened": 4,
+          "prs_merged": 4,
+          "prs_closed": 4,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        },
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
           }
         },
         {
-          "week_start": "2025-02-10",
-          "totals": {
-            "prs_opened": 4,
-            "prs_merged": 5,
-            "prs_closed": 5,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-17",
+          "week_start": "2026-01-12",
           "totals": {
             "prs_opened": 2,
             "prs_merged": 2,
-            "prs_closed": 3,
+            "prs_closed": 2,
             "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
           }
         },
         {
-          "week_start": "2025-02-24",
+          "week_start": "2026-01-19",
           "totals": {
-            "prs_opened": 5,
-            "prs_merged": 4,
-            "prs_closed": 4,
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "CivicActions/git-for-designers",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 2,
+        "prs_closed": 2,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "adriancooke": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        },
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 2,
+            "prs_closed": 2,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "CivicActions/guidebook",
+      "spdx": "CC-BY-4.0",
+      "totals": {
+        "prs_opened": 6,
+        "prs_merged": 5,
+        "prs_closed": 5,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "dependabot": {
+          "prs_opened": 3,
+          "prs_merged": 3,
+          "prs_closed": 3,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        },
+        "dmundra": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "prs_closed": 2,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        },
+        "elizabethraley": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 3,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 2,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 1,
+            "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
@@ -2355,7 +2566,7 @@
         "commits": 0
       },
       "byAuthor": {
-        "mgifford": {
+        "dependabot": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
@@ -2366,7 +2577,7 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-24",
+          "week_start": "2026-01-19",
           "totals": {
             "prs_opened": 1,
             "prs_merged": 1,
@@ -2379,93 +2590,21 @@
       ]
     },
     {
-      "repo": "CivicActions/pgov-cms",
-      "spdx": null,
+      "repo": "CivicActions/openacr-editor",
+      "spdx": "NOASSERTION",
       "totals": {
-        "prs_opened": 13,
-        "prs_merged": 13,
-        "prs_closed": 13,
+        "prs_opened": 1,
+        "prs_merged": 1,
+        "prs_closed": 1,
         "issues_opened": 0,
         "issues_closed": 0,
         "commits": 0
       },
       "byAuthor": {
-        "CodeShtuff": {
+        "dependabot": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "acabouet": {
-          "prs_opened": 2,
-          "prs_merged": 2,
-          "prs_closed": 2,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "bobschmitt-civicactions": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "brianseek": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "dcgoodwin2112": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "dgading": {
-          "prs_opened": 2,
-          "prs_merged": 2,
-          "prs_closed": 2,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "erichuffman": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "iris-i": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "openprivacy": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "vauxia": {
-          "prs_opened": 2,
-          "prs_merged": 2,
-          "prs_closed": 2,
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 0
@@ -2473,23 +2612,136 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-03",
+          "week_start": "2026-01-19",
           "totals": {
-            "prs_opened": 3,
-            "prs_merged": 3,
-            "prs_closed": 3,
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "CivicActions/ssp-toolkit",
+      "spdx": "GPL-3.0",
+      "totals": {
+        "prs_opened": 2,
+        "prs_merged": 0,
+        "prs_closed": 1,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "Tom-Camp": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        },
+        "dependabot": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 0,
+            "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
           }
         },
         {
-          "week_start": "2025-02-10",
+          "week_start": "2026-01-26",
           "totals": {
-            "prs_opened": 10,
-            "prs_merged": 10,
-            "prs_closed": 10,
+            "prs_opened": 1,
+            "prs_merged": 0,
+            "prs_closed": 0,
             "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "FOSDEM/website",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "GetDKAN/RootedJsonData",
+      "spdx": "GPL-3.0",
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "swirtSJW": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
             "issues_closed": 0,
             "commits": 0
           }
@@ -2500,9 +2752,9 @@
       "repo": "GetDKAN/cmsds-open-data-components",
       "spdx": null,
       "totals": {
-        "prs_opened": 4,
-        "prs_merged": 5,
-        "prs_closed": 5,
+        "prs_opened": 11,
+        "prs_merged": 10,
+        "prs_closed": 10,
         "issues_opened": 0,
         "issues_closed": 0,
         "commits": 0
@@ -2516,18 +2768,18 @@
           "issues_closed": 0,
           "commits": 0
         },
-        "dcgoodwin2112": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
+        "brentonkelly1982": {
+          "prs_opened": 5,
+          "prs_merged": 4,
+          "prs_closed": 4,
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 0
         },
-        "dgading": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
+        "dcgoodwin2112": {
+          "prs_opened": 4,
+          "prs_merged": 3,
+          "prs_closed": 3,
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 0
@@ -2535,9 +2787,9 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-03",
+          "week_start": "2026-01-05",
           "totals": {
-            "prs_opened": 2,
+            "prs_opened": 1,
             "prs_merged": 2,
             "prs_closed": 2,
             "issues_opened": 0,
@@ -2546,144 +2798,9 @@
           }
         },
         {
-          "week_start": "2025-02-10",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-17",
+          "week_start": "2026-01-12",
           "totals": {
             "prs_opened": 2,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-24",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "GetDKAN/contracts",
-      "spdx": null,
-      "totals": {
-        "prs_opened": 1,
-        "prs_merged": 1,
-        "prs_closed": 1,
-        "issues_opened": 0,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "dafeder": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "GetDKAN/data-catalog-app",
-      "spdx": null,
-      "totals": {
-        "prs_opened": 1,
-        "prs_merged": 0,
-        "prs_closed": 0,
-        "issues_opened": 2,
-        "issues_closed": 1,
-        "commits": 0
-      },
-      "byAuthor": {
-        "dgading": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0
-        },
-        "TheETupper": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-24",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 2,
-            "issues_closed": 1,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "GetDKAN/ddev-dkan",
-      "spdx": "Apache-2.0",
-      "totals": {
-        "prs_opened": 1,
-        "prs_merged": 1,
-        "prs_closed": 1,
-        "issues_opened": 1,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "dafeder": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-03",
-          "totals": {
-            "prs_opened": 1,
             "prs_merged": 0,
             "prs_closed": 0,
             "issues_opened": 0,
@@ -2692,12 +2809,34 @@
           }
         },
         {
-          "week_start": "2025-02-24",
+          "week_start": "2026-01-19",
           "totals": {
-            "prs_opened": 0,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 1,
+            "prs_opened": 3,
+            "prs_merged": 3,
+            "prs_closed": 3,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 3,
+            "prs_merged": 3,
+            "prs_closed": 3,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 2,
+            "prs_merged": 2,
+            "prs_closed": 2,
+            "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
           }
@@ -2708,16 +2847,16 @@
       "repo": "GetDKAN/dkan",
       "spdx": "GPL-2.0",
       "totals": {
-        "prs_opened": 8,
-        "prs_merged": 11,
-        "prs_closed": 11,
-        "issues_opened": 4,
-        "issues_closed": 4,
+        "prs_opened": 7,
+        "prs_merged": 5,
+        "prs_closed": 6,
+        "issues_opened": 0,
+        "issues_closed": 1,
         "commits": 0
       },
       "byAuthor": {
         "beeyayjay": {
-          "prs_opened": 2,
+          "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
           "issues_opened": 0,
@@ -2728,19 +2867,98 @@
           "prs_opened": 4,
           "prs_merged": 3,
           "prs_closed": 3,
-          "issues_opened": 3,
-          "issues_closed": 2,
-          "commits": 0
-        },
-        "kaise-lafrai": {
-          "prs_opened": 1,
-          "prs_merged": 2,
-          "prs_closed": 2,
           "issues_opened": 0,
           "issues_closed": 1,
           "commits": 0
         },
-        "rovcase": {
+        "janette": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        },
+        "paul-m": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 3,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 2,
+            "prs_closed": 3,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "GetDKAN/mock-chain",
+      "spdx": "GPL-3.0",
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 1,
+        "prs_closed": 1,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "paul-m": {
           "prs_opened": 1,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -2748,23 +2966,7 @@
           "issues_closed": 0,
           "commits": 0
         },
-        "janette": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0
-        },
-        "paul-m": {
-          "prs_opened": 0,
-          "prs_merged": 3,
-          "prs_closed": 3,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "zedmonds96": {
+        "dafeder": {
           "prs_opened": 0,
           "prs_merged": 1,
           "prs_closed": 1,
@@ -2775,149 +2977,22 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-03",
+          "week_start": "2026-01-05",
           "totals": {
-            "prs_opened": 2,
-            "prs_merged": 4,
-            "prs_closed": 4,
-            "issues_opened": 1,
+            "prs_opened": 0,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
           }
         },
         {
-          "week_start": "2025-02-10",
+          "week_start": "2026-02-02",
           "totals": {
-            "prs_opened": 2,
-            "prs_merged": 3,
-            "prs_closed": 3,
-            "issues_opened": 0,
-            "issues_closed": 2,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 2,
+            "prs_opened": 1,
             "prs_merged": 0,
             "prs_closed": 0,
-            "issues_opened": 2,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-24",
-          "totals": {
-            "prs_opened": 2,
-            "prs_merged": 4,
-            "prs_closed": 4,
-            "issues_opened": 1,
-            "issues_closed": 2,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "GetDKAN/file-fetcher",
-      "spdx": "GPL-3.0",
-      "totals": {
-        "prs_opened": 1,
-        "prs_merged": 1,
-        "prs_closed": 1,
-        "issues_opened": 0,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "dafeder": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "GetDKAN/harvest",
-      "spdx": null,
-      "totals": {
-        "prs_opened": 1,
-        "prs_merged": 1,
-        "prs_closed": 1,
-        "issues_opened": 0,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "dafeder": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "GetDKAN/procrastinator",
-      "spdx": "GPL-3.0",
-      "totals": {
-        "prs_opened": 1,
-        "prs_merged": 1,
-        "prs_closed": 1,
-        "issues_opened": 0,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "dafeder": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
@@ -2930,6 +3005,41 @@
       "spdx": "Apache-2.0",
       "totals": {
         "prs_opened": 1,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "brdunfield": {
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "adriancooke/seo-guides",
+      "spdx": "AGPL-3.0",
+      "totals": {
+        "prs_opened": 1,
         "prs_merged": 1,
         "prs_closed": 1,
         "issues_opened": 0,
@@ -2937,7 +3047,7 @@
         "commits": 0
       },
       "byAuthor": {
-        "dgading": {
+        "adriancooke": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
@@ -2948,7 +3058,53 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-17",
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "department-of-veterans-affairs/content-build",
+      "spdx": "CC0-1.0",
+      "totals": {
+        "prs_opened": 3,
+        "prs_merged": 1,
+        "prs_closed": 2,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "dgading": {
+          "prs_opened": 3,
+          "prs_merged": 1,
+          "prs_closed": 2,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 0,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
           "totals": {
             "prs_opened": 1,
             "prs_merged": 0,
@@ -2959,110 +3115,7 @@
           }
         },
         {
-          "week_start": "2025-02-24",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "Tom-Camp/data",
-      "spdx": "MIT",
-      "totals": {
-        "prs_opened": 1,
-        "prs_merged": 1,
-        "prs_closed": 1,
-        "issues_opened": 0,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "Tom-Camp": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-10",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "cameronprince/mptcc",
-      "spdx": "MIT",
-      "totals": {
-        "prs_opened": 4,
-        "prs_merged": 4,
-        "prs_closed": 4,
-        "issues_opened": 0,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "cameronprince": {
-          "prs_opened": 4,
-          "prs_merged": 4,
-          "prs_closed": 4,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-03",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-10",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-24",
+          "week_start": "2026-02-02",
           "totals": {
             "prs_opened": 1,
             "prs_merged": 1,
@@ -3078,18 +3131,18 @@
       "repo": "department-of-veterans-affairs/next-build",
       "spdx": "CC0-1.0",
       "totals": {
-        "prs_opened": 2,
-        "prs_merged": 3,
-        "prs_closed": 3,
+        "prs_opened": 1,
+        "prs_merged": 0,
+        "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
         "commits": 0
       },
       "byAuthor": {
         "brianseek": {
-          "prs_opened": 2,
-          "prs_merged": 3,
-          "prs_closed": 3,
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 0
@@ -3097,33 +3150,11 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-10",
+          "week_start": "2026-01-26",
           "totals": {
             "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-24",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 1,
-            "prs_closed": 1,
+            "prs_merged": 0,
+            "prs_closed": 0,
             "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
@@ -3135,115 +3166,47 @@
       "repo": "department-of-veterans-affairs/va.gov-cms",
       "spdx": "GPL-2.0",
       "totals": {
-        "prs_opened": 3,
-        "prs_merged": 3,
-        "prs_closed": 3,
-        "issues_opened": 7,
-        "issues_closed": 7,
+        "prs_opened": 8,
+        "prs_merged": 10,
+        "prs_closed": 10,
+        "issues_opened": 10,
+        "issues_closed": 12,
         "commits": 0
       },
       "byAuthor": {
+        "Becapa": {
+          "prs_opened": 4,
+          "prs_merged": 5,
+          "prs_closed": 5,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        },
         "brianseek": {
           "prs_opened": 3,
-          "prs_merged": 3,
-          "prs_closed": 3,
+          "prs_merged": 4,
+          "prs_closed": 4,
           "issues_opened": 3,
-          "issues_closed": 1,
+          "issues_closed": 3,
           "commits": 0
         },
-        "davidmpickett": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 4,
-          "issues_closed": 4,
-          "commits": 0
-        },
-        "thejordanwood": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 2,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-03",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 2,
-            "issues_closed": 2,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-10",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 2,
-            "issues_closed": 2,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 1,
-            "issues_closed": 2,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-24",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 2,
-            "issues_closed": 1,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "department-of-veterans-affairs/va.gov-team",
-      "spdx": null,
-      "totals": {
-        "prs_opened": 1,
-        "prs_merged": 1,
-        "prs_closed": 1,
-        "issues_opened": 4,
-        "issues_closed": 7,
-        "commits": 0
-      },
-      "byAuthor": {
         "davidmpickett": {
           "prs_opened": 1,
           "prs_merged": 1,
           "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 0,
+          "issues_opened": 4,
+          "issues_closed": 3,
           "commits": 0
         },
-        "wullaski": {
+        "qjac": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
-          "issues_opened": 4,
-          "issues_closed": 4,
+          "issues_opened": 2,
+          "issues_closed": 3,
           "commits": 0
         },
-        "brianseek": {
+        "swirtSJW": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -3254,46 +3217,127 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-03",
+          "week_start": "2026-01-05",
           "totals": {
-            "prs_opened": 1,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
+            "prs_opened": 2,
+            "prs_merged": 2,
+            "prs_closed": 2,
+            "issues_opened": 2,
             "issues_closed": 2,
             "commits": 0
           }
         },
         {
-          "week_start": "2025-02-10",
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 2,
+            "prs_closed": 2,
+            "issues_opened": 3,
+            "issues_closed": 4,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 3,
+            "prs_merged": 3,
+            "prs_closed": 3,
+            "issues_opened": 3,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
           "totals": {
             "prs_opened": 0,
+            "prs_merged": 2,
+            "prs_closed": 2,
+            "issues_opened": 1,
+            "issues_closed": 3,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 2,
             "prs_merged": 1,
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 2,
             "commits": 0
           }
-        },
+        }
+      ]
+    },
+    {
+      "repo": "department-of-veterans-affairs/vets-api",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 1,
+        "prs_closed": 1,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
         {
-          "week_start": "2025-02-17",
+          "week_start": "2026-02-02",
           "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
-            "issues_closed": 2,
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
             "commits": 0
           }
-        },
+        }
+      ]
+    },
+    {
+      "repo": "department-of-veterans-affairs/vets-json-schema",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 1,
+        "prs_closed": 1,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "dgading": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
         {
-          "week_start": "2025-02-24",
+          "week_start": "2026-02-02",
           "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
-            "issues_closed": 1,
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
             "commits": 0
           }
         }
@@ -3303,18 +3347,26 @@
       "repo": "department-of-veterans-affairs/vets-website",
       "spdx": "CC0-1.0",
       "totals": {
-        "prs_opened": 2,
-        "prs_merged": 3,
-        "prs_closed": 3,
+        "prs_opened": 7,
+        "prs_merged": 7,
+        "prs_closed": 7,
         "issues_opened": 0,
         "issues_closed": 0,
         "commits": 0
       },
       "byAuthor": {
+        "dgading": {
+          "prs_opened": 5,
+          "prs_merged": 5,
+          "prs_closed": 5,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        },
         "wullaski": {
           "prs_opened": 2,
-          "prs_merged": 3,
-          "prs_closed": 3,
+          "prs_merged": 2,
+          "prs_closed": 2,
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 0
@@ -3322,18 +3374,7 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-03",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-10",
+          "week_start": "2026-01-05",
           "totals": {
             "prs_opened": 1,
             "prs_merged": 1,
@@ -3344,7 +3385,7 @@
           }
         },
         {
-          "week_start": "2025-02-24",
+          "week_start": "2026-01-12",
           "totals": {
             "prs_opened": 1,
             "prs_merged": 1,
@@ -3353,120 +3394,23 @@
             "issues_closed": 0,
             "commits": 0
           }
-        }
-      ]
-    },
-    {
-      "repo": "dmundra/medievalelbe-hostinger",
-      "spdx": null,
-      "totals": {
-        "prs_opened": 1,
-        "prs_merged": 1,
-        "prs_closed": 1,
-        "issues_opened": 2,
-        "issues_closed": 2,
-        "commits": 0
-      },
-      "byAuthor": {
-        "dmundra": {
-          "prs_opened": 1,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 2,
-          "issues_closed": 2,
-          "commits": 0
-        }
-      },
-      "weekly": [
+        },
         {
-          "week_start": "2025-02-03",
+          "week_start": "2026-01-19",
           "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
           }
         },
         {
-          "week_start": "2025-02-10",
+          "week_start": "2026-01-26",
           "totals": {
-            "prs_opened": 1,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
-            "issues_closed": 1,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 1,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "usds/ditap-curriculum-update",
-      "spdx": "NOASSERTION",
-      "totals": {
-        "prs_opened": 1,
-        "prs_merged": 1,
-        "prs_closed": 2,
-        "issues_opened": 3,
-        "issues_closed": 4,
-        "commits": 0
-      },
-      "byAuthor": {
-        "kristenjernigan": {
-          "prs_opened": 1,
-          "prs_merged": 0,
-          "prs_closed": 1,
-          "issues_opened": 0,
-          "issues_closed": 2,
-          "commits": 0
-        },
-        "bobschmitt-civicactions": {
-          "prs_opened": 0,
-          "prs_merged": 1,
-          "prs_closed": 1,
-          "issues_opened": 2,
-          "issues_closed": 0,
-          "commits": 0
-        },
-        "kellysmith1008": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 2,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-03",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
-            "issues_closed": 2,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-10",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
+            "prs_opened": 2,
+            "prs_merged": 2,
             "prs_closed": 2,
             "issues_opened": 0,
             "issues_closed": 0,
@@ -3474,23 +3418,12 @@
           }
         },
         {
-          "week_start": "2025-02-17",
+          "week_start": "2026-02-02",
           "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
-            "issues_closed": 2,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-24",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
+            "prs_opened": 2,
+            "prs_merged": 2,
+            "prs_closed": 2,
+            "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
           }
@@ -3498,8 +3431,122 @@
       ]
     },
     {
-      "repo": "w3c-cg/aar",
-      "spdx": "NOASSERTION",
+      "repo": "drydockcloud/ci-cypress",
+      "spdx": "GPL-3.0",
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 1,
+        "prs_closed": 1,
+        "issues_opened": 0,
+        "issues_closed": 1,
+        "commits": 0
+      },
+      "byAuthor": {
+        "dmundra": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "jerseycheese/Narraitor",
+      "spdx": "MIT",
+      "totals": {
+        "prs_opened": 5,
+        "prs_merged": 5,
+        "prs_closed": 5,
+        "issues_opened": 5,
+        "issues_closed": 5,
+        "commits": 0
+      },
+      "byAuthor": {
+        "jerseycheese": {
+          "prs_opened": 5,
+          "prs_merged": 5,
+          "prs_closed": 5,
+          "issues_opened": 5,
+          "issues_closed": 5,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 1,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 1,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 1,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 1,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 1,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "m1x0n/opis-error-presenter",
+      "spdx": "MIT",
       "totals": {
         "prs_opened": 1,
         "prs_merged": 0,
@@ -3509,7 +3556,7 @@
         "commits": 0
       },
       "byAuthor": {
-        "mgifford": {
+        "paul-m": {
           "prs_opened": 1,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -3520,11 +3567,138 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-10",
+          "week_start": "2026-02-02",
           "totals": {
             "prs_opened": 1,
             "prs_merged": 0,
             "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/o-hat-scanner",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 2,
+        "prs_merged": 2,
+        "prs_closed": 2,
+        "issues_opened": 3,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 2,
+          "prs_merged": 2,
+          "prs_closed": 2,
+          "issues_opened": 3,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "minerbotics/2026-Rebuilt",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 1,
+        "prs_closed": 1,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "Becapa": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "paul-m/opis-error-presenter",
+      "spdx": "MIT",
+      "totals": {
+        "prs_opened": 1,
+        "prs_merged": 1,
+        "prs_closed": 1,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "paul-m": {
+          "prs_opened": 1,
+          "prs_merged": 1,
+          "prs_closed": 1,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 1,
+            "prs_merged": 1,
+            "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
@@ -3536,18 +3710,18 @@
       "repo": "w3c/wai-arrm",
       "spdx": null,
       "totals": {
-        "prs_opened": 3,
-        "prs_merged": 2,
-        "prs_closed": 2,
+        "prs_opened": 1,
+        "prs_merged": 0,
+        "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 1,
         "commits": 0
       },
       "byAuthor": {
         "mgifford": {
-          "prs_opened": 3,
-          "prs_merged": 2,
-          "prs_closed": 2,
+          "prs_opened": 1,
+          "prs_merged": 0,
+          "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 1,
           "commits": 0
@@ -3555,18 +3729,7 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-10",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        },
-        {
-          "week_start": "2025-02-17",
+          "week_start": "2026-01-12",
           "totals": {
             "prs_opened": 1,
             "prs_merged": 0,
@@ -3575,26 +3738,15 @@
             "issues_closed": 1,
             "commits": 0
           }
-        },
-        {
-          "week_start": "2025-02-24",
-          "totals": {
-            "prs_opened": 1,
-            "prs_merged": 1,
-            "prs_closed": 1,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 0
-          }
         }
       ]
     },
     {
-      "repo": "GSA/resources.data.gov",
-      "spdx": "NOASSERTION",
+      "repo": "mgifford/ox.ca",
+      "spdx": "AGPL-3.0",
       "totals": {
         "prs_opened": 0,
-        "prs_merged": 0,
+        "prs_merged": 1,
         "prs_closed": 1,
         "issues_opened": 0,
         "issues_closed": 0,
@@ -3603,7 +3755,7 @@
       "byAuthor": {
         "TheBoatyMcBoatFace": {
           "prs_opened": 0,
-          "prs_merged": 0,
+          "prs_merged": 1,
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
@@ -3612,10 +3764,10 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-10",
+          "week_start": "2026-01-05",
           "totals": {
             "prs_opened": 0,
-            "prs_merged": 0,
+            "prs_merged": 1,
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
@@ -3625,8 +3777,8 @@
       ]
     },
     {
-      "repo": "CivicActions/allusgov",
-      "spdx": "GPL-3.0",
+      "repo": "7mary4/a11y-ai-training",
+      "spdx": "CC0-1.0",
       "totals": {
         "prs_opened": 0,
         "prs_merged": 0,
@@ -3636,7 +3788,7 @@
         "commits": 0
       },
       "byAuthor": {
-        "grugnog": {
+        "mgifford": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -3647,7 +3799,7 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-17",
+          "week_start": "2026-01-12",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -3660,112 +3812,7 @@
       ]
     },
     {
-      "repo": "GetDKAN/dkan_data_catalog",
-      "spdx": null,
-      "totals": {
-        "prs_opened": 0,
-        "prs_merged": 0,
-        "prs_closed": 0,
-        "issues_opened": 1,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "TheETupper": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-24",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "TheBoatyMcBoatFace/good-pdc",
-      "spdx": "AGPL-3.0",
-      "totals": {
-        "prs_opened": 0,
-        "prs_merged": 0,
-        "prs_closed": 0,
-        "issues_opened": 1,
-        "issues_closed": 0,
-        "commits": 0
-      },
-      "byAuthor": {
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-03",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "TheBoatyMcBoatFace/upptime",
-      "spdx": "MIT",
-      "totals": {
-        "prs_opened": 0,
-        "prs_merged": 0,
-        "prs_closed": 0,
-        "issues_opened": 1,
-        "issues_closed": 1,
-        "commits": 0
-      },
-      "byAuthor": {
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 1,
-          "commits": 0
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-02-17",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
-            "issues_closed": 1,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
-      "repo": "mozilla/distilvit",
+      "repo": "Automattic/harper",
       "spdx": "Apache-2.0",
       "totals": {
         "prs_opened": 0,
@@ -3787,7 +3834,7 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-10",
+          "week_start": "2026-01-26",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -3800,29 +3847,59 @@
       ]
     },
     {
-      "repo": "qltysh/qlty",
-      "spdx": "NOASSERTION",
+      "repo": "CivicActions/SOO-Wizard",
+      "spdx": "AGPL-3.0",
       "totals": {
         "prs_opened": 0,
         "prs_merged": 0,
         "prs_closed": 0,
-        "issues_opened": 1,
+        "issues_opened": 3,
         "issues_closed": 0,
         "commits": 0
       },
       "byAuthor": {
-        "dafeder": {
+        "TheBoatyMcBoatFace": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 0,
           "commits": 0
+        },
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 2,
+          "issues_closed": 0,
+          "commits": 0
         }
       },
       "weekly": [
         {
-          "week_start": "2025-02-17",
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-19",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -3835,18 +3912,26 @@
       ]
     },
     {
-      "repo": "GetDKAN/data-catalog-components",
-      "spdx": null,
+      "repo": "GSA/touchpoints",
+      "spdx": "NOASSERTION",
       "totals": {
         "prs_opened": 0,
         "prs_merged": 0,
         "prs_closed": 0,
-        "issues_opened": 0,
-        "issues_closed": 1,
+        "issues_opened": 1,
+        "issues_closed": 2,
         "commits": 0
       },
       "byAuthor": {
-        "dgading": {
+        "jerseycheese": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0
+        },
+        "dmundra": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -3857,7 +3942,248 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-24",
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 2,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "Stirling-Tools/Stirling-PDF",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "department-of-veterans-affairs/va.gov-team",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 16,
+        "issues_closed": 16,
+        "commits": 0
+      },
+      "byAuthor": {
+        "dgading": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 3,
+          "issues_closed": 5,
+          "commits": 0
+        },
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 4,
+          "issues_closed": 2,
+          "commits": 0
+        },
+        "openprivacy": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        },
+        "thejordanwood": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 5,
+          "issues_closed": 5,
+          "commits": 0
+        },
+        "wullaski": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 3,
+          "issues_closed": 3,
+          "commits": 0
+        },
+        "Becapa": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 3,
+            "issues_closed": 3,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 4,
+            "issues_closed": 3,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 2,
+            "issues_closed": 4,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 3,
+            "issues_closed": 3,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 4,
+            "issues_closed": 3,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "department-of-veterans-affairs/vets-design-system-documentation",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 3,
+        "issues_closed": 1,
+        "commits": 0
+      },
+      "byAuthor": {
+        "maggiewachs": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 2,
+          "issues_closed": 1,
+          "commits": 0
+        },
+        "qjac": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-02-02",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -3870,8 +4196,658 @@
       ]
     },
     {
-      "repo": "ScanGov/scangov",
+      "repo": "g0v/g0v.tw",
       "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 1,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/a11y-data-keywords",
+      "spdx": "MIT",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/a11y-mermaid-studio",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 2,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 2,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/a11y-svg",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/airtime2",
+      "spdx": "AGPL-3.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/content-first-wireframe",
+      "spdx": "AGPL-3.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 2,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 2,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/gh-open-dash",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/learn-github-game",
+      "spdx": "MIT",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/o-hat-standalone",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/openapi-reference",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/python-acr",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 2,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 2,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/risky-weather",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/tune-my-repos",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 2,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 2,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/ui-palette-generator",
+      "spdx": "AGPL-3.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/whisper-slides",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/wsg-mooc",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 0,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 0,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "w3c/sustainableweb-wsg",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 1,
+        "issues_closed": 1,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 1,
+          "issues_closed": 1,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-12",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 1,
+            "issues_closed": 0,
+            "commits": 0
+          }
+        },
+        {
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "GovTechSG/oobee",
+      "spdx": "MIT",
       "totals": {
         "prs_opened": 0,
         "prs_merged": 0,
@@ -3892,7 +4868,7 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-24",
+          "week_start": "2026-01-12",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -3905,8 +4881,8 @@
       ]
     },
     {
-      "repo": "department-of-veterans-affairs/vets-design-system-documentation",
-      "spdx": null,
+      "repo": "HTTPArchive/almanac.httparchive.org",
+      "spdx": "Apache-2.0",
       "totals": {
         "prs_opened": 0,
         "prs_merged": 0,
@@ -3916,7 +4892,7 @@
         "commits": 0
       },
       "byAuthor": {
-        "brianseek": {
+        "mgifford": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -3927,7 +4903,147 @@
       },
       "weekly": [
         {
-          "week_start": "2025-02-03",
+          "week_start": "2026-01-19",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "IBMa/equal-access",
+      "spdx": "Apache-2.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 1,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-02-02",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "opena11y/ainspector",
+      "spdx": "MPL-2.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 1,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "openemr/openemr",
+      "spdx": "GPL-3.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 1,
+        "commits": 0
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 1,
+            "commits": 0
+          }
+        }
+      ]
+    },
+    {
+      "repo": "smallstep/certificates",
+      "spdx": "Apache-2.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 1,
+        "commits": 0
+      },
+      "byAuthor": {
+        "civicactionsbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 1,
+          "commits": 0
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2026-01-05",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
