@@ -33,6 +33,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Restore SQLite database
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/participation.sqlite
+            data/participation.sqlite-wal
+            data/participation.sqlite-shm
+          # Use a simple rolling key or run_id that restores from the latest available
+          key: participation-data-${{ github.week_number }}
+          restore-keys: |
+            participation-data-
+
       - name: Write staff allowlist from secret (or empty)
         run: |
           if [ -z "${STAFF_ALLOWLIST_JSON}" ]; then
