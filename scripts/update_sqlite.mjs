@@ -3,7 +3,6 @@ import Database from 'better-sqlite3';
 import { graphql } from '@octokit/graphql';
 import fs from 'fs';
 import path from 'path';
-import { processCommentsForOrg } from './comments_collector.mjs';
 
 const DB_PATH = path.join('data', 'participation.sqlite');
 const ALLOWLIST_PATH = path.join('scripts', 'oss_spdx_allowlist.json');
@@ -265,12 +264,7 @@ async function run() {
       await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr closed:${rangeStart}..${rangeEnd}`, org);
       await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue created:${rangeStart}..${rangeEnd}`, org);
       await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue closed:${rangeStart}..${rangeEnd}`, org);
-      // Collect comment counts (issue comments, PR review comments, commit comments) per repo/author for this org and week
-      try {
-        await processCommentsForOrg(weekStartStr, rangeStart, rangeEnd, org);
-      } catch (err) {
-        console.warn(`Failed to collect comments for org ${org} (${weekStartStr}):`, err.message || err);
-      }
+      
     }
 
     for (const user of staffAllowList) {
