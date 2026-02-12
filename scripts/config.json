@@ -4,8 +4,8 @@
   ],
   "historyWeeks": 52,
   "maxWeeksPerRun": 12,
-  "collectAllPublic": true,
-  "licenseFilter": "all",
+  "collectAllPublic": false,
+  "licenseFilter": "oss",
   "collectStaffCommits": false,
   "repoExcludePatterns": [
     "BigBeautifulBoycott",
