@@ -1,11 +1,13 @@
 {
-  "orgAllowlist": ["civicactions"],
+  "orgAllowlist": [
+    "civicactions"
+  ],
   "historyWeeks": 52,
   "maxWeeksPerRun": 12,
-  "collectAllPublic": false,
-  "licenseFilter": "oss"
-  ,"collectStaffCommits": false
-  ,"repoExcludePatterns": [
+  "collectAllPublic": true,
+  "licenseFilter": "all",
+  "collectStaffCommits": false,
+  "repoExcludePatterns": [
     "BigBeautifulBoycott",
     "Open-Climate-Resilience-Policies/OCRP"
   ]
