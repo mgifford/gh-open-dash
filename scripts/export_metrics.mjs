@@ -6,13 +6,40 @@ import path from 'path';
 const DB_PATH = path.join('data', 'participation.sqlite');
 const OUT_PATH = path.join('data', 'metrics.json');
 const STAFF_ALLOWLIST_PATH = path.join('scripts', 'staff_allowlist.json');
+const CONFIG_PATH = path.join('scripts', 'config.json');
+const ALLOWLIST_PATH = path.join('scripts', 'oss_spdx_allowlist.json');
+
+const defaultConfig = {
+  orgAllowlist: ['civicactions'],
+  collectAllPublic: false,
+  licenseFilter: 'oss'
+};
+
+function loadConfig() {
+  if (fs.existsSync(CONFIG_PATH)) {
+    try {
+      const c = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+      // Backfill defaults
+      if (typeof c.collectAllPublic === 'undefined') c.collectAllPublic = defaultConfig.collectAllPublic;
+      if (typeof c.licenseFilter === 'undefined') c.licenseFilter = defaultConfig.licenseFilter;
+      return c;
+    } catch (err) {
+      console.warn('Failed to parse config.json in export; using defaults', err.message);
+    }
+  }
+  return { ...defaultConfig };
+}
+
+const fileConfig = loadConfig();
+
 function parseAllowlist(input, fallback) {
   const raw = (typeof input === 'undefined' || input === null) ? fallback : input;
   if (Array.isArray(raw)) return raw.map(s => String(s).trim()).filter(Boolean);
   return String(raw).split(',').map(s => s.trim()).filter(Boolean);
 }
 
-const ORG_ALLOWLIST = parseAllowlist(process.env.ORG_ALLOWLIST, 'civicactions');
+const ORG_ALLOWLIST = parseAllowlist(process.env.ORG_ALLOWLIST, fileConfig.orgAllowlist || defaultConfig.orgAllowlist);
+const SPDX_ALLOWLIST = fs.existsSync(ALLOWLIST_PATH) ? JSON.parse(fs.readFileSync(ALLOWLIST_PATH, 'utf8')) : [];
 
 if (!fs.existsSync(DB_PATH)) {
   console.error('Database not found');
@@ -20,6 +47,32 @@ if (!fs.existsSync(DB_PATH)) {
 }
 
 const db = new Database(DB_PATH);
+
+// Helper to decide if a repo row should be included in the export based on current config
+// (Simulates filtering on the view layer so toggling config changes output immediately)
+const shouldIncludeRepo = (repo, spdx) => {
+  // 1. Check License Filter
+  // If filter is 'oss', we require SPDX to be in allowlist.
+  if (fileConfig.licenseFilter === 'oss') {
+    if (!spdx || !SPDX_ALLOWLIST.includes(spdx)) return false;
+  }
+  
+  // 2. Check Collection Mode (Org Only vs All Public)
+  // If collectAllPublic is FALSE, we only include repos belonging to orgAllowlist.
+  if (!fileConfig.collectAllPublic) {
+    if (!repo) return false;
+    const owner = repo.split('/')[0];
+    // Check if owner is in allowlist (case-insensitive check is safer)
+    if (!ORG_ALLOWLIST.some(o => o.toLowerCase() === owner.toLowerCase())) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+// Start export logic
+// ...
 
 // Load staff allowlist for segmentation (post-processing only)
 let staffAllowList = [];
@@ -60,6 +113,8 @@ if (tableExists('comment_counts')) {
 const weeks = db.prepare(`${weeksQueryParts.join('\nUNION\n')}\nORDER BY week_start`).all().map(r => r.week_start);
 
 // Fetch all authors
+// We only want authors who have at least one valid contribution under current filters.
+// But simplifying: we can just fetch all and let the counts be 0 if filtered.
 const authorQueryParts = [
   "SELECT DISTINCT author FROM pr_opened",
   "SELECT DISTINCT author FROM pr_merged",
@@ -73,16 +128,26 @@ const authors = db.prepare(`${authorQueryParts.join('\nUNION\n')}\nORDER BY auth
 const staffAuthors = authors.filter(a => staffAllowList.includes(a));
 
 // Aggregate data
-// We need to query each table and aggregate counts per (week, author)
-// To do this efficiently, we can fetch all rows and process in JS, or use SQL group by.
-// Given SQLite is local and fast, fetching grouped data is good.
-
+// REPLACED: Simple SQL aggregation with in-memory filtering to respect config
 const getData = (table) => {
-  return db.prepare(`
-    SELECT week_start, author, count(*) as count
-    FROM ${table}
-    GROUP BY week_start, author
-  `).all();
+  const rows = db.prepare(`SELECT week_start, author, repo, spdx, count(*) as count FROM ${table} GROUP BY week_start, author, repo, spdx`).all();
+  // Filter and re-aggregate by (week, author)
+  const aggregated = new Map(); // key="week||author" -> count
+  
+  for (const r of rows) {
+    if (shouldIncludeRepo(r.repo, r.spdx)) {
+      const key = `${r.week_start}||${r.author}`;
+      aggregated.set(key, (aggregated.get(key) || 0) + r.count);
+    }
+  }
+  
+  // Transform back to object list
+  const out = [];
+  for (const [k, count] of aggregated.entries()) {
+    const [week_start, author] = k.split('||');
+    out.push({ week_start, author, count });
+  }
+  return out;
 };
 
 const prOpenedRaw = getData('pr_opened');
@@ -90,11 +155,43 @@ const prMergedRaw = getData('pr_merged');
 const prClosedRaw = getData('pr_closed');
 const issuesOpenedRaw = getData('issue_opened');
 const issuesClosedRaw = getData('issue_closed');
-const commitsRaw = db.prepare(`SELECT week_start, author, count(*) as count FROM commits GROUP BY week_start, author`).all();
+
+// Commits table (already has repo/spdx columns)
+const getCommitsData = () => {
+  const rows = db.prepare(`SELECT week_start, author, repo, spdx, count(*) as count FROM commits GROUP BY week_start, author, repo, spdx`).all();
+  const aggregated = new Map();
+  for (const r of rows) {
+    if (shouldIncludeRepo(r.repo, r.spdx)) {
+      const key = `${r.week_start}||${r.author}`;
+      aggregated.set(key, (aggregated.get(key) || 0) + r.count);
+    }
+  }
+  const out = [];
+  for (const [k, count] of aggregated.entries()) {
+    const [week_start, author] = k.split('||');
+    out.push({ week_start, author, count });
+  }
+  return out;
+};
+const commitsRaw = getCommitsData();
+
 // comment counts grouped by week/author/kind
 let commentCountsRaw = [];
 if (tableExists('comment_counts')) {
-  commentCountsRaw = db.prepare(`SELECT week_start, author, kind, SUM(count) as count FROM comment_counts GROUP BY week_start, author, kind`).all();
+  // original: db.prepare(`SELECT week_start, author, kind, SUM(count) as count FROM comment_counts GROUP BY week_start, author, kind`).all();
+  // New: fetch with repo/spdx to filter
+  const rows = db.prepare(`SELECT week_start, author, repo, spdx, kind, count FROM comment_counts`).all();
+  const agg = new Map(); // "week||author||kind" -> count
+  for (const r of rows) {
+    if (shouldIncludeRepo(r.repo, r.spdx)) {
+      const key = `${r.week_start}||${r.author}||${r.kind}`;
+      agg.set(key, (agg.get(key) || 0) + r.count);
+    }
+  }
+  for (const [k, count] of agg.entries()) {
+    const [week_start, author, kind] = k.split('||');
+    commentCountsRaw.push({ week_start, author, kind, count });
+  }
 }
 
 // Build structure
