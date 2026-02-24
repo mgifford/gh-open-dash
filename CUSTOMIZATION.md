@@ -278,10 +278,9 @@ export GITHUB_TOKEN=your_token
 npm run update
 npm run export
 
-# 3. Copy files to public directory
+# 3. Copy metrics to public directory (config is auto-copied by Vite)
 mkdir -p site/public/data
 cp data/metrics.json site/public/data/
-cp site/config.json site/public/
 
 # 4. Start dev server
 cd site
@@ -289,6 +288,8 @@ npm run dev
 ```
 
 Open http://localhost:5173 to see your customized dashboard!
+
+> **Note**: The Vite build process automatically copies `site/config.json` to the public directory, so you only need to maintain one config file.
 
 ## Troubleshooting
 

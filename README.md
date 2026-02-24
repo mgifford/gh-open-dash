@@ -174,11 +174,10 @@ npm install
 ### Running the Frontend Locally
 
 1.  Make sure `data/metrics.json` exists (see above).
-2.  Copy `data/metrics.json` and `config.json` to `site/public/`:
+2.  Copy `data/metrics.json` to `site/public/data/` (config.json is automatically copied by Vite):
     ```bash
     mkdir -p site/public/data
     cp data/metrics.json site/public/data/
-    cp site/config.json site/public/
     ```
 3.  Start Vite:
     ```bash
@@ -186,6 +185,8 @@ npm install
     npm run dev
     ```
 4.  Open http://localhost:5173 in your browser
+
+> **Note**: The build process automatically copies `site/config.json` to `site/public/config.json`, so you only need to maintain the single source file at `site/config.json`.
 
 ### Reprocessing history after allowlist changes
 

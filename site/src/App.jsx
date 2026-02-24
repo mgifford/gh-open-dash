@@ -200,6 +200,18 @@ function App() {
   const totalContributors = data.authors.length;
   const totalRepos = data.byRepo ? Object.keys(data.byRepo).length : 0;
   const activeContributors = processedData.leaderboard.filter(item => item.count > 0).length;
+  
+  // Helper function to calculate weekly activity
+  const calculateWeeklyActivity = (weekData) => {
+    if (!weekData || !weekData.byAuthor) return 0;
+    return Object.values(weekData.byAuthor).reduce((sum, metrics) => {
+      return sum + Object.values(metrics).reduce((s, v) => s + (typeof v === 'number' ? v : 0), 0);
+    }, 0);
+  };
+  
+  const thisWeekActivity = data.series && data.series.length > 0 
+    ? calculateWeeklyActivity(data.series[data.series.length - 1])
+    : 0;
 
   return (
     <div className="container">
@@ -237,9 +249,7 @@ function App() {
             />
             <MetricCard
               title="This Week"
-              value={data.series && data.series.length > 0 ? 
-                Object.values(data.series[data.series.length - 1].byAuthor || {})
-                  .reduce((sum, metrics) => sum + Object.values(metrics).reduce((s, v) => s + (typeof v === 'number' ? v : 0), 0), 0) : 0}
+              value={thisWeekActivity}
               subtitle="Recent activity"
               icon="⚡"
             />
