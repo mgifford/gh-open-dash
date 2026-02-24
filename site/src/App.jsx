@@ -18,6 +18,17 @@ async function loadMetrics() {
   }
 }
 
+async function loadConfig() {
+  try {
+    const res = await fetch("./config.json", { cache: "no-store" });
+    if (!res.ok) return null; // Config is optional
+    return await res.json();
+  } catch (err) {
+    console.warn('Config not loaded, using defaults:', err.message);
+    return null;
+  }
+}
+
 const METRIC_OPTIONS = [
   { key: "all_metrics", label: "All Metrics" },
   { key: "comments_total", label: "Comments" },
@@ -37,6 +48,7 @@ const RANGE_OPTIONS = [
 
 function App() {
   const [data, setData] = useState(null);
+  const [config, setConfig] = useState(null);
   const [metric, setMetric] = useState("all_metrics");
   const [range, setRange] = useState("12");
   const [selectedAuthor, setSelectedAuthor] = useState("all");
@@ -71,6 +83,9 @@ function App() {
     loadMetrics()
       .then(setData)
       .catch((err) => console.error(err));
+    loadConfig()
+      .then(setConfig)
+      .catch((err) => console.error('Config load error:', err));
   }, []);
 
   useEffect(() => {
@@ -197,7 +212,7 @@ function App() {
         </div>
       </header>
 
-      <Hero orgName="CivicActions" tagline="Building in the open, together" />
+      <Hero config={config} />
 
       {view === 'dashboard' && (
         <>
@@ -230,7 +245,7 @@ function App() {
             />
           </div>
 
-          <WhyOpen />
+          <WhyOpen config={config} />
         </>
       )}
 
