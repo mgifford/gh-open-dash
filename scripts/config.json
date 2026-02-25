@@ -6,8 +6,8 @@
   "maxWeeksPerRun": 12,
   "collectAllPublic": true,
   "licenseFilter": "all",
-  "collectStaffCommits": false,
-  "collectEcosystemsData": false,
+  "collectStaffCommits": true,
+  "collectEcosystemsData": true,
   "repoExcludePatterns": [
     "BigBeautifulBoycott",
     "Open-Climate-Resilience-Policies/OCRP"
