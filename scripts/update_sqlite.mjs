@@ -125,6 +125,32 @@ db.exec(`
     spdx TEXT,
     PRIMARY KEY (week_start, author, repo)
   );
+  CREATE TABLE IF NOT EXISTS pr_details (
+    week_start TEXT,
+    author TEXT,
+    repo TEXT,
+    pr_number INTEGER,
+    created_at TEXT,
+    merged_at TEXT,
+    closed_at TEXT,
+    additions INTEGER,
+    deletions INTEGER,
+    PRIMARY KEY (week_start, repo, pr_number)
+  );
+  CREATE TABLE IF NOT EXISTS issue_labels (
+    week_start TEXT,
+    author TEXT,
+    repo TEXT,
+    issue_number INTEGER,
+    labels TEXT,
+    PRIMARY KEY (week_start, repo, issue_number)
+  );
+  CREATE TABLE IF NOT EXISTS repo_stars (
+    week_start TEXT,
+    repo TEXT,
+    stars INTEGER,
+    PRIMARY KEY (week_start, repo)
+  );
   CREATE TABLE IF NOT EXISTS meta (
     key TEXT PRIMARY KEY,
     value TEXT
@@ -296,6 +322,9 @@ async function processMetric(client, table, weekStart, query, contextLabel) {
   let hasNextPage = true;
   let cursor = null;
   const items = [];
+  const prDetails = [];
+  const issueLabels = [];
+  const repoStars = new Map();
   let skippedMissingRepo = 0;
   let skippedMissingLicense = 0;
   let skippedDisallowedLicense = 0;
@@ -331,10 +360,42 @@ async function processMetric(client, table, weekStart, query, contextLabel) {
         repo: node.repository.nameWithOwner,
         spdx: spdx
       });
+
+      // Collect PR details if this is a PR
+      if (node.number && (table === 'pr_opened' || table === 'pr_merged' || table === 'pr_closed')) {
+        prDetails.push({
+          author: node.author.login,
+          repo: node.repository.nameWithOwner,
+          pr_number: node.number,
+          created_at: node.createdAt || null,
+          merged_at: node.mergedAt || null,
+          closed_at: node.closedAt || null,
+          additions: node.additions || 0,
+          deletions: node.deletions || 0
+        });
+      }
+
+      // Collect issue labels if this is an issue
+      if (node.number && node.labels && (table === 'issue_opened' || table === 'issue_closed')) {
+        const labelNames = node.labels.nodes ? node.labels.nodes.map(l => l.name).filter(Boolean) : [];
+        if (labelNames.length > 0) {
+          issueLabels.push({
+            author: node.author.login,
+            repo: node.repository.nameWithOwner,
+            issue_number: node.number,
+            labels: JSON.stringify(labelNames)
+          });
+        }
+      }
+
+      // Collect repo stars (deduplicate by repo)
+      if (node.repository.stargazerCount !== undefined && !repoStars.has(repoFull)) {
+        repoStars.set(repoFull, node.repository.stargazerCount);
+      }
     }
   }
   
-  // Batch insert
+  // Batch insert main items
   const stmt = db.prepare(`INSERT OR IGNORE INTO ${table} (week_start, author, repo, spdx) VALUES (?, ?, ?, ?)`);
   const insertMany = db.transaction((rows) => {
     for (const row of rows) {
@@ -345,6 +406,54 @@ async function processMetric(client, table, weekStart, query, contextLabel) {
   if (items.length > 0) {
     insertMany(items);
     console.log(`  Inserted ${items.length} records for ${table} (${contextLabel})`);
+  }
+
+  // Insert PR details
+  if (prDetails.length > 0) {
+    const stmtPR = db.prepare(`
+      INSERT OR REPLACE INTO pr_details 
+      (week_start, author, repo, pr_number, created_at, merged_at, closed_at, additions, deletions) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+    const insertPRs = db.transaction((rows) => {
+      for (const row of rows) {
+        stmtPR.run(weekStart, row.author, row.repo, row.pr_number, row.created_at, row.merged_at, row.closed_at, row.additions, row.deletions);
+      }
+    });
+    insertPRs(prDetails);
+    console.log(`  Inserted ${prDetails.length} PR detail records (${contextLabel})`);
+  }
+
+  // Insert issue labels
+  if (issueLabels.length > 0) {
+    const stmtLabels = db.prepare(`
+      INSERT OR REPLACE INTO issue_labels 
+      (week_start, author, repo, issue_number, labels) 
+      VALUES (?, ?, ?, ?, ?)
+    `);
+    const insertLabels = db.transaction((rows) => {
+      for (const row of rows) {
+        stmtLabels.run(weekStart, row.author, row.repo, row.issue_number, row.labels);
+      }
+    });
+    insertLabels(issueLabels);
+    console.log(`  Inserted ${issueLabels.length} issue label records (${contextLabel})`);
+  }
+
+  // Insert repo stars
+  if (repoStars.size > 0) {
+    const stmtStars = db.prepare(`
+      INSERT OR REPLACE INTO repo_stars 
+      (week_start, repo, stars) 
+      VALUES (?, ?, ?)
+    `);
+    const insertStars = db.transaction(() => {
+      for (const [repo, stars] of repoStars.entries()) {
+        stmtStars.run(weekStart, repo, stars);
+      }
+    });
+    insertStars();
+    console.log(`  Inserted ${repoStars.size} repo star records (${contextLabel})`);
   }
 
   const skippedTotal = skippedMissingRepo + skippedMissingLicense + skippedDisallowedLicense + skippedMissingAuthor + skippedPrivateRepo;
@@ -453,19 +562,35 @@ async function fetchSearchPage(client, query, cursor, contextLabel) {
             }
             nodes {
               ... on PullRequest {
+                number
                 author { login }
+                createdAt
+                mergedAt
+                closedAt
+                additions
+                deletions
                 repository {
                   nameWithOwner
                   licenseInfo { spdxId }
                   isPrivate
+                  stargazerCount
                 }
               }
               ... on Issue {
+                number
                 author { login }
+                createdAt
+                closedAt
+                labels(first: 20) {
+                  nodes {
+                    name
+                  }
+                }
                 repository {
                   nameWithOwner
                   licenseInfo { spdxId }
                   isPrivate
+                  stargazerCount
                 }
               }
             }
