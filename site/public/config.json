@@ -1,0 +1,64 @@
+{
+  "organization": {
+    "name": "CivicActions",
+    "tagline": "Building in the open, together",
+    "description": "We believe in radical transparency. This dashboard shows our public open-source contributions, celebrating our commitment to building and contributing back to the community.",
+    "githubOrg": "civicactions",
+    "website": "https://civicactions.com"
+  },
+  "branding": {
+    "primaryColor": "#004488",
+    "primaryLightColor": "#0066bb",
+    "accentColor": "#107c10"
+  },
+  "transparency": {
+    "whyOpen": {
+      "enabled": true,
+      "items": [
+        {
+          "icon": "🌍",
+          "title": "Community First",
+          "description": "We believe in giving back to the open-source community that has given us so much. Transparency builds trust and fosters collaboration."
+        },
+        {
+          "icon": "📊",
+          "title": "Accountability",
+          "description": "By sharing our metrics publicly, we hold ourselves accountable to our mission and values, demonstrating our commitment through action."
+        },
+        {
+          "icon": "🚀",
+          "title": "Inspire Others",
+          "description": "We hope our transparency inspires other organizations to contribute to open source and share their impact with the world."
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "cards": [
+      {
+        "id": "total_contributions",
+        "title": "Total Contributions",
+        "icon": "🚀",
+        "enabled": true
+      },
+      {
+        "id": "active_contributors",
+        "title": "Active Contributors",
+        "icon": "👥",
+        "enabled": true
+      },
+      {
+        "id": "repositories",
+        "title": "Repositories",
+        "icon": "📦",
+        "enabled": true
+      },
+      {
+        "id": "this_week",
+        "title": "This Week",
+        "icon": "⚡",
+        "enabled": true
+      }
+    ]
+  }
+}

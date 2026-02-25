@@ -2,6 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import Leaderboard from "./Leaderboard.jsx";
 import WeeklyChart from "./WeeklyChart.jsx";
 import Projects from "./Projects.jsx";
+import Hero from "./Hero.jsx";
+import MetricCard from "./MetricCard.jsx";
+import WhyOpen from "./WhyOpen.jsx";
 import "./styles.css";
 
 async function loadMetrics() {
@@ -12,6 +15,17 @@ async function loadMetrics() {
     return JSON.parse(text);
   } catch (err) {
     throw new Error(`Failed to parse metrics.json: ${err.message}\nResponse body:\n${text.slice(0, 2000)}`);
+  }
+}
+
+async function loadConfig() {
+  try {
+    const res = await fetch("./config.json", { cache: "no-store" });
+    if (!res.ok) return null; // Config is optional
+    return await res.json();
+  } catch (err) {
+    console.warn('Config not loaded, using defaults:', err.message);
+    return null;
   }
 }
 
@@ -34,6 +48,7 @@ const RANGE_OPTIONS = [
 
 function App() {
   const [data, setData] = useState(null);
+  const [config, setConfig] = useState(null);
   const [metric, setMetric] = useState("all_metrics");
   const [range, setRange] = useState("12");
   const [selectedAuthor, setSelectedAuthor] = useState("all");
@@ -68,6 +83,9 @@ function App() {
     loadMetrics()
       .then(setData)
       .catch((err) => console.error(err));
+    loadConfig()
+      .then(setConfig)
+      .catch((err) => console.error('Config load error:', err));
   }, []);
 
   useEffect(() => {
@@ -177,37 +195,87 @@ function App() {
   if (!data) return <div className="loading">Loading participation data...</div>;
   if (!processedData) return <div className="loading">Processing...</div>;
 
+  // Calculate overview metrics
+  const totalContributions = processedData.leaderboard.reduce((sum, item) => sum + item.count, 0);
+  const totalContributors = data.authors.length;
+  const totalRepos = data.byRepo ? Object.keys(data.byRepo).length : 0;
+  const activeContributors = processedData.leaderboard.filter(item => item.count > 0).length;
+  
+  // Helper function to calculate weekly activity
+  const calculateWeeklyActivity = (weekData) => {
+    if (!weekData || !weekData.byAuthor) return 0;
+    return Object.values(weekData.byAuthor).reduce((sum, metrics) => {
+      return sum + Object.values(metrics).reduce((s, v) => s + (typeof v === 'number' ? v : 0), 0);
+    }, 0);
+  };
+  
+  const thisWeekActivity = data.series && data.series.length > 0 
+    ? calculateWeeklyActivity(data.series[data.series.length - 1])
+    : 0;
+
   return (
     <div className="container">
       <header>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h1 style={{ margin: 0 }}>CivicActions Open Source Participation</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div style={{ display: 'flex', gap: 8 }}>
             <a href="#/dashboard" onClick={() => setView('dashboard')} className={view === 'dashboard' ? 'active' : ''} aria-current={view === 'dashboard' ? 'page' : undefined}>Dashboard</a>
             <a href="#/projects" onClick={() => setView('projects')} className={view === 'projects' ? 'active' : ''} aria-current={view === 'projects' ? 'page' : undefined}>Projects</a>
           </div>
         </div>
-        <p>
-          Aggregation of public contributions from the CivicActions team on GitHub.
-        </p>
-        <div className="meta">
-          {(() => {
-            try {
-              const generatedAt = new Date(data.generated_at);
-              const local = generatedAt.toLocaleString(undefined, { timeZoneName: 'short' });
-              const ageSeconds = Math.floor((Date.now() - generatedAt.getTime()) / 1000);
-              let ageText = '';
-              if (ageSeconds < 60) ageText = 'just now';
-              else if (ageSeconds < 3600) ageText = `${Math.floor(ageSeconds/60)} minute${Math.floor(ageSeconds/60)===1? '':'s'} ago`;
-              else if (ageSeconds < 86400) ageText = `${Math.floor(ageSeconds/3600)} hour${Math.floor(ageSeconds/3600)===1? '':'s'} ago`;
-              else ageText = `${Math.floor(ageSeconds/86400)} day${Math.floor(ageSeconds/86400)===1? '':'s'} ago`;
-              return <>Last updated: {local} ({ageText})</>;
-            } catch (e) {
-              return <>Last updated: {new Date(data.generated_at).toLocaleString()}</>;
-            }
-          })()}
-        </div>
       </header>
+
+      <Hero config={config} />
+
+      {view === 'dashboard' && (
+        <>
+          <div className="metrics-overview">
+            <MetricCard
+              title="Total Contributions"
+              value={totalContributions.toLocaleString()}
+              subtitle={`In the last ${range === 'all' ? 'all time' : range + ' weeks'}`}
+              icon="🚀"
+            />
+            <MetricCard
+              title="Active Contributors"
+              value={activeContributors}
+              subtitle={`Out of ${totalContributors} total contributors`}
+              icon="👥"
+            />
+            <MetricCard
+              title="Repositories"
+              value={totalRepos}
+              subtitle="Open source projects"
+              icon="📦"
+            />
+            <MetricCard
+              title="This Week"
+              value={thisWeekActivity}
+              subtitle="Recent activity"
+              icon="⚡"
+            />
+          </div>
+
+          <WhyOpen config={config} />
+        </>
+      )}
+
+      <div className="meta" style={{ textAlign: 'center', marginBottom: '24px' }}>
+        {(() => {
+          try {
+            const generatedAt = new Date(data.generated_at);
+            const local = generatedAt.toLocaleString(undefined, { timeZoneName: 'short' });
+            const ageSeconds = Math.floor((Date.now() - generatedAt.getTime()) / 1000);
+            let ageText = '';
+            if (ageSeconds < 60) ageText = 'just now';
+            else if (ageSeconds < 3600) ageText = `${Math.floor(ageSeconds/60)} minute${Math.floor(ageSeconds/60)===1? '':'s'} ago`;
+            else if (ageSeconds < 86400) ageText = `${Math.floor(ageSeconds/3600)} hour${Math.floor(ageSeconds/3600)===1? '':'s'} ago`;
+            else ageText = `${Math.floor(ageSeconds/86400)} day${Math.floor(ageSeconds/86400)===1? '':'s'} ago`;
+            return <>Last updated: {local} ({ageText})</>;
+          } catch (e) {
+            return <>Last updated: {new Date(data.generated_at).toLocaleString()}</>;
+          }
+        })()}
+      </div>
 
       <div className="controls">
         <label>
