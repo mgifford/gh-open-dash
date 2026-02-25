@@ -7,7 +7,8 @@ vi.mock('react-chartjs-2', () => {
   const React = require('react');
   return {
     Line: (props) => React.createElement('div', { 'data-testid': 'chart' }),
-    Bubble: (props) => React.createElement('div', { 'data-testid': 'bubble' })
+    Bubble: (props) => React.createElement('div', { 'data-testid': 'bubble' }),
+    Bar: (props) => React.createElement('div', { 'data-testid': 'bar' })
   };
 });
 
