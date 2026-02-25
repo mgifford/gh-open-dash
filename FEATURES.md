@@ -12,14 +12,23 @@ This document lists the key features of the transparency dashboard inspired by c
 - Responsive design
 
 ### Metric Cards
-- Four highlighted metrics with icons:
+- Six highlighted metrics with icons:
   - 🚀 Total Contributions
   - 👥 Active Contributors  
   - 📦 Repositories
   - ⚡ This Week's Activity
+  - ✅ PR Success Rate (merged vs closed)
+  - ⏱️ Average PR Merge Time
 - Hover effects
 - Clean, modern card design
 - Automatically calculated from data
+
+### Enhanced Visualizations
+- **PR Success Rate Chart**: Stacked bar chart showing PRs merged vs closed without merge
+- **Issues vs PRs Ratio**: Line chart comparing issue creation to PR creation over time
+- **PR Merge Time & Size**: Dual-axis chart showing average merge time and PR size trends
+- **Repository Stars**: Horizontal bar chart of top repositories by GitHub stars
+- All charts support filtering by time range and contributor
 
 ### "Why We're Open" Section
 - Customizable transparency philosophy cards
@@ -36,6 +45,12 @@ This document lists the key features of the transparency dashboard inspired by c
 - Legend with visual indicators
 
 ## Technical Features
+
+### Enhanced Data Collection
+- **PR Details**: Tracks merge times, PR sizes (additions/deletions), and merge status
+- **Issue Labels**: Collects and stores issue labels for categorization
+- **Repository Stars**: Tracks GitHub star counts for popularity metrics
+- All data collected via GitHub GraphQL API with rate-limit safety
 
 ### Configuration System
 - Single source of truth: `site/config.json`
