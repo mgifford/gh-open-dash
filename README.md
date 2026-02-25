@@ -7,9 +7,14 @@ An open-source transparency dashboard inspired by cal.com/open and other open st
 ## ✨ Features
 
 - 🎯 **Modern Transparency Page**: Hero section, metric cards, and "Why We're Open" section
-- 📊 **Real-time Metrics**: Track PRs, issues, commits, and comments across your organization
+- 📊 **Enhanced Analytics**: Track PR success rates, merge times, PR sizes, and repository stars
+- 📈 **Advanced Visualizations**: 
+  - PR success rate (merged vs closed)
+  - Issues vs PRs ratio over time
+  - PR merge time and size trends
+  - Repository stars ranking
 - 👥 **Contributor Leaderboard**: Celebrate your top contributors
-- 📈 **Weekly Trends**: Visualize activity over time with interactive charts
+- 📉 **Weekly Trends**: Visualize activity over time with interactive charts
 - 🏢 **Multi-Organization Support**: Track multiple GitHub organizations
 - 🎨 **Fully Customizable**: Easy configuration for branding and content
 - 🔒 **Privacy-First**: Only public data, no private repo access needed

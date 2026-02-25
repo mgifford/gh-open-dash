@@ -384,6 +384,83 @@ const staffSeries = series.map(week => {
   return { week_start: week.week_start, byAuthor: filtered };
 });
 
+// Collect PR details for merge time and size analytics
+const prDetailsData = [];
+if (tableExists('pr_details')) {
+  const rows = db.prepare(`
+    SELECT week_start, author, repo, pr_number, created_at, merged_at, closed_at, additions, deletions 
+    FROM pr_details 
+    ORDER BY week_start, repo, pr_number
+  `).all();
+  
+  for (const row of rows) {
+    if (shouldIncludeRepo(row.repo, null)) {
+      // Calculate merge time in hours if both created_at and merged_at exist
+      let mergeTimeHours = null;
+      if (row.created_at && row.merged_at) {
+        const created = new Date(row.created_at);
+        const merged = new Date(row.merged_at);
+        mergeTimeHours = (merged - created) / (1000 * 60 * 60);
+      }
+      
+      prDetailsData.push({
+        week_start: row.week_start,
+        author: row.author,
+        repo: row.repo,
+        pr_number: row.pr_number,
+        merge_time_hours: mergeTimeHours,
+        additions: row.additions,
+        deletions: row.deletions,
+        total_changes: row.additions + row.deletions,
+        was_merged: !!row.merged_at,
+        was_closed_without_merge: !!row.closed_at && !row.merged_at
+      });
+    }
+  }
+}
+
+// Collect issue labels
+const issueLabelsData = [];
+if (tableExists('issue_labels')) {
+  const rows = db.prepare(`
+    SELECT week_start, author, repo, issue_number, labels 
+    FROM issue_labels 
+    ORDER BY week_start, repo, issue_number
+  `).all();
+  
+  for (const row of rows) {
+    if (shouldIncludeRepo(row.repo, null)) {
+      issueLabelsData.push({
+        week_start: row.week_start,
+        author: row.author,
+        repo: row.repo,
+        issue_number: row.issue_number,
+        labels: JSON.parse(row.labels || '[]')
+      });
+    }
+  }
+}
+
+// Collect repo stars
+const repoStarsData = [];
+if (tableExists('repo_stars')) {
+  const rows = db.prepare(`
+    SELECT week_start, repo, stars 
+    FROM repo_stars 
+    ORDER BY week_start, repo
+  `).all();
+  
+  for (const row of rows) {
+    if (shouldIncludeRepo(row.repo, null)) {
+      repoStarsData.push({
+        week_start: row.week_start,
+        repo: row.repo,
+        stars: row.stars
+      });
+    }
+  }
+}
+
 const output = {
   generated_at: new Date().toISOString(),
   org: ORG_ALLOWLIST[0] || "",
@@ -393,8 +470,11 @@ const output = {
   series: series,
   staff_allowlist: staffAllowList,
   staff_authors: staffAuthors,
-  staff_series: staffSeries
-  ,repos: repos
+  staff_series: staffSeries,
+  repos: repos,
+  pr_details: prDetailsData,
+  issue_labels: issueLabelsData,
+  repo_stars: repoStarsData
 };
 
 // Include config flags for frontend visibility

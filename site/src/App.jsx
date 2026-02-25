@@ -1,6 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Leaderboard from "./Leaderboard.jsx";
 import WeeklyChart from "./WeeklyChart.jsx";
+import PRSuccessChart from "./PRSuccessChart.jsx";
+import IssuesPRsRatioChart from "./IssuesPRsRatioChart.jsx";
+import PRMetricsChart from "./PRMetricsChart.jsx";
+import RepoStarsChart from "./RepoStarsChart.jsx";
 import Projects from "./Projects.jsx";
 import Hero from "./Hero.jsx";
 import MetricCard from "./MetricCard.jsx";
@@ -213,6 +217,45 @@ function App() {
     ? calculateWeeklyActivity(data.series[data.series.length - 1])
     : 0;
 
+  // Calculate PR merge success rate
+  const calculatePRSuccessRate = () => {
+    if (!data.series || data.series.length === 0) return 0;
+    let totalMerged = 0;
+    let totalClosed = 0;
+    
+    data.series.forEach(week => {
+      Object.values(week.byAuthor || {}).forEach(metrics => {
+        totalMerged += metrics.prs_merged || 0;
+        totalClosed += metrics.prs_closed || 0;
+      });
+    });
+    
+    if (totalClosed === 0) return 0;
+    return Math.round((totalMerged / totalClosed) * 100);
+  };
+
+  // Calculate average PR merge time
+  const calculateAvgMergeTime = () => {
+    if (!data.pr_details || data.pr_details.length === 0) return null;
+    
+    const mergeTimes = data.pr_details
+      .filter(pr => pr.merge_time_hours !== null && pr.was_merged)
+      .map(pr => pr.merge_time_hours);
+    
+    if (mergeTimes.length === 0) return null;
+    
+    const avg = mergeTimes.reduce((a, b) => a + b, 0) / mergeTimes.length;
+    
+    // Convert to days if > 24 hours
+    if (avg >= 24) {
+      return `${(avg / 24).toFixed(1)}d`;
+    }
+    return `${avg.toFixed(1)}h`;
+  };
+
+  const prSuccessRate = calculatePRSuccessRate();
+  const avgMergeTime = calculateAvgMergeTime();
+
   return (
     <div className="container">
       <header>
@@ -253,6 +296,20 @@ function App() {
               subtitle="Recent activity"
               icon="⚡"
             />
+            <MetricCard
+              title="PR Success Rate"
+              value={`${prSuccessRate}%`}
+              subtitle="PRs merged vs closed"
+              icon="✅"
+            />
+            {avgMergeTime && (
+              <MetricCard
+                title="Avg Merge Time"
+                value={avgMergeTime}
+                subtitle="Time to merge PRs"
+                icon="⏱️"
+              />
+            )}
           </div>
 
           <WhyOpen config={config} />
@@ -356,6 +413,26 @@ function App() {
             <section className="leaderboard-section">
               <h2>Top Contributors ({range === 'all' ? 'All Time' : `Last ${range} Weeks`})</h2>
               <Leaderboard items={processedData.leaderboard} onSelectAuthor={setSelectedAuthor} selectedAuthor={selectedAuthor} />
+            </section>
+
+            <section className="chart-section">
+              <h2>PR Success Rate</h2>
+              <PRSuccessChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+            </section>
+
+            <section className="chart-section">
+              <h2>Issues vs PRs Over Time</h2>
+              <IssuesPRsRatioChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+            </section>
+
+            <section className="chart-section">
+              <h2>PR Merge Time & Size</h2>
+              <PRMetricsChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+            </section>
+
+            <section className="chart-section">
+              <h2>Repository Stars</h2>
+              <RepoStarsChart data={data} />
             </section>
           </>
         )}
