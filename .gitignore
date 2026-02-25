@@ -11,3 +11,6 @@ data/participation.sqlite
 data/participation.sqlite-*
 data/*.sqlite
 data/*.sqlite-*
+
+# Build artifacts
+site/dist

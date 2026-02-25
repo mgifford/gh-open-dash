@@ -202,7 +202,7 @@ function App() {
   // Calculate overview metrics
   const totalContributions = processedData.leaderboard.reduce((sum, item) => sum + item.count, 0);
   const totalContributors = data.authors.length;
-  const totalRepos = data.byRepo ? Object.keys(data.byRepo).length : 0;
+  const totalRepos = data.repos ? data.repos.length : 0;
   const activeContributors = processedData.leaderboard.filter(item => item.count > 0).length;
   
   // Helper function to calculate weekly activity
