@@ -477,6 +477,56 @@ const output = {
   repo_stars: repoStarsData
 };
 
+// Export Ecosyste.ms data if tables exist
+const ecosystemsReposTable = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='ecosystems_repos'`).get();
+if (ecosystemsReposTable) {
+  try {
+    // Get the most recent timestamp for each repo
+    const ecosystemsRepos = db.prepare(`
+      SELECT repo, health_score, maintenance_status, archived, 
+             dependency_count, dependent_repos_count, language, license, topics
+      FROM ecosystems_repos
+      WHERE timestamp = (
+        SELECT MAX(timestamp) FROM ecosystems_repos WHERE repo = ecosystems_repos.repo
+      )
+    `).all();
+    
+    const ecosystemsIssueStats = db.prepare(`
+      SELECT repo, total_issues, open_issues, closed_issues,
+             avg_time_to_close, avg_comments_per_issue
+      FROM ecosystems_issue_stats
+      WHERE timestamp = (
+        SELECT MAX(timestamp) FROM ecosystems_issue_stats WHERE repo = ecosystems_issue_stats.repo
+      )
+    `).all();
+    
+    const ecosystemsCommitStats = db.prepare(`
+      SELECT repo, total_commits, total_committers, 
+             avg_commits_per_week, last_commit_at
+      FROM ecosystems_commit_stats
+      WHERE timestamp = (
+        SELECT MAX(timestamp) FROM ecosystems_commit_stats WHERE repo = ecosystems_commit_stats.repo
+      )
+    `).all();
+    
+    // Parse topics JSON
+    const ecosystemsReposParsed = ecosystemsRepos.map(r => ({
+      ...r,
+      topics: r.topics ? JSON.parse(r.topics) : []
+    }));
+    
+    output.ecosystems = {
+      repositories: ecosystemsReposParsed,
+      issue_stats: ecosystemsIssueStats,
+      commit_stats: ecosystemsCommitStats
+    };
+    
+    console.log(`Exported Ecosyste.ms data: ${ecosystemsReposParsed.length} repos`);
+  } catch (err) {
+    console.warn('Error exporting Ecosyste.ms data:', err.message);
+  }
+}
+
 // Include config flags for frontend visibility
 try {
   const CONFIG_PATH = path.join('scripts', 'config.json');

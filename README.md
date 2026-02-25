@@ -8,11 +8,15 @@ An open-source transparency dashboard inspired by cal.com/open and other open st
 
 - 🎯 **Modern Transparency Page**: Hero section, metric cards, and "Why We're Open" section
 - 📊 **Enhanced Analytics**: Track PR success rates, merge times, PR sizes, and repository stars
+- 🌐 **Ecosyste.ms Integration**: Repository health scores, dependency analysis, and community engagement metrics
 - 📈 **Advanced Visualizations**: 
   - PR success rate (merged vs closed)
   - Issues vs PRs ratio over time
   - PR merge time and size trends
   - Repository stars ranking
+  - Repository health scores (via Ecosyste.ms)
+  - Dependency and impact analysis
+  - Community engagement metrics
 - 👥 **Contributor Leaderboard**: Celebrate your top contributors
 - 📉 **Weekly Trends**: Visualize activity over time with interactive charts
 - 🏢 **Multi-Organization Support**: Track multiple GitHub organizations
@@ -125,7 +129,8 @@ This system allows you to publish metrics without exposing private data or hitti
   "historyWeeks": 260,
   "maxWeeksPerRun": 10,
   "collectAllPublic": false,
-  "licenseFilter": "oss"
+  "licenseFilter": "oss",
+  "collectEcosystemsData": false
 }
 ```
 
@@ -134,6 +139,7 @@ Options:
 - `historyWeeks`: How far back to collect data (default: 260 weeks / 5 years)
 - `collectAllPublic`: Track all public repos (not just org repos) for staff members
 - `licenseFilter`: "oss" (only open source) or "all"
+- `collectEcosystemsData`: Enable Ecosyste.ms integration for repository health and community metrics (default: false)
 
 ## Setup & Local Development
 
@@ -214,6 +220,17 @@ The dashboard is automatically deployed to GitHub Pages via GitHub Actions:
 4. Deploys to GitHub Pages
 
 No runtime API calls are needed - everything is pre-generated!
+
+## Ecosyste.ms Integration
+
+The dashboard can optionally integrate with [Ecosyste.ms](https://ecosyste.ms) to provide enhanced repository insights:
+
+- **Repository Health Scores**: Automated health assessments (0-100%) based on activity and maintenance
+- **Dependency Analysis**: Track dependencies and reverse dependencies (impact)
+- **Community Engagement**: Issue resolution times, comment engagement, and contributor metrics
+- **Maintenance Indicators**: Identify projects that need attention
+
+To enable, set `"collectEcosystemsData": true` in `scripts/config.json`. See [ECOSYSTEMS_INTEGRATION.md](./ECOSYSTEMS_INTEGRATION.md) for details.
 
 ## Inspired By
 

@@ -3,6 +3,11 @@ import Database from 'better-sqlite3';
 import { graphql } from '@octokit/graphql';
 import fs from 'fs';
 import path from 'path';
+import { 
+  createEcosystemsTables, 
+  collectEcosystemsData, 
+  storeEcosystemsData 
+} from './ecosystems_collector.mjs';
 
 const DB_PATH = path.join('data', 'participation.sqlite');
 const ALLOWLIST_PATH = path.join('scripts', 'oss_spdx_allowlist.json');
@@ -20,6 +25,7 @@ const fileConfig = loadConfig();
 // Backwards compatible defaults for new features
 if (typeof fileConfig.collectAllPublic === 'undefined') fileConfig.collectAllPublic = false;
 if (typeof fileConfig.licenseFilter === 'undefined') fileConfig.licenseFilter = 'oss';
+if (typeof fileConfig.collectEcosystemsData === 'undefined') fileConfig.collectEcosystemsData = false;
 
 function parseAllowlist(input, fallback) {
   const raw = (typeof input === 'undefined' || input === null) ? fallback : input;
@@ -156,6 +162,9 @@ db.exec(`
     value TEXT
   );
 `);
+
+// Create Ecosyste.ms tables
+createEcosystemsTables(db);
 
 const getMeta = (key) => {
   const row = db.prepare('SELECT value FROM meta WHERE key = ?').get(key);
@@ -315,6 +324,41 @@ async function run() {
     setMeta('processed_through_week', weekStartStr);
     pointer = addDays(pointer, 7);
     weeksThisRun++;
+  }
+
+  // Collect Ecosyste.ms data if enabled (once per run, not per week)
+  if (fileConfig.collectEcosystemsData) {
+    try {
+      console.log('\n=== Collecting Ecosyste.ms data ===');
+      
+      // Get list of unique repositories from the database
+      const repoRows = db.prepare(`
+        SELECT DISTINCT repo FROM (
+          SELECT DISTINCT repo FROM pr_opened
+          UNION
+          SELECT DISTINCT repo FROM issue_opened
+          UNION
+          SELECT DISTINCT repo FROM commits
+        )
+      `).all();
+      
+      const repositories = repoRows.map(r => r.repo).filter(Boolean);
+      
+      if (repositories.length > 0) {
+        console.log(`Found ${repositories.length} unique repositories to enrich with Ecosyste.ms data`);
+        
+        const ecosystemsData = await collectEcosystemsData(repositories, false);
+        const timestamp = new Date().toISOString();
+        storeEcosystemsData(db, ecosystemsData, timestamp);
+        
+        console.log('Ecosyste.ms data collection complete');
+      } else {
+        console.log('No repositories found to collect Ecosyste.ms data for');
+      }
+    } catch (err) {
+      console.error('Error collecting Ecosyste.ms data:', err);
+      // Don't fail the entire update if Ecosyste.ms collection fails
+    }
   }
 }
 

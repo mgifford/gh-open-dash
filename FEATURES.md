@@ -28,7 +28,18 @@ This document lists the key features of the transparency dashboard inspired by c
 - **Issues vs PRs Ratio**: Line chart comparing issue creation to PR creation over time
 - **PR Merge Time & Size**: Dual-axis chart showing average merge time and PR size trends
 - **Repository Stars**: Horizontal bar chart of top repositories by GitHub stars
+- **Repository Health Scores** (via Ecosyste.ms): Color-coded health scores for all repositories
+- **Dependency & Impact Analysis** (via Ecosyste.ms): Bubble chart showing dependencies vs dependents
+- **Community Engagement Metrics** (via Ecosyste.ms): Issue response times, engagement levels, and activity
 - All charts support filtering by time range and contributor
+
+### Ecosyste.ms Integration (Optional)
+- **Repository Health**: Automated health scores (0-100%) based on maintenance and activity
+- **Dependency Tracking**: Number of dependencies and reverse dependencies
+- **Issue Analytics**: Average time to close, comments per issue, open/closed ratios
+- **Commit Statistics**: Total commits, committers, and activity patterns
+- **Community Metrics**: Aggregate engagement and responsiveness indicators
+- Can be enabled/disabled via `collectEcosystemsData` config flag
 
 ### "Why We're Open" Section
 - Customizable transparency philosophy cards

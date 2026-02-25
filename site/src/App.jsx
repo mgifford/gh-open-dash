@@ -5,6 +5,9 @@ import PRSuccessChart from "./PRSuccessChart.jsx";
 import IssuesPRsRatioChart from "./IssuesPRsRatioChart.jsx";
 import PRMetricsChart from "./PRMetricsChart.jsx";
 import RepoStarsChart from "./RepoStarsChart.jsx";
+import RepositoryHealthChart from "./RepositoryHealthChart.jsx";
+import DependencyHealthChart from "./DependencyHealthChart.jsx";
+import CommunityEngagement from "./CommunityEngagement.jsx";
 import Projects from "./Projects.jsx";
 import Hero from "./Hero.jsx";
 import MetricCard from "./MetricCard.jsx";
@@ -434,6 +437,26 @@ function App() {
               <h2>Repository Stars</h2>
               <RepoStarsChart data={data} />
             </section>
+
+            {/* Ecosyste.ms Enhanced Visualizations */}
+            {data.ecosystems && (
+              <>
+                <section className="chart-section">
+                  <h2>Community Engagement</h2>
+                  <CommunityEngagement data={data} />
+                </section>
+
+                <section className="chart-section">
+                  <h2>Repository Health</h2>
+                  <RepositoryHealthChart data={data} />
+                </section>
+
+                <section className="chart-section">
+                  <h2>Dependencies & Impact</h2>
+                  <DependencyHealthChart data={data} />
+                </section>
+              </>
+            )}
           </>
         )}
 
