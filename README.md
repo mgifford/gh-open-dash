@@ -20,6 +20,7 @@ An open-source transparency dashboard inspired by cal.com/open and other open st
 - 👥 **Contributor Leaderboard**: Celebrate your top contributors
 - 📉 **Weekly Trends**: Visualize activity over time with interactive charts
 - 🏢 **Multi-Organization Support**: Track multiple GitHub organizations
+- 🔄 **Dynamic Organization Switching**: View any public organization's metrics via URL parameter or UI selector
 - 🎨 **Fully Customizable**: Easy configuration for branding and content
 - 🔒 **Privacy-First**: Only public data, no private repo access needed
 - 🚀 **Static Site**: Deploy to GitHub Pages with zero runtime API calls
@@ -220,6 +221,35 @@ The dashboard is automatically deployed to GitHub Pages via GitHub Actions:
 4. Deploys to GitHub Pages
 
 No runtime API calls are needed - everything is pre-generated!
+
+## Viewing Other Organizations
+
+The dashboard supports viewing metrics for any public GitHub organization without forking or reconfiguring:
+
+### URL Parameter Method
+
+Add `?org=<orgname>` to the URL to view any organization's metrics:
+
+```
+https://your-dashboard-url.github.io/?org=openplus
+https://your-dashboard-url.github.io/?org=civicactions
+```
+
+The URL parameter accepts:
+- Organization name: `?org=openplus`
+- Full GitHub URL: `?org=https://github.com/openplus`
+- URL without scheme: `?org=github.com/openplus`
+
+### UI Selector Method
+
+At the bottom of the page, you'll find the "Choose Organization" section where you can:
+
+1. Enter an organization name (e.g., `openplus`) or GitHub URL
+2. Click "Apply" to switch organizations
+3. Your choice is saved in browser localStorage and persists across page refreshes
+4. Click "Reset" to return to the default organization
+
+**Note**: The URL parameter always takes precedence over localStorage settings.
 
 ## Ecosyste.ms Integration
 
