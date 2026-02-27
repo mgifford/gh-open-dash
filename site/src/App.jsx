@@ -79,7 +79,9 @@ function App() {
   // Handler for org changes - reload page to fetch new org's data
   const handleOrgChange = (newOrg) => {
     // Reload the page to fetch data for new org
-    // This ensures a clean state and proper data loading
+    // The newOrg is already saved to localStorage by the OrgSelector component,
+    // so a simple reload will pick it up via getCurrentOrg()
+    // Note: We don't set ?org= in URL to allow localStorage to be the source
     window.location.reload();
   };
 

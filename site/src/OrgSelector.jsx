@@ -88,18 +88,7 @@ function OrgSelector({ currentOrg, defaultOrg, onOrgChange }) {
         
         <button
           type="submit"
-          style={{
-            padding: '8px 16px',
-            fontSize: '1em',
-            backgroundColor: '#0078d4',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            whiteSpace: 'nowrap'
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#005a9c'}
-          onMouseOut={(e) => e.target.style.backgroundColor = '#0078d4'}
+          className="org-selector-button primary"
         >
           Apply
         </button>
@@ -108,18 +97,7 @@ function OrgSelector({ currentOrg, defaultOrg, onOrgChange }) {
           <button
             type="button"
             onClick={handleReset}
-            style={{
-              padding: '8px 16px',
-              fontSize: '1em',
-              backgroundColor: '#e0e0e0',
-              color: '#333',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              whiteSpace: 'nowrap'
-            }}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#d0d0d0'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#e0e0e0'}
+            className="org-selector-button secondary"
             aria-label="Reset to default organization"
           >
             Reset
