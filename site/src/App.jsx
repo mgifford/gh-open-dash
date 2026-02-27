@@ -12,6 +12,8 @@ import Projects from "./Projects.jsx";
 import Hero from "./Hero.jsx";
 import MetricCard from "./MetricCard.jsx";
 import WhyOpen from "./WhyOpen.jsx";
+import OrgSelector from "./OrgSelector.jsx";
+import { getCurrentOrg } from "./orgUtils.js";
 import "./styles.css";
 
 async function loadMetrics() {
@@ -61,6 +63,25 @@ function App() {
   const [selectedAuthor, setSelectedAuthor] = useState("all");
   const [displayConfig, setDisplayConfig] = useState({ collectAllPublic: false, licenseFilter: 'oss' });
   const [view, setView] = useState('dashboard');
+  
+  // Organization override management
+  const defaultOrg = config?.organization?.githubOrg || 'civicactions';
+  const [currentOrg, setCurrentOrg] = useState(() => getCurrentOrg(defaultOrg));
+  
+  // Update currentOrg when config loads
+  useEffect(() => {
+    if (config) {
+      const newDefaultOrg = config.organization?.githubOrg || 'civicactions';
+      setCurrentOrg(getCurrentOrg(newDefaultOrg));
+    }
+  }, [config]);
+  
+  // Handler for org changes - reload page to fetch new org's data
+  const handleOrgChange = (newOrg) => {
+    // Reload the page to fetch data for new org
+    // This ensures a clean state and proper data loading
+    window.location.reload();
+  };
 
   // Initialize view from URL hash (simple hash routing)
   useEffect(() => {
@@ -369,7 +390,7 @@ function App() {
             <option value="all_public">All public contributions</option>
           </select>
           <div className="meta" style={{ marginTop: 6, fontWeight: 'normal', fontSize: '0.9em', color: '#666' }}>
-            Org-only limits queries to CivicActions.
+            Org-only limits queries to {currentOrg}.
           </div>
         </label>
 
@@ -473,7 +494,7 @@ function App() {
 
       <footer style={{ marginTop: 18, borderTop: '1px solid #eee', paddingTop: 12, fontSize: '0.9em', color: '#444' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
-          <div style={{ color: '#666' }}>Org-only limits queries to CivicActions.</div>
+          <div style={{ color: '#666' }}>Org-only limits queries to {currentOrg}.</div>
           <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
             <div>
               <span style={{ marginRight: 8 }}>Apply to collector:</span>
@@ -489,6 +510,12 @@ function App() {
           </div>
         </div>
       </footer>
+      
+      <OrgSelector 
+        currentOrg={currentOrg} 
+        defaultOrg={defaultOrg}
+        onOrgChange={handleOrgChange}
+      />
     </div>
   );
 }
