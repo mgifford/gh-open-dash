@@ -5,7 +5,7 @@ import path from 'path';
 const CONFIG_PATH = path.join('scripts', 'config.json');
 
 function usage() {
-  console.log('Usage: node scripts/set_config.mjs [--collectAllPublic=true|false] [--licenseFilter=oss|all]');
+  console.log('Usage: node scripts/set_config.mjs [--collectAllPublic=true|false] [--licenseFilter=oss|all] [--collectOpenContributions=true|false]');
   process.exit(1);
 }
 
@@ -30,6 +30,9 @@ for (const a of args) {
       process.exit(2);
     }
     cfg.licenseFilter = v;
+  } else if (a.startsWith('--collectOpenContributions=')) {
+    const v = a.split('=')[1];
+    cfg.collectOpenContributions = v === 'true' || v === '1';
   } else {
     usage();
   }

@@ -8,6 +8,7 @@ import RepoStarsChart from "./RepoStarsChart.jsx";
 import RepositoryHealthChart from "./RepositoryHealthChart.jsx";
 import DependencyHealthChart from "./DependencyHealthChart.jsx";
 import CommunityEngagement from "./CommunityEngagement.jsx";
+import OpenContributions from "./OpenContributions.jsx";
 import Projects from "./Projects.jsx";
 import Hero from "./Hero.jsx";
 import MetricCard from "./MetricCard.jsx";
@@ -456,6 +457,14 @@ function App() {
                   <DependencyHealthChart data={data} />
                 </section>
               </>
+            )}
+
+            {/* Open Contributions Descriptors */}
+            {data.open_contributions && (
+              <section className="chart-section">
+                <h2>Open Contributions Descriptors</h2>
+                <OpenContributions data={data} />
+              </section>
             )}
           </>
         )}

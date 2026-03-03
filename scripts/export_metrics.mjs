@@ -527,6 +527,28 @@ if (ecosystemsReposTable) {
   }
 }
 
+// Export open-contributions descriptor data if table exists
+const openContribTable = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='open_contributions'`).get();
+if (openContribTable) {
+  try {
+    const rows = db.prepare(`
+      SELECT repo, fetched_at, has_descriptor, descriptor_json
+      FROM open_contributions
+      ORDER BY repo
+    `).all();
+    output.open_contributions = rows.map(r => ({
+      repo: r.repo,
+      fetched_at: r.fetched_at,
+      has_descriptor: !!r.has_descriptor,
+      descriptor: r.descriptor_json ? JSON.parse(r.descriptor_json) : null
+    }));
+    const withDescriptor = output.open_contributions.filter(r => r.has_descriptor).length;
+    console.log(`Exported open-contributions data: ${rows.length} repos checked, ${withDescriptor} have a descriptor`);
+  } catch (err) {
+    console.warn('Error exporting open-contributions data:', err.message);
+  }
+}
+
 // Include config flags for frontend visibility
 try {
   const CONFIG_PATH = path.join('scripts', 'config.json');

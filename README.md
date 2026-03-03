@@ -130,7 +130,8 @@ This system allows you to publish metrics without exposing private data or hitti
   "maxWeeksPerRun": 10,
   "collectAllPublic": false,
   "licenseFilter": "oss",
-  "collectEcosystemsData": false
+  "collectEcosystemsData": false,
+  "collectOpenContributions": false
 }
 ```
 
@@ -140,6 +141,7 @@ Options:
 - `collectAllPublic`: Track all public repos (not just org repos) for staff members
 - `licenseFilter`: "oss" (only open source) or "all"
 - `collectEcosystemsData`: Enable Ecosyste.ms integration for repository health and community metrics (default: false)
+- `collectOpenContributions`: Check tracked repos for `.well-known/open-contributions.json` descriptors and surface them in the dashboard (default: false)
 
 ## Setup & Local Development
 
@@ -231,6 +233,32 @@ The dashboard can optionally integrate with [Ecosyste.ms](https://ecosyste.ms) t
 - **Maintenance Indicators**: Identify projects that need attention
 
 To enable, set `"collectEcosystemsData": true` in `scripts/config.json`. See [ECOSYSTEMS_INTEGRATION.md](./ECOSYSTEMS_INTEGRATION.md) for details.
+
+## Open Contributions Descriptor Integration
+
+The dashboard can optionally discover and display [Open Contributions Descriptors](https://www.foo.be/2026/03/open-contributions-descriptor) published by tracked repositories.
+
+A `.well-known/open-contributions.json` file is a machine-readable descriptor that a repository can publish to describe how it accepts contributions — types of work welcomed, contact points, policies, and more. This project aligns closely with that goal of mapping open-source contribution pathways.
+
+When enabled, the collector:
+1. Looks for `.well-known/open-contributions.json` in each tracked repository via the GitHub Contents API.
+2. Stores whether a descriptor was found, and its parsed contents if present, in the SQLite cache.
+3. Exports this data in `data/metrics.json` so the dashboard can display:
+   - Which repos publish a descriptor (📄 badge on repo cards in the Projects view)
+   - A dedicated **Open Contributions Descriptors** section with per-repo details
+
+To enable, set `"collectOpenContributions": true` in `scripts/config.json`:
+
+```bash
+node scripts/set_config.mjs --collectOpenContributions=true
+```
+
+Then re-run the collector:
+
+```bash
+node scripts/update_sqlite.mjs
+node scripts/export_metrics.mjs
+```
 
 ## Inspired By
 

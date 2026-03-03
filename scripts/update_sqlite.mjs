@@ -8,6 +8,10 @@ import {
   collectEcosystemsData, 
   storeEcosystemsData 
 } from './ecosystems_collector.mjs';
+import {
+  createOpenContributionsTable,
+  collectOpenContributions
+} from './open_contributions_collector.mjs';
 
 const DB_PATH = path.join('data', 'participation.sqlite');
 const ALLOWLIST_PATH = path.join('scripts', 'oss_spdx_allowlist.json');
@@ -26,6 +30,7 @@ const fileConfig = loadConfig();
 if (typeof fileConfig.collectAllPublic === 'undefined') fileConfig.collectAllPublic = false;
 if (typeof fileConfig.licenseFilter === 'undefined') fileConfig.licenseFilter = 'oss';
 if (typeof fileConfig.collectEcosystemsData === 'undefined') fileConfig.collectEcosystemsData = false;
+if (typeof fileConfig.collectOpenContributions === 'undefined') fileConfig.collectOpenContributions = false;
 
 function parseAllowlist(input, fallback) {
   const raw = (typeof input === 'undefined' || input === null) ? fallback : input;
@@ -165,6 +170,8 @@ db.exec(`
 
 // Create Ecosyste.ms tables
 createEcosystemsTables(db);
+// Create open-contributions descriptor table
+createOpenContributionsTable(db);
 
 const getMeta = (key) => {
   const row = db.prepare('SELECT value FROM meta WHERE key = ?').get(key);
@@ -358,6 +365,29 @@ async function run() {
     } catch (err) {
       console.error('Error collecting Ecosyste.ms data:', err);
       // Don't fail the entire update if Ecosyste.ms collection fails
+    }
+  }
+
+  // Collect open-contributions descriptors if enabled (once per run)
+  if (fileConfig.collectOpenContributions) {
+    try {
+      console.log('\n=== Collecting open-contributions descriptors ===');
+      const repoRows = db.prepare(`
+        SELECT DISTINCT repo FROM (
+          SELECT DISTINCT repo FROM pr_opened
+          UNION
+          SELECT DISTINCT repo FROM issue_opened
+        )
+      `).all();
+      const repositories = repoRows.map(r => r.repo).filter(Boolean);
+      if (repositories.length > 0) {
+        await collectOpenContributions(db, repositories, token);
+      } else {
+        console.log('No repositories found for open-contributions collection');
+      }
+    } catch (err) {
+      console.error('Error collecting open-contributions descriptors:', err);
+      // Don't fail the entire update if this optional step fails
     }
   }
 }
