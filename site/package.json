@@ -22,7 +22,7 @@
     "vitest": "^4.0.18",
     "@testing-library/react": "^14.0.0",
     "@testing-library/jest-dom": "^6.0.0",
-    "jsdom": "^22.1.0"
+    "jsdom": "^28.1.0"
   }
   ,
   "vitest": {
