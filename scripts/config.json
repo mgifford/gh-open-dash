@@ -8,6 +8,7 @@
   "licenseFilter": "all",
   "collectStaffCommits": true,
   "collectEcosystemsData": true,
+  "collectOpenContributions": false,
   "repoExcludePatterns": [
     "BigBeautifulBoycott",
     "Open-Climate-Resilience-Policies/OCRP"

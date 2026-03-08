@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import ProjectsBubble from './ProjectsBubble.jsx';
 
-function RepoCard({ repo }) {
+function RepoCard({ repo, hasDescriptor }) {
   const topContributors = Object.entries(repo.byAuthor || {})
     .map(([author, counts]) => ({ author, total: Object.values(counts).reduce((s, v) => s + v, 0), counts }))
     .sort((a, b) => b.total - a.total)
@@ -11,7 +11,18 @@ function RepoCard({ repo }) {
     <div className="repo-card">
       <div className="repo-header">
         <div className="repo-name">{repo.repo}</div>
-        <div className="repo-spdx">{repo.spdx || 'unknown'}</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          {hasDescriptor && (
+            <span
+              title="Publishes a .well-known/open-contributions.json descriptor"
+              style={{ fontSize: 14, cursor: 'default' }}
+              aria-label="Has open-contributions descriptor"
+            >
+              📄
+            </span>
+          )}
+          <div className="repo-spdx">{repo.spdx || 'unknown'}</div>
+        </div>
       </div>
       <div className="repo-totals">
         <span>PRs opened: {repo.totals.prs_opened}</span>
@@ -36,22 +47,28 @@ export default function Projects({ data, selectedAuthor = 'all', metric = 'issue
   const [orgFilter, setOrgFilter] = useState('all');
   const [selectedRepo, setSelectedRepo] = useState(null);
 
-  if (!data || !data.repos || data.repos.length === 0) {
-    return (
-      <div className="projects-empty">No per-repo data present. Run the exporter to include repo aggregates.</div>
-    );
-  }
+  // Build a Set of repos that have an open-contributions descriptor
+  const descriptorRepos = useMemo(() => {
+    const s = new Set();
+    if (data && data.open_contributions) {
+      data.open_contributions.forEach(r => { if (r.has_descriptor) s.add(r.repo); });
+    }
+    return s;
+  }, [data && data.open_contributions]);
 
   const orgs = useMemo(() => {
     const s = new Set();
-    data.repos.forEach(r => {
-      const parts = (r.repo || '').split('/');
-      if (parts[0]) s.add(parts[0]);
-    });
+    if (data && data.repos) {
+      data.repos.forEach(r => {
+        const parts = (r.repo || '').split('/');
+        if (parts[0]) s.add(parts[0]);
+      });
+    }
     return ['all', ...Array.from(s).sort()];
-  }, [data.repos]);
+  }, [data && data.repos]);
 
   const filtered = useMemo(() => {
+    if (!data || !data.repos) return [];
     return data.repos.filter(r => {
       if (orgFilter !== 'all') {
         if (!r.repo.startsWith(orgFilter + '/')) return false;
@@ -59,7 +76,13 @@ export default function Projects({ data, selectedAuthor = 'all', metric = 'issue
       if (search && !r.repo.toLowerCase().includes(search.toLowerCase())) return false;
       return true;
     });
-  }, [data.repos, orgFilter, search]);
+  }, [data && data.repos, orgFilter, search]);
+
+  if (!data || !data.repos || data.repos.length === 0) {
+    return (
+      <div className="projects-empty">No per-repo data present. Run the exporter to include repo aggregates.</div>
+    );
+  }
 
   return (
     <div>
@@ -86,14 +109,14 @@ export default function Projects({ data, selectedAuthor = 'all', metric = 'issue
             {(() => {
               const repoObj = data.repos.find(r => r.repo === selectedRepo);
               if (!repoObj) return <div>Repository data not found.</div>;
-              return <RepoCard repo={repoObj} />;
+              return <RepoCard repo={repoObj} hasDescriptor={descriptorRepos.has(repoObj.repo)} />;
             })()}
           </div>
         </div>
       )}
 
       <div className="projects-grid" style={{ marginTop: 12 }}>
-        {filtered.map(r => <div key={r.repo} onClick={() => setSelectedRepo(r.repo)}><RepoCard repo={r} /></div>)}
+        {filtered.map(r => <div key={r.repo} onClick={() => setSelectedRepo(r.repo)}><RepoCard repo={r} hasDescriptor={descriptorRepos.has(r.repo)} /></div>)}
       </div>
     </div>
   );
