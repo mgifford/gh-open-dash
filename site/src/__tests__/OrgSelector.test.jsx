@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import OrgSelector from '../OrgSelector.jsx';
 
 describe('OrgSelector', () => {
@@ -8,10 +8,26 @@ describe('OrgSelector', () => {
     localStorage.clear();
   });
 
+  afterEach(() => {
+    cleanup();
+  });
+
   it('should render with current org', () => {
     render(<OrgSelector currentOrg="civicactions" defaultOrg="civicactions" />);
     expect(screen.getByText(/Current organization:/)).toBeDefined();
     expect(screen.getByText(/civicactions/)).toBeDefined();
+  });
+
+  it('should pre-fill input with the current org from URL or localStorage', () => {
+    render(<OrgSelector currentOrg="chaoss" defaultOrg="civicactions" />);
+    const input = screen.getByRole('textbox');
+    expect(input.value).toBe('chaoss');
+  });
+
+  it('should pre-fill input with default org when org matches default', () => {
+    render(<OrgSelector currentOrg="civicactions" defaultOrg="civicactions" />);
+    const input = screen.getByRole('textbox');
+    expect(input.value).toBe('civicactions');
   });
 
   it('should show custom indicator when org differs from default', () => {
