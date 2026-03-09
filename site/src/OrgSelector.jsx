@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { parseOrgInput, saveOrgOverride, clearOrgOverride } from './orgUtils.js';
 
-function OrgSelector({ currentOrg, defaultOrg, onOrgChange }) {
+function OrgSelector({ currentOrg, defaultOrg, onOrgChange, effectiveOrg }) {
   const [input, setInput] = useState(currentOrg || '');
   const [error, setError] = useState('');
   
@@ -54,6 +54,11 @@ function OrgSelector({ currentOrg, defaultOrg, onOrgChange }) {
         {isCustomOrg && (
           <span style={{ marginLeft: '8px', color: '#107c10' }}>
             (custom)
+          </span>
+        )}
+        {effectiveOrg && effectiveOrg !== currentOrg && (
+          <span style={{ marginLeft: '8px', color: '#767676', fontSize: '0.9em' }}>
+            — showing data for <strong>{effectiveOrg}</strong>
           </span>
         )}
       </div>
