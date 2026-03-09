@@ -161,6 +161,13 @@ function App() {
       series = series.slice(-count); // Assumes series matches weeks order
     }
 
+    // If the selected org is not represented in this dataset, clear series/weeks
+    // so the leaderboard and trend charts don't display another org's data.
+    if (!orgHasData) {
+      series = [];
+      weeks = [];
+    }
+
     // 2. Aggregate for Leaderboard
     // Sum selected metric for each author over the visible range
     const authorTotals = {};
@@ -263,7 +270,7 @@ function App() {
     }, 0);
   };
   
-  const thisWeekActivity = data.series && data.series.length > 0 
+  const thisWeekActivity = processedData.orgHasData && data.series && data.series.length > 0 
     ? calculateWeeklyActivity(data.series[data.series.length - 1])
     : 0;
 
@@ -303,8 +310,8 @@ function App() {
     return `${avg.toFixed(1)}h`;
   };
 
-  const prSuccessRate = calculatePRSuccessRate();
-  const avgMergeTime = calculateAvgMergeTime();
+  const prSuccessRate = processedData.orgHasData ? calculatePRSuccessRate() : 0;
+  const avgMergeTime = processedData.orgHasData ? calculateAvgMergeTime() : null;
 
   return (
     <div className="container">
@@ -483,20 +490,26 @@ function App() {
               <Leaderboard items={processedData.leaderboard} onSelectAuthor={setSelectedAuthor} selectedAuthor={selectedAuthor} />
             </section>
 
-            <section className="chart-section">
-              <h2>PR Success Rate</h2>
-              <PRSuccessChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
-            </section>
+            {processedData.orgHasData && (
+              <section className="chart-section">
+                <h2>PR Success Rate</h2>
+                <PRSuccessChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+              </section>
+            )}
 
-            <section className="chart-section">
-              <h2>Issues vs PRs Over Time</h2>
-              <IssuesPRsRatioChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
-            </section>
+            {processedData.orgHasData && (
+              <section className="chart-section">
+                <h2>Issues vs PRs Over Time</h2>
+                <IssuesPRsRatioChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+              </section>
+            )}
 
-            <section className="chart-section">
-              <h2>PR Merge Time & Size</h2>
-              <PRMetricsChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
-            </section>
+            {processedData.orgHasData && (
+              <section className="chart-section">
+                <h2>PR Merge Time & Size</h2>
+                <PRMetricsChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+              </section>
+            )}
 
             <section className="chart-section">
               <h2>Repository Stars</h2>

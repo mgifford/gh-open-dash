@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { parseOrgInput, saveOrgOverride, clearOrgOverride } from './orgUtils.js';
 
 function OrgSelector({ currentOrg, defaultOrg, onOrgChange }) {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(currentOrg || '');
   const [error, setError] = useState('');
   
   const isCustomOrg = currentOrg !== defaultOrg;
