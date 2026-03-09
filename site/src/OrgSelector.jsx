@@ -108,9 +108,12 @@ function OrgSelector({ currentOrg, defaultOrg, onOrgChange }) {
       <div id="org-help" style={{ fontSize: '0.85em', color: '#666' }}>
         Examples: <code>openplus</code> or <code>https://github.com/openplus</code>
         <br />
-        The selected organization is reflected in the URL (<code>?org=</code>) and saved in browser
-        storage. Note: the dashboard displays pre-generated data — to see metrics for a different
-        org you need to run the data pipeline for that org and redeploy.
+        The selected organization is saved in browser storage and reflected in the URL (<code>?org=</code>).
+        Repository charts and counts will update to show only repos from the selected org.
+        <br />
+        <strong>Note:</strong> contribution trends and leaderboards reflect all data in the pre-generated
+        dataset. To collect metrics <em>for a different org</em>, add it to{' '}
+        <code>orgAllowlist</code> in <code>scripts/config.json</code> and re-run the data pipeline.
       </div>
     </div>
   );

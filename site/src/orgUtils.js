@@ -109,3 +109,20 @@ export function clearOrgOverride() {
     console.warn('Failed to clear localStorage:', e);
   }
 }
+
+/**
+ * Filter an array of repo objects to only those belonging to the given org.
+ * Each repo object must have a `repo` field of the form "owner/name".
+ *
+ * @param {Array} repos - Array of objects with a `repo` property
+ * @param {string} org - Organization login to filter by
+ * @returns {Array} - Filtered array
+ */
+export function filterReposByOrg(repos, org) {
+  if (!Array.isArray(repos) || !org) return repos || [];
+  const orgLower = org.toLowerCase();
+  return repos.filter(r => {
+    const owner = r && r.repo && r.repo.split('/')[0];
+    return owner && owner.toLowerCase() === orgLower;
+  });
+}

@@ -14,7 +14,7 @@ import Hero from "./Hero.jsx";
 import MetricCard from "./MetricCard.jsx";
 import WhyOpen from "./WhyOpen.jsx";
 import OrgSelector from "./OrgSelector.jsx";
-import { getCurrentOrg } from "./orgUtils.js";
+import { getCurrentOrg, filterReposByOrg } from "./orgUtils.js";
 import "./styles.css";
 
 async function loadMetrics() {
@@ -130,6 +130,27 @@ function App() {
   const processedData = useMemo(() => {
     if (!data) return null;
 
+    // 0. Org filtering — determine which repos belong to the selected org and
+    //    whether the dataset was actually collected for that org.
+    const dataOrgs = data.orgs || (data.org ? [data.org] : []);
+    const orgHasData = dataOrgs.length === 0 ||
+      dataOrgs.some(o => o.toLowerCase() === currentOrg.toLowerCase());
+    const orgRepos = filterReposByOrg(data.repos || [], currentOrg);
+
+    // Build a filtered-data view for repo-level components
+    const filteredEcosystems = data.ecosystems ? {
+      ...data.ecosystems,
+      repositories: filterReposByOrg(data.ecosystems.repositories || [], currentOrg),
+      issue_stats: filterReposByOrg(data.ecosystems.issue_stats || [], currentOrg),
+      commit_stats: filterReposByOrg(data.ecosystems.commit_stats || [], currentOrg),
+    } : data.ecosystems;
+    const filteredData = {
+      ...data,
+      repos: orgRepos,
+      repo_stars: filterReposByOrg(data.repo_stars || [], currentOrg),
+      ecosystems: filteredEcosystems,
+    };
+
     // 1. Filter weeks based on range
     let weeks = data.weeks;
     let series = data.series;
@@ -222,8 +243,8 @@ function App() {
       pushDataset(metric, opt.label || metric);
     }
 
-    return { leaderboard, chartData, authors: data.authors };
-  }, [data, metric, range, selectedAuthor]);
+    return { leaderboard, chartData, authors: data.authors, orgRepos, orgHasData, dataOrgs, filteredData };
+  }, [data, metric, range, selectedAuthor, currentOrg]);
 
   if (!data) return <div className="loading">Loading participation data...</div>;
   if (!processedData) return <div className="loading">Processing...</div>;
@@ -231,7 +252,7 @@ function App() {
   // Calculate overview metrics
   const totalContributions = processedData.leaderboard.reduce((sum, item) => sum + item.count, 0);
   const totalContributors = data.authors.length;
-  const totalRepos = data.repos ? data.repos.length : 0;
+  const totalRepos = processedData.orgRepos.length;
   const activeContributors = processedData.leaderboard.filter(item => item.count > 0).length;
   
   // Helper function to calculate weekly activity
@@ -295,6 +316,24 @@ function App() {
           </div>
         </div>
       </header>
+
+      {!processedData.orgHasData && (
+        <div className="org-mismatch-banner" role="status" aria-live="polite">
+          <strong>⚠️ No data collected for &ldquo;{currentOrg}&rdquo;</strong>
+          <p>
+            This dataset was collected for:{' '}
+            <strong>{processedData.dataOrgs.length ? processedData.dataOrgs.join(', ') : 'unknown'}</strong>.
+            Repository charts and counts below reflect only repos from the selected org.
+          </p>
+          <p>
+            To collect data for <strong>{currentOrg}</strong>, add it to{' '}
+            <code>orgAllowlist</code> in <code>scripts/config.json</code> and run the data pipeline:
+          </p>
+          <code className="org-mismatch-banner__cmd">
+            node scripts/update_sqlite.mjs && node scripts/export_metrics.mjs
+          </code>
+        </div>
+      )}
 
       <Hero config={config} />
 
@@ -461,7 +500,7 @@ function App() {
 
             <section className="chart-section">
               <h2>Repository Stars</h2>
-              <RepoStarsChart data={data} />
+              <RepoStarsChart data={processedData.filteredData} />
             </section>
 
             {/* Ecosyste.ms Enhanced Visualizations */}
@@ -469,17 +508,17 @@ function App() {
               <>
                 <section className="chart-section">
                   <h2>Community Engagement</h2>
-                  <CommunityEngagement data={data} />
+                  <CommunityEngagement data={processedData.filteredData} />
                 </section>
 
                 <section className="chart-section">
                   <h2>Repository Health</h2>
-                  <RepositoryHealthChart data={data} />
+                  <RepositoryHealthChart data={processedData.filteredData} />
                 </section>
 
                 <section className="chart-section">
                   <h2>Dependencies & Impact</h2>
-                  <DependencyHealthChart data={data} />
+                  <DependencyHealthChart data={processedData.filteredData} />
                 </section>
               </>
             )}
@@ -488,7 +527,7 @@ function App() {
             {data.open_contributions && (
               <section className="chart-section">
                 <h2>Open Contributions Descriptors</h2>
-                <OpenContributions data={data} />
+                <OpenContributions data={processedData.filteredData} />
               </section>
             )}
           </>
@@ -499,7 +538,7 @@ function App() {
             <h2>Projects & Repositories</h2>
             {/* lazy-load Projects to avoid increasing bundle size too much */}
               <React.Suspense fallback={<div>Loading projects...</div>}>
-                <Projects data={data} selectedAuthor={selectedAuthor} metric={metric} />
+                <Projects data={processedData.filteredData} selectedAuthor={selectedAuthor} metric={metric} />
               </React.Suspense>
           </section>
         )}
