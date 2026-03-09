@@ -135,19 +135,24 @@ function App() {
     const dataOrgs = data.orgs || (data.org ? [data.org] : []);
     const orgHasData = dataOrgs.length === 0 ||
       dataOrgs.some(o => o.toLowerCase() === currentOrg.toLowerCase());
-    const orgRepos = filterReposByOrg(data.repos || [], currentOrg);
+
+    // When the requested org isn't in the dataset, fall back to the first
+    // available collected org so charts and leaderboard still show data.
+    const effectiveOrg = orgHasData ? currentOrg : (dataOrgs[0] || currentOrg);
+
+    const orgRepos = filterReposByOrg(data.repos || [], effectiveOrg);
 
     // Build a filtered-data view for repo-level components
     const filteredEcosystems = data.ecosystems ? {
       ...data.ecosystems,
-      repositories: filterReposByOrg(data.ecosystems.repositories || [], currentOrg),
-      issue_stats: filterReposByOrg(data.ecosystems.issue_stats || [], currentOrg),
-      commit_stats: filterReposByOrg(data.ecosystems.commit_stats || [], currentOrg),
+      repositories: filterReposByOrg(data.ecosystems.repositories || [], effectiveOrg),
+      issue_stats: filterReposByOrg(data.ecosystems.issue_stats || [], effectiveOrg),
+      commit_stats: filterReposByOrg(data.ecosystems.commit_stats || [], effectiveOrg),
     } : data.ecosystems;
     const filteredData = {
       ...data,
       repos: orgRepos,
-      repo_stars: filterReposByOrg(data.repo_stars || [], currentOrg),
+      repo_stars: filterReposByOrg(data.repo_stars || [], effectiveOrg),
       ecosystems: filteredEcosystems,
     };
 
@@ -159,13 +164,6 @@ function App() {
       const count = parseInt(range, 10);
       weeks = weeks.slice(-count);
       series = series.slice(-count); // Assumes series matches weeks order
-    }
-
-    // If the selected org is not represented in this dataset, clear series/weeks
-    // so the leaderboard and trend charts don't display another org's data.
-    if (!orgHasData) {
-      series = [];
-      weeks = [];
     }
 
     // 2. Aggregate for Leaderboard
@@ -250,7 +248,7 @@ function App() {
       pushDataset(metric, opt.label || metric);
     }
 
-    return { leaderboard, chartData, authors: data.authors, orgRepos, orgHasData, dataOrgs, filteredData };
+    return { leaderboard, chartData, authors: data.authors, orgRepos, orgHasData, effectiveOrg, dataOrgs, filteredData };
   }, [data, metric, range, selectedAuthor, currentOrg]);
 
   if (!data) return <div className="loading">Loading participation data...</div>;
@@ -270,7 +268,7 @@ function App() {
     }, 0);
   };
   
-  const thisWeekActivity = processedData.orgHasData && data.series && data.series.length > 0 
+  const thisWeekActivity = data.series && data.series.length > 0 
     ? calculateWeeklyActivity(data.series[data.series.length - 1])
     : 0;
 
@@ -310,8 +308,8 @@ function App() {
     return `${avg.toFixed(1)}h`;
   };
 
-  const prSuccessRate = processedData.orgHasData ? calculatePRSuccessRate() : 0;
-  const avgMergeTime = processedData.orgHasData ? calculateAvgMergeTime() : null;
+  const prSuccessRate = calculatePRSuccessRate();
+  const avgMergeTime = calculateAvgMergeTime();
 
   return (
     <div className="container">
@@ -323,24 +321,6 @@ function App() {
           </div>
         </div>
       </header>
-
-      {!processedData.orgHasData && (
-        <div className="org-mismatch-banner" role="status" aria-live="polite">
-          <strong>⚠️ No data collected for &ldquo;{currentOrg}&rdquo;</strong>
-          <p>
-            This dataset was collected for:{' '}
-            <strong>{processedData.dataOrgs.length ? processedData.dataOrgs.join(', ') : 'unknown'}</strong>.
-            Repository charts and counts below reflect only repos from the selected org.
-          </p>
-          <p>
-            To collect data for <strong>{currentOrg}</strong>, add it to{' '}
-            <code>orgAllowlist</code> in <code>scripts/config.json</code> and run the data pipeline:
-          </p>
-          <code className="org-mismatch-banner__cmd">
-            node scripts/update_sqlite.mjs && node scripts/export_metrics.mjs
-          </code>
-        </div>
-      )}
 
       <Hero config={config} />
 
@@ -490,26 +470,20 @@ function App() {
               <Leaderboard items={processedData.leaderboard} onSelectAuthor={setSelectedAuthor} selectedAuthor={selectedAuthor} />
             </section>
 
-            {processedData.orgHasData && (
-              <section className="chart-section">
-                <h2>PR Success Rate</h2>
-                <PRSuccessChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
-              </section>
-            )}
+            <section className="chart-section">
+              <h2>PR Success Rate</h2>
+              <PRSuccessChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+            </section>
 
-            {processedData.orgHasData && (
-              <section className="chart-section">
-                <h2>Issues vs PRs Over Time</h2>
-                <IssuesPRsRatioChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
-              </section>
-            )}
+            <section className="chart-section">
+              <h2>Issues vs PRs Over Time</h2>
+              <IssuesPRsRatioChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+            </section>
 
-            {processedData.orgHasData && (
-              <section className="chart-section">
-                <h2>PR Merge Time & Size</h2>
-                <PRMetricsChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
-              </section>
-            )}
+            <section className="chart-section">
+              <h2>PR Merge Time & Size</h2>
+              <PRMetricsChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+            </section>
 
             <section className="chart-section">
               <h2>Repository Stars</h2>
@@ -580,6 +554,7 @@ function App() {
         currentOrg={currentOrg} 
         defaultOrg={defaultOrg}
         onOrgChange={handleOrgChange}
+        effectiveOrg={processedData.effectiveOrg !== currentOrg ? processedData.effectiveOrg : undefined}
       />
     </div>
   );
