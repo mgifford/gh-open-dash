@@ -131,16 +131,20 @@ function App() {
     if (!data) return null;
 
     // 0. Org filtering — determine which repos belong to the selected org and
-    //    whether the dataset was actually collected for that org.
+    //    whether the dataset actually contains repos for that org.
     const dataOrgs = data.orgs || (data.org ? [data.org] : []);
-    const orgHasData = dataOrgs.length === 0 ||
-      dataOrgs.some(o => o.toLowerCase() === currentOrg.toLowerCase());
 
-    // When the requested org isn't in the dataset, fall back to the first
+    // Check for actual repo presence rather than just the configured orgs list.
+    // This correctly handles collectAllPublic mode where repos from many orgs
+    // may appear in the dataset regardless of what's in data.orgs.
+    const requestedOrgRepos = filterReposByOrg(data.repos || [], currentOrg);
+    const orgHasData = requestedOrgRepos.length > 0;
+
+    // When the requested org has no repos in the dataset, fall back to the first
     // available collected org so charts and leaderboard still show data.
     const effectiveOrg = orgHasData ? currentOrg : (dataOrgs[0] || currentOrg);
 
-    const orgRepos = filterReposByOrg(data.repos || [], effectiveOrg);
+    const orgRepos = orgHasData ? requestedOrgRepos : filterReposByOrg(data.repos || [], effectiveOrg);
 
     // Build a filtered-data view for repo-level components
     const filteredEcosystems = data.ecosystems ? {
@@ -323,6 +327,26 @@ function App() {
       </header>
 
       <Hero config={config} />
+
+      {processedData.effectiveOrg !== currentOrg && (
+        <div className="org-mismatch-banner" role="alert">
+          <strong>No data found for organization &ldquo;{currentOrg}&rdquo;</strong>
+          <p>
+            Showing data for <strong>{processedData.effectiveOrg}</strong> instead.
+            {processedData.dataOrgs.length > 0 && (
+              <> This dataset contains data for: <strong>{processedData.dataOrgs.join(', ')}</strong>.</>
+            )}
+          </p>
+          <p>
+            To collect metrics for <strong>{currentOrg}</strong>, add it to{' '}
+            <code>orgAllowlist</code> in <code>scripts/config.json</code> and
+            re-run the data pipeline:
+          </p>
+          <code className="org-mismatch-banner__cmd">
+            node scripts/update_sqlite.mjs &amp;&amp; node scripts/export_metrics.mjs
+          </code>
+        </div>
+      )}
 
       {view === 'dashboard' && (
         <>
