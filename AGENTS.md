@@ -155,6 +155,23 @@ Not allowed:
 - Any page that displays issue/PR content or links.
 - Any approach that requires per-item fetching beyond org-wide weekly search unless it is strictly bounded and justified.
 
+## Accessibility requirements
+
+This project commits to **WCAG 2.2 AA** for all dashboard UI and documentation. See [ACCESSIBILITY.md](./ACCESSIBILITY.md) for the full policy.
+
+When contributing UI changes, agents must:
+
+- Use semantic HTML and proper ARIA attributes in React components.
+- Ensure all interactive controls (buttons, dropdowns, selectors) are keyboard-operable.
+- Verify color-contrast ratios meet WCAG 2.2 AA (4.5:1 for normal text, 3:1 for large text).
+- Provide accessible alternatives for Chart.js canvas charts (e.g., `aria-label`, descriptive text, or a data table).
+- Use inclusive, person-centered language in any user-facing copy.
+
+When an accessibility issue is found:
+
+- Tag the GitHub issue or PR with the `accessibility` label.
+- Classify severity using the taxonomy in [ACCESSIBILITY.md §4](./ACCESSIBILITY.md#4-reporting--severity-taxonomy).
+
 ## Verification checklist before merge
 
 - [ ] `data/metrics.json` contains only weeks/authors/counts (no titles/urls/text).
@@ -164,6 +181,7 @@ Not allowed:
  - [ ] `data/metrics.json` is present in the deployed Pages site (workflow `update-metrics.yml` produces and includes it).
  - [ ] Closed metrics (`pr_closed`, `issue_closed`) are present in `data/metrics.json` after export.
  - [ ] `scripts/config.json` flags `collectAllPublic` and `licenseFilter` are documented and used intentionally.
+ - [ ] UI changes meet WCAG 2.2 AA (keyboard access, contrast, ARIA labels, chart alternatives).
 
 ## GitHub Pages consolidation and ensuring `main` is authoritative
 
