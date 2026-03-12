@@ -72,14 +72,16 @@ function App() {
   const dateFrom = urlParams.get('from') || '';
   const dateTo = urlParams.get('to') || '';
 
-  // Build the "Usage & AI" href when a GitHub user is defined
+  // Build the "Usage & AI" href when a GitHub user is defined (URL param takes precedence, then config)
   const usageAiHref = useMemo(() => {
-    if (!githubUser) return null;
-    const params = new URLSearchParams({ u: githubUser });
+    const user = githubUser || config?.aiSummaryUser || '';
+    if (!user) return null;
+    const baseUrl = config?.aiSummaryBaseUrl || 'https://mgifford.github.io/gh-summary/';
+    const params = new URLSearchParams({ u: user });
     if (dateFrom) params.set('from', dateFrom);
     if (dateTo) params.set('to', dateTo);
-    return `https://mgifford.github.io/gh-summary/usage.html?${params.toString()}`;
-  }, [githubUser, dateFrom, dateTo]);
+    return `${baseUrl.replace(/\/?$/, '/')}?${params.toString()}`;
+  }, [githubUser, dateFrom, dateTo, config]);
   
   // Organization override management
   const defaultOrg = config?.organization?.githubOrg || 'civicactions';
