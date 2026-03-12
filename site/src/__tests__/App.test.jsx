@@ -110,3 +110,40 @@ test('does not show org-mismatch banner when no org param is set (default org)',
 
   expect(screen.queryByRole('alert')).toBeNull();
 });
+
+test('Usage & AI is not a link when no u= URL parameter is set', async () => {
+  // Ensure no ?u= param in search
+  Object.defineProperty(window, 'location', {
+    value: { ...window.location, search: '' },
+    writable: true,
+  });
+
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  // Should render as a disabled span, not an anchor
+  const disabledItems = document.querySelectorAll('header .nav-disabled');
+  expect(disabledItems.length).toBeGreaterThan(0);
+  expect(disabledItems[0].textContent).toMatch(/Usage.*AI/i);
+  expect(disabledItems[0].tagName).toBe('SPAN');
+});
+
+test('Usage & AI is a link when u= URL parameter is set', async () => {
+  Object.defineProperty(window, 'location', {
+    value: { ...window.location, search: '?u=mgifford&from=2026-02-26&to=2026-03-12' },
+    writable: true,
+  });
+
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  // Should render as an anchor link
+  const links = Array.from(document.querySelectorAll('header a')).filter(a =>
+    /Usage.*AI/i.test(a.textContent)
+  );
+  expect(links.length).toBeGreaterThan(0);
+  expect(links[0].href).toContain('gh-summary');
+  expect(links[0].href).toContain('u=mgifford');
+  expect(links[0].href).toContain('from=2026-02-26');
+  expect(links[0].href).toContain('to=2026-03-12');
+});

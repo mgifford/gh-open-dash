@@ -55,6 +55,18 @@ header a:focus {
   outline-offset: 2px;
 }
 
+/* Disabled (non-link) nav item – shown when no GitHub user is defined */
+header .nav-disabled {
+  display: inline-block;
+  margin: 0 6px;
+  padding: 8px 12px;
+  color: #999;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  cursor: default;
+}
+
 h1 {
   margin: 0 0 8px;
   color: var(--primary);

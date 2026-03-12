@@ -65,6 +65,21 @@ function App() {
   const [selectedAuthor, setSelectedAuthor] = useState("all");
   const [displayConfig, setDisplayConfig] = useState({ collectAllPublic: false, licenseFilter: 'oss' });
   const [view, setView] = useState('dashboard');
+
+  // Parse GitHub user context from URL parameters (?u=username&from=YYYY-MM-DD&to=YYYY-MM-DD)
+  const urlParams = useMemo(() => new URLSearchParams(window.location.search), []);
+  const githubUser = urlParams.get('u') || '';
+  const dateFrom = urlParams.get('from') || '';
+  const dateTo = urlParams.get('to') || '';
+
+  // Build the "Usage & AI" href when a GitHub user is defined
+  const usageAiHref = useMemo(() => {
+    if (!githubUser) return null;
+    const params = new URLSearchParams({ u: githubUser });
+    if (dateFrom) params.set('from', dateFrom);
+    if (dateTo) params.set('to', dateTo);
+    return `https://mgifford.github.io/gh-summary/usage.html?${params.toString()}`;
+  }, [githubUser, dateFrom, dateTo]);
   
   // Organization override management
   const defaultOrg = config?.organization?.githubOrg || 'civicactions';
@@ -333,6 +348,11 @@ function App() {
           <div style={{ display: 'flex', gap: 8 }}>
             <a href="#/dashboard" onClick={() => setView('dashboard')} className={view === 'dashboard' ? 'active' : ''} aria-current={view === 'dashboard' ? 'page' : undefined}>Dashboard</a>
             <a href="#/projects" onClick={() => setView('projects')} className={view === 'projects' ? 'active' : ''} aria-current={view === 'projects' ? 'page' : undefined}>Projects</a>
+            {usageAiHref ? (
+              <a href={usageAiHref} target="_blank" rel="noopener noreferrer">Usage &amp; AI</a>
+            ) : (
+              <span className="nav-disabled" aria-disabled="true">Usage &amp; AI</span>
+            )}
           </div>
         </div>
       </header>
