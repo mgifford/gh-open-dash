@@ -9,6 +9,7 @@
   "collectStaffCommits": true,
   "collectEcosystemsData": true,
   "collectOpenContributions": false,
+  "collectWorkflowRuns": false,
   "repoExcludePatterns": [
     "BigBeautifulBoycott",
     "Open-Climate-Resilience-Policies/OCRP"

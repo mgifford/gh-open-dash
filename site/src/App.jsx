@@ -14,6 +14,7 @@ import Hero from "./Hero.jsx";
 import MetricCard from "./MetricCard.jsx";
 import WhyOpen from "./WhyOpen.jsx";
 import OrgSelector from "./OrgSelector.jsx";
+import WorkflowRunsChart from "./WorkflowRunsChart.jsx";
 import { getCurrentOrg, filterReposByOrg } from "./orgUtils.js";
 import "./styles.css";
 
@@ -255,6 +256,16 @@ function App() {
     return { leaderboard, chartData, authors: data.authors, orgRepos, orgHasData, effectiveOrg, dataOrgs, filteredData };
   }, [data, metric, range, selectedAuthor, currentOrg]);
 
+  // Calculate total workflow runs across visible weeks (must be before early returns)
+  const totalWorkflowRuns = useMemo(() => {
+    if (!data || !data.workflow_runs || data.workflow_runs.length === 0) return null;
+    if (!processedData) return null;
+    const weekSet = new Set(processedData.chartData.labels || []);
+    return data.workflow_runs
+      .filter(r => weekSet.size === 0 || weekSet.has(r.week_start))
+      .reduce((sum, r) => sum + r.run_count, 0);
+  }, [data, processedData]);
+
   if (!data) return <div className="loading">Loading participation data...</div>;
   if (!processedData) return <div className="loading">Processing...</div>;
 
@@ -389,6 +400,14 @@ function App() {
                 icon="⏱️"
               />
             )}
+            {totalWorkflowRuns !== null && (
+              <MetricCard
+                title="Workflow Runs"
+                value={totalWorkflowRuns.toLocaleString()}
+                subtitle={`GitHub Actions in the last ${range === 'all' ? 'all time' : range + ' weeks'}`}
+                icon="⚙️"
+              />
+            )}
           </div>
 
           <WhyOpen config={config} />
@@ -512,6 +531,12 @@ function App() {
             <section className="chart-section">
               <h2>Repository Stars</h2>
               <RepoStarsChart data={processedData.filteredData} />
+            </section>
+
+            {/* GitHub Actions Workflow Runs */}
+            <section className="chart-section">
+              <h2>GitHub Actions Workflow Runs</h2>
+              <WorkflowRunsChart data={data} weeks={processedData.chartData.labels} />
             </section>
 
             {/* Ecosyste.ms Enhanced Visualizations */}
