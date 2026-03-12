@@ -112,7 +112,7 @@ test('does not show org-mismatch banner when no org param is set (default org)',
 });
 
 test('Usage & AI is not a link when no u= URL parameter is set', async () => {
-  // Ensure no ?u= param in search
+  // Ensure no ?u= param in search; config mock has no aiSummaryUser
   Object.defineProperty(window, 'location', {
     value: { ...window.location, search: '' },
     writable: true,
@@ -146,4 +146,34 @@ test('Usage & AI is a link when u= URL parameter is set', async () => {
   expect(links[0].href).toContain('u=mgifford');
   expect(links[0].href).toContain('from=2026-02-26');
   expect(links[0].href).toContain('to=2026-03-12');
+  // URL should use root path, not usage.html
+  expect(links[0].href).not.toContain('usage.html');
+});
+
+test('Usage & AI is a link when config provides aiSummaryUser and no u= param', async () => {
+  Object.defineProperty(window, 'location', {
+    value: { ...window.location, search: '' },
+    writable: true,
+  });
+
+  const configWithUser = { ...sampleMetrics, aiSummaryUser: 'mgifford' };
+  global.fetch = vi.fn(() => Promise.resolve({
+    ok: true,
+    text: () => Promise.resolve(JSON.stringify(sampleMetrics)),
+    json: () => Promise.resolve(configWithUser),
+  }));
+
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  // Should render as an anchor link using the config user
+  await waitFor(() => {
+    const links = Array.from(document.querySelectorAll('header a')).filter(a =>
+      /Usage.*AI/i.test(a.textContent)
+    );
+    expect(links.length).toBeGreaterThan(0);
+    expect(links[0].href).toContain('gh-summary');
+    expect(links[0].href).toContain('u=mgifford');
+    expect(links[0].href).not.toContain('usage.html');
+  });
 });
