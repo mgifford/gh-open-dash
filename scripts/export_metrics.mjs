@@ -461,6 +461,30 @@ if (tableExists('repo_stars')) {
   }
 }
 
+// Collect workflow run data
+const workflowRunsData = [];
+if (tableExists('workflow_runs')) {
+  const rows = db.prepare(`
+    SELECT week_start, repo, workflow_name, run_count
+    FROM workflow_runs
+    ORDER BY week_start, repo, workflow_name
+  `).all();
+
+  for (const row of rows) {
+    if (shouldIncludeRepo(row.repo, null)) {
+      workflowRunsData.push({
+        week_start: row.week_start,
+        repo: row.repo,
+        workflow_name: row.workflow_name,
+        run_count: row.run_count
+      });
+    }
+  }
+  if (workflowRunsData.length > 0) {
+    console.log(`Exported ${workflowRunsData.length} workflow run records`);
+  }
+}
+
 const output = {
   generated_at: new Date().toISOString(),
   org: ORG_ALLOWLIST[0] || "",
@@ -474,7 +498,8 @@ const output = {
   repos: repos,
   pr_details: prDetailsData,
   issue_labels: issueLabelsData,
-  repo_stars: repoStarsData
+  repo_stars: repoStarsData,
+  workflow_runs: workflowRunsData.length > 0 ? workflowRunsData : undefined
 };
 
 // Export Ecosyste.ms data if tables exist

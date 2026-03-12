@@ -31,6 +31,7 @@ if (typeof fileConfig.collectAllPublic === 'undefined') fileConfig.collectAllPub
 if (typeof fileConfig.licenseFilter === 'undefined') fileConfig.licenseFilter = 'oss';
 if (typeof fileConfig.collectEcosystemsData === 'undefined') fileConfig.collectEcosystemsData = false;
 if (typeof fileConfig.collectOpenContributions === 'undefined') fileConfig.collectOpenContributions = false;
+if (typeof fileConfig.collectWorkflowRuns === 'undefined') fileConfig.collectWorkflowRuns = false;
 
 function parseAllowlist(input, fallback) {
   const raw = (typeof input === 'undefined' || input === null) ? fallback : input;
@@ -161,6 +162,13 @@ db.exec(`
     repo TEXT,
     stars INTEGER,
     PRIMARY KEY (week_start, repo)
+  );
+  CREATE TABLE IF NOT EXISTS workflow_runs (
+    week_start TEXT,
+    repo TEXT,
+    workflow_name TEXT,
+    run_count INTEGER DEFAULT 0,
+    PRIMARY KEY (week_start, repo, workflow_name)
   );
   CREATE TABLE IF NOT EXISTS meta (
     key TEXT PRIMARY KEY,
@@ -326,6 +334,10 @@ async function run() {
       if (fileConfig.collectStaffCommits) {
         await processStaffCommits(weekStartStr, rangeStart, rangeEnd, user);
       }
+    }
+
+    if (fileConfig.collectWorkflowRuns) {
+      await processWorkflowRuns(weekStartStr, rangeStart, rangeEnd);
     }
 
     setMeta('processed_through_week', weekStartStr);
@@ -620,6 +632,94 @@ async function processStaffCommits(weekStart, rangeStartISO, rangeEndISO, user) 
   });
   insertMany(items);
   console.log(`  Inserted ${items.length} commit records for staff:${user} (${weekStart})`);
+}
+
+async function processWorkflowRuns(weekStart, rangeStartISO, rangeEndISO) {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) {
+    console.warn('GITHUB_TOKEN missing; skipping workflow run collection');
+    return;
+  }
+
+  // Build date range string for GitHub API (YYYY-MM-DD..YYYY-MM-DD)
+  const dateFrom = rangeStartISO.split('T')[0];
+  const dateTo = rangeEndISO.split('T')[0];
+  const dateRange = `${dateFrom}..${dateTo}`;
+
+  for (const org of ORG_ALLOWLIST) {
+    // Collect all public repos for the org
+    const orgRepos = [];
+    let page = 1;
+    while (true) {
+      const url = `https://api.github.com/orgs/${org}/repos?type=public&per_page=100&page=${page}`;
+      const res = await fetch(url, {
+        headers: { authorization: `token ${token}` }
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        console.warn(`Failed to list repos for org ${org}: ${res.status} ${text.slice(0, 200)}`);
+        break;
+      }
+      const repos = await res.json();
+      if (!Array.isArray(repos) || repos.length === 0) break;
+      for (const r of repos) {
+        if (r.full_name && !r.private) orgRepos.push(r.full_name);
+      }
+      if (repos.length < 100) break;
+      page++;
+      await sleep(300);
+    }
+
+    console.log(`  Found ${orgRepos.length} public repos in org ${org} for workflow run collection (${weekStart})`);
+
+    const insertStmt = db.prepare(`
+      INSERT OR REPLACE INTO workflow_runs (week_start, repo, workflow_name, run_count)
+      VALUES (?, ?, ?, ?)
+    `);
+
+    for (const repoFull of orgRepos) {
+      if (repoShouldBeExcluded(repoFull)) continue;
+
+      // Aggregate run counts by workflow name
+      const runCounts = {};
+      let runsPage = 1;
+      while (true) {
+        const url = `https://api.github.com/repos/${repoFull}/actions/runs?created=${encodeURIComponent(dateRange)}&per_page=100&page=${runsPage}`;
+        const res = await fetch(url, {
+          headers: { authorization: `token ${token}` }
+        });
+        if (!res.ok) {
+          // 404 means Actions not enabled for this repo — not an error
+          if (res.status !== 404) {
+            console.warn(`Failed to get workflow runs for ${repoFull}: ${res.status}`);
+          }
+          break;
+        }
+        const data = await res.json();
+        if (!data.workflow_runs || data.workflow_runs.length === 0) break;
+        for (const run of data.workflow_runs) {
+          const name = run.name || '(unnamed workflow)';
+          runCounts[name] = (runCounts[name] || 0) + 1;
+        }
+        if (data.workflow_runs.length < 100) break;
+        runsPage++;
+        await sleep(200);
+      }
+
+      if (Object.keys(runCounts).length > 0) {
+        const insertAll = db.transaction((counts) => {
+          for (const [name, count] of Object.entries(counts)) {
+            insertStmt.run(weekStart, repoFull, name, count);
+          }
+        });
+        insertAll(runCounts);
+        const total = Object.values(runCounts).reduce((a, b) => a + b, 0);
+        console.log(`  Recorded ${total} workflow run(s) in ${Object.keys(runCounts).length} workflow(s) for ${repoFull} (${weekStart})`);
+      }
+
+      await sleep(300);
+    }
+  }
 }
 
 // comment collection logic moved to scripts/comments_collector.mjs
