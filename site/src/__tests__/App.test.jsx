@@ -111,18 +111,18 @@ test('does not show org-mismatch banner when no org param is set (default org)',
   expect(screen.queryByRole('alert')).toBeNull();
 });
 
-test('Usage & AI is always a link (org-wide) using the configured org name', async () => {
+test('Usage & AI link is not rendered in the nav', async () => {
   render(<App />);
   await waitFor(() => expect(global.fetch).toHaveBeenCalled());
 
-  // Should render as an anchor link since org is always configured
-  const links = Array.from(document.querySelectorAll('header a')).filter(a =>
+  // The "Usage & AI" link should be removed since org-wide agent/action data is not available
+  const usageLinks = Array.from(document.querySelectorAll('header a')).filter(a =>
     /Usage.*AI/i.test(a.textContent)
   );
-  expect(links.length).toBeGreaterThan(0);
-  expect(links[0].href).toContain('org=civicactions');
-  // Should not contain a per-user ?u= parameter
-  expect(links[0].href).not.toContain('u=mgifford');
-  // URL should use root path, not usage.html
-  expect(links[0].href).not.toContain('usage.html');
+  expect(usageLinks.length).toBe(0);
+
+  const usageSpans = Array.from(document.querySelectorAll('header span')).filter(s =>
+    /Usage.*AI/i.test(s.textContent)
+  );
+  expect(usageSpans.length).toBe(0);
 });

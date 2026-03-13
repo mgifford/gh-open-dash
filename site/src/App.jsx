@@ -70,14 +70,6 @@ function App() {
   const defaultOrg = config?.organization?.githubOrg || 'civicactions';
   const [currentOrg, setCurrentOrg] = useState(() => getCurrentOrg(defaultOrg));
 
-  // Build the "Usage & AI" href for org-wide scan of Agents and Actions
-  const usageAiHref = useMemo(() => {
-    const org = currentOrg || config?.organization?.githubOrg || '';
-    if (!org) return null;
-    const baseUrl = config?.aiSummaryBaseUrl || 'https://mgifford.github.io/gh-summary/';
-    const params = new URLSearchParams({ org });
-    return `${baseUrl.replace(/\/?$/, '/')}?${params.toString()}`;
-  }, [currentOrg, config]);
   
   // Update currentOrg when config loads
   useEffect(() => {
@@ -342,11 +334,6 @@ function App() {
           <div style={{ display: 'flex', gap: 8 }}>
             <a href="#/dashboard" onClick={() => setView('dashboard')} className={view === 'dashboard' ? 'active' : ''} aria-current={view === 'dashboard' ? 'page' : undefined}>Dashboard</a>
             <a href="#/projects" onClick={() => setView('projects')} className={view === 'projects' ? 'active' : ''} aria-current={view === 'projects' ? 'page' : undefined}>Projects</a>
-            {usageAiHref ? (
-              <a href={usageAiHref} target="_blank" rel="noopener noreferrer">Usage &amp; AI</a>
-            ) : (
-              <span className="nav-disabled" aria-disabled="true">Usage &amp; AI</span>
-            )}
           </div>
         </div>
       </header>
