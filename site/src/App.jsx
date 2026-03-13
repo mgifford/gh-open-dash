@@ -66,26 +66,18 @@ function App() {
   const [displayConfig, setDisplayConfig] = useState({ collectAllPublic: false, licenseFilter: 'oss' });
   const [view, setView] = useState('dashboard');
 
-  // Parse GitHub user context from URL parameters (?u=username&from=YYYY-MM-DD&to=YYYY-MM-DD)
-  const urlParams = useMemo(() => new URLSearchParams(window.location.search), []);
-  const githubUser = urlParams.get('u') || '';
-  const dateFrom = urlParams.get('from') || '';
-  const dateTo = urlParams.get('to') || '';
-
-  // Build the "Usage & AI" href when a GitHub user is defined (URL param takes precedence, then config)
-  const usageAiHref = useMemo(() => {
-    const user = githubUser || config?.aiSummaryUser || '';
-    if (!user) return null;
-    const baseUrl = config?.aiSummaryBaseUrl || 'https://mgifford.github.io/gh-summary/';
-    const params = new URLSearchParams({ u: user });
-    if (dateFrom) params.set('from', dateFrom);
-    if (dateTo) params.set('to', dateTo);
-    return `${baseUrl.replace(/\/?$/, '/')}?${params.toString()}`;
-  }, [githubUser, dateFrom, dateTo, config]);
-  
   // Organization override management
   const defaultOrg = config?.organization?.githubOrg || 'civicactions';
   const [currentOrg, setCurrentOrg] = useState(() => getCurrentOrg(defaultOrg));
+
+  // Build the "Usage & AI" href for org-wide scan of Agents and Actions
+  const usageAiHref = useMemo(() => {
+    const org = currentOrg || config?.organization?.githubOrg || '';
+    if (!org) return null;
+    const baseUrl = config?.aiSummaryBaseUrl || 'https://mgifford.github.io/gh-summary/';
+    const params = new URLSearchParams({ org });
+    return `${baseUrl.replace(/\/?$/, '/')}?${params.toString()}`;
+  }, [currentOrg, config]);
   
   // Update currentOrg when config loads
   useEffect(() => {
