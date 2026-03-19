@@ -297,6 +297,28 @@ This project is inspired by the open startup movement and transparency pages lik
 - [Buffer's Open page](https://buffer.com/open) - Revenue and metrics transparency  
 - [Ghost's Open page](https://ghost.org/open) - Open source product metrics
 
+## AI Disclosure
+
+This project is committed to transparency about AI usage. Below is a record of AI tools that have been used in this project and how they were used.
+
+### AI used to build or maintain this project
+
+| AI Tool | Model / Version | How it was used |
+|---|---|---|
+| [GitHub Copilot](https://github.com/features/copilot) (Coding Agent) | Claude Sonnet (via GitHub Copilot) | Used to write and refactor code, generate documentation, implement new features, and review pull requests throughout the development of this project. |
+
+### AI used during CI/CD or data collection
+
+None. The data collection scripts (`scripts/update_sqlite.mjs`, `scripts/export_metrics.mjs`) query the GitHub GraphQL API directly and do not use any AI or machine-learning services.
+
+### AI running in the user's browser
+
+None. The dashboard is a fully static site. No browser-based AI features are enabled. The deployed site makes no runtime API calls to any AI service.
+
+---
+
+> **Note for contributors and AI agents:** If you use an AI tool to contribute to this project, please add or update your tool's entry in the table above. See `AGENTS.md` for the full disclosure policy.
+
 ## Contributing
 
 Contributions are welcome! This project is designed to be:

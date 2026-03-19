@@ -172,6 +172,16 @@ When an accessibility issue is found:
 - Tag the GitHub issue or PR with the `accessibility` label.
 - Classify severity using the taxonomy in [ACCESSIBILITY.md §4](./ACCESSIBILITY.md#4-reporting--severity-taxonomy).
 
+## AI disclosure requirement
+
+This project is committed to transparency about how AI is used. AI agents and human contributors alike **must** keep the `README.md` AI Disclosure section accurate and up to date.
+
+- When an AI agent (e.g., GitHub Copilot, Claude, GPT, Gemini) contributes code, documentation, or configuration, it **must** add or update an entry for itself in the **AI Disclosure** section of `README.md`.
+- Each entry must state: the AI tool/model name, what it was used for (e.g., writing code, generating documentation, reviewing PRs), and whether it is used at runtime or only during development/build.
+- Do **not** list AI tools that were not actually used in this project.
+- AI is not used at runtime by the dashboard and no browser-based AI features are enabled; entries should reflect this accurately.
+- The AI Disclosure section must distinguish between: (a) AI used to build or maintain the project, (b) AI used during CI/CD or data collection, and (c) AI running in the user's browser.
+
 ## Verification checklist before merge
 
 - [ ] `data/metrics.json` contains only weeks/authors/counts (no titles/urls/text).
@@ -182,6 +192,7 @@ When an accessibility issue is found:
  - [ ] Closed metrics (`pr_closed`, `issue_closed`) are present in `data/metrics.json` after export.
  - [ ] `scripts/config.json` flags `collectAllPublic` and `licenseFilter` are documented and used intentionally.
  - [ ] UI changes meet WCAG 2.2 AA (keyboard access, contrast, ARIA labels, chart alternatives).
+ - [ ] If an AI agent contributed to this PR, the `README.md` AI Disclosure section has been updated to reflect that contribution.
 
 ## GitHub Pages consolidation and ensuring `main` is authoritative
 
