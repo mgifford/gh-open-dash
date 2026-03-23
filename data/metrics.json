@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-16T08:04:36.454Z",
+  "generated_at": "2026-03-23T08:26:09.233Z",
   "org": "civicactions",
   "orgs": [
     "civicactions",
@@ -2736,7 +2736,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -2780,7 +2780,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -2802,7 +2802,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -2862,7 +2862,7 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "kristenjernigan": {
+        "jennawaszak": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -2873,7 +2873,7 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "openprivacy": {
+        "kristenjernigan": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -2895,7 +2895,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -2961,7 +2961,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3038,7 +3038,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3060,7 +3060,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3072,6 +3072,28 @@
           "issues_opened": 0,
           "issues_closed": 1,
           "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "erichuffman": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "kristenjernigan": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3087,7 +3109,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 5,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3109,7 +3131,7 @@
           "prs_closed": 2,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 3,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3164,7 +3186,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3208,7 +3230,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3219,7 +3241,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3322,6 +3344,28 @@
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
+        },
+        "joduinn": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "jonbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
         }
       }
     },
@@ -3378,7 +3422,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3400,7 +3444,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 3,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3411,7 +3455,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3444,7 +3488,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3455,7 +3499,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3488,7 +3532,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3525,6 +3569,39 @@
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
+        },
+        "jonbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "kristenjernigan": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "marissaleighfox": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
         }
       }
     },
@@ -3537,7 +3614,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3603,7 +3680,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3625,7 +3702,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3647,7 +3724,7 @@
           "prs_closed": 1,
           "issues_opened": 4,
           "issues_closed": 3,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3658,7 +3735,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3724,7 +3801,18 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "KeithKawasaki": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3850,7 +3938,7 @@
           "prs_closed": 1,
           "issues_opened": 2,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3861,7 +3949,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 4,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3894,7 +3982,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 5,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -3932,17 +4020,6 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 3,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
         "erichuffman": {
           "prs_opened": 0,
           "prs_merged": 0,
@@ -3955,6 +4032,28 @@
           "comments_commit": 0
         },
         "jonbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "joshuaminarick": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "openprivacy": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -4020,7 +4119,7 @@
           "prs_closed": 3,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 3,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4053,7 +4152,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4064,7 +4163,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4097,7 +4196,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 3,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4108,7 +4207,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4141,7 +4240,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4152,7 +4251,7 @@
           "prs_closed": 0,
           "issues_opened": 2,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4212,7 +4311,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4223,7 +4322,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4300,7 +4399,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4311,7 +4410,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4322,7 +4421,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4377,7 +4476,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4459,6 +4558,17 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
+        "kellysmith1008": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
         "tiffneybare": {
           "prs_opened": 0,
           "prs_merged": 0,
@@ -4481,7 +4591,7 @@
           "prs_closed": 2,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4536,7 +4646,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4547,7 +4657,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4558,7 +4668,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4569,7 +4679,7 @@
           "prs_closed": 1,
           "issues_opened": 2,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4662,18 +4772,7 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 3,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "joshuaminarick": {
+        "kellysmith1008": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -4684,7 +4783,7 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "kellysmith1008": {
+        "openprivacy": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -4706,7 +4805,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4898,17 +4997,6 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "davidmpickett": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
         "maggiewachs": {
           "prs_opened": 0,
           "prs_merged": 0,
@@ -4927,6 +5015,17 @@
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 3,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brentonkelly1982": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4975,7 +5074,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -4986,7 +5085,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5019,7 +5118,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5041,7 +5140,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5063,7 +5162,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5074,7 +5173,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5096,7 +5195,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5140,7 +5239,7 @@
           "prs_closed": 0,
           "issues_opened": 3,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5189,7 +5288,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 3,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5211,7 +5310,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5222,7 +5321,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5244,7 +5343,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5266,7 +5365,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 5,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5288,7 +5387,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 2,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5299,7 +5398,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5310,7 +5409,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5321,7 +5420,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5332,7 +5431,7 @@
           "prs_closed": 2,
           "issues_opened": 4,
           "issues_closed": 2,
-          "commits": 0,
+          "commits": 5,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5343,7 +5442,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5365,7 +5464,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5376,7 +5475,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5398,7 +5497,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -5459,28 +5558,6 @@
           "comments_commit": 0
         },
         "erichuffman": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 1,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "joshuaminarick": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 1,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "lhouse24": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -8168,7 +8245,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8190,7 +8267,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8212,7 +8289,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8272,7 +8349,7 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "kristenjernigan": {
+        "jennawaszak": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -8283,7 +8360,7 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "openprivacy": {
+        "kristenjernigan": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -8305,7 +8382,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8360,7 +8437,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8437,7 +8514,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8459,7 +8536,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8471,6 +8548,28 @@
           "issues_opened": 0,
           "issues_closed": 1,
           "commits": 0,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "erichuffman": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "kristenjernigan": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8486,7 +8585,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 5,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8508,7 +8607,7 @@
           "prs_closed": 2,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 3,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8552,7 +8651,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8596,7 +8695,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8607,7 +8706,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8710,6 +8809,28 @@
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
+        },
+        "joduinn": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "jonbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
         }
       }
     },
@@ -8766,7 +8887,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8777,7 +8898,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 3,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8788,7 +8909,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8821,7 +8942,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8832,7 +8953,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8865,7 +8986,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8891,6 +9012,39 @@
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
+        },
+        "jonbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "kristenjernigan": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "marissaleighfox": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
         }
       }
     },
@@ -8903,7 +9057,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8947,7 +9101,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8969,7 +9123,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -8991,7 +9145,7 @@
           "prs_closed": 1,
           "issues_opened": 4,
           "issues_closed": 3,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9002,7 +9156,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9068,7 +9222,18 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "KeithKawasaki": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9183,7 +9348,7 @@
           "prs_closed": 1,
           "issues_opened": 2,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9194,7 +9359,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 4,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9227,7 +9392,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 5,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9265,17 +9430,6 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 3,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
         "erichuffman": {
           "prs_opened": 0,
           "prs_merged": 0,
@@ -9288,6 +9442,28 @@
           "comments_commit": 0
         },
         "jonbot": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "joshuaminarick": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "openprivacy": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -9342,7 +9518,7 @@
           "prs_closed": 3,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 3,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9375,7 +9551,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9386,7 +9562,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9419,7 +9595,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 3,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9430,7 +9606,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9463,7 +9639,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9474,7 +9650,7 @@
           "prs_closed": 0,
           "issues_opened": 2,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9534,7 +9710,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9545,7 +9721,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9611,7 +9787,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9622,7 +9798,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9633,7 +9809,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9688,7 +9864,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9770,6 +9946,17 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
+        "kellysmith1008": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
         "tiffneybare": {
           "prs_opened": 0,
           "prs_merged": 0,
@@ -9792,7 +9979,7 @@
           "prs_closed": 2,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9836,7 +10023,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9847,7 +10034,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9858,7 +10045,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9869,7 +10056,7 @@
           "prs_closed": 1,
           "issues_opened": 2,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 4,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -9962,18 +10149,7 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "TheBoatyMcBoatFace": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 3,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "joshuaminarick": {
+        "kellysmith1008": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -9984,7 +10160,7 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "kellysmith1008": {
+        "openprivacy": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -10006,7 +10182,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10176,17 +10352,6 @@
           "comments_pr_review": 0,
           "comments_commit": 0
         },
-        "davidmpickett": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 0,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
         "maggiewachs": {
           "prs_opened": 0,
           "prs_merged": 0,
@@ -10205,6 +10370,17 @@
           "issues_opened": 0,
           "issues_closed": 0,
           "commits": 3,
+          "comments_issue": 0,
+          "comments_pr_review": 0,
+          "comments_commit": 0
+        },
+        "brentonkelly1982": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10253,7 +10429,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10264,7 +10440,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10286,7 +10462,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10308,7 +10484,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10330,7 +10506,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10341,7 +10517,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10363,7 +10539,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10407,7 +10583,7 @@
           "prs_closed": 0,
           "issues_opened": 3,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10456,7 +10632,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 3,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10478,7 +10654,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10489,7 +10665,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10511,7 +10687,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10522,7 +10698,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 5,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10544,7 +10720,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 1,
-          "commits": 2,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10555,7 +10731,7 @@
           "prs_closed": 1,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10566,7 +10742,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10577,7 +10753,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1,
+          "commits": 0,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10588,7 +10764,7 @@
           "prs_closed": 2,
           "issues_opened": 4,
           "issues_closed": 2,
-          "commits": 0,
+          "commits": 5,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10599,7 +10775,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10610,7 +10786,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 2,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10621,7 +10797,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0,
+          "commits": 3,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10643,7 +10819,7 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 0,
+          "commits": 1,
           "comments_issue": 0,
           "comments_pr_review": 0,
           "comments_commit": 0
@@ -10704,28 +10880,6 @@
           "comments_commit": 0
         },
         "erichuffman": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 1,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "joshuaminarick": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 1,
-          "comments_issue": 0,
-          "comments_pr_review": 0,
-          "comments_commit": 0
-        },
-        "lhouse24": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -10852,7 +11006,7 @@
         "prs_closed": 2,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 2
+        "commits": 1
       },
       "byAuthor": {
         "TheBoatyMcBoatFace": {
@@ -10861,7 +11015,7 @@
           "prs_closed": 2,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2
+          "commits": 1
         },
         "mgifford": {
           "prs_opened": 1,
@@ -10903,7 +11057,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -10963,7 +11117,7 @@
         "prs_closed": 10,
         "issues_opened": 7,
         "issues_closed": 8,
-        "commits": 3
+        "commits": 5
       },
       "byAuthor": {
         "Tom-Camp": {
@@ -10972,7 +11126,7 @@
           "prs_closed": 9,
           "issues_opened": 5,
           "issues_closed": 8,
-          "commits": 3
+          "commits": 5
         },
         "openprivacy": {
           "prs_opened": 1,
@@ -11063,7 +11217,7 @@
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -11085,7 +11239,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -11121,7 +11275,7 @@
         "prs_closed": 20,
         "issues_opened": 1,
         "issues_closed": 1,
-        "commits": 6
+        "commits": 7
       },
       "byAuthor": {
         "adriancooke": {
@@ -11170,7 +11324,7 @@
           "prs_closed": 6,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1
+          "commits": 2
         },
         "pre-commit-ci": {
           "prs_opened": 2,
@@ -11289,7 +11443,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -11675,7 +11829,7 @@
         "prs_closed": 6,
         "issues_opened": 2,
         "issues_closed": 1,
-        "commits": 4
+        "commits": 3
       },
       "byAuthor": {
         "dependabot": {
@@ -11692,7 +11846,7 @@
           "prs_closed": 3,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 4
+          "commits": 3
         },
         "pre-commit-ci": {
           "prs_opened": 2,
@@ -11731,7 +11885,7 @@
             "prs_closed": 2,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -11789,7 +11943,7 @@
         "prs_closed": 3,
         "issues_opened": 1,
         "issues_closed": 1,
-        "commits": 2
+        "commits": 1
       },
       "byAuthor": {
         "TheBoatyMcBoatFace": {
@@ -11798,7 +11952,7 @@
           "prs_closed": 3,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2
+          "commits": 1
         },
         "laflannery": {
           "prs_opened": 0,
@@ -11859,7 +12013,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 0
           }
         }
       ]
@@ -11873,7 +12027,7 @@
         "prs_closed": 11,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 1
+        "commits": 0
       },
       "byAuthor": {
         "dependabot": {
@@ -11890,7 +12044,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1
+          "commits": 0
         },
         "pre-commit-ci": {
           "prs_opened": 2,
@@ -11965,7 +12119,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -12023,7 +12177,7 @@
         "prs_closed": 50,
         "issues_opened": 2,
         "issues_closed": 2,
-        "commits": 17
+        "commits": 19
       },
       "byAuthor": {
         "TheBoatyMcBoatFace": {
@@ -12088,7 +12242,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0
+          "commits": 1
         },
         "mgifford": {
           "prs_opened": 1,
@@ -12120,7 +12274,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0
+          "commits": 1
         },
         "conleya6": {
           "prs_opened": 0,
@@ -12277,7 +12431,7 @@
             "prs_closed": 5,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 2
+            "commits": 3
           }
         },
         {
@@ -12288,7 +12442,7 @@
             "prs_closed": 4,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 2
+            "commits": 3
           }
         },
         {
@@ -12299,7 +12453,7 @@
             "prs_closed": 3,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 2
+            "commits": 1
           }
         },
         {
@@ -12332,7 +12486,7 @@
             "prs_closed": 3,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 2
+            "commits": 0
           }
         },
         {
@@ -12343,7 +12497,7 @@
             "prs_closed": 3,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 2
           }
         },
         {
@@ -12376,7 +12530,7 @@
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -12387,7 +12541,7 @@
             "prs_closed": 3,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         }
       ]
@@ -12401,7 +12555,7 @@
         "prs_closed": 2,
         "issues_opened": 1,
         "issues_closed": 0,
-        "commits": 6
+        "commits": 12
       },
       "byAuthor": {
         "bobschmitt-civicactions": {
@@ -12418,7 +12572,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 4
+          "commits": 7
         },
         "openprivacy": {
           "prs_opened": 1,
@@ -12426,9 +12580,25 @@
           "prs_closed": 0,
           "issues_opened": 1,
           "issues_closed": 0,
-          "commits": 0
+          "commits": 1
+        },
+        "KeithKawasaki": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
         },
         "Tom-Camp": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        },
+        "marissaleighfox": {
           "prs_opened": 0,
           "prs_merged": 0,
           "prs_closed": 0,
@@ -12483,7 +12653,7 @@
           }
         },
         {
-          "week_start": "2025-07-07",
+          "week_start": "2025-06-16",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -12494,7 +12664,40 @@
           }
         },
         {
+          "week_start": "2025-06-23",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-07-07",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 2
+          }
+        },
+        {
           "week_start": "2025-07-28",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-08-04",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -12512,7 +12715,7 @@
             "prs_closed": 0,
             "issues_opened": 1,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 2
           }
         }
       ]
@@ -12767,7 +12970,7 @@
         "prs_closed": 1,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 4
+        "commits": 3
       },
       "byAuthor": {
         "civicactionsbot": {
@@ -12784,23 +12987,12 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 3
+          "commits": 2
         }
       },
       "weekly": [
         {
           "week_start": "2025-04-14",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
-          "week_start": "2025-06-09",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -12992,7 +13184,7 @@
         "prs_closed": 2,
         "issues_opened": 1,
         "issues_closed": 1,
-        "commits": 2
+        "commits": 3
       },
       "byAuthor": {
         "TheBoatyMcBoatFace": {
@@ -13001,7 +13193,7 @@
           "prs_closed": 2,
           "issues_opened": 1,
           "issues_closed": 1,
-          "commits": 2
+          "commits": 3
         }
       },
       "weekly": [
@@ -13035,7 +13227,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         }
       ]
@@ -13206,7 +13398,7 @@
         "prs_closed": 16,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 8
+        "commits": 11
       },
       "byAuthor": {
         "ajoseph0": {
@@ -13223,7 +13415,7 @@
           "prs_closed": 4,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2
+          "commits": 4
         },
         "brentonkelly1982": {
           "prs_opened": 2,
@@ -13231,7 +13423,7 @@
           "prs_closed": 1,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 0
+          "commits": 1
         },
         "dcgoodwin2112": {
           "prs_opened": 7,
@@ -13344,7 +13536,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -13388,7 +13580,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -13432,7 +13624,7 @@
             "prs_closed": 3,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 3
           }
         }
       ]
@@ -13881,7 +14073,7 @@
         "prs_closed": 43,
         "issues_opened": 28,
         "issues_closed": 24,
-        "commits": 28
+        "commits": 27
       },
       "byAuthor": {
         "beeyayjay": {
@@ -13898,7 +14090,7 @@
           "prs_closed": 17,
           "issues_opened": 10,
           "issues_closed": 11,
-          "commits": 11
+          "commits": 13
         },
         "janette": {
           "prs_opened": 6,
@@ -13906,7 +14098,7 @@
           "prs_closed": 7,
           "issues_opened": 2,
           "issues_closed": 2,
-          "commits": 6
+          "commits": 4
         },
         "kaise-lafrai": {
           "prs_opened": 6,
@@ -13914,7 +14106,7 @@
           "prs_closed": 5,
           "issues_opened": 5,
           "issues_closed": 3,
-          "commits": 3
+          "commits": 2
         },
         "paul-m": {
           "prs_opened": 5,
@@ -14166,7 +14358,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -14210,7 +14402,7 @@
             "prs_closed": 2,
             "issues_opened": 2,
             "issues_closed": 3,
-            "commits": 2
+            "commits": 1
           }
         },
         {
@@ -14232,7 +14424,7 @@
             "prs_closed": 2,
             "issues_opened": 1,
             "issues_closed": 2,
-            "commits": 1
+            "commits": 2
           }
         },
         {
@@ -14660,7 +14852,7 @@
         "prs_closed": 2,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 1
+        "commits": 2
       },
       "byAuthor": {
         "Tom-Camp": {
@@ -14669,7 +14861,7 @@
           "prs_closed": 2,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1
+          "commits": 2
         }
       },
       "weekly": [
@@ -14693,6 +14885,17 @@
             "issues_opened": 0,
             "issues_closed": 0,
             "commits": 0
+          }
+        },
+        {
+          "week_start": "2025-06-02",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
           }
         }
       ]
@@ -14925,7 +15128,7 @@
         "prs_closed": 2,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 2
+        "commits": 1
       },
       "byAuthor": {
         "brianseek": {
@@ -14934,7 +15137,7 @@
           "prs_closed": 2,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2
+          "commits": 1
         }
       },
       "weekly": [
@@ -14946,7 +15149,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -14971,7 +15174,7 @@
         "prs_closed": 14,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 8
+        "commits": 10
       },
       "byAuthor": {
         "brianseek": {
@@ -14980,7 +15183,7 @@
           "prs_closed": 14,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 8
+          "commits": 10
         }
       },
       "weekly": [
@@ -15102,7 +15305,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -15146,7 +15349,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -15157,7 +15360,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -15168,7 +15371,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         }
       ]
@@ -15182,7 +15385,7 @@
         "prs_closed": 17,
         "issues_opened": 13,
         "issues_closed": 18,
-        "commits": 7
+        "commits": 9
       },
       "byAuthor": {
         "brianseek": {
@@ -15191,7 +15394,7 @@
           "prs_closed": 11,
           "issues_opened": 10,
           "issues_closed": 7,
-          "commits": 4
+          "commits": 6
         },
         "curtis-civicActions": {
           "prs_opened": 6,
@@ -15438,7 +15641,7 @@
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -15449,7 +15652,7 @@
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -15520,7 +15723,7 @@
         "prs_closed": 23,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 14
+        "commits": 16
       },
       "byAuthor": {
         "dgading": {
@@ -15537,7 +15740,7 @@
           "prs_closed": 16,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 9
+          "commits": 11
         }
       },
       "weekly": [
@@ -15681,7 +15884,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -15725,7 +15928,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -15736,7 +15939,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -15747,7 +15950,7 @@
             "prs_closed": 2,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 2
+            "commits": 1
           }
         },
         {
@@ -15791,7 +15994,7 @@
             "prs_closed": 2,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 2
           }
         },
         {
@@ -15802,7 +16005,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         }
       ]
@@ -16046,7 +16249,7 @@
         "prs_closed": 12,
         "issues_opened": 11,
         "issues_closed": 13,
-        "commits": 8
+        "commits": 9
       },
       "byAuthor": {
         "jerseycheese": {
@@ -16055,7 +16258,7 @@
           "prs_closed": 12,
           "issues_opened": 11,
           "issues_closed": 13,
-          "commits": 8
+          "commits": 9
         }
       },
       "weekly": [
@@ -16111,7 +16314,7 @@
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -16133,7 +16336,7 @@
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -16144,7 +16347,7 @@
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -16199,7 +16402,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 1,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -16210,7 +16413,7 @@
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 1
+            "commits": 0
           }
         }
       ]
@@ -16527,7 +16730,7 @@
         "prs_closed": 22,
         "issues_opened": 20,
         "issues_closed": 18,
-        "commits": 13
+        "commits": 20
       },
       "byAuthor": {
         "bobschmitt-civicactions": {
@@ -16560,7 +16763,7 @@
           "prs_closed": 5,
           "issues_opened": 6,
           "issues_closed": 5,
-          "commits": 2
+          "commits": 5
         },
         "lhouse24": {
           "prs_opened": 6,
@@ -16568,7 +16771,7 @@
           "prs_closed": 6,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2
+          "commits": 5
         },
         "mgifford": {
           "prs_opened": 1,
@@ -16576,7 +16779,7 @@
           "prs_closed": 1,
           "issues_opened": 2,
           "issues_closed": 1,
-          "commits": 0
+          "commits": 1
         },
         "thejordanwood": {
           "prs_opened": 2,
@@ -16747,7 +16950,7 @@
             "prs_closed": 0,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -16769,7 +16972,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 2
           }
         },
         {
@@ -16780,7 +16983,7 @@
             "prs_closed": 2,
             "issues_opened": 0,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 2
           }
         },
         {
@@ -16791,7 +16994,7 @@
             "prs_closed": 3,
             "issues_opened": 1,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 3
           }
         },
         {
@@ -16813,7 +17016,7 @@
             "prs_closed": 3,
             "issues_opened": 4,
             "issues_closed": 1,
-            "commits": 1
+            "commits": 3
           }
         },
         {
@@ -16824,7 +17027,7 @@
             "prs_closed": 4,
             "issues_opened": 2,
             "issues_closed": 1,
-            "commits": 4
+            "commits": 2
           }
         }
       ]
@@ -16838,7 +17041,7 @@
         "prs_closed": 7,
         "issues_opened": 5,
         "issues_closed": 3,
-        "commits": 6
+        "commits": 11
       },
       "byAuthor": {
         "mgifford": {
@@ -16847,7 +17050,7 @@
           "prs_closed": 7,
           "issues_opened": 5,
           "issues_closed": 3,
-          "commits": 6
+          "commits": 11
         }
       },
       "weekly": [
@@ -16925,7 +17128,7 @@
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -16947,7 +17150,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -16958,7 +17161,7 @@
             "prs_closed": 1,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -16980,7 +17183,7 @@
             "prs_closed": 0,
             "issues_opened": 0,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -16991,7 +17194,7 @@
             "prs_closed": 1,
             "issues_opened": 1,
             "issues_closed": 0,
-            "commits": 0
+            "commits": 1
           }
         }
       ]
@@ -17760,52 +17963,6 @@
       ]
     },
     {
-      "repo": "davidmpickett/ufo-50-terminal-code-menu",
-      "spdx": null,
-      "totals": {
-        "prs_opened": 0,
-        "prs_merged": 0,
-        "prs_closed": 0,
-        "issues_opened": 1,
-        "issues_closed": 0,
-        "commits": 1
-      },
-      "byAuthor": {
-        "davidmpickett": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 1,
-          "issues_closed": 0,
-          "commits": 1
-        }
-      },
-      "weekly": [
-        {
-          "week_start": "2025-06-30",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
-          "week_start": "2025-07-28",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 1,
-            "issues_closed": 0,
-            "commits": 0
-          }
-        }
-      ]
-    },
-    {
       "repo": "davidmpickett/ufo50-party-ufo",
       "spdx": null,
       "totals": {
@@ -17923,7 +18080,7 @@
             "prs_closed": 0,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -17967,7 +18124,7 @@
             "prs_closed": 0,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         }
       ]
@@ -18016,7 +18173,7 @@
         "prs_closed": 0,
         "issues_opened": 31,
         "issues_closed": 31,
-        "commits": 6
+        "commits": 10
       },
       "byAuthor": {
         "curtis-civicActions": {
@@ -18049,7 +18206,7 @@
           "prs_closed": 0,
           "issues_opened": 23,
           "issues_closed": 22,
-          "commits": 4
+          "commits": 8
         },
         "brianseek": {
           "prs_opened": 0,
@@ -18201,7 +18358,7 @@
             "prs_closed": 0,
             "issues_opened": 2,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -18212,7 +18369,7 @@
             "prs_closed": 0,
             "issues_opened": 2,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -18223,7 +18380,7 @@
             "prs_closed": 0,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -18234,7 +18391,7 @@
             "prs_closed": 0,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -18245,7 +18402,7 @@
             "prs_closed": 0,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 0
+            "commits": 1
           }
         },
         {
@@ -18256,7 +18413,7 @@
             "prs_closed": 0,
             "issues_opened": 1,
             "issues_closed": 1,
-            "commits": 1
+            "commits": 0
           }
         },
         {
@@ -19727,7 +19884,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 2,
-        "commits": 6
+        "commits": 7
       },
       "byAuthor": {
         "dmundra": {
@@ -19736,7 +19893,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 2,
-          "commits": 6
+          "commits": 7
         }
       },
       "weekly": [
@@ -19819,6 +19976,17 @@
         },
         {
           "week_start": "2025-07-14",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-08-11",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -20146,6 +20314,52 @@
       ]
     },
     {
+      "repo": "CivicActions/Drupal-ACR",
+      "spdx": "GPL-3.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 2
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 2
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-07-14",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-07-21",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
       "repo": "CivicActions/action-pyction",
       "spdx": "AGPL-3.0",
       "totals": {
@@ -20338,7 +20552,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 3
+        "commits": 5
       },
       "byAuthor": {
         "jonbot": {
@@ -20347,7 +20561,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1
+          "commits": 4
         },
         "joshuaminarick": {
           "prs_opened": 0,
@@ -20355,10 +20569,43 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2
+          "commits": 1
         }
       },
       "weekly": [
+        {
+          "week_start": "2025-06-09",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-06-16",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-06-23",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
         {
           "week_start": "2025-06-30",
           "totals": {
@@ -20367,22 +20614,35 @@
             "prs_closed": 0,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 2
           }
-        },
+        }
+      ]
+    },
+    {
+      "repo": "CivicActions/procurement-coach",
+      "spdx": "NOASSERTION",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 1
+      },
+      "byAuthor": {
+        "jennawaszak": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        }
+      },
+      "weekly": [
         {
-          "week_start": "2025-07-21",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
-          "week_start": "2025-08-11",
+          "week_start": "2025-05-26",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -20578,7 +20838,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 16
+        "commits": 14
       },
       "byAuthor": {
         "TheBoatyMcBoatFace": {
@@ -20587,7 +20847,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 16
+          "commits": 14
         }
       },
       "weekly": [
@@ -20658,7 +20918,18 @@
           }
         },
         {
-          "week_start": "2025-06-09",
+          "week_start": "2025-05-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-06-02",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -20691,17 +20962,6 @@
           }
         },
         {
-          "week_start": "2025-06-30",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
           "week_start": "2025-07-07",
           "totals": {
             "prs_opened": 0,
@@ -20724,17 +20984,6 @@
           }
         },
         {
-          "week_start": "2025-07-21",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
           "week_start": "2025-07-28",
           "totals": {
             "prs_opened": 0,
@@ -20747,17 +20996,6 @@
         },
         {
           "week_start": "2025-08-04",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
-          "week_start": "2025-08-11",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -20828,6 +21066,41 @@
       "weekly": [
         {
           "week_start": "2025-03-17",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
+      "repo": "Martinalberdi/martinalberdi.github.io",
+      "spdx": "CC0-1.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 1
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-08-04",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -20945,6 +21218,76 @@
       ]
     },
     {
+      "repo": "OpenConceptConsulting/OpenConcept",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 1
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-06-23",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
+      "repo": "Purple-Lotus-Agency/bolt_prompts",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 1
+      },
+      "byAuthor": {
+        "tiffneybare": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-07-14",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
       "repo": "TheBoatyMcBoatFace/explore-ghosts",
       "spdx": "AGPL-3.0",
       "totals": {
@@ -20953,7 +21296,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 15
+        "commits": 14
       },
       "byAuthor": {
         "TheBoatyMcBoatFace": {
@@ -20962,7 +21305,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 15
+          "commits": 14
         }
       },
       "weekly": [
@@ -21033,7 +21376,18 @@
           }
         },
         {
-          "week_start": "2025-06-09",
+          "week_start": "2025-05-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-06-02",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -21066,17 +21420,6 @@
           }
         },
         {
-          "week_start": "2025-06-30",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
           "week_start": "2025-07-07",
           "totals": {
             "prs_opened": 0,
@@ -21089,17 +21432,6 @@
         },
         {
           "week_start": "2025-07-14",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
-          "week_start": "2025-07-21",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -21142,7 +21474,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 15
+        "commits": 13
       },
       "byAuthor": {
         "TheBoatyMcBoatFace": {
@@ -21151,7 +21483,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 15
+          "commits": 13
         }
       },
       "weekly": [
@@ -21211,7 +21543,18 @@
           }
         },
         {
-          "week_start": "2025-06-09",
+          "week_start": "2025-05-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-06-02",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -21244,17 +21587,6 @@
           }
         },
         {
-          "week_start": "2025-06-30",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
           "week_start": "2025-07-07",
           "totals": {
             "prs_opened": 0,
@@ -21277,17 +21609,6 @@
           }
         },
         {
-          "week_start": "2025-07-21",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
           "week_start": "2025-07-28",
           "totals": {
             "prs_opened": 0,
@@ -21300,17 +21621,6 @@
         },
         {
           "week_start": "2025-08-04",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
-          "week_start": "2025-08-11",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -21436,7 +21746,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 28
+        "commits": 27
       },
       "byAuthor": {
         "beeyayjay": {
@@ -21453,7 +21763,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 11
+          "commits": 13
         },
         "janette": {
           "prs_opened": 0,
@@ -21461,7 +21771,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 6
+          "commits": 4
         },
         "kaise-lafrai": {
           "prs_opened": 0,
@@ -21469,7 +21779,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 3
+          "commits": 2
         },
         "paul-m": {
           "prs_opened": 0,
@@ -21649,17 +21959,6 @@
           }
         },
         {
-          "week_start": "2025-06-23",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
-        {
           "week_start": "2025-07-07",
           "totals": {
             "prs_opened": 0,
@@ -21689,7 +21988,7 @@
             "prs_closed": 0,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 2
+            "commits": 1
           }
         },
         {
@@ -21711,7 +22010,7 @@
             "prs_closed": 0,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 2
           }
         },
         {
@@ -21723,6 +22022,52 @@
             "issues_opened": 0,
             "issues_closed": 0,
             "commits": 2
+          }
+        }
+      ]
+    },
+    {
+      "repo": "brentonkelly1982/repiit-website",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 2
+      },
+      "byAuthor": {
+        "brentonkelly1982": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 2
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-07-28",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-08-11",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
           }
         }
       ]
@@ -21843,6 +22188,41 @@
       "weekly": [
         {
           "week_start": "2025-06-09",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
+      "repo": "dafeder/op-clickhouse",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 1
+      },
+      "byAuthor": {
+        "dafeder": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-08-04",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -22223,6 +22603,41 @@
       ]
     },
     {
+      "repo": "distributedteams/website",
+      "spdx": "GPL-3.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 1
+      },
+      "byAuthor": {
+        "joduinn": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-06-09",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
       "repo": "dmundra/danielmundra.com",
       "spdx": null,
       "totals": {
@@ -22269,7 +22684,7 @@
       ]
     },
     {
-      "repo": "dmundra/ndhurandhar.art",
+      "repo": "dmundra/github-token-tracking",
       "spdx": null,
       "totals": {
         "prs_opened": 0,
@@ -22277,7 +22692,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 8
+        "commits": 1
       },
       "byAuthor": {
         "dmundra": {
@@ -22286,7 +22701,42 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 8
+          "commits": 1
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-08-04",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
+      "repo": "dmundra/ndhurandhar.art",
+      "spdx": null,
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 9
+      },
+      "byAuthor": {
+        "dmundra": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 9
         }
       },
       "weekly": [
@@ -22377,6 +22827,17 @@
             "issues_closed": 0,
             "commits": 1
           }
+        },
+        {
+          "week_start": "2025-08-11",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
         }
       ]
     },
@@ -22389,7 +22850,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 7
+        "commits": 8
       },
       "byAuthor": {
         "dmundra": {
@@ -22398,7 +22859,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 7
+          "commits": 8
         }
       },
       "weekly": [
@@ -22478,6 +22939,17 @@
             "issues_closed": 0,
             "commits": 1
           }
+        },
+        {
+          "week_start": "2025-08-11",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
         }
       ]
     },
@@ -22490,7 +22962,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 6
+        "commits": 7
       },
       "byAuthor": {
         "dmundra": {
@@ -22499,7 +22971,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 6
+          "commits": 7
         }
       },
       "weekly": [
@@ -22568,6 +23040,17 @@
             "issues_closed": 0,
             "commits": 1
           }
+        },
+        {
+          "week_start": "2025-08-11",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
         }
       ]
     },
@@ -22615,7 +23098,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 16
+        "commits": 17
       },
       "byAuthor": {
         "erichuffman": {
@@ -22624,7 +23107,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 16
+          "commits": 17
         }
       },
       "weekly": [
@@ -22685,6 +23168,17 @@
         },
         {
           "week_start": "2025-04-14",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-06-02",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -22990,7 +23484,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 14
+        "commits": 16
       },
       "byAuthor": {
         "dgading": {
@@ -23007,7 +23501,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 9
+          "commits": 11
         }
       },
       "weekly": [
@@ -23067,6 +23561,17 @@
           }
         },
         {
+          "week_start": "2025-05-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
           "week_start": "2025-06-16",
           "totals": {
             "prs_opened": 0,
@@ -23078,7 +23583,7 @@
           }
         },
         {
-          "week_start": "2025-06-30",
+          "week_start": "2025-06-23",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -23096,7 +23601,7 @@
             "prs_closed": 0,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 2
+            "commits": 1
           }
         },
         {
@@ -23140,6 +23645,17 @@
             "prs_closed": 0,
             "issues_opened": 0,
             "issues_closed": 0,
+            "commits": 2
+          }
+        },
+        {
+          "week_start": "2025-08-11",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
             "commits": 1
           }
         }
@@ -23154,7 +23670,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 8
+        "commits": 15
       },
       "byAuthor": {
         "kellysmith1008": {
@@ -23163,7 +23679,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 1
+          "commits": 2
         },
         "kristenjernigan": {
           "prs_opened": 0,
@@ -23171,7 +23687,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 6
+          "commits": 12
         },
         "thejordanwood": {
           "prs_opened": 0,
@@ -23239,7 +23755,51 @@
           }
         },
         {
-          "week_start": "2025-07-21",
+          "week_start": "2025-06-02",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-06-16",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-06-23",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-07-07",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
+          "week_start": "2025-07-14",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -23247,6 +23807,17 @@
             "issues_opened": 0,
             "issues_closed": 0,
             "commits": 2
+          }
+        },
+        {
+          "week_start": "2025-07-21",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 3
           }
         },
         {
@@ -23298,8 +23869,8 @@
       ]
     },
     {
-      "repo": "mgifford/caart",
-      "spdx": "MIT",
+      "repo": "mgifford/arrm-checklist",
+      "spdx": "GPL-3.0",
       "totals": {
         "prs_opened": 0,
         "prs_merged": 0,
@@ -23320,7 +23891,123 @@
       },
       "weekly": [
         {
+          "week_start": "2025-08-11",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/caart",
+      "spdx": "MIT",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 2
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 2
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-07-21",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
           "week_start": "2025-07-28",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/gh-summary",
+      "spdx": "GPL-3.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 1
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-08-11",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/github-scanner",
+      "spdx": "GPL-3.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 1
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-07-21",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -23356,6 +24043,41 @@
       "weekly": [
         {
           "week_start": "2025-07-28",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
+      "repo": "mgifford/wsg-priority",
+      "spdx": "MIT",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 1
+      },
+      "byAuthor": {
+        "mgifford": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-07-14",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -23411,7 +24133,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 2
+        "commits": 1
       },
       "byAuthor": {
         "brianseek": {
@@ -23420,21 +24142,10 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 2
+          "commits": 1
         }
       },
       "weekly": [
-        {
-          "week_start": "2025-06-09",
-          "totals": {
-            "prs_opened": 0,
-            "prs_merged": 0,
-            "prs_closed": 0,
-            "issues_opened": 0,
-            "issues_closed": 0,
-            "commits": 1
-          }
-        },
         {
           "week_start": "2025-06-23",
           "totals": {
@@ -23449,8 +24160,8 @@
       ]
     },
     {
-      "repo": "openprivacy/fen-blog",
-      "spdx": null,
+      "repo": "openprivacy/cmmc-automation",
+      "spdx": "AGPL-3.0",
       "totals": {
         "prs_opened": 0,
         "prs_merged": 0,
@@ -23471,7 +24182,42 @@
       },
       "weekly": [
         {
-          "week_start": "2025-05-26",
+          "week_start": "2025-07-21",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        }
+      ]
+    },
+    {
+      "repo": "openprivacy/wifi_map",
+      "spdx": "AGPL-3.0",
+      "totals": {
+        "prs_opened": 0,
+        "prs_merged": 0,
+        "prs_closed": 0,
+        "issues_opened": 0,
+        "issues_closed": 0,
+        "commits": 1
+      },
+      "byAuthor": {
+        "openprivacy": {
+          "prs_opened": 0,
+          "prs_merged": 0,
+          "prs_closed": 0,
+          "issues_opened": 0,
+          "issues_closed": 0,
+          "commits": 1
+        }
+      },
+      "weekly": [
+        {
+          "week_start": "2025-06-30",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -23492,7 +24238,7 @@
         "prs_closed": 0,
         "issues_opened": 0,
         "issues_closed": 0,
-        "commits": 14
+        "commits": 16
       },
       "byAuthor": {
         "dgading": {
@@ -23509,7 +24255,7 @@
           "prs_closed": 0,
           "issues_opened": 0,
           "issues_closed": 0,
-          "commits": 9
+          "commits": 11
         }
       },
       "weekly": [
@@ -23569,6 +24315,17 @@
           }
         },
         {
+          "week_start": "2025-05-26",
+          "totals": {
+            "prs_opened": 0,
+            "prs_merged": 0,
+            "prs_closed": 0,
+            "issues_opened": 0,
+            "issues_closed": 0,
+            "commits": 1
+          }
+        },
+        {
           "week_start": "2025-06-16",
           "totals": {
             "prs_opened": 0,
@@ -23580,7 +24337,7 @@
           }
         },
         {
-          "week_start": "2025-06-30",
+          "week_start": "2025-06-23",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -23598,7 +24355,7 @@
             "prs_closed": 0,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 2
+            "commits": 1
           }
         },
         {
@@ -23642,35 +24399,11 @@
             "prs_closed": 0,
             "issues_opened": 0,
             "issues_closed": 0,
-            "commits": 1
+            "commits": 2
           }
-        }
-      ]
-    },
-    {
-      "repo": "tiffneybare/bolt_prompts",
-      "spdx": null,
-      "totals": {
-        "prs_opened": 0,
-        "prs_merged": 0,
-        "prs_closed": 0,
-        "issues_opened": 0,
-        "issues_closed": 0,
-        "commits": 1
-      },
-      "byAuthor": {
-        "tiffneybare": {
-          "prs_opened": 0,
-          "prs_merged": 0,
-          "prs_closed": 0,
-          "issues_opened": 0,
-          "issues_closed": 0,
-          "commits": 1
-        }
-      },
-      "weekly": [
+        },
         {
-          "week_start": "2025-07-14",
+          "week_start": "2025-08-11",
           "totals": {
             "prs_opened": 0,
             "prs_merged": 0,
@@ -32210,9 +32943,9 @@
       "repo": "GetDKAN/cmsds-open-data-components",
       "pr_number": 300,
       "merge_time_hours": 165.44472222222223,
-      "additions": 203,
-      "deletions": 174,
-      "total_changes": 377,
+      "additions": 0,
+      "deletions": 0,
+      "total_changes": 0,
       "was_merged": true,
       "was_closed_without_merge": false
     },
@@ -44359,15 +45092,6 @@
     },
     {
       "week_start": "2025-07-28",
-      "author": "davidmpickett",
-      "repo": "davidmpickett/ufo-50-terminal-code-menu",
-      "issue_number": 1,
-      "labels": [
-        "bug"
-      ]
-    },
-    {
-      "week_start": "2025-07-28",
       "author": "wullaski",
       "repo": "department-of-veterans-affairs/va.gov-team",
       "issue_number": 105134,
@@ -47035,7 +47759,7 @@
     {
       "week_start": "2025-05-26",
       "repo": "CMSgov/design-system",
-      "stars": 354
+      "stars": 355
     },
     {
       "week_start": "2025-05-26",
@@ -47075,12 +47799,12 @@
     {
       "week_start": "2025-05-26",
       "repo": "department-of-veterans-affairs/va.gov-cms",
-      "stars": 110
+      "stars": 111
     },
     {
       "week_start": "2025-05-26",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-05-26",
@@ -47105,7 +47829,7 @@
     {
       "week_start": "2025-06-02",
       "repo": "CMSgov/design-system",
-      "stars": 354
+      "stars": 355
     },
     {
       "week_start": "2025-06-02",
@@ -47165,12 +47889,12 @@
     {
       "week_start": "2025-06-02",
       "repo": "department-of-veterans-affairs/va.gov-cms",
-      "stars": 110
+      "stars": 111
     },
     {
       "week_start": "2025-06-02",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-06-02",
@@ -47230,12 +47954,12 @@
     {
       "week_start": "2025-06-09",
       "repo": "department-of-veterans-affairs/va.gov-cms",
-      "stars": 110
+      "stars": 111
     },
     {
       "week_start": "2025-06-09",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-06-09",
@@ -47260,12 +47984,12 @@
     {
       "week_start": "2025-06-09",
       "repo": "w3c/sustainableweb-wsg",
-      "stars": 37
+      "stars": 39
     },
     {
       "week_start": "2025-06-09",
       "repo": "w3c/wai-arrm",
-      "stars": 12
+      "stars": 13
     },
     {
       "week_start": "2025-06-16",
@@ -47305,7 +48029,7 @@
     {
       "week_start": "2025-06-16",
       "repo": "KonradIT/mmt",
-      "stars": 142
+      "stars": 145
     },
     {
       "week_start": "2025-06-16",
@@ -47320,7 +48044,7 @@
     {
       "week_start": "2025-06-16",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-06-16",
@@ -47340,7 +48064,7 @@
     {
       "week_start": "2025-06-16",
       "repo": "lastpass/lastpass-cli",
-      "stars": 2897
+      "stars": 2900
     },
     {
       "week_start": "2025-06-16",
@@ -47385,7 +48109,7 @@
     {
       "week_start": "2025-06-23",
       "repo": "axismaps/colorbrewer",
-      "stars": 1070
+      "stars": 1075
     },
     {
       "week_start": "2025-06-23",
@@ -47405,12 +48129,12 @@
     {
       "week_start": "2025-06-23",
       "repo": "department-of-veterans-affairs/va.gov-cms",
-      "stars": 110
+      "stars": 111
     },
     {
       "week_start": "2025-06-23",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-06-23",
@@ -47425,7 +48149,7 @@
     {
       "week_start": "2025-06-23",
       "repo": "mastodon/mastodon",
-      "stars": 49755
+      "stars": 49777
     },
     {
       "week_start": "2025-06-23",
@@ -47435,7 +48159,7 @@
     {
       "week_start": "2025-06-23",
       "repo": "reaviz/reaviz",
-      "stars": 1224
+      "stars": 1227
     },
     {
       "week_start": "2025-06-23",
@@ -47450,12 +48174,12 @@
     {
       "week_start": "2025-06-23",
       "repo": "w3c/sustainableweb-wsg",
-      "stars": 37
+      "stars": 39
     },
     {
       "week_start": "2025-06-30",
       "repo": "CMSgov/design-system",
-      "stars": 354
+      "stars": 355
     },
     {
       "week_start": "2025-06-30",
@@ -47490,12 +48214,12 @@
     {
       "week_start": "2025-06-30",
       "repo": "department-of-veterans-affairs/va.gov-cms",
-      "stars": 110
+      "stars": 111
     },
     {
       "week_start": "2025-06-30",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-06-30",
@@ -47510,12 +48234,12 @@
     {
       "week_start": "2025-06-30",
       "repo": "suitenumerique/docs",
-      "stars": 16253
+      "stars": 16287
     },
     {
       "week_start": "2025-06-30",
       "repo": "w3c/wai-arrm",
-      "stars": 12
+      "stars": 13
     },
     {
       "week_start": "2025-07-07",
@@ -47555,12 +48279,12 @@
     {
       "week_start": "2025-07-07",
       "repo": "department-of-veterans-affairs/va.gov-cms",
-      "stars": 110
+      "stars": 111
     },
     {
       "week_start": "2025-07-07",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-07-07",
@@ -47580,12 +48304,12 @@
     {
       "week_start": "2025-07-07",
       "repo": "w3c/sustainableweb-wsg",
-      "stars": 37
+      "stars": 39
     },
     {
       "week_start": "2025-07-07",
       "repo": "w3c/wai-arrm",
-      "stars": 12
+      "stars": 13
     },
     {
       "week_start": "2025-07-14",
@@ -47640,12 +48364,12 @@
     {
       "week_start": "2025-07-14",
       "repo": "department-of-veterans-affairs/va.gov-cms",
-      "stars": 110
+      "stars": 111
     },
     {
       "week_start": "2025-07-14",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-07-14",
@@ -47670,12 +48394,12 @@
     {
       "week_start": "2025-07-14",
       "repo": "w3c/wai-arrm",
-      "stars": 12
+      "stars": 13
     },
     {
       "week_start": "2025-07-21",
       "repo": "CMSgov/design-system",
-      "stars": 354
+      "stars": 355
     },
     {
       "week_start": "2025-07-21",
@@ -47735,12 +48459,12 @@
     {
       "week_start": "2025-07-21",
       "repo": "department-of-veterans-affairs/va.gov-cms",
-      "stars": 110
+      "stars": 111
     },
     {
       "week_start": "2025-07-21",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-07-21",
@@ -47760,7 +48484,7 @@
     {
       "week_start": "2025-07-21",
       "repo": "w3c/wai-arrm",
-      "stars": 12
+      "stars": 13
     },
     {
       "week_start": "2025-07-21",
@@ -47809,18 +48533,13 @@
     },
     {
       "week_start": "2025-07-28",
-      "repo": "davidmpickett/ufo-50-terminal-code-menu",
-      "stars": 0
-    },
-    {
-      "week_start": "2025-07-28",
       "repo": "department-of-veterans-affairs/next-build",
       "stars": 13
     },
     {
       "week_start": "2025-07-28",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-07-28",
@@ -47845,7 +48564,7 @@
     {
       "week_start": "2025-07-28",
       "repo": "pa11y/pa11y-ci",
-      "stars": 592
+      "stars": 593
     },
     {
       "week_start": "2025-07-28",
@@ -47855,7 +48574,7 @@
     {
       "week_start": "2025-07-28",
       "repo": "w3c/wai-arrm",
-      "stars": 12
+      "stars": 13
     },
     {
       "week_start": "2025-08-04",
@@ -47895,7 +48614,7 @@
     {
       "week_start": "2025-08-04",
       "repo": "GovTechSG/oobee",
-      "stars": 154
+      "stars": 155
     },
     {
       "week_start": "2025-08-04",
@@ -47910,12 +48629,12 @@
     {
       "week_start": "2025-08-04",
       "repo": "department-of-veterans-affairs/va.gov-cms",
-      "stars": 110
+      "stars": 111
     },
     {
       "week_start": "2025-08-04",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-08-04",
@@ -47935,17 +48654,17 @@
     {
       "week_start": "2025-08-04",
       "repo": "w3c/sustainableweb-wsg",
-      "stars": 37
+      "stars": 39
     },
     {
       "week_start": "2025-08-04",
       "repo": "w3c/wai-arrm",
-      "stars": 12
+      "stars": 13
     },
     {
       "week_start": "2025-08-11",
       "repo": "CMSgov/design-system",
-      "stars": 354
+      "stars": 355
     },
     {
       "week_start": "2025-08-11",
@@ -48000,12 +48719,12 @@
     {
       "week_start": "2025-08-11",
       "repo": "department-of-veterans-affairs/va.gov-cms",
-      "stars": 110
+      "stars": 111
     },
     {
       "week_start": "2025-08-11",
       "repo": "department-of-veterans-affairs/va.gov-team",
-      "stars": 361
+      "stars": 362
     },
     {
       "week_start": "2025-08-11",
@@ -48035,7 +48754,7 @@
     {
       "week_start": "2025-08-11",
       "repo": "upstash/context7",
-      "stars": 49187
+      "stars": 50215
     },
     {
       "week_start": "2025-08-11",
@@ -48045,7 +48764,7 @@
     {
       "week_start": "2025-08-11",
       "repo": "w3c/wai-arrm",
-      "stars": 12
+      "stars": 13
     }
   ],
   "ecosystems": {
@@ -48073,30 +48792,6 @@
         "topics": []
       },
       {
-        "repo": "CMSgov/design-system",
-        "health_score": null,
-        "maintenance_status": null,
-        "archived": 0,
-        "dependency_count": 0,
-        "dependent_repos_count": 0,
-        "language": "TypeScript",
-        "license": "other",
-        "topics": [
-          "a11y",
-          "civic-tech",
-          "css",
-          "design-system",
-          "dotgov",
-          "government",
-          "government-tech",
-          "guidelines",
-          "react",
-          "sass",
-          "section-508",
-          "utility-classes"
-        ]
-      },
-      {
         "repo": "CivicActions/.github",
         "health_score": null,
         "maintenance_status": null,
@@ -48104,6 +48799,17 @@
         "dependency_count": 0,
         "dependent_repos_count": 0,
         "language": null,
+        "license": "gpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "CivicActions/Drupal-ACR",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
         "license": "gpl-3.0",
         "topics": []
       },
@@ -48117,6 +48823,20 @@
         "language": "JavaScript",
         "license": null,
         "topics": []
+      },
+      {
+        "repo": "CivicActions/FE-drupal-storybook-starterkit",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 1,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "mit",
+        "topics": [
+          "design-system",
+          "storybook"
+        ]
       },
       {
         "repo": "CivicActions/SSP-Flask",
@@ -48153,6 +48873,17 @@
           "personas",
           "vpat"
         ]
+      },
+      {
+        "repo": "CivicActions/accessibility-data-reference",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": "other",
+        "topics": []
       },
       {
         "repo": "CivicActions/action-pyction",
@@ -48199,6 +48930,17 @@
         "topics": []
       },
       {
+        "repo": "CivicActions/ca-jekyll-vanilla",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "other",
+        "topics": []
+      },
+      {
         "repo": "CivicActions/check-my-repo",
         "health_score": null,
         "maintenance_status": null,
@@ -48207,6 +48949,17 @@
         "dependent_repos_count": 0,
         "language": "Vue",
         "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "CivicActions/civic-project-template",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": "other",
         "topics": []
       },
       {
@@ -48253,6 +49006,17 @@
         "dependent_repos_count": 0,
         "language": "Python",
         "license": "cc-by-4.0",
+        "topics": []
+      },
+      {
+        "repo": "CivicActions/moodle-plugin-repo",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": null,
         "topics": []
       },
       {
@@ -48307,6 +49071,28 @@
         "topics": []
       },
       {
+        "repo": "CivicActions/pgov-cms",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 1,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "CivicActions/procurement-coach",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": "other",
+        "topics": []
+      },
+      {
         "repo": "CivicActions/pyction",
         "health_score": null,
         "maintenance_status": null,
@@ -48351,6 +49137,17 @@
         "topics": []
       },
       {
+        "repo": "CivicLabsAlliance/website",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": "mit",
+        "topics": []
+      },
+      {
         "repo": "CivicLabsAlliance/worker-broadcast",
         "health_score": null,
         "maintenance_status": null,
@@ -48359,6 +49156,41 @@
         "dependent_repos_count": 0,
         "language": "JavaScript",
         "license": "agpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "Croftcheck/croftcheck.com",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "SCSS",
+        "license": "other",
+        "topics": [
+          "hacktoberfest"
+        ]
+      },
+      {
+        "repo": "Croftcheck/croftcheck.github.io",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "DuPPadotnet/I2CEncoderV2.1",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "C",
+        "license": "gpl-3.0",
         "topics": []
       },
       {
@@ -48371,6 +49203,23 @@
         "language": null,
         "license": "agpl-3.0",
         "topics": []
+      },
+      {
+        "repo": "GSA/openacr",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "other",
+        "topics": [
+          "a11y",
+          "accessibility",
+          "compliance",
+          "reporting-tool",
+          "vpat"
+        ]
       },
       {
         "repo": "GSA/openacr-editor",
@@ -48392,6 +49241,17 @@
         ]
       },
       {
+        "repo": "GetDKAN/RootedJsonData",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "PHP",
+        "license": "gpl-3.0",
+        "topics": []
+      },
+      {
         "repo": "GetDKAN/cmsds-open-data-components",
         "health_score": null,
         "maintenance_status": null,
@@ -48400,6 +49260,28 @@
         "dependent_repos_count": 0,
         "language": "TypeScript",
         "license": null,
+        "topics": []
+      },
+      {
+        "repo": "GetDKAN/contracts",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "PHP",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "GetDKAN/csv-parser",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "PHP",
+        "license": "gpl-3.0",
         "topics": []
       },
       {
@@ -48423,6 +49305,19 @@
         "language": "JavaScript",
         "license": null,
         "topics": []
+      },
+      {
+        "repo": "GetDKAN/ddev-dkan",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Shell",
+        "license": "apache-2.0",
+        "topics": [
+          "ddev-get"
+        ]
       },
       {
         "repo": "GetDKAN/dkan",
@@ -48464,6 +49359,17 @@
         "topics": []
       },
       {
+        "repo": "GetDKAN/pdlt",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "PHP",
+        "license": "gpl-2.0",
+        "topics": []
+      },
+      {
         "repo": "GetDKAN/recommended-project",
         "health_score": null,
         "maintenance_status": null,
@@ -48473,6 +49379,32 @@
         "language": null,
         "license": null,
         "topics": []
+      },
+      {
+        "repo": "GovTechSG/oobee",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "EJS",
+        "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "HTTPArchive/almanac.httparchive.org",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": "apache-2.0",
+        "topics": [
+          "bigquery",
+          "http-archive",
+          "web-almanac"
+        ]
       },
       {
         "repo": "HTTPArchive/wappalyzer",
@@ -48497,6 +49429,47 @@
         "topics": []
       },
       {
+        "repo": "KarthikeyaKollu/Orian-Ollama-WebUI",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "KonradIT/mmt",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Go",
+        "license": "apache-2.0",
+        "topics": [
+          "action-camera",
+          "android",
+          "camera",
+          "dji",
+          "drones",
+          "gopro",
+          "hero10",
+          "hero11",
+          "hero5",
+          "hero6",
+          "hero7",
+          "hero8",
+          "hero9",
+          "insta360",
+          "linux",
+          "mavic",
+          "media",
+          "telemetry"
+        ]
+      },
+      {
         "repo": "LL4nc33/coop-messenger",
         "health_score": null,
         "maintenance_status": null,
@@ -48519,6 +49492,17 @@
         ]
       },
       {
+        "repo": "Martinalberdi/martinalberdi.github.io",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "SCSS",
+        "license": "cc0-1.0",
+        "topics": []
+      },
+      {
         "repo": "OpenATO/website",
         "health_score": null,
         "maintenance_status": null,
@@ -48527,6 +49511,28 @@
         "dependent_repos_count": 0,
         "language": "JavaScript",
         "license": "other",
+        "topics": []
+      },
+      {
+        "repo": "OpenConceptConsulting/OpenConcept",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "Purple-Lotus-Agency/bolt_prompts",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Shell",
+        "license": null,
         "topics": []
       },
       {
@@ -48541,6 +49547,98 @@
         "topics": []
       },
       {
+        "repo": "TheBoatyMcBoatFace/allusgov",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Python",
+        "license": "gpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "TheBoatyMcBoatFace/explore-ghosts",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Python",
+        "license": "agpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "TheBoatyMcBoatFace/homebrew-swiftDialog",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Ruby",
+        "license": "agpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "TheBoatyMcBoatFace/nifty-cli",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Shell",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "TheBoatyMcBoatFace/upptime",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JSON",
+        "license": "mit",
+        "topics": [
+          "status-page",
+          "upptime",
+          "uptime-monitor"
+        ]
+      },
+      {
+        "repo": "Tom-Camp/data",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Python",
+        "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "Tom-Camp/fe",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Python",
+        "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "Tom-Camp/rfm_receiver",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Python",
+        "license": "mit",
+        "topics": []
+      },
+      {
         "repo": "Tom-Camp/tom.camp-flask",
         "health_score": null,
         "maintenance_status": null,
@@ -48549,6 +49647,39 @@
         "dependent_repos_count": 0,
         "language": "CSS",
         "license": "gpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "TugboatQA/drupal",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Makefile",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "accessibility-luxembourg/simplA11yPDFCrawler",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Python",
+        "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "axismaps/colorbrewer",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "apache-2.0",
         "topics": []
       },
       {
@@ -48582,6 +49713,28 @@
         ]
       },
       {
+        "repo": "brentonkelly1982/repiit-website",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "brianseek/seek.photo",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "CSS",
+        "license": "mit",
+        "topics": []
+      },
+      {
         "repo": "cameronprince/mptcc",
         "health_score": null,
         "maintenance_status": null,
@@ -48590,6 +49743,153 @@
         "dependent_repos_count": 0,
         "language": "Python",
         "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "ckan/ckan-docker",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Shell",
+        "license": null,
+        "topics": [
+          "ckan",
+          "docker",
+          "docker-compose"
+        ]
+      },
+      {
+        "repo": "ckeditor/github-writer",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 1,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "other",
+        "topics": []
+      },
+      {
+        "repo": "codeforamerica/asap_pdf",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Ruby",
+        "license": "apache-2.0",
+        "topics": []
+      },
+      {
+        "repo": "compliance-framework/docs",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "agpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "dafeder/dotfiles",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Shell",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "dafeder/op-clickhouse",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "PHP",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "dafeder/phpcov-rewrite",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "PHP",
+        "license": "gpl-2.0",
+        "topics": []
+      },
+      {
+        "repo": "dasumner/ai-for-public-schools",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "dasumner/business-continuity-playbook",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": "other",
+        "topics": []
+      },
+      {
+        "repo": "dasumner/business-continuity-service-delivery",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "dasumner/hcde-ai-usage",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": "other",
+        "topics": []
+      },
+      {
+        "repo": "davidmpickett/ufo-50-campanella-coffee",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "davidmpickett/ufo50-caramel-health",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": null,
         "topics": []
       },
       {
@@ -48625,6 +49925,19 @@
         "license": "apache-2.0",
         "topics": [
           "ddev-get"
+        ]
+      },
+      {
+        "repo": "department-of-veterans-affairs/content-build",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "cc0-1.0",
+        "topics": [
+          "platform"
         ]
       },
       {
@@ -48696,6 +50009,54 @@
         ]
       },
       {
+        "repo": "dequelabs/axe-core",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "mpl-2.0",
+        "topics": [
+          "a11y",
+          "accessibility",
+          "axe"
+        ]
+      },
+      {
+        "repo": "distributedteams/website",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": "gpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "dmundra/danielmundra.com",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Ruby",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "dmundra/github-token-tracking",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "PHP",
+        "license": null,
+        "topics": []
+      },
+      {
         "repo": "dmundra/medievalelbe-hostinger",
         "health_score": null,
         "maintenance_status": null,
@@ -48740,6 +50101,31 @@
         "topics": []
       },
       {
+        "repo": "drydockcloud/ci-phpcbf",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Dockerfile",
+        "license": "gpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "erichuffman/lighthouse-dashboard",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": "mit",
+        "topics": [
+          "lighthouse",
+          "reactjs"
+        ]
+      },
+      {
         "repo": "foreops/foreops",
         "health_score": null,
         "maintenance_status": null,
@@ -48748,6 +50134,76 @@
         "dependent_repos_count": 0,
         "language": "HTML",
         "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "frictionlessdata/datapackage",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "MDX",
+        "license": "unlicense",
+        "topics": [
+          "csv",
+          "data-science",
+          "json",
+          "metadata",
+          "schema",
+          "validation"
+        ]
+      },
+      {
+        "repo": "github/government.github.com",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": null,
+        "topics": [
+          "government",
+          "open-government",
+          "stories"
+        ]
+      },
+      {
+        "repo": "harlan-zw/unlighthouse",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "mit",
+        "topics": [
+          "google-lighthouse",
+          "puppeteer",
+          "site-audit"
+        ]
+      },
+      {
+        "repo": "ilbee/csv-response",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "PHP",
+        "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "iris-i/git-cms",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "TypeScript",
+        "license": null,
         "topics": []
       },
       {
@@ -48760,6 +50216,21 @@
         "language": null,
         "license": "mit",
         "topics": []
+      },
+      {
+        "repo": "jekyll/minima",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "SCSS",
+        "license": "mit",
+        "topics": [
+          "jekyll",
+          "jekyll-theme",
+          "jekyll-themes"
+        ]
       },
       {
         "repo": "jerseycheese/Narraitor",
@@ -48786,6 +50257,39 @@
         ]
       },
       {
+        "repo": "kellysmith1008/Refresh",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "kmoylanCA/km-vets-website",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "cc0-1.0",
+        "topics": []
+      },
+      {
+        "repo": "kristenjernigan/kj-liatest",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": null,
+        "topics": []
+      },
+      {
         "repo": "lastpass/lastpass-cli",
         "health_score": null,
         "maintenance_status": null,
@@ -48794,6 +50298,46 @@
         "dependent_repos_count": 0,
         "language": "C",
         "license": "gpl-2.0",
+        "topics": []
+      },
+      {
+        "repo": "marijohannessen/color-contrast-checker",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": null,
+        "topics": []
+      },
+      {
+        "repo": "mgifford/apca-wcag2",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "gpl-3.0",
+        "topics": [
+          "apca",
+          "apca-w3",
+          "color-contrast",
+          "wcag",
+          "wcag-aa",
+          "wcag-contrast"
+        ]
+      },
+      {
+        "repo": "mgifford/arrm-checklist",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": "gpl-3.0",
         "topics": []
       },
       {
@@ -48808,6 +50352,28 @@
         "topics": []
       },
       {
+        "repo": "mgifford/gh-summary",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "gpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "mgifford/github-scanner",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "gpl-3.0",
+        "topics": []
+      },
+      {
         "repo": "mgifford/ox.ca",
         "health_score": null,
         "maintenance_status": null,
@@ -48819,6 +50385,28 @@
         "topics": [
           "personal-website"
         ]
+      },
+      {
+        "repo": "mgifford/print-css-bookmarklet",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "CSS",
+        "license": "gpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "mgifford/wsg-priority",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": "mit",
+        "topics": []
       },
       {
         "repo": "micaherne/moodle-plugin-repo",
@@ -48871,6 +50459,39 @@
         "topics": []
       },
       {
+        "repo": "oddballteam/arc-content-build",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "JavaScript",
+        "license": "cc0-1.0",
+        "topics": []
+      },
+      {
+        "repo": "openprivacy/cmmc-automation",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": null,
+        "license": "agpl-3.0",
+        "topics": []
+      },
+      {
+        "repo": "openprivacy/wifi_map",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Python",
+        "license": "agpl-3.0",
+        "topics": []
+      },
+      {
         "repo": "opis/json-schema",
         "health_score": null,
         "maintenance_status": null,
@@ -48913,7 +50534,37 @@
         ]
       },
       {
+        "repo": "pages-themes/cayman",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "SCSS",
+        "license": "cc0-1.0",
+        "topics": [
+          "github-pages",
+          "jekyll",
+          "jekyll-theme"
+        ]
+      },
+      {
         "repo": "pages-themes/dinky",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "SCSS",
+        "license": "cc0-1.0",
+        "topics": [
+          "github-pages",
+          "jekyll",
+          "jekyll-theme"
+        ]
+      },
+      {
+        "repo": "pages-themes/leap-day",
         "health_score": null,
         "maintenance_status": null,
         "archived": 0,
@@ -48973,6 +50624,21 @@
         ]
       },
       {
+        "repo": "pages-themes/modernist",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "SCSS",
+        "license": "cc0-1.0",
+        "topics": [
+          "github-pages",
+          "jekyll",
+          "jekyll-theme"
+        ]
+      },
+      {
         "repo": "pages-themes/primer",
         "health_score": null,
         "maintenance_status": null,
@@ -48981,6 +50647,21 @@
         "dependent_repos_count": 0,
         "language": "SCSS",
         "license": "mit",
+        "topics": [
+          "github-pages",
+          "jekyll",
+          "jekyll-theme"
+        ]
+      },
+      {
+        "repo": "pages-themes/slate",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "SCSS",
+        "license": "cc0-1.0",
         "topics": [
           "github-pages",
           "jekyll",
@@ -49003,6 +50684,53 @@
         ]
       },
       {
+        "repo": "pages-themes/time-machine",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "SCSS",
+        "license": "cc0-1.0",
+        "topics": [
+          "github-pages",
+          "jekyll",
+          "jekyll-theme"
+        ]
+      },
+      {
+        "repo": "reaviz/reaviz",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "TypeScript",
+        "license": "apache-2.0",
+        "topics": [
+          "area-charts",
+          "bar-charts",
+          "bubble-chart",
+          "charting-library",
+          "charts",
+          "d3",
+          "d3js",
+          "data-visualization",
+          "data-viz",
+          "funnel-chart",
+          "heatmap",
+          "line-charts",
+          "react",
+          "reactjs",
+          "sankey-chart",
+          "scatter-plot",
+          "sparkline",
+          "sunburst-chart",
+          "treemap",
+          "venn-diagram"
+        ]
+      },
+      {
         "repo": "reaviz/reaviz-website",
         "health_score": null,
         "maintenance_status": null,
@@ -49010,6 +50738,96 @@
         "dependency_count": 0,
         "dependent_repos_count": 0,
         "language": "TypeScript",
+        "license": "apache-2.0",
+        "topics": []
+      },
+      {
+        "repo": "rectorphp/rector",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "PHP",
+        "license": "mit",
+        "topics": [
+          "ast",
+          "automated-upgrades",
+          "instant-upgrades",
+          "php",
+          "rector",
+          "upgrade"
+        ]
+      },
+      {
+        "repo": "saucelabs/check-my-repo",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Vue",
+        "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "sharjeelaziz/email-ntfy",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "TypeScript",
+        "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "sharjeelaziz/foss-presentation",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "CSS",
+        "license": "mit",
+        "topics": []
+      },
+      {
+        "repo": "suitenumerique/docs",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Python",
+        "license": "mit",
+        "topics": [
+          "blocknotejs",
+          "collaborative",
+          "django",
+          "documentation",
+          "g2g",
+          "government",
+          "knowledge",
+          "knowledge-base",
+          "mit",
+          "mit-license",
+          "opensource",
+          "reactjs",
+          "realtime-collaboration",
+          "self-hosted",
+          "wiki",
+          "yjs"
+        ]
+      },
+      {
+        "repo": "thegreenwebfoundation/carbon-txt-site",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "Svelte",
         "license": "apache-2.0",
         "topics": []
       },
@@ -49040,6 +50858,50 @@
           "mcp",
           "mcp-server",
           "vibe-coding"
+        ]
+      },
+      {
+        "repo": "usds/ditap-curriculum-update",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "MDX",
+        "license": "other",
+        "topics": [
+          "liascript",
+          "liascript-course"
+        ]
+      },
+      {
+        "repo": "uswds/uswds",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "SCSS",
+        "license": "other",
+        "topics": [
+          "design",
+          "design-systems",
+          "government",
+          "uswds"
+        ]
+      },
+      {
+        "repo": "w3c/sustainableweb-wsg",
+        "health_score": null,
+        "maintenance_status": null,
+        "archived": 0,
+        "dependency_count": 0,
+        "dependent_repos_count": 0,
+        "language": "HTML",
+        "license": "other",
+        "topics": [
+          "guidelines",
+          "sustainability"
         ]
       },
       {
@@ -49078,14 +50940,6 @@
     ],
     "issue_stats": [
       {
-        "repo": "CMSgov/design-system",
-        "total_issues": 58,
-        "open_issues": 0,
-        "closed_issues": 0,
-        "avg_time_to_close": 21599082.4,
-        "avg_comments_per_issue": 2.3275862068965516
-      },
-      {
         "repo": "CivicActions/.github",
         "total_issues": 0,
         "open_issues": 0,
@@ -49094,15 +50948,7 @@
         "avg_comments_per_issue": null
       },
       {
-        "repo": "CivicActions/FE-component-library",
-        "total_issues": 0,
-        "open_issues": 0,
-        "closed_issues": 0,
-        "avg_time_to_close": null,
-        "avg_comments_per_issue": null
-      },
-      {
-        "repo": "CivicActions/FE-drupal-storybook-starterkit",
+        "repo": "CivicActions/Drupal-ACR",
         "total_issues": 0,
         "open_issues": 0,
         "closed_issues": 0,
@@ -49124,14 +50970,6 @@
         "closed_issues": 0,
         "avg_time_to_close": 3330144.6666666665,
         "avg_comments_per_issue": 0.6363636363636364
-      },
-      {
-        "repo": "CivicActions/accessibility-data-reference",
-        "total_issues": 1,
-        "open_issues": 0,
-        "closed_issues": 0,
-        "avg_time_to_close": 2517455,
-        "avg_comments_per_issue": 2
       },
       {
         "repo": "CivicActions/ai-crawl-analysis",
@@ -49228,14 +51066,6 @@
         "closed_issues": 0,
         "avg_time_to_close": 15372,
         "avg_comments_per_issue": 0.3333333333333333
-      },
-      {
-        "repo": "CivicActions/pgov-cms",
-        "total_issues": 1,
-        "open_issues": 0,
-        "closed_issues": 0,
-        "avg_time_to_close": 318585,
-        "avg_comments_per_issue": null
       },
       {
         "repo": "CivicActions/pyction",
@@ -49638,6 +51468,14 @@
         "avg_comments_per_issue": null
       },
       {
+        "repo": "dafeder/op-clickhouse",
+        "total_issues": 0,
+        "open_issues": 0,
+        "closed_issues": 0,
+        "avg_time_to_close": null,
+        "avg_comments_per_issue": null
+      },
+      {
         "repo": "dafeder/phpcov-rewrite",
         "total_issues": 0,
         "open_issues": 0,
@@ -49655,14 +51493,6 @@
       },
       {
         "repo": "dasumner/hcde-ai-usage",
-        "total_issues": 0,
-        "open_issues": 0,
-        "closed_issues": 0,
-        "avg_time_to_close": null,
-        "avg_comments_per_issue": null
-      },
-      {
-        "repo": "davidmpickett/ufo-50-terminal-code-menu",
         "total_issues": 0,
         "open_issues": 0,
         "closed_issues": 0,
@@ -49743,6 +51573,14 @@
       },
       {
         "repo": "dmundra/danielmundra.com",
+        "total_issues": 0,
+        "open_issues": 0,
+        "closed_issues": 0,
+        "avg_time_to_close": null,
+        "avg_comments_per_issue": null
+      },
+      {
+        "repo": "dmundra/github-token-tracking",
         "total_issues": 0,
         "open_issues": 0,
         "closed_issues": 0,
@@ -49894,7 +51732,31 @@
         "avg_comments_per_issue": null
       },
       {
+        "repo": "mgifford/arrm-checklist",
+        "total_issues": 0,
+        "open_issues": 0,
+        "closed_issues": 0,
+        "avg_time_to_close": null,
+        "avg_comments_per_issue": null
+      },
+      {
         "repo": "mgifford/caart",
+        "total_issues": 0,
+        "open_issues": 0,
+        "closed_issues": 0,
+        "avg_time_to_close": null,
+        "avg_comments_per_issue": null
+      },
+      {
+        "repo": "mgifford/gh-summary",
+        "total_issues": 0,
+        "open_issues": 0,
+        "closed_issues": 0,
+        "avg_time_to_close": null,
+        "avg_comments_per_issue": null
+      },
+      {
+        "repo": "mgifford/github-scanner",
         "total_issues": 0,
         "open_issues": 0,
         "closed_issues": 0,
@@ -49911,6 +51773,14 @@
       },
       {
         "repo": "mgifford/print-css-bookmarklet",
+        "total_issues": 0,
+        "open_issues": 0,
+        "closed_issues": 0,
+        "avg_time_to_close": null,
+        "avg_comments_per_issue": null
+      },
+      {
+        "repo": "mgifford/wsg-priority",
         "total_issues": 0,
         "open_issues": 0,
         "closed_issues": 0,
@@ -49946,11 +51816,27 @@
         "total_issues": 239,
         "open_issues": 0,
         "closed_issues": 0,
-        "avg_time_to_close": 21920585.78125,
+        "avg_time_to_close": 21761644.178294573,
         "avg_comments_per_issue": 5.7615062761506275
       },
       {
         "repo": "oddballteam/arc-content-build",
+        "total_issues": 0,
+        "open_issues": 0,
+        "closed_issues": 0,
+        "avg_time_to_close": null,
+        "avg_comments_per_issue": null
+      },
+      {
+        "repo": "openprivacy/cmmc-automation",
+        "total_issues": 0,
+        "open_issues": 0,
+        "closed_issues": 0,
+        "avg_time_to_close": null,
+        "avg_comments_per_issue": null
+      },
+      {
+        "repo": "openprivacy/wifi_map",
         "total_issues": 0,
         "open_issues": 0,
         "closed_issues": 0,
@@ -50163,7 +52049,7 @@
         "open_issues": 0,
         "closed_issues": 0,
         "avg_time_to_close": 18628034.168865435,
-        "avg_comments_per_issue": 1.2118834080717489
+        "avg_comments_per_issue": 1.2130044843049328
       },
       {
         "repo": "w3c/sustainableweb-wsg",
@@ -50473,6 +52359,13 @@
         "last_commit_at": null
       },
       {
+        "repo": "dmundra/github-token-tracking",
+        "total_commits": 0,
+        "total_committers": 0,
+        "avg_commits_per_week": null,
+        "last_commit_at": null
+      },
+      {
         "repo": "dmundra/medievalelbe-hostinger",
         "total_commits": 0,
         "total_committers": 0,
@@ -50572,6 +52465,20 @@
       },
       {
         "repo": "moment/moment",
+        "total_commits": 0,
+        "total_committers": 0,
+        "avg_commits_per_week": null,
+        "last_commit_at": null
+      },
+      {
+        "repo": "openprivacy/cmmc-automation",
+        "total_commits": 0,
+        "total_committers": 0,
+        "avg_commits_per_week": null,
+        "last_commit_at": null
+      },
+      {
+        "repo": "openprivacy/wifi_map",
         "total_commits": 0,
         "total_committers": 0,
         "avg_commits_per_week": null,
