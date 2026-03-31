@@ -174,6 +174,10 @@ db.exec(`
     key TEXT PRIMARY KEY,
     value TEXT
   );
+  CREATE TABLE IF NOT EXISTS weeks_collected (
+    week_start TEXT PRIMARY KEY,
+    collected_at TEXT
+  );
 `);
 
 // Create Ecosyste.ms tables
@@ -188,6 +192,20 @@ const getMeta = (key) => {
 
 const setMeta = (key, value) => {
   db.prepare('INSERT OR REPLACE INTO meta (key, value) VALUES (?, ?)').run(key, value);
+};
+
+const isWeekCollected = (weekStart) => {
+  const row = db.prepare('SELECT 1 FROM weeks_collected WHERE week_start = ?').get(weekStart);
+  return !!row;
+};
+
+const markWeekCollected = (weekStart) => {
+  db.prepare('INSERT OR REPLACE INTO weeks_collected (week_start, collected_at) VALUES (?, ?)')
+    .run(weekStart, new Date().toISOString());
+};
+
+const clearWeekCollected = (weekStart) => {
+  db.prepare('DELETE FROM weeks_collected WHERE week_start = ?').run(weekStart);
 };
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -261,46 +279,103 @@ async function run() {
   const currentWeekStart = getMonday(now);
   const lastCompleteWeekStart = addDays(currentWeekStart, -7);
 
-  let processedThrough = getMeta('processed_through_week');
-  let startProcessingDate;
+  // The earliest week we ever want to collect (configurable history window).
+  const historyStart = getMonday(addDays(lastCompleteWeekStart, -HISTORY_WEEKS * 7));
+
+  // -----------------------------------------------------------------------
+  // Migrate old linear watermark → per-week tracking (runs once on upgrade)
+  // -----------------------------------------------------------------------
+  const processedThrough = getMeta('processed_through_week');
+  const collectedCount = db.prepare('SELECT COUNT(*) as c FROM weeks_collected').get().c;
+  if (processedThrough && collectedCount === 0) {
+    console.log(`Migrating watermark ${processedThrough} → weeks_collected table…`);
+    const watermarkDate = new Date(processedThrough);
+    const insertMig = db.prepare('INSERT OR IGNORE INTO weeks_collected (week_start, collected_at) VALUES (?, ?)');
+    const migNow = new Date().toISOString();
+    const doMigrate = db.transaction(() => {
+      let p = getMonday(historyStart);
+      while (p.getTime() <= watermarkDate.getTime()) {
+        insertMig.run(toISODate(p), migNow);
+        p = addDays(p, 7);
+      }
+    });
+    doMigrate();
+    console.log(`Migration complete.`);
+  }
+
+  // -----------------------------------------------------------------------
+  // Handle reprocess overrides: clear weeks_collected for the target range
+  // so they will be re-fetched from the API.
+  // -----------------------------------------------------------------------
+  let reprocessStart = null;
+  const reprocessEnd = lastCompleteWeekStart;
 
   if (reprocessFromWeekEnv) {
-    const candidate = new Date(reprocessFromWeekEnv);
+    const candidate = getMonday(new Date(reprocessFromWeekEnv));
     if (Number.isNaN(candidate.getTime())) {
-      console.warn(`REPROCESS_FROM_WEEK is invalid (${reprocessFromWeekEnv}); falling back to history/meta.`);
+      console.warn(`REPROCESS_FROM_WEEK is invalid (${reprocessFromWeekEnv}); ignoring.`);
     } else {
-      startProcessingDate = candidate;
-      console.log(`Reprocessing from week override: ${toISODate(startProcessingDate)}`);
+      reprocessStart = candidate;
+      console.log(`Reprocessing from week override: ${toISODate(reprocessStart)}`);
     }
   }
 
-  if (!startProcessingDate && parsedReprocessWeeks > 0) {
-    startProcessingDate = addDays(lastCompleteWeekStart, -parsedReprocessWeeks * 7);
+  if (!reprocessStart && parsedReprocessWeeks > 0) {
+    reprocessStart = addDays(lastCompleteWeekStart, -parsedReprocessWeeks * 7);
     console.log(`Reprocessing last ${parsedReprocessWeeks} weeks.`);
   }
 
-  if (!startProcessingDate && !processedThrough) {
-    console.log(`No history found. Defaulting to ${HISTORY_WEEKS} weeks ago.`);
-    startProcessingDate = addDays(lastCompleteWeekStart, -HISTORY_WEEKS * 7);
-  } else if (!startProcessingDate) {
-    startProcessingDate = addDays(new Date(processedThrough), 7);
+  if (reprocessStart) {
+    // Clear per-week tracking for the affected range so they are re-collected
+    const clearRange = db.transaction(() => {
+      let p = getMonday(reprocessStart);
+      while (p.getTime() <= reprocessEnd.getTime()) {
+        clearWeekCollected(toISODate(p));
+        p = addDays(p, 7);
+      }
+    });
+    clearRange();
+    console.log(`Cleared weeks_collected for range ${toISODate(reprocessStart)}..${toISODate(reprocessEnd)}.`);
+  }
+
+  // -----------------------------------------------------------------------
+  // Build the ordered list of weeks to process (newest-first), skipping any
+  // week that has already been fully collected.
+  // -----------------------------------------------------------------------
+  const weeksPending = [];
+  {
+    let p = lastCompleteWeekStart;
+    while (p.getTime() >= historyStart.getTime()) {
+      const ws = toISODate(p);
+      if (!isWeekCollected(ws)) {
+        weeksPending.push(ws);
+      }
+      p = addDays(p, -7);
+    }
   }
 
   console.log(`Last complete week start: ${toISODate(lastCompleteWeekStart)}`);
-  console.log(`Start processing from: ${toISODate(startProcessingDate)}`);
+  console.log(`History start: ${toISODate(historyStart)} (${HISTORY_WEEKS} weeks)`);
   console.log(`Org allowlist: ${ORG_ALLOWLIST.join(', ')}`);
   console.log(`Staff allowlist size: ${staffAllowList.length}`);
+  const totalInWindow = db.prepare('SELECT COUNT(*) as c FROM weeks_collected WHERE week_start >= ? AND week_start <= ?')
+    .get(toISODate(historyStart), toISODate(lastCompleteWeekStart)).c;
+  console.log(`Weeks already collected in window: ${totalInWindow}`);
+  console.log(`Weeks pending in window: ${weeksPending.length}`);
   console.log(`Max weeks this run: ${MAX_WEEKS_PER_RUN}`);
 
-  let pointer = startProcessingDate;
+  if (weeksPending.length === 0) {
+    console.log('All weeks in the history window are up to date. Nothing to do.');
+  }
+
   let weeksThisRun = 0;
-  while (pointer <= lastCompleteWeekStart) {
+  for (const weekStartStr of weeksPending) {
     if (weeksThisRun >= MAX_WEEKS_PER_RUN) {
       console.log(`Reached MAX_WEEKS_PER_RUN=${MAX_WEEKS_PER_RUN}; stop here and resume next run.`);
       break;
     }
 
-    const weekStartStr = toISODate(pointer);
+    const pointer = new Date(weekStartStr);
     const weekEnd = addDays(pointer, 7); 
     const rangeStart = pointer.toISOString();
     const rangeEnd = new Date(weekEnd.getTime() - 1).toISOString(); 
@@ -340,8 +415,10 @@ async function run() {
       await processWorkflowRuns(weekStartStr, rangeStart, rangeEnd);
     }
 
+    markWeekCollected(weekStartStr);
+    // Keep the legacy watermark updated to the most recently processed week for
+    // backward compatibility with any tooling that reads it.
     setMeta('processed_through_week', weekStartStr);
-    pointer = addDays(pointer, 7);
     weeksThisRun++;
   }
 
