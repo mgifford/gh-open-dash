@@ -273,6 +273,10 @@ function App() {
       pushDataset(metric, opt.label || metric);
     }
 
+    // `authors` retains the full unfiltered list so the total-contributors count
+    // remains accurate regardless of the active contributor type filter.
+    // `visibleAuthors` contains only the filtered subset used by the Person
+    // dropdown and chart aggregation.
     return { leaderboard, chartData, authors: data.authors, visibleAuthors, staffSet, orgRepos, orgHasData, effectiveOrg, dataOrgs, filteredData };
   }, [data, metric, range, selectedAuthor, currentOrg, contributorType]);
 
