@@ -340,47 +340,54 @@ function App() {
 
       <Hero config={config} />
 
-      {processedData.effectiveOrg !== currentOrg && (
-        <div className="org-mismatch-banner" role="alert">
-          <strong>No data found for organization &ldquo;{currentOrg}&rdquo;</strong>
-          <p>
-            Showing data for <strong>{processedData.effectiveOrg}</strong> instead.
-            {processedData.dataOrgs.length > 0 && (
-              <> This dataset contains data for: <strong>{processedData.dataOrgs.join(', ')}</strong>.</>
-            )}
-          </p>
-          <p>To add <strong>{currentOrg}</strong> to the dashboard, choose one of these options:</p>
-          <ol>
-            <li>
-              <strong>Request via GitHub issue</strong> — open an issue in this repository
-              titled <code>SCAN: {currentOrg}</code> and a GitHub Action will automatically
-              collect and publish the data.
-              {config?.githubRepo && (
-                <>
-                  {' '}
-                  <a
-                    href={`https://github.com/${config.githubRepo}/issues/new?title=${encodeURIComponent(`SCAN: ${currentOrg}`)}&body=${encodeURIComponent(`Please add contribution metrics for the **${currentOrg}** GitHub organization to the dashboard.`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Open a GitHub issue to request scanning of ${currentOrg} (opens in new tab)`}
-                  >
-                    Open issue now ↗
-                  </a>
-                </>
+      {processedData.effectiveOrg !== currentOrg && (() => {
+        const scanIssueTitle = `SCAN: ${currentOrg}`;
+        const scanIssueBody = `Please add contribution metrics for the **${currentOrg}** GitHub organization to the dashboard.`;
+        const scanIssueUrl = config?.githubRepo
+          ? `https://github.com/${config.githubRepo}/issues/new?title=${encodeURIComponent(scanIssueTitle)}&body=${encodeURIComponent(scanIssueBody)}`
+          : null;
+        return (
+          <div className="org-mismatch-banner" role="alert">
+            <strong>No data found for organization &ldquo;{currentOrg}&rdquo;</strong>
+            <p>
+              Showing data for <strong>{processedData.effectiveOrg}</strong> instead.
+              {processedData.dataOrgs.length > 0 && (
+                <> This dataset contains data for: <strong>{processedData.dataOrgs.join(', ')}</strong>.</>
               )}
-            </li>
-            <li>
-              <strong>Add manually</strong> — add <code>{currentOrg}</code> to{' '}
-              <code>orgAllowlist</code> in <code>scripts/config.json</code> and
-              re-run the data pipeline:
-              <br />
-              <code className="org-mismatch-banner__cmd">
-                node scripts/update_sqlite.mjs &amp;&amp; node scripts/export_metrics.mjs
-              </code>
-            </li>
-          </ol>
-        </div>
-      )}
+            </p>
+            <p>To add <strong>{currentOrg}</strong> to the dashboard, choose one of these options:</p>
+            <ol>
+              <li>
+                <strong>Request via GitHub issue</strong> — open an issue in this repository
+                titled <code>{scanIssueTitle}</code> and a GitHub Action will automatically
+                collect and publish the data.
+                {scanIssueUrl && (
+                  <>
+                    {' '}
+                    <a
+                      href={scanIssueUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open a GitHub issue to request scanning of ${currentOrg} (opens in new tab)`}
+                    >
+                      Open issue now ↗
+                    </a>
+                  </>
+                )}
+              </li>
+              <li>
+                <strong>Add manually</strong> — add <code>{currentOrg}</code> to{' '}
+                <code>orgAllowlist</code> in <code>scripts/config.json</code> and
+                re-run the data pipeline:
+                <br />
+                <code className="org-mismatch-banner__cmd">
+                  node scripts/update_sqlite.mjs &amp;&amp; node scripts/export_metrics.mjs
+                </code>
+              </li>
+            </ol>
+          </div>
+        );
+      })()}
 
       {view === 'dashboard' && (
         <>

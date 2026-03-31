@@ -17,9 +17,10 @@ jobs:
     steps:
       - name: Check if title starts with SCAN
         id: check
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
         run: |
-          TITLE="${{ github.event.issue.title }}"
-          if echo "$TITLE" | grep -qiE '^SCAN[[:space:]]*:'; then
+          if echo "$ISSUE_TITLE" | grep -qiE '^SCAN[[:space:]]*:'; then
             echo "is-scan=true" >> "$GITHUB_OUTPUT"
           else
             echo "is-scan=false" >> "$GITHUB_OUTPUT"
@@ -28,10 +29,11 @@ jobs:
       - name: Parse org name from title
         id: parse
         if: steps.check.outputs.is-scan == 'true'
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
         run: |
-          TITLE="${{ github.event.issue.title }}"
           # Strip the "SCAN:" prefix (case-insensitive) and surrounding whitespace
-          ORG=$(printf '%s' "$TITLE" | sed 's/^[Ss][Cc][Aa][Nn][[:space:]]*://; s/^[[:space:]]*//; s/[[:space:]]*$//' | tr '[:upper:]' '[:lower:]')
+          ORG=$(printf '%s' "$ISSUE_TITLE" | sed 's/^[Ss][Cc][Aa][Nn][[:space:]]*://; s/^[[:space:]]*//; s/[[:space:]]*$//' | tr '[:upper:]' '[:lower:]')
           # Validate: must start with alphanumeric, only letters/numbers/hyphens/underscores
           if echo "$ORG" | grep -qE '^[a-z0-9][a-z0-9_-]*$'; then
             echo "org=$ORG" >> "$GITHUB_OUTPUT"
@@ -69,6 +71,11 @@ jobs:
     needs: parse-title
     if: needs.parse-title.outputs.is-scan == 'true' && needs.parse-title.outputs.org != ''
     runs-on: ubuntu-latest
+    # Build the combined allowlist once at the job level to avoid duplication
+    env:
+      # GH_READ_ORG_TOKEN is an optional PAT with read:org scope for higher rate limits;
+      # falls back to the default GITHUB_TOKEN if not set.
+      COMBINED_ORG_ALLOWLIST: "${{ vars.ORG_ALLOWLIST || 'civicactions' }},${{ needs.parse-title.outputs.org }}"
     steps:
       - uses: actions/checkout@v4
 
@@ -92,8 +99,16 @@ jobs:
           restore-keys: |
             participation-data-
 
-      - name: Write empty staff allowlist
-        run: echo "[]" > scripts/staff_allowlist.json
+      - name: Write staff allowlist from secret (or empty)
+        run: |
+          if [ -z "${STAFF_ALLOWLIST_JSON}" ]; then
+            echo "STAFF_ALLOWLIST_JSON not set; writing empty list" >&2
+            echo "[]" > scripts/staff_allowlist.json
+          else
+            printf '%s\n' "${STAFF_ALLOWLIST_JSON}" > scripts/staff_allowlist.json
+          fi
+        env:
+          STAFF_ALLOWLIST_JSON: ${{ secrets.STAFF_ALLOWLIST_JSON }}
 
       - name: Add org to scripts/config.json allowlist
         env:
@@ -115,30 +130,34 @@ jobs:
       - name: Collect data for requested org
         env:
           GITHUB_TOKEN: ${{ secrets.GH_READ_ORG_TOKEN || secrets.GITHUB_TOKEN }}
-          # Include both the existing allowlist and the newly requested org
-          ORG_ALLOWLIST: "${{ vars.ORG_ALLOWLIST || 'civicactions' }},${{ needs.parse-title.outputs.org }}"
+          ORG_ALLOWLIST: ${{ env.COMBINED_ORG_ALLOWLIST }}
           HISTORY_WEEKS: ${{ vars.HISTORY_WEEKS || 52 }}
           MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 12 }}
         run: node scripts/update_sqlite.mjs
 
       - name: Export metrics
         env:
-          ORG_ALLOWLIST: "${{ vars.ORG_ALLOWLIST || 'civicactions' }},${{ needs.parse-title.outputs.org }}"
+          ORG_ALLOWLIST: ${{ env.COMBINED_ORG_ALLOWLIST }}
         run: node scripts/export_metrics.mjs
 
       - name: Commit updated config and metrics
+        env:
+          SCAN_ORG: ${{ needs.parse-title.outputs.org }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add scripts/config.json data/metrics.json
-          git diff --staged --quiet || git commit -m "Scan org: ${{ needs.parse-title.outputs.org }} (issue #${{ github.event.issue.number }})"
+          git diff --staged --quiet || git commit -m "Scan org: ${SCAN_ORG} (issue #${ISSUE_NUMBER})"
           git push
 
       - name: Comment success on issue
         uses: actions/github-script@v7
+        env:
+          SCAN_ORG: ${{ needs.parse-title.outputs.org }}
         with:
           script: |
-            const org = '${{ needs.parse-title.outputs.org }}';
+            const org = process.env.SCAN_ORG;
             const repoHomepage = context.payload.repository.homepage;
             const dashUrl = repoHomepage
               ? `${repoHomepage.replace(/\/$/, '')}/?org=${org}`

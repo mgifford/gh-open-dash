@@ -119,10 +119,11 @@ test('org-mismatch banner shows "Open issue now" link when githubRepo is configu
 
   const alerts = screen.getAllByRole('alert');
   expect(alerts.length).toBeGreaterThan(0);
-  // The "Open issue now" link should be present
+  // The "Open issue now" link should point to the githubRepo value from config
   const issueLink = alerts[0].querySelector('a[href*="github.com/myorg/my-dash/issues/new"]');
   expect(issueLink).not.toBeNull();
-  // Link should pre-fill the title with SCAN: chaoss
+  // Verify the link URL is built from the config.githubRepo value and includes the org in the title
+  expect(issueLink.href).toContain('github.com/' + configWithRepo.githubRepo + '/issues/new');
   expect(issueLink.href).toContain('SCAN%3A%20chaoss');
 });
 
