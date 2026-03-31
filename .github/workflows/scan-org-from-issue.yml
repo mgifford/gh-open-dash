@@ -1,0 +1,165 @@
+name: Scan Organization from Issue
+
+on:
+  issues:
+    types: [opened, reopened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  parse-title:
+    runs-on: ubuntu-latest
+    outputs:
+      is-scan: ${{ steps.check.outputs.is-scan }}
+      org: ${{ steps.parse.outputs.org }}
+    steps:
+      - name: Check if title starts with SCAN
+        id: check
+        run: |
+          TITLE="${{ github.event.issue.title }}"
+          if echo "$TITLE" | grep -qiE '^SCAN[[:space:]]*:'; then
+            echo "is-scan=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is-scan=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Parse org name from title
+        id: parse
+        if: steps.check.outputs.is-scan == 'true'
+        run: |
+          TITLE="${{ github.event.issue.title }}"
+          # Strip the "SCAN:" prefix (case-insensitive) and surrounding whitespace
+          ORG=$(printf '%s' "$TITLE" | sed 's/^[Ss][Cc][Aa][Nn][[:space:]]*://; s/^[[:space:]]*//; s/[[:space:]]*$//' | tr '[:upper:]' '[:lower:]')
+          # Validate: must start with alphanumeric, only letters/numbers/hyphens/underscores
+          if echo "$ORG" | grep -qE '^[a-z0-9][a-z0-9_-]*$'; then
+            echo "org=$ORG" >> "$GITHUB_OUTPUT"
+          else
+            echo "org=" >> "$GITHUB_OUTPUT"
+          fi
+
+  comment-invalid:
+    needs: parse-title
+    if: needs.parse-title.outputs.is-scan == 'true' && needs.parse-title.outputs.org == ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment with instructions for invalid org name
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: [
+                '❌ Could not parse a valid organization name from this issue title.',
+                '',
+                'Please rename the issue using the format:',
+                '```',
+                'SCAN: orgname',
+                '```',
+                'Where `orgname` is a valid GitHub organization handle (letters, numbers, hyphens, and underscores only).',
+                '',
+                'Example: `SCAN: civicactions`'
+              ].join('\n')
+            });
+
+  scan-org:
+    needs: parse-title
+    if: needs.parse-title.outputs.is-scan == 'true' && needs.parse-title.outputs.org != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore SQLite database
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/participation.sqlite
+            data/participation.sqlite-wal
+            data/participation.sqlite-shm
+          key: participation-data-${{ github.run_id }}
+          restore-keys: |
+            participation-data-
+
+      - name: Write empty staff allowlist
+        run: echo "[]" > scripts/staff_allowlist.json
+
+      - name: Add org to scripts/config.json allowlist
+        env:
+          NEW_ORG: ${{ needs.parse-title.outputs.org }}
+        run: |
+          node -e "
+          const fs = require('fs');
+          const config = JSON.parse(fs.readFileSync('scripts/config.json', 'utf8'));
+          const org = process.env.NEW_ORG;
+          if (!config.orgAllowlist.includes(org)) {
+            config.orgAllowlist.push(org);
+            fs.writeFileSync('scripts/config.json', JSON.stringify(config, null, 2) + '\n');
+            console.log('Added ' + org + ' to orgAllowlist');
+          } else {
+            console.log(org + ' is already in orgAllowlist — no config change needed');
+          }
+          "
+
+      - name: Collect data for requested org
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_READ_ORG_TOKEN || secrets.GITHUB_TOKEN }}
+          # Include both the existing allowlist and the newly requested org
+          ORG_ALLOWLIST: "${{ vars.ORG_ALLOWLIST || 'civicactions' }},${{ needs.parse-title.outputs.org }}"
+          HISTORY_WEEKS: ${{ vars.HISTORY_WEEKS || 52 }}
+          MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 12 }}
+        run: node scripts/update_sqlite.mjs
+
+      - name: Export metrics
+        env:
+          ORG_ALLOWLIST: "${{ vars.ORG_ALLOWLIST || 'civicactions' }},${{ needs.parse-title.outputs.org }}"
+        run: node scripts/export_metrics.mjs
+
+      - name: Commit updated config and metrics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/config.json data/metrics.json
+          git diff --staged --quiet || git commit -m "Scan org: ${{ needs.parse-title.outputs.org }} (issue #${{ github.event.issue.number }})"
+          git push
+
+      - name: Comment success on issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const org = '${{ needs.parse-title.outputs.org }}';
+            const repoHomepage = context.payload.repository.homepage;
+            const dashUrl = repoHomepage
+              ? `${repoHomepage.replace(/\/$/, '')}/?org=${org}`
+              : null;
+            const lines = [
+              `✅ Data collection for **${org}** has been initiated.`,
+              '',
+              '**What happened:**',
+              `- \`${org}\` was added to the data pipeline allowlist in \`scripts/config.json\``,
+              '- Metrics were collected and exported to `data/metrics.json`',
+              '- The changes have been committed to this repository',
+            ];
+            if (dashUrl) {
+              lines.push('');
+              lines.push(`**View the dashboard:** [${dashUrl}](${dashUrl})`);
+            }
+            lines.push('');
+            lines.push(`> **Note:** \`${org}\` will now be included in all future weekly data collection runs.`);
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: lines.join('\n')
+            });

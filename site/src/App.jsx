@@ -349,14 +349,36 @@ function App() {
               <> This dataset contains data for: <strong>{processedData.dataOrgs.join(', ')}</strong>.</>
             )}
           </p>
-          <p>
-            To collect metrics for <strong>{currentOrg}</strong>, add it to{' '}
-            <code>orgAllowlist</code> in <code>scripts/config.json</code> and
-            re-run the data pipeline:
-          </p>
-          <code className="org-mismatch-banner__cmd">
-            node scripts/update_sqlite.mjs &amp;&amp; node scripts/export_metrics.mjs
-          </code>
+          <p>To add <strong>{currentOrg}</strong> to the dashboard, choose one of these options:</p>
+          <ol>
+            <li>
+              <strong>Request via GitHub issue</strong> — open an issue in this repository
+              titled <code>SCAN: {currentOrg}</code> and a GitHub Action will automatically
+              collect and publish the data.
+              {config?.githubRepo && (
+                <>
+                  {' '}
+                  <a
+                    href={`https://github.com/${config.githubRepo}/issues/new?title=${encodeURIComponent(`SCAN: ${currentOrg}`)}&body=${encodeURIComponent(`Please add contribution metrics for the **${currentOrg}** GitHub organization to the dashboard.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open a GitHub issue to request scanning of ${currentOrg} (opens in new tab)`}
+                  >
+                    Open issue now ↗
+                  </a>
+                </>
+              )}
+            </li>
+            <li>
+              <strong>Add manually</strong> — add <code>{currentOrg}</code> to{' '}
+              <code>orgAllowlist</code> in <code>scripts/config.json</code> and
+              re-run the data pipeline:
+              <br />
+              <code className="org-mismatch-banner__cmd">
+                node scripts/update_sqlite.mjs &amp;&amp; node scripts/export_metrics.mjs
+              </code>
+            </li>
+          </ol>
         </div>
       )}
 

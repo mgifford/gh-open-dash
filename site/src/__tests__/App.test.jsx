@@ -90,6 +90,42 @@ test('shows org-mismatch banner when requested org has no data', async () => {
   expect(alerts[0].textContent).toMatch(/chaoss/i);
 });
 
+test('org-mismatch banner includes SCAN issue instructions', async () => {
+  mockGetCurrentOrg.mockReturnValue('chaoss');
+
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const alerts = screen.getAllByRole('alert');
+  expect(alerts.length).toBeGreaterThan(0);
+  // Banner should mention creating a SCAN issue
+  expect(alerts[0].textContent).toMatch(/SCAN:\s*chaoss/i);
+  expect(alerts[0].textContent).toMatch(/GitHub issue/i);
+});
+
+test('org-mismatch banner shows "Open issue now" link when githubRepo is configured', async () => {
+  mockGetCurrentOrg.mockReturnValue('chaoss');
+
+  const configWithRepo = { githubRepo: 'myorg/my-dash', organization: { githubOrg: 'civicactions' } };
+  global.fetch = vi.fn((url) => {
+    if (url && url.includes('config.json')) {
+      return Promise.resolve({ ok: true, json: () => Promise.resolve(configWithRepo) });
+    }
+    return Promise.resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(sampleMetrics)), json: () => Promise.resolve(sampleMetrics) });
+  });
+
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const alerts = screen.getAllByRole('alert');
+  expect(alerts.length).toBeGreaterThan(0);
+  // The "Open issue now" link should be present
+  const issueLink = alerts[0].querySelector('a[href*="github.com/myorg/my-dash/issues/new"]');
+  expect(issueLink).not.toBeNull();
+  // Link should pre-fill the title with SCAN: chaoss
+  expect(issueLink.href).toContain('SCAN%3A%20chaoss');
+});
+
 test('does not show org-mismatch banner when requested org matches dataset', async () => {
   // civicactions has repos in the sample dataset, so no banner expected
   mockGetCurrentOrg.mockReturnValue('civicactions');
