@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor, cleanup } from '@testing-library/react';
+import { render, screen, waitFor, cleanup, fireEvent } from '@testing-library/react';
 import { beforeEach, afterEach, test, expect, vi } from 'vitest';
 import App from '../App.jsx';
 
@@ -26,6 +26,7 @@ const sampleMetrics = {
   generated_at: new Date().toISOString(),
   weeks: ['2025-12-01','2025-12-08'],
   authors: ['alice','bob'],
+  staff_allowlist: ['alice'],
   series: [
     { week_start: '2025-12-01', byAuthor: { alice: { prs_opened: 1, prs_closed: 0, prs_merged: 0, issues_opened: 2, issues_closed: 0 }, bob: { prs_opened: 0, prs_closed: 0, prs_merged: 0, issues_opened: 0, issues_closed: 0 } } },
     { week_start: '2025-12-08', byAuthor: { alice: { prs_opened: 0, prs_closed: 1, prs_merged: 1, issues_opened: 0, issues_closed: 1 }, bob: { prs_opened: 1, prs_closed: 0, prs_merged: 0, issues_opened: 1, issues_closed: 0 } } }
@@ -162,4 +163,60 @@ test('Usage & AI link is not rendered in the nav', async () => {
     /Usage.*AI/i.test(s.textContent)
   );
   expect(usageSpans.length).toBe(0);
+});
+
+test('renders contributor type filter with All Contributors option', async () => {
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const contributorTypeSelect = screen.getByRole('combobox', { name: /Contributor type:/i });
+  expect(contributorTypeSelect).toBeDefined();
+  expect(contributorTypeSelect.value).toBe('all');
+
+  const options = Array.from(contributorTypeSelect.querySelectorAll('option')).map(o => o.value);
+  expect(options).toContain('all');
+  expect(options).toContain('staff');
+  expect(options).toContain('community');
+});
+
+test('contributor type filter shows only staff when Org Members selected', async () => {
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const contributorTypeSelect = screen.getByRole('combobox', { name: /Contributor type:/i });
+  fireEvent.change(contributorTypeSelect, { target: { value: 'staff' } });
+
+  // alice is in staff_allowlist, bob is not
+  // After filtering to staff, only alice should appear in the Person dropdown
+  const personSelect = screen.getByRole('combobox', { name: /Person:/i });
+  const personOptions = Array.from(personSelect.querySelectorAll('option')).map(o => o.value);
+  expect(personOptions).toContain('alice');
+  expect(personOptions).not.toContain('bob');
+});
+
+test('contributor type filter shows only community contributors when Community Contributors selected', async () => {
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const contributorTypeSelect = screen.getByRole('combobox', { name: /Contributor type:/i });
+  fireEvent.change(contributorTypeSelect, { target: { value: 'community' } });
+
+  // bob is not in staff_allowlist, alice is
+  // After filtering to community, only bob should appear in the Person dropdown
+  const personSelect = screen.getByRole('combobox', { name: /Person:/i });
+  const personOptions = Array.from(personSelect.querySelectorAll('option')).map(o => o.value);
+  expect(personOptions).toContain('bob');
+  expect(personOptions).not.toContain('alice');
+});
+
+test('leaderboard shows staff badge emoji for org members', async () => {
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  // alice is in staff_allowlist so should have 🏢 badge
+  // bob is not so should have 🌍 badge
+  const staffBadges = document.querySelectorAll('.contributor-badge--staff');
+  const communityBadges = document.querySelectorAll('.contributor-badge--community');
+  expect(staffBadges.length).toBeGreaterThan(0);
+  expect(communityBadges.length).toBeGreaterThan(0);
 });
