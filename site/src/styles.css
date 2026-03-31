@@ -162,6 +162,13 @@ tr.selected {
   font-weight: 500;
 }
 
+.contributor-badge {
+  margin-left: 6px;
+  font-size: 0.85em;
+  vertical-align: middle;
+  opacity: 0.85;
+}
+
 .more-info {
   text-align: center;
   color: #666;

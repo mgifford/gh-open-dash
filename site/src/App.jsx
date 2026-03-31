@@ -63,6 +63,7 @@ function App() {
   const [metric, setMetric] = useState("all_metrics");
   const [range, setRange] = useState("12");
   const [selectedAuthor, setSelectedAuthor] = useState("all");
+  const [contributorType, setContributorType] = useState("all");
   const [displayConfig, setDisplayConfig] = useState({ collectAllPublic: false, licenseFilter: 'oss' });
   const [view, setView] = useState('dashboard');
 
@@ -172,10 +173,28 @@ function App() {
       series = series.slice(-count); // Assumes series matches weeks order
     }
 
+    // 1b. Filter series by contributor type (all / staff / community)
+    const staffSet = new Set((data.staff_allowlist || []).map(s => s.toLowerCase()));
+    const isStaff = (author) => staffSet.has(author.toLowerCase());
+    if (contributorType !== 'all') {
+      series = series.map(week => {
+        const filtered = {};
+        for (const [author, metrics] of Object.entries(week.byAuthor || {})) {
+          if (contributorType === 'staff' ? isStaff(author) : !isStaff(author)) {
+            filtered[author] = metrics;
+          }
+        }
+        return { ...week, byAuthor: filtered };
+      });
+    }
+
     // 2. Aggregate for Leaderboard
     // Sum selected metric for each author over the visible range
     const authorTotals = {};
-    data.authors.forEach(a => authorTotals[a] = 0);
+    const visibleAuthors = contributorType === 'all'
+      ? data.authors
+      : data.authors.filter(a => contributorType === 'staff' ? isStaff(a) : !isStaff(a));
+    visibleAuthors.forEach(a => authorTotals[a] = 0);
 
     series.forEach(week => {
       const byAuthor = week.byAuthor;
@@ -254,8 +273,12 @@ function App() {
       pushDataset(metric, opt.label || metric);
     }
 
-    return { leaderboard, chartData, authors: data.authors, orgRepos, orgHasData, effectiveOrg, dataOrgs, filteredData };
-  }, [data, metric, range, selectedAuthor, currentOrg]);
+    // `authors` retains the full unfiltered list so the total-contributors count
+    // remains accurate regardless of the active contributor type filter.
+    // `visibleAuthors` contains only the filtered subset used by the Person
+    // dropdown and chart aggregation.
+    return { leaderboard, chartData, authors: data.authors, visibleAuthors, staffSet, orgRepos, orgHasData, effectiveOrg, dataOrgs, filteredData };
+  }, [data, metric, range, selectedAuthor, currentOrg, contributorType]);
 
   // Calculate total workflow runs across visible weeks (must be before early returns)
   const totalWorkflowRuns = useMemo(() => {
@@ -478,10 +501,19 @@ function App() {
         </label>
 
         <label>
+          Contributor type:
+          <select value={contributorType} onChange={(e) => { setContributorType(e.target.value); setSelectedAuthor('all'); }}>
+            <option value="all">All Contributors</option>
+            <option value="staff">Org Members</option>
+            <option value="community">Community Contributors</option>
+          </select>
+        </label>
+
+        <label>
           Person:
           <select value={selectedAuthor} onChange={(e) => setSelectedAuthor(e.target.value)}>
             <option value="all">All Contributors</option>
-            {data.authors.map(a => <option key={a} value={a}>{a}</option>)}
+            {(processedData?.visibleAuthors || data.authors).map(a => <option key={a} value={a}>{a}</option>)}
           </select>
         </label>
         <label>
@@ -540,7 +572,7 @@ function App() {
 
             <section className="leaderboard-section">
               <h2>Top Contributors ({range === 'all' ? 'All Time' : `Last ${range} Weeks`})</h2>
-              <Leaderboard items={processedData.leaderboard} onSelectAuthor={setSelectedAuthor} selectedAuthor={selectedAuthor} />
+              <Leaderboard items={processedData.leaderboard} onSelectAuthor={setSelectedAuthor} selectedAuthor={selectedAuthor} staffSet={processedData.staffSet} />
             </section>
 
             <section className="chart-section">
