@@ -654,18 +654,39 @@ async function processStaffCommits(weekStart, rangeStartISO, rangeEndISO, user) 
   while (true) {
     const q = `author:${user} committer-date:${rangeStartISO}..${rangeEndISO}`;
     const url = `https://api.github.com/search/commits?q=${encodeURIComponent(q)}&per_page=${perPage}&page=${page}`;
-    const res = await fetch(url, {
-      headers: {
-        authorization: `token ${token}`,
-        accept: 'application/vnd.github.cloak-preview'
-      }
-    });
 
-    if (!res.ok) {
+    let res;
+    let attempt = 0;
+    while (attempt < MAX_RETRIES) {
+      attempt++;
+      res = await fetch(url, {
+        headers: {
+          authorization: `token ${token}`,
+          accept: 'application/vnd.github.cloak-preview'
+        }
+      });
+      if (res.ok) break;
+
+      const isRateLimit = res.status === 403 || res.status === 429;
       const text = await res.text();
+      if (isRateLimit && attempt < MAX_RETRIES) {
+        const resetAt = Number(res.headers.get('x-ratelimit-reset')) || null;
+        const now = Date.now();
+        const waitMs = resetAt
+          ? Math.max(resetAt * 1000 - now + RATE_LIMIT_BUFFER_MS, RETRY_DELAY_MS * attempt)
+          : RETRY_DELAY_MS * attempt;
+        const waitSeconds = Math.ceil(waitMs / 1000);
+        console.warn(`Commit search rate limited (attempt ${attempt}/${MAX_RETRIES}) for ${user}; waiting ${waitSeconds}s`);
+        await sleep(waitMs);
+        // Don't advance attempt on rate-limit so we keep retrying after reset
+        attempt--;
+        continue;
+      }
       console.warn(`Failed commit search page ${page} for ${user}: ${res.status} ${text}`);
+      res = null;
       break;
     }
+    if (!res || !res.ok) break;
 
     const data = await res.json();
     if (!data.items || data.items.length === 0) break;
