@@ -73,6 +73,9 @@ const CONTRIBUTION_SCORE_WEIGHTS = {
   comments_commit: 1,
 };
 
+// All individual metric keys stored per-author in the series (excludes derived metrics like comments_total).
+const ALL_TRACKED_METRICS = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_issue','comments_pr_review','comments_commit','meeting_mentions'];
+
 function App() {
   const [data, setData] = useState(null);
   const [config, setConfig] = useState(null);
@@ -119,7 +122,8 @@ function App() {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
-  // Shared metric keys and accessible style map for chart and legend
+  // Metric keys shown in the legend. Uses `comments_total` (derived) instead of the three
+  // underlying comment sub-types so each line in the legend is distinct and user-facing.
   const metricKeys = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_total','meeting_mentions'];
   const styleMap = {
     prs_opened:  { color: '#005a9c', bg: 'rgba(0,90,156,0.15)', dash: [], marker: 'circle' },
@@ -218,7 +222,7 @@ function App() {
       for (const author in byAuthor) {
           if (metric === 'all_metrics') {
           // sum all tracked metric keys for the leaderboard
-          const sum = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_issue','comments_pr_review','comments_commit','meeting_mentions']
+          const sum = ALL_TRACKED_METRICS
             .reduce((s, k) => s + ((byAuthor[author] && byAuthor[author][k]) || 0), 0);
           authorTotals[author] = (authorTotals[author] || 0) + sum;
         } else if (metric === 'contribution_score') {

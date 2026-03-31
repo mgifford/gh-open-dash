@@ -814,7 +814,7 @@ async function processWorkflowRuns(weekStart, rangeStartISO, rangeEndISO) {
 // comment collection logic moved to scripts/comments_collector.mjs
 
 async function processMeetingMentions(graphqlClient, weekStart, rangeStart, rangeEnd) {
-  // Regex to extract @mentions from issue body (GitHub username rules)
+  // Matches GitHub @mentions: 1–39 characters, alphanumeric or internal hyphens, not starting/ending with a hyphen.
   const mentionRegex = /\B@([a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38})\b/g;
 
   const repoLicenseCache = new Map();
@@ -884,9 +884,7 @@ async function processMeetingMentions(graphqlClient, weekStart, rangeStart, rang
         let m;
         mentionRegex.lastIndex = 0;
         while ((m = mentionRegex.exec(body)) !== null) {
-          const username = m[1];
-          // Skip GitHub's special handles (e.g. ghost) and bot-like names
-          if (username && username.length >= 1) mentions.add(username);
+          if (m[1]) mentions.add(m[1]);
         }
 
         if (mentions.size === 0) continue;
