@@ -32,6 +32,7 @@ if (typeof fileConfig.licenseFilter === 'undefined') fileConfig.licenseFilter = 
 if (typeof fileConfig.collectEcosystemsData === 'undefined') fileConfig.collectEcosystemsData = false;
 if (typeof fileConfig.collectOpenContributions === 'undefined') fileConfig.collectOpenContributions = false;
 if (typeof fileConfig.collectWorkflowRuns === 'undefined') fileConfig.collectWorkflowRuns = false;
+if (typeof fileConfig.collectMeetingMentions === 'undefined') fileConfig.collectMeetingMentions = false;
 
 function parseAllowlist(input, fallback) {
   const raw = (typeof input === 'undefined' || input === null) ? fallback : input;
@@ -169,6 +170,13 @@ db.exec(`
     workflow_name TEXT,
     run_count INTEGER DEFAULT 0,
     PRIMARY KEY (week_start, repo, workflow_name)
+  );
+  CREATE TABLE IF NOT EXISTS meeting_mentions (
+    week_start TEXT,
+    author TEXT,
+    repo TEXT,
+    spdx TEXT,
+    PRIMARY KEY (week_start, author, repo)
   );
   CREATE TABLE IF NOT EXISTS meta (
     key TEXT PRIMARY KEY,
@@ -413,6 +421,10 @@ async function run() {
 
     if (fileConfig.collectWorkflowRuns) {
       await processWorkflowRuns(weekStartStr, rangeStart, rangeEnd);
+    }
+
+    if (fileConfig.collectMeetingMentions) {
+      await processMeetingMentions(graphqlClient, weekStartStr, rangeStart, rangeEnd);
     }
 
     markWeekCollected(weekStartStr);
@@ -800,6 +812,97 @@ async function processWorkflowRuns(weekStart, rangeStartISO, rangeEndISO) {
 }
 
 // comment collection logic moved to scripts/comments_collector.mjs
+
+async function processMeetingMentions(graphqlClient, weekStart, rangeStart, rangeEnd) {
+  // Matches GitHub @mentions: 1–39 characters, alphanumeric or internal hyphens, not starting/ending with a hyphen.
+  const mentionRegex = /\B@([a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38})\b/g;
+
+  const repoLicenseCache = new Map();
+
+  for (const org of ORG_ALLOWLIST) {
+    const query = `org:${org} is:public is:issue in:title MEETING: created:${rangeStart}..${rangeEnd}`;
+    let hasNextPage = true;
+    let cursor = null;
+
+    while (hasNextPage) {
+      let data;
+      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+        try {
+          data = await graphqlClient(`
+            query($q: String!, $cursor: String) {
+              search(query: $q, type: ISSUE, first: 100, after: $cursor) {
+                pageInfo { hasNextPage endCursor }
+                nodes {
+                  ... on Issue {
+                    title
+                    body
+                    repository {
+                      nameWithOwner
+                      licenseInfo { spdxId }
+                      isPrivate
+                    }
+                  }
+                }
+              }
+            }
+          `, { q: query, cursor });
+          break;
+        } catch (err) {
+          if (attempt === MAX_RETRIES) throw err;
+          await sleep(RETRY_DELAY_MS * attempt);
+        }
+      }
+
+      if (!data) break;
+      const search = data.search;
+      hasNextPage = search.pageInfo.hasNextPage;
+      cursor = search.pageInfo.endCursor;
+
+      const insertStmt = db.prepare(`INSERT OR IGNORE INTO meeting_mentions (week_start, author, repo, spdx) VALUES (?, ?, ?, ?)`);
+      const insertBatch = db.transaction((rows) => {
+        for (const r of rows) insertStmt.run(r.week_start, r.author, r.repo, r.spdx);
+      });
+
+      for (const node of search.nodes) {
+        if (!node || !node.repository) continue;
+        if (node.repository.isPrivate) continue;
+        const repoFull = node.repository.nameWithOwner;
+        if (!repoFull) continue;
+        if (repoShouldBeExcluded(repoFull)) continue;
+
+        // Only MEETING: issues (title must start with MEETING:, case-insensitive)
+        if (!node.title || !node.title.match(/^MEETING:/i)) continue;
+
+        const spdx = node.repository.licenseInfo ? node.repository.licenseInfo.spdxId : null;
+        if (fileConfig.licenseFilter === 'oss') {
+          if (!spdx || !allowList.includes(spdx)) continue;
+        }
+
+        // Extract @mentions from issue body — store only the usernames, not the body
+        const body = node.body || '';
+        const mentions = new Set();
+        let m;
+        mentionRegex.lastIndex = 0;
+        while ((m = mentionRegex.exec(body)) !== null) {
+          if (m[1]) mentions.add(m[1]);
+        }
+
+        if (mentions.size === 0) continue;
+
+        const rows = Array.from(mentions).map(username => ({
+          week_start: weekStart,
+          author: username,
+          repo: repoFull,
+          spdx: spdx
+        }));
+        insertBatch(rows);
+        console.log(`  Recorded ${rows.length} meeting mention(s) from MEETING issue in ${repoFull} (${weekStart})`);
+      }
+
+      await sleep(300);
+    }
+  }
+}
 
 async function fetchSearchPage(client, query, cursor, contextLabel) {
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
