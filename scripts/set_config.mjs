@@ -5,7 +5,7 @@ import path from 'path';
 const CONFIG_PATH = path.join('scripts', 'config.json');
 
 function usage() {
-  console.log('Usage: node scripts/set_config.mjs [--collectAllPublic=true|false] [--licenseFilter=oss|all] [--collectOpenContributions=true|false]');
+  console.log('Usage: node scripts/set_config.mjs [--collectAllPublic=true|false] [--licenseFilter=oss|all] [--collectOpenContributions=true|false] [--historyWeeks=N]');
   process.exit(1);
 }
 
@@ -33,6 +33,13 @@ for (const a of args) {
   } else if (a.startsWith('--collectOpenContributions=')) {
     const v = a.split('=')[1];
     cfg.collectOpenContributions = v === 'true' || v === '1';
+  } else if (a.startsWith('--historyWeeks=')) {
+    const v = Number.parseInt(a.split('=')[1], 10);
+    if (!Number.isFinite(v) || v < 1) {
+      console.error('historyWeeks must be a positive integer');
+      process.exit(2);
+    }
+    cfg.historyWeeks = v;
   } else {
     usage();
   }
