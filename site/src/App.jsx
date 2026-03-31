@@ -42,12 +42,14 @@ async function loadConfig() {
 
 const METRIC_OPTIONS = [
   { key: "all_metrics", label: "All Metrics" },
+  { key: "contribution_score", label: "Contribution Score" },
   { key: "comments_total", label: "Comments" },
   { key: "prs_opened", label: "PRs Opened" },
   { key: "prs_closed", label: "PRs Closed" },
   { key: "prs_merged", label: "PRs Merged" },
   { key: "issues_opened", label: "Issues Opened" },
-  { key: "issues_closed", label: "Issues Closed" }
+  { key: "issues_closed", label: "Issues Closed" },
+  { key: "meeting_mentions", label: "Meeting Attendance" },
 ];
 
 const RANGE_OPTIONS = [
@@ -56,6 +58,20 @@ const RANGE_OPTIONS = [
   { key: "52", label: "Last 52 Weeks" },
   { key: "all", label: "All Time" }
 ];
+
+// Drupal-inspired contribution score weights
+const CONTRIBUTION_SCORE_WEIGHTS = {
+  prs_merged: 5,
+  commits: 4,
+  prs_opened: 3,
+  comments_pr_review: 3,
+  issues_opened: 2,
+  meeting_mentions: 2,
+  prs_closed: 1,
+  issues_closed: 1,
+  comments_issue: 1,
+  comments_commit: 1,
+};
 
 function App() {
   const [data, setData] = useState(null);
@@ -104,7 +120,7 @@ function App() {
   }, []);
 
   // Shared metric keys and accessible style map for chart and legend
-  const metricKeys = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_total'];
+  const metricKeys = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_total','meeting_mentions'];
   const styleMap = {
     prs_opened:  { color: '#005a9c', bg: 'rgba(0,90,156,0.15)', dash: [], marker: 'circle' },
     prs_closed:  { color: '#0078d4', bg: 'rgba(0,120,212,0.12)', dash: [6,4], marker: 'rect' },
@@ -112,7 +128,8 @@ function App() {
     issues_opened:{ color: '#a80000', bg: 'rgba(168,0,0,0.12)', dash: [1,3], marker: 'diamond' },
     issues_closed:{ color: '#e81123', bg: 'rgba(232,17,35,0.12)', dash: [8,4,2,4], marker: 'cross' },
     commits:     { color: '#444444', bg: 'rgba(68,68,68,0.08)', dash: [4,2], marker: 'line' },
-    comments_total: { color: '#6b5cff', bg: 'rgba(107,92,255,0.08)', dash: [2,2], marker: 'circle' }
+    comments_total: { color: '#6b5cff', bg: 'rgba(107,92,255,0.08)', dash: [2,2], marker: 'circle' },
+    meeting_mentions: { color: '#c67b00', bg: 'rgba(198,123,0,0.10)', dash: [3,3], marker: 'diamond' },
   };
 
   useEffect(() => {
@@ -201,9 +218,14 @@ function App() {
       for (const author in byAuthor) {
           if (metric === 'all_metrics') {
           // sum all tracked metric keys for the leaderboard
-          const sum = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_issue','comments_pr_review','comments_commit']
+          const sum = ['prs_opened','prs_closed','prs_merged','issues_opened','issues_closed','commits','comments_issue','comments_pr_review','comments_commit','meeting_mentions']
             .reduce((s, k) => s + ((byAuthor[author] && byAuthor[author][k]) || 0), 0);
           authorTotals[author] = (authorTotals[author] || 0) + sum;
+        } else if (metric === 'contribution_score') {
+          const m = byAuthor[author] || {};
+          const score = Object.entries(CONTRIBUTION_SCORE_WEIGHTS)
+            .reduce((s, [k, w]) => s + (m[k] || 0) * w, 0);
+          authorTotals[author] = (authorTotals[author] || 0) + score;
         } else if (metric === 'comments_total') {
            const sum = ((byAuthor[author]['comments_issue'] || 0) + (byAuthor[author]['comments_pr_review'] || 0) + (byAuthor[author]['comments_commit'] || 0));
            authorTotals[author] = (authorTotals[author] || 0) + sum;
@@ -235,6 +257,9 @@ function App() {
           for (const auth in s.byAuthor) {
             if (key === 'comments_total') {
               total += ((s.byAuthor[auth]['comments_issue'] || 0) + (s.byAuthor[auth]['comments_pr_review'] || 0) + (s.byAuthor[auth]['comments_commit'] || 0));
+            } else if (key === 'contribution_score') {
+              const m = s.byAuthor[auth] || {};
+              total += Object.entries(CONTRIBUTION_SCORE_WEIGHTS).reduce((sc, [k, w]) => sc + (m[k] || 0) * w, 0);
             } else {
               total += (s.byAuthor[auth][key] || 0);
             }
@@ -243,6 +268,10 @@ function App() {
         }
         if (key === 'comments_total') {
           return ((s.byAuthor[selectedAuthor] && ((s.byAuthor[selectedAuthor]['comments_issue'] || 0) + (s.byAuthor[selectedAuthor]['comments_pr_review'] || 0) + (s.byAuthor[selectedAuthor]['comments_commit'] || 0))) || 0);
+        }
+        if (key === 'contribution_score') {
+          const m = (s.byAuthor[selectedAuthor]) || {};
+          return Object.entries(CONTRIBUTION_SCORE_WEIGHTS).reduce((sc, [k, w]) => sc + (m[k] || 0) * w, 0);
         }
         return (s.byAuthor[selectedAuthor] && s.byAuthor[selectedAuthor][key]) || 0;
       });
@@ -550,7 +579,12 @@ function App() {
           <div className="legend" aria-hidden>
             {metricKeys.map(k => {
               const s = styleMap[k];
-              const label = k === 'prs_opened' ? 'PRs Opened' : k === 'prs_closed' ? 'PRs Closed' : k === 'prs_merged' ? 'PRs Merged' : k === 'issues_opened' ? 'Issues Opened' : k === 'issues_closed' ? 'Issues Closed' : 'Commits';
+              const labelMap = {
+                prs_opened: 'PRs Opened', prs_closed: 'PRs Closed', prs_merged: 'PRs Merged',
+                issues_opened: 'Issues Opened', issues_closed: 'Issues Closed',
+                commits: 'Commits', comments_total: 'Comments', meeting_mentions: 'Meeting Attendance'
+              };
+              const label = labelMap[k] || k;
               const dashAttr = (s.dash && s.dash.length) ? s.dash.join(',') : null;
               return (
                 <div key={k} className="legend-item">

@@ -175,6 +175,26 @@ const getCommitsData = () => {
 };
 const commitsRaw = getCommitsData();
 
+// Meeting mentions grouped by week/author
+let meetingMentionsRaw = [];
+if (tableExists('meeting_mentions')) {
+  const rows = db.prepare(`SELECT week_start, author, repo, spdx, count(*) as count FROM meeting_mentions GROUP BY week_start, author, repo, spdx`).all();
+  const agg = new Map();
+  for (const r of rows) {
+    if (shouldIncludeRepo(r.repo, r.spdx)) {
+      const key = `${r.week_start}||${r.author}`;
+      agg.set(key, (agg.get(key) || 0) + r.count);
+    }
+  }
+  for (const [k, count] of agg.entries()) {
+    const [week_start, author] = k.split('||');
+    meetingMentionsRaw.push({ week_start, author, count });
+  }
+  if (meetingMentionsRaw.length > 0) {
+    console.log(`Exported ${meetingMentionsRaw.length} meeting mention records`);
+  }
+}
+
 // comment counts grouped by week/author/kind
 let commentCountsRaw = [];
 if (tableExists('comment_counts')) {
@@ -211,7 +231,7 @@ const fill = (data, key) => {
     if (!weekEntry) return; // Should not happen given weeks list derivation
     
     if (!weekEntry.byAuthor[row.author]) {
-      weekEntry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0 };
+      weekEntry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0, meeting_mentions: 0 };
     }
     weekEntry.byAuthor[row.author][key] = row.count;
   });
@@ -223,6 +243,7 @@ fill(prClosedRaw, 'prs_closed');
 fill(issuesOpenedRaw, 'issues_opened');
 fill(issuesClosedRaw, 'issues_closed');
 fill(commitsRaw, 'commits');
+fill(meetingMentionsRaw, 'meeting_mentions');
 
 const series = Array.from(seriesMap.values());
 
@@ -236,7 +257,7 @@ commentCountsRaw.forEach(row => {
   const weekEntry = seriesMap.get(row.week_start);
   if (!weekEntry) return;
   if (!weekEntry.byAuthor[row.author]) {
-    weekEntry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0 };
+    weekEntry.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0, meeting_mentions: 0 };
   }
   const k = kindToKey[row.kind] || null;
   if (k) weekEntry.byAuthor[row.author][k] = row.count;

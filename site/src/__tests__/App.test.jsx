@@ -220,3 +220,67 @@ test('leaderboard shows staff badge emoji for org members', async () => {
   expect(staffBadges.length).toBeGreaterThan(0);
   expect(communityBadges.length).toBeGreaterThan(0);
 });
+
+test('metric dropdown includes Contribution Score and Meeting Attendance options', async () => {
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const metricSelect = screen.getByRole('combobox', { name: /Metric:/i });
+  const options = Array.from(metricSelect.querySelectorAll('option')).map(o => o.value);
+  expect(options).toContain('contribution_score');
+  expect(options).toContain('meeting_mentions');
+});
+
+test('selecting Contribution Score metric shows correct heading', async () => {
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const metricSelect = screen.getByRole('combobox', { name: /Metric:/i });
+  fireEvent.change(metricSelect, { target: { value: 'contribution_score' } });
+
+  await waitFor(() => expect(screen.getByText(/Weekly Trend: Contribution Score/i)).toBeDefined());
+});
+
+test('selecting Meeting Attendance metric shows correct heading', async () => {
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const metricSelect = screen.getByRole('combobox', { name: /Metric:/i });
+  fireEvent.change(metricSelect, { target: { value: 'meeting_mentions' } });
+
+  await waitFor(() => expect(screen.getByText(/Weekly Trend: Meeting Attendance/i)).toBeDefined());
+});
+
+test('contribution score leaderboard ranks author with more weighted contributions higher', async () => {
+  const metricsWithScore = {
+    ...sampleMetrics,
+    series: [
+      {
+        week_start: '2025-12-01',
+        byAuthor: {
+          alice: { prs_merged: 2, commits: 1, prs_opened: 0, issues_opened: 0, prs_closed: 0, issues_closed: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0, meeting_mentions: 0 },
+          bob:   { prs_merged: 0, commits: 0, prs_opened: 1, issues_opened: 1, prs_closed: 0, issues_closed: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0, meeting_mentions: 3 }
+        }
+      }
+    ]
+  };
+  // alice score: 2*5 + 1*4 = 14; bob score: 1*3 + 1*2 + 3*2 = 11
+  global.fetch = vi.fn(() => Promise.resolve({
+    ok: true,
+    text: () => Promise.resolve(JSON.stringify(metricsWithScore)),
+    json: () => Promise.resolve(metricsWithScore)
+  }));
+
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const metricSelect = screen.getByRole('combobox', { name: /Metric:/i });
+  fireEvent.change(metricSelect, { target: { value: 'contribution_score' } });
+
+  await waitFor(() => {
+    const rows = document.querySelectorAll('.leaderboard tbody tr');
+    expect(rows.length).toBeGreaterThan(0);
+    // alice should be ranked first (higher score)
+    expect(rows[0].textContent).toContain('alice');
+  });
+});
