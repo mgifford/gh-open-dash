@@ -181,7 +181,7 @@ test('renders contributor type filter with All Contributors option', async () =>
 
 test('contributor type filter shows only staff when Org Members selected', async () => {
   render(<App />);
-  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+  await waitFor(() => screen.getByRole('combobox', { name: /Contributor type:/i }));
 
   const contributorTypeSelect = screen.getByRole('combobox', { name: /Contributor type:/i });
   fireEvent.change(contributorTypeSelect, { target: { value: 'staff' } });
