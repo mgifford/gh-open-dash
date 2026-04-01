@@ -11,7 +11,7 @@
     "test:watch": "vitest --watch"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "dependencies": {
     "chart.js": "^4.4.1",
