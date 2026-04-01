@@ -128,6 +128,28 @@ test('org-mismatch banner shows "Open issue now" link when githubRepo is configu
   expect(issueLink.href).toContain('SCAN%3A%20chaoss');
 });
 
+test('org-mismatch banner shows "Open workflow" link when githubRepo is configured', async () => {
+  mockGetCurrentOrg.mockReturnValue('chaoss');
+
+  const configWithRepo = { githubRepo: 'myorg/my-dash', organization: { githubOrg: 'civicactions' } };
+  global.fetch = vi.fn((url) => {
+    if (url && url.includes('config.json')) {
+      return Promise.resolve({ ok: true, json: () => Promise.resolve(configWithRepo) });
+    }
+    return Promise.resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(sampleMetrics)), json: () => Promise.resolve(sampleMetrics) });
+  });
+
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const alerts = screen.getAllByRole('alert');
+  expect(alerts.length).toBeGreaterThan(0);
+  // The "Open workflow" link should point to the Actions workflow URL
+  const workflowLink = alerts[0].querySelector('a[href*="github.com/myorg/my-dash/actions/workflows/update-data.yml"]');
+  expect(workflowLink).not.toBeNull();
+  expect(workflowLink.href).toContain('github.com/' + configWithRepo.githubRepo + '/actions/workflows/update-data.yml');
+});
+
 test('does not show org-mismatch banner when requested org matches dataset', async () => {
   // civicactions has repos in the sample dataset, so no banner expected
   mockGetCurrentOrg.mockReturnValue('civicactions');

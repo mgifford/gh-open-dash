@@ -433,12 +433,36 @@ function App() {
               </li>
               <li>
                 <strong>Add manually</strong> — add <code>{currentOrg}</code> to{' '}
-                <code>orgAllowlist</code> in <code>scripts/config.json</code> and
-                re-run the data pipeline:
-                <br />
-                <code className="org-mismatch-banner__cmd">
-                  node scripts/update_sqlite.mjs &amp;&amp; node scripts/export_metrics.mjs
-                </code>
+                <code>orgAllowlist</code> in <code>scripts/config.json</code>, then
+                re-run the data pipeline using one of these approaches:
+                <ul>
+                  <li>
+                    <strong>Via GitHub Actions</strong> (no local setup needed) — after
+                    updating <code>scripts/config.json</code>, manually trigger the{' '}
+                    <em>Update participation data</em> workflow from the repository&rsquo;s
+                    Actions tab.
+                    {config?.githubRepo && (
+                      <>
+                        {' '}
+                        <a
+                          href={`https://github.com/${config.githubRepo}/actions/workflows/update-data.yml`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Open the Update participation data GitHub Actions workflow (opens in new tab)"
+                        >
+                          Open workflow ↗
+                        </a>
+                      </>
+                    )}
+                  </li>
+                  <li>
+                    <strong>Locally or in GitHub Codespaces</strong> — run:
+                    <br />
+                    <code className="org-mismatch-banner__cmd">
+                      node scripts/update_sqlite.mjs &amp;&amp; node scripts/export_metrics.mjs
+                    </code>
+                  </li>
+                </ul>
               </li>
             </ol>
           </div>
