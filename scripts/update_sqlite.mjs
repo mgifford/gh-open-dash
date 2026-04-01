@@ -392,26 +392,26 @@ async function run() {
 
     for (const org of ORG_ALLOWLIST) {
       const baseQualifier = `org:${org} is:public`;
-      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr created:${rangeStart}..${rangeEnd}`, org);
-      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr merged:${rangeStart}..${rangeEnd}`, org);
-      await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr closed:${rangeStart}..${rangeEnd}`, org);
-      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue created:${rangeStart}..${rangeEnd}`, org);
-      await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue closed:${rangeStart}..${rangeEnd}`, org);
-      
+      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr`, 'created', rangeStart, rangeEnd, org);
+      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr`, 'merged', rangeStart, rangeEnd, org);
+      await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr`, 'closed', rangeStart, rangeEnd, org);
+      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue`, 'created', rangeStart, rangeEnd, org);
+      await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue`, 'closed', rangeStart, rangeEnd, org);
+
     }
 
     for (const user of staffAllowList) {
       const label = `staff:${user}`;
-      
+
       // Only run per-person global public search if collectAllPublic is true.
       // If false, we rely on the org-based collection above.
       if (fileConfig.collectAllPublic) {
         const baseQualifier = `author:${user} is:public`;
-        await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr created:${rangeStart}..${rangeEnd}`, label);
-        await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr merged:${rangeStart}..${rangeEnd}`, label);
-        await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr closed:${rangeStart}..${rangeEnd}`, label);
-        await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue created:${rangeStart}..${rangeEnd}`, label);
-        await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue closed:${rangeStart}..${rangeEnd}`, label);
+        await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr`, 'created', rangeStart, rangeEnd, label);
+        await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr`, 'merged', rangeStart, rangeEnd, label);
+        await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr`, 'closed', rangeStart, rangeEnd, label);
+        await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue`, 'created', rangeStart, rangeEnd, label);
+        await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue`, 'closed', rangeStart, rangeEnd, label);
       }
       
       if (fileConfig.collectStaffCommits) {
@@ -493,7 +493,19 @@ async function run() {
   }
 }
 
-async function processMetric(client, table, weekStart, query, contextLabel) {
+// MIN_SPLIT_RANGE_MS: never split a time window smaller than 1 hour to avoid infinite recursion
+const MIN_SPLIT_RANGE_MS = 60 * 60 * 1000;
+
+// processMetric collects one metric type for a given query base and date range.
+// If the API reports more than 1000 matching results (the GitHub search pagination ceiling),
+// the range is automatically split in half and each half is processed recursively, ensuring
+// no data is silently truncated for large active organisations.
+//
+// queryBase  – query string WITHOUT the date qualifier (e.g. "org:civicactions is:public is:pr")
+// dateQualifier – 'created' | 'merged' | 'closed'
+// rangeStart / rangeEnd – ISO datetime strings for the search window
+async function processMetric(client, table, weekStart, queryBase, dateQualifier, rangeStart, rangeEnd, contextLabel) {
+  const query = `${queryBase} ${dateQualifier}:${rangeStart}..${rangeEnd}`;
   let hasNextPage = true;
   let cursor = null;
   const items = [];
@@ -505,11 +517,41 @@ async function processMetric(client, table, weekStart, query, contextLabel) {
   let skippedDisallowedLicense = 0;
   let skippedMissingAuthor = 0;
   let skippedPrivateRepo = 0;
+  let firstPage = true;
 
   while (hasNextPage) {
     const data = await fetchSearchPage(client, query, cursor, `${table}:${contextLabel}`);
 
     const search = data.search;
+
+    // On the first page, check whether the total result count exceeds the GitHub
+    // search pagination ceiling of 1000.  When it does, split the time window in
+    // half and recurse rather than silently discarding the overflow items.
+    if (firstPage) {
+      firstPage = false;
+      const issueCount = search.issueCount;
+      if (issueCount > 1000) {
+        const startMs = new Date(rangeStart).getTime();
+        const endMs = new Date(rangeEnd).getTime();
+        if ((endMs - startMs) > MIN_SPLIT_RANGE_MS) {
+          console.warn(`  [${contextLabel}] ${table}: ${issueCount} results exceed 1000-item API limit for ${rangeStart}..${rangeEnd}. Splitting range.`);
+          const midMs = Math.floor((startMs + endMs) / 2);
+          const midISO = new Date(midMs).toISOString();
+          // Start the second half 1 ms after the midpoint so the two ranges
+          // are non-overlapping (GitHub uses inclusive bounds on both ends).
+          // GitHub timestamps have millisecond resolution, so there is no gap.
+          // Note: one API call is "spent" here to discover the count before
+          // splitting; this is an acceptable trade-off to avoid silent data loss.
+          const mid1ISO = new Date(midMs + 1).toISOString();
+          await processMetric(client, table, weekStart, queryBase, dateQualifier, rangeStart, midISO, contextLabel);
+          await processMetric(client, table, weekStart, queryBase, dateQualifier, mid1ISO, rangeEnd, contextLabel);
+          return; // sub-ranges handle all insertions; discard partial first-page results
+        } else {
+          console.warn(`  [${contextLabel}] ${table}: ${issueCount} results exceed API limit but range too small to split further (${rangeStart}..${rangeEnd}); collecting first 1000.`);
+        }
+      }
+    }
+
     hasNextPage = search.pageInfo.hasNextPage;
     cursor = search.pageInfo.endCursor;
 
@@ -931,6 +973,7 @@ async function fetchSearchPage(client, query, cursor, contextLabel) {
       return await client(`
         query($q: String!, $cursor: String) {
           search(query: $q, type: ISSUE, first: 100, after: $cursor) {
+            issueCount
             pageInfo {
               hasNextPage
               endCursor
