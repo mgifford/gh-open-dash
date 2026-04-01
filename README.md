@@ -148,7 +148,7 @@ Options:
 
 ### Prerequisites
 
-*   Node.js 20+
+*   Node.js 24+
 *   A GitHub Personal Access Token (classic) with `read:org` scope (if you want to run the data collection locally).
 
 ### Install Dependencies
