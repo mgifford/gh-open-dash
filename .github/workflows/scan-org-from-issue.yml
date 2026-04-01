@@ -140,7 +140,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_READ_ORG_TOKEN || secrets.GITHUB_TOKEN }}
           ORG_ALLOWLIST: ${{ env.COMBINED_ORG_ALLOWLIST }}
           HISTORY_WEEKS: ${{ vars.HISTORY_WEEKS || 52 }}
-          MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 12 }}
+          MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 4 }}
         run: node scripts/update_sqlite.mjs
 
       - name: Export metrics
@@ -184,8 +184,11 @@ jobs:
               '',
               '**What happened:**',
               `- \`${org}\` was added to the data pipeline allowlist in \`scripts/config.json\``,
-              '- Metrics were collected and exported to `data/metrics.json`',
+              '- The first 4 weeks of metrics were collected and exported to `data/metrics.json`',
               '- The changes have been committed to this repository',
+              '',
+              '**Ongoing collection:**',
+              `> The weekly scheduled run will automatically backfill the remaining history for \`${org}\` in small batches (up to 4 weeks per run). Full history will be available after a few weekly runs.`,
             ];
             if (dashUrl) {
               lines.push('');
