@@ -439,16 +439,16 @@ function App() {
                   <li>
                     <strong>Via GitHub Actions</strong> (no local setup needed) — after
                     updating <code>scripts/config.json</code>, manually trigger the{' '}
-                    <em>Update participation data</em> workflow from the repository&rsquo;s
+                    <em>Update metrics</em> workflow from the repository&rsquo;s
                     Actions tab.
                     {config?.githubRepo && (
                       <>
                         {' '}
                         <a
-                          href={`https://github.com/${config.githubRepo}/actions/workflows/update-data.yml`}
+                          href={`https://github.com/${config.githubRepo}/actions/workflows/update-metrics.yml`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-label="Open the Update participation data GitHub Actions workflow (opens in new tab)"
+                          aria-label="Open the Update metrics GitHub Actions workflow (opens in new tab)"
                         >
                           Open workflow ↗
                         </a>

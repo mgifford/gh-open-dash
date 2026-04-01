@@ -145,9 +145,9 @@ test('org-mismatch banner shows "Open workflow" link when githubRepo is configur
   const alerts = screen.getAllByRole('alert');
   expect(alerts.length).toBeGreaterThan(0);
   // The "Open workflow" link should point to the Actions workflow URL
-  const workflowLink = alerts[0].querySelector('a[href*="github.com/myorg/my-dash/actions/workflows/update-data.yml"]');
+  const workflowLink = alerts[0].querySelector('a[href*="github.com/myorg/my-dash/actions/workflows/update-metrics.yml"]');
   expect(workflowLink).not.toBeNull();
-  expect(workflowLink.href).toContain('github.com/' + configWithRepo.githubRepo + '/actions/workflows/update-data.yml');
+  expect(workflowLink.href).toContain('github.com/' + configWithRepo.githubRepo + '/actions/workflows/update-metrics.yml');
 });
 
 test('does not show org-mismatch banner when requested org matches dataset', async () => {
