@@ -159,8 +159,14 @@ jobs:
           git diff --staged --quiet || git commit -m "Scan org: ${SCAN_ORG} (issue #${ISSUE_NUMBER})"
           # Retry push with rebase in case another commit landed on the remote during this long-running scan
           for i in 1 2 3; do
-            git pull --rebase origin HEAD && git push origin HEAD && break || { echo "Push attempt $i failed (pull/rebase or push error); retrying in 10s..."; sleep 10; }
+            if git pull --rebase origin HEAD && git push origin HEAD; then
+              exit 0
+            fi
+            echo "Push attempt $i failed; retrying in 10s..."
+            sleep 10
           done
+          echo "All push attempts failed after 3 retries"
+          exit 1
 
       - name: Comment success on issue
         uses: actions/github-script@v7

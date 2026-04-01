@@ -80,4 +80,13 @@ jobs:
           git add data/metrics.json
           # Only commit if there are changes
           git diff --staged --quiet || git commit -m "Update participation data"
-          git push
+          # Retry push with rebase in case another commit landed on the remote
+          for i in 1 2 3; do
+            if git pull --rebase origin HEAD && git push origin HEAD; then
+              exit 0
+            fi
+            echo "Push attempt $i failed; retrying in 10s..."
+            sleep 10
+          done
+          echo "All push attempts failed after 3 retries"
+          exit 1
