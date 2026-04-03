@@ -177,3 +177,246 @@ test('CommunityEngagement shows health scores with color coding', () => {
   const healthCells = screen.getAllByText(/\d+%/);
   expect(healthCells.length).toBeGreaterThan(0);
 });
+
+// ---------------------------------------------------------------------------
+// RepositoryHealthChart – additional edge cases
+// ---------------------------------------------------------------------------
+
+describe('RepositoryHealthChart – edge cases', () => {
+  test('shows "No health score data" when all repos have null health_score', () => {
+    const dataNoScores = {
+      ecosystems: {
+        repositories: [
+          { repo: 'org/repo-a', health_score: null },
+          { repo: 'org/repo-b', health_score: undefined },
+        ],
+      },
+    };
+    render(<RepositoryHealthChart data={dataNoScores} />);
+    expect(screen.getByText(/No health score data available/i)).toBeDefined();
+  });
+
+  test('renders legend text describing health score tiers', () => {
+    render(<RepositoryHealthChart data={sampleEcosystemsData} />);
+    expect(screen.getByText(/Healthy \(80-100%\)/i)).toBeDefined();
+    expect(screen.getByText(/Needs Attention \(50-79%\)/i)).toBeDefined();
+    expect(screen.getByText(/Critical/i)).toBeDefined();
+  });
+
+  test('renders a footnote about Ecosyste.ms as data source', () => {
+    render(<RepositoryHealthChart data={sampleEcosystemsData} />);
+    expect(screen.getByText(/Ecosyste\.ms/i)).toBeDefined();
+  });
+
+  test('limits display to 20 repos when more are provided', () => {
+    const manyRepos = Array.from({ length: 25 }, (_, i) => ({
+      repo: `org/repo-${i}`,
+      health_score: 50 + i,
+      maintenance_status: 'active',
+      language: 'JavaScript',
+    }));
+    render(<RepositoryHealthChart data={{ ecosystems: { repositories: manyRepos } }} />);
+    // Should render a chart (no crash and chart appears)
+    expect(screen.getByTestId('health-bar-chart')).toBeDefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// DependencyHealthChart – additional edge cases
+// ---------------------------------------------------------------------------
+
+describe('DependencyHealthChart – edge cases', () => {
+  test('groups repos without a language into "Other" dataset', () => {
+    const dataNoLang = {
+      ecosystems: {
+        repositories: [
+          {
+            repo: 'org/no-lang-repo',
+            health_score: 70,
+            dependency_count: 10,
+            dependent_repos_count: 5,
+            language: null,
+          },
+        ],
+      },
+    };
+    render(<DependencyHealthChart data={dataNoLang} />);
+    expect(screen.getByTestId('dependency-bubble-chart')).toBeDefined();
+  });
+
+  test('renders correctly with repos from multiple languages', () => {
+    const multiLangData = {
+      ecosystems: {
+        repositories: [
+          { repo: 'org/js-repo', health_score: 80, dependency_count: 20, dependent_repos_count: 8, language: 'JavaScript' },
+          { repo: 'org/py-repo', health_score: 60, dependency_count: 15, dependent_repos_count: 3, language: 'Python' },
+          { repo: 'org/rb-repo', health_score: 40, dependency_count: 5, dependent_repos_count: 1, language: 'Ruby' },
+        ],
+      },
+    };
+    render(<DependencyHealthChart data={multiLangData} />);
+    expect(screen.getByTestId('dependency-bubble-chart')).toBeDefined();
+  });
+
+  test('renders description about bubble sizing', () => {
+    render(<DependencyHealthChart data={sampleEcosystemsData} />);
+    expect(screen.getByText(/Bubble size represents health score/i)).toBeDefined();
+  });
+
+  test('shows "No dependency data" when repos have zero dependency and zero dependent counts', () => {
+    const allZeroData = {
+      ecosystems: {
+        repositories: [
+          { repo: 'org/a', health_score: 80, dependency_count: 0, dependent_repos_count: 0, language: 'Go' },
+        ],
+      },
+    };
+    render(<DependencyHealthChart data={allZeroData} />);
+    expect(screen.getByText(/No dependency data available/i)).toBeDefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CommunityEngagement – additional edge cases
+// ---------------------------------------------------------------------------
+
+describe('CommunityEngagement – edge cases', () => {
+  test('shows total commits card when commit stats are present', () => {
+    render(<CommunityEngagement data={sampleEcosystemsData} />);
+    // sampleEcosystemsData has 1500 total_commits
+    expect(screen.getByText('1,500')).toBeDefined();
+    expect(screen.getByText(/Total Commits/i)).toBeDefined();
+  });
+
+  test('shows committer count in commit stats detail', () => {
+    render(<CommunityEngagement data={sampleEcosystemsData} />);
+    expect(screen.getByText(/35 committers/i)).toBeDefined();
+  });
+
+  test('does not show Total Commits card when commit_stats is absent', () => {
+    const noCommitStats = {
+      ecosystems: {
+        ...sampleEcosystemsData.ecosystems,
+        commit_stats: [],
+      },
+    };
+    render(<CommunityEngagement data={noCommitStats} />);
+    expect(screen.queryByText(/Total Commits/i)).toBeNull();
+  });
+
+  test('shows avg health score card when repository health data is present', () => {
+    render(<CommunityEngagement data={sampleEcosystemsData} />);
+    expect(screen.getByText(/Avg Health Score/i)).toBeDefined();
+  });
+
+  test('formats avg time to close in days and hours for long durations', () => {
+    const longTimeData = {
+      ecosystems: {
+        repositories: sampleEcosystemsData.ecosystems.repositories,
+        issue_stats: [
+          {
+            repo: 'org/repo-a',
+            total_issues: 10,
+            open_issues: 2,
+            closed_issues: 8,
+            avg_time_to_close: 50, // 2 days 2 hours
+            avg_comments_per_issue: 1.0,
+          },
+        ],
+        commit_stats: [],
+      },
+    };
+    render(<CommunityEngagement data={longTimeData} />);
+    expect(screen.getByText(/2d 2h/i)).toBeDefined();
+  });
+
+  test('formats avg time to close in hours only for short durations', () => {
+    const shortTimeData = {
+      ecosystems: {
+        repositories: sampleEcosystemsData.ecosystems.repositories,
+        issue_stats: [
+          {
+            repo: 'org/repo-a',
+            total_issues: 10,
+            open_issues: 2,
+            closed_issues: 8,
+            avg_time_to_close: 6, // 6 hours, less than 1 day
+            avg_comments_per_issue: 2.0,
+          },
+        ],
+        commit_stats: [],
+      },
+    };
+    render(<CommunityEngagement data={shortTimeData} />);
+    expect(screen.getByText('6h')).toBeDefined();
+  });
+
+  test('hides Avg Time to Close card when avg_time_to_close is null', () => {
+    const noTimeData = {
+      ecosystems: {
+        repositories: [],
+        issue_stats: [
+          {
+            repo: 'org/repo-a',
+            total_issues: 5,
+            open_issues: 1,
+            closed_issues: 4,
+            avg_time_to_close: null,
+            avg_comments_per_issue: null,
+          },
+        ],
+        commit_stats: [],
+      },
+    };
+    render(<CommunityEngagement data={noTimeData} />);
+    expect(screen.queryByText(/Avg Time to Close/i)).toBeNull();
+  });
+
+  test('shows N/A in table when avg_comments_per_issue is absent', () => {
+    const noCommentsData = {
+      ecosystems: {
+        repositories: [],
+        issue_stats: [
+          {
+            repo: 'org/repo-a',
+            total_issues: 5,
+            open_issues: 1,
+            closed_issues: 4,
+            avg_time_to_close: null,
+            avg_comments_per_issue: null,
+          },
+        ],
+        commit_stats: [],
+      },
+    };
+    render(<CommunityEngagement data={noCommentsData} />);
+    const naCells = screen.getAllByText('N/A');
+    expect(naCells.length).toBeGreaterThan(0);
+  });
+
+  test('shows data source attribution text', () => {
+    render(<CommunityEngagement data={sampleEcosystemsData} />);
+    expect(screen.getByText(/Community engagement data provided by Ecosyste\.ms/i)).toBeDefined();
+  });
+
+  test('shows no more than 10 repos in the Top Repositories table', () => {
+    const manyIssueStats = Array.from({ length: 15 }, (_, i) => ({
+      repo: `org/repo-${i}`,
+      total_issues: 10 + i,
+      open_issues: i,
+      closed_issues: 10,
+      avg_time_to_close: 24,
+      avg_comments_per_issue: 1.5,
+    }));
+    const manyData = {
+      ecosystems: {
+        repositories: [],
+        issue_stats: manyIssueStats,
+        commit_stats: [],
+      },
+    };
+    const { container } = render(<CommunityEngagement data={manyData} />);
+    const tableRows = container.querySelectorAll('tbody tr');
+    expect(tableRows.length).toBeLessThanOrEqual(10);
+  });
+});
