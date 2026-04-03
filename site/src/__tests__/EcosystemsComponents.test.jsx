@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { test, expect, vi, beforeEach } from 'vitest';
+import { describe, test, expect, vi, beforeEach } from 'vitest';
 import RepositoryHealthChart from '../RepositoryHealthChart.jsx';
 import DependencyHealthChart from '../DependencyHealthChart.jsx';
 import CommunityEngagement from '../CommunityEngagement.jsx';
