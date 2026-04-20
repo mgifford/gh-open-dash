@@ -22,19 +22,19 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: '24'
           cache: 'npm'
           
       - name: Install dependencies
         run: npm ci
 
       - name: Restore SQLite database
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             data/participation.sqlite
@@ -82,7 +82,7 @@ jobs:
           git diff --staged --quiet || git commit -m "Update participation data"
           # Retry push with rebase in case another commit landed on the remote
           for i in 1 2 3; do
-            if git pull --rebase origin HEAD && git push origin HEAD; then
+            if git pull --rebase --autostash origin HEAD && git push origin HEAD; then
               exit 0
             fi
             echo "Push attempt $i failed; retrying in 10s..."
