@@ -6,9 +6,9 @@ This report is done when it satisfies the concrete project requirements below an
 
 The current implementation and data pipeline already define much of the report scope:
 
-- **Primary source of truth:** `/home/runner/work/gh-open-dash/gh-open-dash/data/metrics.json`
-- **Published site copy:** `/home/runner/work/gh-open-dash/gh-open-dash/site/public/data/metrics.json`
-- **Collector configuration:** `/home/runner/work/gh-open-dash/gh-open-dash/scripts/config.json`
+- **Primary source of truth:** `data/metrics.json`
+- **Published site copy:** `site/public/data/metrics.json`
+- **Collector configuration:** `scripts/config.json`
 - **Current configured org allowlist:** `civicactions`
 - **Current history window:** `52` weeks
 - **Current max processing window per run:** `4` weeks
@@ -38,7 +38,7 @@ The current implementation and data pipeline already define much of the report s
   - comment-related activity when present in the export
   - ecosystem or repository metadata when enabled
 - The report does not claim metrics that are not present in the generated data.
-- `/home/runner/work/gh-open-dash/gh-open-dash/data/metrics.json` and `/home/runner/work/gh-open-dash/gh-open-dash/site/public/data/metrics.json` are intentionally aligned for the release, or any difference is explicitly explained before publication.
+- `data/metrics.json` and `site/public/data/metrics.json` are intentionally aligned for the release, or any difference is explicitly explained before publication.
 
 ### 3. Time boundaries are correct
 
@@ -65,7 +65,7 @@ The current implementation and data pipeline already define much of the report s
 
 - Headings and summary text use clear, inclusive language.
 - A reviewer can understand what the report means without reading the source code or SQLite database.
-- Charts or visual summaries have accessible supporting context consistent with `/home/runner/work/gh-open-dash/gh-open-dash/ACCESSIBILITY.md`.
+- Charts or visual summaries have accessible supporting context consistent with `ACCESSIBILITY.md`.
 - Any caveats, anomalies, or obvious gaps in the exported data are called out in plain language.
 
 ### 7. Supporting documentation is up to date
@@ -78,8 +78,8 @@ The current implementation and data pipeline already define much of the report s
 
 - Relevant existing project validation has been run for the affected area.
 - For this repository, that currently means using the existing site checks:
-  - `cd /home/runner/work/gh-open-dash/gh-open-dash/site && npm test -- --run`
-  - `cd /home/runner/work/gh-open-dash/gh-open-dash/site && npm run build`
+  - `cd site && npm test -- --run`
+  - `cd site && npm run build`
 - Any validation blockers that prevent those commands from running are documented before calling the work done.
 
 ### 9. The report is ready to publish
