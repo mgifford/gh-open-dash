@@ -306,6 +306,7 @@ This project is committed to transparency about AI usage. Below is a record of A
 | AI Tool | Model / Version | How it was used |
 |---|---|---|
 | [GitHub Copilot](https://github.com/features/copilot) (Coding Agent) | Claude Sonnet (via GitHub Copilot) | Used to write and refactor code, generate documentation, implement new features, and review pull requests throughout the development of this project. |
+| [GitHub Copilot](https://github.com/features/copilot) (Task Agent) | GPT-5 (via GitHub Copilot) | Used to draft `DEFINITION_OF_DONE.md` and update project documentation during development. Not used at runtime. |
 
 ### AI used during CI/CD or data collection
 
