@@ -408,6 +408,19 @@ async function waitForGraphqlRateLimit(headers, contextLabel) {
   await sleep(waitMs);
 }
 
+function isGraphqlRateLimitedError(err) {
+  if (err?.status === 403 || err?.status === 429) return true;
+  return Array.isArray(err?.errors) && err.errors.some(e => e.type === 'RATE_LIMIT' || e.type === 'RATE_LIMITED');
+}
+
+function getGraphqlRateLimitWaitMs(err, attempt) {
+  const resetAt = Number(err?.headers?.['x-ratelimit-reset']) || null;
+  const now = Date.now();
+  return resetAt
+    ? Math.max(resetAt * 1000 - now + RATE_LIMIT_BUFFER_MS, RETRY_DELAY_MS * attempt)
+    : RETRY_DELAY_MS * attempt;
+}
+
 function createGraphqlClient(token) {
   return async (query, variables, contextLabel = 'graphql') => {
     const res = await fetch('https://api.github.com/graphql', {
@@ -526,7 +539,7 @@ async function run() {
       }
     });
     clearRange();
-    console.log(`Cleared weeks_collected for range ${toISODate(reprocessStart)}..${toISODate(reprocessEnd)}.`);
+    console.log(`Cleared weeks_collected and weeks_metrics_collected for range ${toISODate(reprocessStart)}..${toISODate(reprocessEnd)}.`);
   }
 
   // -----------------------------------------------------------------------
@@ -970,8 +983,7 @@ async function processStaffCommits(weekStart, rangeStartISO, rangeEndISO, user) 
       const repoFull = node.repository && (node.repository.full_name || node.repository.fullName || node.repository.name);
       const authorLogin = node.author && node.author.login;
       if (!repoFull || !authorLogin) continue;
-
-    if (repoShouldBeExcluded(repoFull)) continue;
+      if (repoShouldBeExcluded(repoFull)) continue;
 
       // license check: when licenseFilter === 'oss', require allowList membership
       let spdx = null;
@@ -1140,6 +1152,15 @@ async function processMeetingMentions(graphqlClient, weekStart, rangeStart, rang
         `, { q: query, cursor }, `meeting_mentions:${org}`);
         break;
       } catch (err) {
+        const rateLimited = isGraphqlRateLimitedError(err);
+        if (rateLimited) {
+          const waitMs = getGraphqlRateLimitWaitMs(err, attempt);
+          const waitSeconds = Math.ceil(waitMs / 1000);
+          console.log(`[meeting_mentions:${org}] Hit rate limit; waiting ${waitSeconds}s until API window resets before retry.`);
+          await sleep(waitMs);
+          attempt--;
+          continue;
+        }
         if (attempt === MAX_RETRIES) throw err;
         await sleep(RETRY_DELAY_MS * attempt);
       }
@@ -1248,12 +1269,10 @@ async function fetchSearchPage(client, query, cursor, contextLabel) {
       }, contextLabel);
     } catch (err) {
       const isLastAttempt = attempt === MAX_RETRIES;
-      const rateLimited = Array.isArray(err.errors) && err.errors.some(e => e.type === 'RATE_LIMIT' || e.type === 'RATE_LIMITED');
+      const rateLimited = isGraphqlRateLimitedError(err);
       const status = err.status || 'unknown';
       const message = err.message || 'Unknown GraphQL error';
-      const resetAt = Number(err.headers?.['x-ratelimit-reset']) || null;
-      const now = Date.now();
-      const waitMsFromReset = resetAt ? Math.max(resetAt * 1000 - now + RATE_LIMIT_BUFFER_MS, RETRY_DELAY_MS * attempt) : RETRY_DELAY_MS * attempt;
+      const waitMsFromReset = getGraphqlRateLimitWaitMs(err, attempt);
 
       console.warn(`[${contextLabel}] GraphQL fetch failed (attempt ${attempt}/${MAX_RETRIES}, status ${status}, rateLimited=${rateLimited}): ${message}`);
 
