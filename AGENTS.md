@@ -182,6 +182,14 @@ This project is committed to transparency about how AI is used. AI agents and hu
 - AI is not used at runtime by the dashboard and no browser-based AI features are enabled; entries should reflect this accurately.
 - The AI Disclosure section must distinguish between: (a) AI used to build or maintain the project, (b) AI used during CI/CD or data collection, and (c) AI running in the user's browser.
 
+## Security review requirement
+
+Security review must be treated as a recurring requirement for every meaningful change.
+
+- Review changes for data exposure, dependency risk, and workflow/automation risk before merge.
+- Keep `SBOM.md` current with direct software dependencies, resolved versions, and license identifiers.
+- Run repository validation commands after updates and address any security-relevant findings before merge.
+
 ## Verification checklist before merge
 
 - [ ] `data/metrics.json` contains only weeks/authors/counts (no titles/urls/text).
@@ -193,6 +201,7 @@ This project is committed to transparency about how AI is used. AI agents and hu
  - [ ] `scripts/config.json` flags `collectAllPublic` and `licenseFilter` are documented and used intentionally.
  - [ ] UI changes meet WCAG 2.2 AA (keyboard access, contrast, ARIA labels, chart alternatives).
  - [ ] If an AI agent contributed to this PR, the `README.md` AI Disclosure section has been updated to reflect that contribution.
+ - [ ] Security review was completed and `SBOM.md` is up to date with versions and licenses.
 
 ## GitHub Pages consolidation and ensuring `main` is authoritative
 
