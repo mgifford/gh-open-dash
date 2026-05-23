@@ -69,6 +69,7 @@ This system allows you to publish metrics without exposing private data or hitti
 1.  **Data Pipeline (`scripts/`)**:
     *   Runs on a scheduled GitHub Action (daily/weekly configurable).
     *   Queries GitHub GraphQL API for PRs and Issues in your allowed org list.
+    *   Caches weekly results in SQLite and resumes interrupted weeks from per-metric checkpoints.
     *   Filters for repositories with Open Source licenses (SPDX allowlist).
     *   Stores counts in a local SQLite database (`data/participation.sqlite`) incrementally.
     *   Exports aggregated anonymous JSON metrics to `data/metrics.json`.
@@ -128,7 +129,7 @@ This system allows you to publish metrics without exposing private data or hitti
 {
   "orgAllowlist": ["your-org", "partner-org"],
   "historyWeeks": 260,
-  "maxWeeksPerRun": 10,
+  "maxWeeksPerRun": 2,
   "collectAllPublic": false,
   "licenseFilter": "oss",
   "collectEcosystemsData": false,
@@ -139,6 +140,7 @@ This system allows you to publish metrics without exposing private data or hitti
 Options:
 - `orgAllowlist`: List of GitHub organizations to track
 - `historyWeeks`: How far back to collect data (default: 260 weeks / 5 years)
+- `maxWeeksPerRun`: Maximum number of complete weekly buckets to fetch in a single collector run
 - `collectAllPublic`: Track all public repos (not just org repos) for staff members
 - `licenseFilter`: "oss" (only open source) or "all"
 - `collectEcosystemsData`: Enable Ecosyste.ms integration for repository health and community metrics (default: false)
@@ -178,6 +180,14 @@ npm install
     npm run update
     ```
     This will create/update `data/participation.sqlite`.
+
+    To inspect cache progress without making any GitHub API calls:
+    ```bash
+    node scripts/update_sqlite.mjs --status
+    # or
+    node scripts/update_sqlite.mjs --dry-run
+    ```
+    This reports how many weeks are fully collected, partially checkpointed, and still pending in the configured history window.
 
 3.  Export the metrics JSON:
     ```bash
@@ -306,7 +316,7 @@ This project is committed to transparency about AI usage. Below is a record of A
 | AI Tool | Model / Version | How it was used |
 |---|---|---|
 | [GitHub Copilot](https://github.com/features/copilot) (Coding Agent) | Claude Sonnet (via GitHub Copilot) | Used to write and refactor code, generate documentation, implement new features, and review pull requests throughout the development of this project. |
-| [GitHub Copilot](https://github.com/features/copilot) (Task Agent) | GPT-5 (via GitHub Copilot) | Used to draft and refine `DEFINITION_OF_DONE.md` and update project documentation during development. Not used at runtime. |
+| [GitHub Copilot](https://github.com/features/copilot) (Task Agent) | GPT-5 (via GitHub Copilot) | Used to implement data-pipeline improvements, update collector configuration, and revise project documentation during development. Not used at runtime. |
 
 ### AI used during CI/CD or data collection
 

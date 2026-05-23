@@ -3,7 +3,7 @@
     "civicactions"
   ],
   "historyWeeks": 52,
-  "maxWeeksPerRun": 4,
+  "maxWeeksPerRun": 2,
   "collectAllPublic": true,
   "licenseFilter": "all",
   "collectStaffCommits": true,
