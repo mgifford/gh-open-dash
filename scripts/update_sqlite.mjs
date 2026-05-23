@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import Database from 'better-sqlite3';
-import { graphql } from '@octokit/graphql';
 import fs from 'fs';
 import path from 'path';
 import { 
@@ -21,8 +20,18 @@ const CONFIG_PATH = path.join('scripts', 'config.json');
 const defaultConfig = {
   orgAllowlist: ['civicactions'],
   historyWeeks: 52,
-  maxWeeksPerRun: 12
+  maxWeeksPerRun: 2
 };
+
+const SUPPORTED_FLAGS = new Set(['--status', '--dry-run']);
+const cliArgs = process.argv.slice(2);
+for (const arg of cliArgs) {
+  if (!SUPPORTED_FLAGS.has(arg)) {
+    console.error(`Unsupported argument: ${arg}`);
+    process.exit(2);
+  }
+}
+const STATUS_ONLY = cliArgs.includes('--status') || cliArgs.includes('--dry-run');
 
 const fileConfig = loadConfig();
 
@@ -53,6 +62,7 @@ const parsedReprocessWeeks = Number.parseInt(process.env.REPROCESS_WEEKS || '0',
 const RATE_LIMIT_BUFFER_MS = 5000;
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 2000;
+const GRAPHQL_RATE_LIMIT_MIN_REMAINING = 50;
 
 // Ensure data directory exists
 if (!fs.existsSync('data')) {
@@ -186,6 +196,12 @@ db.exec(`
     week_start TEXT PRIMARY KEY,
     collected_at TEXT
   );
+  CREATE TABLE IF NOT EXISTS weeks_metrics_collected (
+    week_start TEXT,
+    metric_key TEXT,
+    collected_at TEXT,
+    PRIMARY KEY (week_start, metric_key)
+  );
 `);
 
 // Create Ecosyste.ms tables
@@ -214,6 +230,32 @@ const markWeekCollected = (weekStart) => {
 
 const clearWeekCollected = (weekStart) => {
   db.prepare('DELETE FROM weeks_collected WHERE week_start = ?').run(weekStart);
+};
+
+const isWeekMetricCollected = (weekStart, metricKey) => {
+  const row = db.prepare('SELECT 1 FROM weeks_metrics_collected WHERE week_start = ? AND metric_key = ?').get(weekStart, metricKey);
+  return !!row;
+};
+
+const markWeekMetricCollected = (weekStart, metricKey) => {
+  db.prepare('INSERT OR REPLACE INTO weeks_metrics_collected (week_start, metric_key, collected_at) VALUES (?, ?, ?)')
+    .run(weekStart, metricKey, new Date().toISOString());
+};
+
+const clearWeekMetricsCollected = (weekStart) => {
+  db.prepare('DELETE FROM weeks_metrics_collected WHERE week_start = ?').run(weekStart);
+};
+
+const countWeekMetricsCollected = (weekStart, metricKeys) => {
+  if (metricKeys.length === 0) return 0;
+  const placeholders = metricKeys.map(() => '?').join(', ');
+  const row = db.prepare(`
+    SELECT COUNT(*) AS c
+    FROM weeks_metrics_collected
+    WHERE week_start = ?
+      AND metric_key IN (${placeholders})
+  `).get(weekStart, ...metricKeys);
+  return row ? row.c : 0;
 };
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -268,20 +310,159 @@ function loadConfig() {
   return { ...defaultConfig };
 }
 
-// Main logic
-async function run() {
-  const token = process.env.GITHUB_TOKEN;
-  if (!token) {
-    console.error('GITHUB_TOKEN is required');
-    process.exit(1);
+function buildWeeklyMetricKeys() {
+  const keys = [];
+
+  for (const org of ORG_ALLOWLIST) {
+    keys.push(`pr_opened:org:${org}`);
+    keys.push(`pr_merged:org:${org}`);
+    keys.push(`pr_closed:org:${org}`);
+    keys.push(`issue_opened:org:${org}`);
+    keys.push(`issue_closed:org:${org}`);
+
+    if (fileConfig.collectWorkflowRuns) {
+      keys.push(`workflow_runs:org:${org}`);
+    }
+
+    if (fileConfig.collectMeetingMentions) {
+      keys.push(`meeting_mentions:org:${org}`);
+    }
   }
 
-  const graphqlClient = graphql.defaults({
-    headers: {
-      authorization: `token ${token}`,
-    },
-  });
+  for (const user of staffAllowList) {
+    if (fileConfig.collectAllPublic) {
+      keys.push(`pr_opened:staff:${user}`);
+      keys.push(`pr_merged:staff:${user}`);
+      keys.push(`pr_closed:staff:${user}`);
+      keys.push(`issue_opened:staff:${user}`);
+      keys.push(`issue_closed:staff:${user}`);
+    }
 
+    if (fileConfig.collectStaffCommits) {
+      keys.push(`commits:${user}`);
+    }
+  }
+
+  return keys;
+}
+
+function getWindowWeeks(historyStart, lastCompleteWeekStart) {
+  const weeks = [];
+  let p = new Date(lastCompleteWeekStart);
+  while (p.getTime() >= historyStart.getTime()) {
+    weeks.push(toISODate(p));
+    p = addDays(p, -7);
+  }
+  return weeks;
+}
+
+function printCollectionStatus({ historyStart, lastCompleteWeekStart, weeksPending, weeklyMetricKeys }) {
+  const windowWeeks = getWindowWeeks(historyStart, lastCompleteWeekStart);
+  const partialWeeks = [];
+  for (const weekStart of windowWeeks) {
+    if (isWeekCollected(weekStart)) continue;
+    const collectedMetrics = countWeekMetricsCollected(weekStart, weeklyMetricKeys);
+    if (collectedMetrics > 0) {
+      partialWeeks.push({
+        weekStart,
+        collectedMetrics
+      });
+    }
+  }
+
+  const totalWeeks = windowWeeks.length;
+  const collectedWeeks = totalWeeks - weeksPending.length;
+
+  console.log('Collector cache status');
+  console.log(`Last complete week start: ${toISODate(lastCompleteWeekStart)}`);
+  console.log(`History start: ${toISODate(historyStart)} (${HISTORY_WEEKS} weeks)`);
+  console.log(`Weeks in window: ${totalWeeks}`);
+  console.log(`Weeks fully collected: ${collectedWeeks}`);
+  console.log(`Weeks partially collected: ${partialWeeks.length}`);
+  console.log(`Weeks pending: ${weeksPending.length}`);
+  console.log(`Checkpointed metrics per week: ${weeklyMetricKeys.length}`);
+
+  if (partialWeeks.length > 0) {
+    console.log('Partial weeks:');
+    for (const partial of partialWeeks.slice(0, 10)) {
+      console.log(`  ${partial.weekStart}: ${partial.collectedMetrics}/${weeklyMetricKeys.length} metrics cached`);
+    }
+    if (partialWeeks.length > 10) {
+      console.log(`  …and ${partialWeeks.length - 10} more partial week(s)`);
+    }
+  }
+}
+
+async function waitForGraphqlRateLimit(headers, contextLabel) {
+  const remaining = Number(headers.get('x-ratelimit-remaining'));
+  const resetAt = Number(headers.get('x-ratelimit-reset'));
+  if (!Number.isFinite(remaining) || !Number.isFinite(resetAt)) return;
+  if (remaining > GRAPHQL_RATE_LIMIT_MIN_REMAINING) return;
+
+  const now = Date.now();
+  const waitMs = Math.max(resetAt * 1000 - now + RATE_LIMIT_BUFFER_MS, 0);
+  if (waitMs <= 0) return;
+
+  const waitSeconds = Math.ceil(waitMs / 1000);
+  console.log(`[${contextLabel}] GraphQL remaining budget is ${remaining}; waiting ${waitSeconds}s for reset.`);
+  await sleep(waitMs);
+}
+
+function createGraphqlClient(token) {
+  return async (query, variables, contextLabel = 'graphql') => {
+    const res = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        authorization: `token ${token}`,
+        'content-type': 'application/json',
+        'user-agent': 'gh-open-dash-collector'
+      },
+      body: JSON.stringify({ query, variables })
+    });
+
+    const rawBody = await res.text();
+    let payload = null;
+    if (rawBody) {
+      try {
+        payload = JSON.parse(rawBody);
+      } catch (err) {
+        payload = null;
+      }
+    }
+
+    if (!res.ok || payload?.errors?.length) {
+      const error = new Error(
+        payload?.errors?.map(e => e.message).join('; ')
+        || rawBody
+        || `HTTP ${res.status}`
+      );
+      error.status = res.status;
+      error.errors = payload?.errors || [];
+      error.headers = {
+        'x-ratelimit-reset': res.headers.get('x-ratelimit-reset'),
+        'x-ratelimit-remaining': res.headers.get('x-ratelimit-remaining')
+      };
+      throw error;
+    }
+
+    await waitForGraphqlRateLimit(res.headers, contextLabel);
+    return payload.data;
+  };
+}
+
+async function runCheckpointedMetric(weekStart, metricKey, action) {
+  if (isWeekMetricCollected(weekStart, metricKey)) {
+    console.log(`  Skipping cached metric ${metricKey} (${weekStart})`);
+    return false;
+  }
+
+  await action();
+  markWeekMetricCollected(weekStart, metricKey);
+  return true;
+}
+
+// Main logic
+async function run() {
   const now = new Date();
   
   const currentWeekStart = getMonday(now);
@@ -338,7 +519,9 @@ async function run() {
     const clearRange = db.transaction(() => {
       let p = getMonday(reprocessStart);
       while (p.getTime() <= reprocessEnd.getTime()) {
-        clearWeekCollected(toISODate(p));
+        const weekStart = toISODate(p);
+        clearWeekCollected(weekStart);
+        clearWeekMetricsCollected(weekStart);
         p = addDays(p, 7);
       }
     });
@@ -361,6 +544,26 @@ async function run() {
       p = addDays(p, -7);
     }
   }
+
+  const weeklyMetricKeys = buildWeeklyMetricKeys();
+
+  if (STATUS_ONLY) {
+    printCollectionStatus({
+      historyStart,
+      lastCompleteWeekStart,
+      weeksPending,
+      weeklyMetricKeys
+    });
+    return;
+  }
+
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) {
+    console.error('GITHUB_TOKEN is required');
+    process.exit(1);
+  }
+
+  const graphqlClient = createGraphqlClient(token);
 
   console.log(`Last complete week start: ${toISODate(lastCompleteWeekStart)}`);
   console.log(`History start: ${toISODate(historyStart)} (${HISTORY_WEEKS} weeks)`);
@@ -392,12 +595,21 @@ async function run() {
 
     for (const org of ORG_ALLOWLIST) {
       const baseQualifier = `org:${org} is:public`;
-      await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr`, 'created', rangeStart, rangeEnd, org);
-      await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr`, 'merged', rangeStart, rangeEnd, org);
-      await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr`, 'closed', rangeStart, rangeEnd, org);
-      await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue`, 'created', rangeStart, rangeEnd, org);
-      await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue`, 'closed', rangeStart, rangeEnd, org);
-
+      await runCheckpointedMetric(weekStartStr, `pr_opened:org:${org}`, () =>
+        processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr`, 'created', rangeStart, rangeEnd, org)
+      );
+      await runCheckpointedMetric(weekStartStr, `pr_merged:org:${org}`, () =>
+        processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr`, 'merged', rangeStart, rangeEnd, org)
+      );
+      await runCheckpointedMetric(weekStartStr, `pr_closed:org:${org}`, () =>
+        processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr`, 'closed', rangeStart, rangeEnd, org)
+      );
+      await runCheckpointedMetric(weekStartStr, `issue_opened:org:${org}`, () =>
+        processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue`, 'created', rangeStart, rangeEnd, org)
+      );
+      await runCheckpointedMetric(weekStartStr, `issue_closed:org:${org}`, () =>
+        processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue`, 'closed', rangeStart, rangeEnd, org)
+      );
     }
 
     for (const user of staffAllowList) {
@@ -407,24 +619,44 @@ async function run() {
       // If false, we rely on the org-based collection above.
       if (fileConfig.collectAllPublic) {
         const baseQualifier = `author:${user} is:public`;
-        await processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr`, 'created', rangeStart, rangeEnd, label);
-        await processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr`, 'merged', rangeStart, rangeEnd, label);
-        await processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr`, 'closed', rangeStart, rangeEnd, label);
-        await processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue`, 'created', rangeStart, rangeEnd, label);
-        await processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue`, 'closed', rangeStart, rangeEnd, label);
+        await runCheckpointedMetric(weekStartStr, `pr_opened:staff:${user}`, () =>
+          processMetric(graphqlClient, 'pr_opened', weekStartStr, `${baseQualifier} is:pr`, 'created', rangeStart, rangeEnd, label)
+        );
+        await runCheckpointedMetric(weekStartStr, `pr_merged:staff:${user}`, () =>
+          processMetric(graphqlClient, 'pr_merged', weekStartStr, `${baseQualifier} is:pr`, 'merged', rangeStart, rangeEnd, label)
+        );
+        await runCheckpointedMetric(weekStartStr, `pr_closed:staff:${user}`, () =>
+          processMetric(graphqlClient, 'pr_closed', weekStartStr, `${baseQualifier} is:pr`, 'closed', rangeStart, rangeEnd, label)
+        );
+        await runCheckpointedMetric(weekStartStr, `issue_opened:staff:${user}`, () =>
+          processMetric(graphqlClient, 'issue_opened', weekStartStr, `${baseQualifier} is:issue`, 'created', rangeStart, rangeEnd, label)
+        );
+        await runCheckpointedMetric(weekStartStr, `issue_closed:staff:${user}`, () =>
+          processMetric(graphqlClient, 'issue_closed', weekStartStr, `${baseQualifier} is:issue`, 'closed', rangeStart, rangeEnd, label)
+        );
       }
       
       if (fileConfig.collectStaffCommits) {
-        await processStaffCommits(weekStartStr, rangeStart, rangeEnd, user);
+        await runCheckpointedMetric(weekStartStr, `commits:${user}`, () =>
+          processStaffCommits(weekStartStr, rangeStart, rangeEnd, user)
+        );
       }
     }
 
     if (fileConfig.collectWorkflowRuns) {
-      await processWorkflowRuns(weekStartStr, rangeStart, rangeEnd);
+      for (const org of ORG_ALLOWLIST) {
+        await runCheckpointedMetric(weekStartStr, `workflow_runs:org:${org}`, () =>
+          processWorkflowRuns(weekStartStr, rangeStart, rangeEnd, org)
+        );
+      }
     }
 
     if (fileConfig.collectMeetingMentions) {
-      await processMeetingMentions(graphqlClient, weekStartStr, rangeStart, rangeEnd);
+      for (const org of ORG_ALLOWLIST) {
+        await runCheckpointedMetric(weekStartStr, `meeting_mentions:org:${org}`, () =>
+          processMeetingMentions(graphqlClient, weekStartStr, rangeStart, rangeEnd, org)
+        );
+      }
     }
 
     markWeekCollected(weekStartStr);
@@ -786,7 +1018,7 @@ async function processStaffCommits(weekStart, rangeStartISO, rangeEndISO, user) 
   console.log(`  Inserted ${items.length} commit records for staff:${user} (${weekStart})`);
 }
 
-async function processWorkflowRuns(weekStart, rangeStartISO, rangeEndISO) {
+async function processWorkflowRuns(weekStart, rangeStartISO, rangeEndISO, org) {
   const token = process.env.GITHUB_TOKEN;
   if (!token) {
     console.warn('GITHUB_TOKEN missing; skipping workflow run collection');
@@ -798,172 +1030,168 @@ async function processWorkflowRuns(weekStart, rangeStartISO, rangeEndISO) {
   const dateTo = rangeEndISO.split('T')[0];
   const dateRange = `${dateFrom}..${dateTo}`;
 
-  for (const org of ORG_ALLOWLIST) {
-    // Collect all public repos for the org
-    const orgRepos = [];
-    let page = 1;
+  // Collect all public repos for the org
+  const orgRepos = [];
+  let page = 1;
+  while (true) {
+    const url = `https://api.github.com/orgs/${org}/repos?type=public&per_page=100&page=${page}`;
+    const res = await fetch(url, {
+      headers: { authorization: `token ${token}` }
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      console.warn(`Failed to list repos for org ${org}: ${res.status} ${text.slice(0, 200)}`);
+      break;
+    }
+    const repos = await res.json();
+    if (!Array.isArray(repos) || repos.length === 0) break;
+    for (const r of repos) {
+      if (r.full_name && !r.private) orgRepos.push(r.full_name);
+    }
+    if (repos.length < 100) break;
+    page++;
+    await sleep(300);
+  }
+
+  console.log(`  Found ${orgRepos.length} public repos in org ${org} for workflow run collection (${weekStart})`);
+
+  const insertStmt = db.prepare(`
+    INSERT OR REPLACE INTO workflow_runs (week_start, repo, workflow_name, run_count)
+    VALUES (?, ?, ?, ?)
+  `);
+
+  for (const repoFull of orgRepos) {
+    if (repoShouldBeExcluded(repoFull)) continue;
+
+    // Aggregate run counts by workflow name
+    const runCounts = {};
+    let runsPage = 1;
     while (true) {
-      const url = `https://api.github.com/orgs/${org}/repos?type=public&per_page=100&page=${page}`;
+      const url = `https://api.github.com/repos/${repoFull}/actions/runs?created=${encodeURIComponent(dateRange)}&per_page=100&page=${runsPage}`;
       const res = await fetch(url, {
         headers: { authorization: `token ${token}` }
       });
       if (!res.ok) {
-        const text = await res.text();
-        console.warn(`Failed to list repos for org ${org}: ${res.status} ${text.slice(0, 200)}`);
+        // 404 means Actions not enabled for this repo — not an error
+        if (res.status !== 404) {
+          console.warn(`Failed to get workflow runs for ${repoFull}: ${res.status}`);
+        }
         break;
       }
-      const repos = await res.json();
-      if (!Array.isArray(repos) || repos.length === 0) break;
-      for (const r of repos) {
-        if (r.full_name && !r.private) orgRepos.push(r.full_name);
+      const data = await res.json();
+      if (!data.workflow_runs || data.workflow_runs.length === 0) break;
+      for (const run of data.workflow_runs) {
+        const name = run.name || '(unnamed workflow)';
+        runCounts[name] = (runCounts[name] || 0) + 1;
       }
-      if (repos.length < 100) break;
-      page++;
-      await sleep(300);
+      if (data.workflow_runs.length < 100) break;
+      runsPage++;
+      await sleep(200);
     }
 
-    console.log(`  Found ${orgRepos.length} public repos in org ${org} for workflow run collection (${weekStart})`);
-
-    const insertStmt = db.prepare(`
-      INSERT OR REPLACE INTO workflow_runs (week_start, repo, workflow_name, run_count)
-      VALUES (?, ?, ?, ?)
-    `);
-
-    for (const repoFull of orgRepos) {
-      if (repoShouldBeExcluded(repoFull)) continue;
-
-      // Aggregate run counts by workflow name
-      const runCounts = {};
-      let runsPage = 1;
-      while (true) {
-        const url = `https://api.github.com/repos/${repoFull}/actions/runs?created=${encodeURIComponent(dateRange)}&per_page=100&page=${runsPage}`;
-        const res = await fetch(url, {
-          headers: { authorization: `token ${token}` }
-        });
-        if (!res.ok) {
-          // 404 means Actions not enabled for this repo — not an error
-          if (res.status !== 404) {
-            console.warn(`Failed to get workflow runs for ${repoFull}: ${res.status}`);
-          }
-          break;
+    if (Object.keys(runCounts).length > 0) {
+      const insertAll = db.transaction((counts) => {
+        for (const [name, count] of Object.entries(counts)) {
+          insertStmt.run(weekStart, repoFull, name, count);
         }
-        const data = await res.json();
-        if (!data.workflow_runs || data.workflow_runs.length === 0) break;
-        for (const run of data.workflow_runs) {
-          const name = run.name || '(unnamed workflow)';
-          runCounts[name] = (runCounts[name] || 0) + 1;
-        }
-        if (data.workflow_runs.length < 100) break;
-        runsPage++;
-        await sleep(200);
-      }
-
-      if (Object.keys(runCounts).length > 0) {
-        const insertAll = db.transaction((counts) => {
-          for (const [name, count] of Object.entries(counts)) {
-            insertStmt.run(weekStart, repoFull, name, count);
-          }
-        });
-        insertAll(runCounts);
-        const total = Object.values(runCounts).reduce((a, b) => a + b, 0);
-        console.log(`  Recorded ${total} workflow run(s) in ${Object.keys(runCounts).length} workflow(s) for ${repoFull} (${weekStart})`);
-      }
-
-      await sleep(300);
+      });
+      insertAll(runCounts);
+      const total = Object.values(runCounts).reduce((a, b) => a + b, 0);
+      console.log(`  Recorded ${total} workflow run(s) in ${Object.keys(runCounts).length} workflow(s) for ${repoFull} (${weekStart})`);
     }
+
+    await sleep(300);
   }
 }
 
 // comment collection logic moved to scripts/comments_collector.mjs
 
-async function processMeetingMentions(graphqlClient, weekStart, rangeStart, rangeEnd) {
+async function processMeetingMentions(graphqlClient, weekStart, rangeStart, rangeEnd, org) {
   // Matches GitHub @mentions: 1–39 characters, alphanumeric or internal hyphens, not starting/ending with a hyphen.
   const mentionRegex = /\B@([a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38})\b/g;
 
   const repoLicenseCache = new Map();
 
-  for (const org of ORG_ALLOWLIST) {
-    const query = `org:${org} is:public is:issue in:title MEETING: created:${rangeStart}..${rangeEnd}`;
-    let hasNextPage = true;
-    let cursor = null;
+  const query = `org:${org} is:public is:issue in:title MEETING: created:${rangeStart}..${rangeEnd}`;
+  let hasNextPage = true;
+  let cursor = null;
 
-    while (hasNextPage) {
-      let data;
-      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-        try {
-          data = await graphqlClient(`
-            query($q: String!, $cursor: String) {
-              search(query: $q, type: ISSUE, first: 100, after: $cursor) {
-                pageInfo { hasNextPage endCursor }
-                nodes {
-                  ... on Issue {
-                    title
-                    body
-                    repository {
-                      nameWithOwner
-                      licenseInfo { spdxId }
-                      isPrivate
-                    }
+  while (hasNextPage) {
+    let data;
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        data = await graphqlClient(`
+          query($q: String!, $cursor: String) {
+            search(query: $q, type: ISSUE, first: 100, after: $cursor) {
+              pageInfo { hasNextPage endCursor }
+              nodes {
+                ... on Issue {
+                  title
+                  body
+                  repository {
+                    nameWithOwner
+                    licenseInfo { spdxId }
+                    isPrivate
                   }
                 }
               }
             }
-          `, { q: query, cursor });
-          break;
-        } catch (err) {
-          if (attempt === MAX_RETRIES) throw err;
-          await sleep(RETRY_DELAY_MS * attempt);
-        }
+          }
+        `, { q: query, cursor }, `meeting_mentions:${org}`);
+        break;
+      } catch (err) {
+        if (attempt === MAX_RETRIES) throw err;
+        await sleep(RETRY_DELAY_MS * attempt);
       }
-
-      if (!data) break;
-      const search = data.search;
-      hasNextPage = search.pageInfo.hasNextPage;
-      cursor = search.pageInfo.endCursor;
-
-      const insertStmt = db.prepare(`INSERT OR IGNORE INTO meeting_mentions (week_start, author, repo, spdx) VALUES (?, ?, ?, ?)`);
-      const insertBatch = db.transaction((rows) => {
-        for (const r of rows) insertStmt.run(r.week_start, r.author, r.repo, r.spdx);
-      });
-
-      for (const node of search.nodes) {
-        if (!node || !node.repository) continue;
-        if (node.repository.isPrivate) continue;
-        const repoFull = node.repository.nameWithOwner;
-        if (!repoFull) continue;
-        if (repoShouldBeExcluded(repoFull)) continue;
-
-        // Only MEETING: issues (title must start with MEETING:, case-insensitive)
-        if (!node.title || !node.title.match(/^MEETING:/i)) continue;
-
-        const spdx = node.repository.licenseInfo ? node.repository.licenseInfo.spdxId : null;
-        if (fileConfig.licenseFilter === 'oss') {
-          if (!spdx || !allowList.includes(spdx)) continue;
-        }
-
-        // Extract @mentions from issue body — store only the usernames, not the body
-        const body = node.body || '';
-        const mentions = new Set();
-        let m;
-        mentionRegex.lastIndex = 0;
-        while ((m = mentionRegex.exec(body)) !== null) {
-          if (m[1]) mentions.add(m[1]);
-        }
-
-        if (mentions.size === 0) continue;
-
-        const rows = Array.from(mentions).map(username => ({
-          week_start: weekStart,
-          author: username,
-          repo: repoFull,
-          spdx: spdx
-        }));
-        insertBatch(rows);
-        console.log(`  Recorded ${rows.length} meeting mention(s) from MEETING issue in ${repoFull} (${weekStart})`);
-      }
-
-      await sleep(300);
     }
+
+    if (!data) break;
+    const search = data.search;
+    hasNextPage = search.pageInfo.hasNextPage;
+    cursor = search.pageInfo.endCursor;
+
+    const insertStmt = db.prepare(`INSERT OR IGNORE INTO meeting_mentions (week_start, author, repo, spdx) VALUES (?, ?, ?, ?)`);
+    const insertBatch = db.transaction((rows) => {
+      for (const r of rows) insertStmt.run(r.week_start, r.author, r.repo, r.spdx);
+    });
+
+    for (const node of search.nodes) {
+      if (!node || !node.repository) continue;
+      if (node.repository.isPrivate) continue;
+      const repoFull = node.repository.nameWithOwner;
+      if (!repoFull) continue;
+      if (repoShouldBeExcluded(repoFull)) continue;
+
+      // Only MEETING: issues (title must start with MEETING:, case-insensitive)
+      if (!node.title || !node.title.match(/^MEETING:/i)) continue;
+
+      const spdx = node.repository.licenseInfo ? node.repository.licenseInfo.spdxId : null;
+      if (fileConfig.licenseFilter === 'oss') {
+        if (!spdx || !allowList.includes(spdx)) continue;
+      }
+
+      // Extract @mentions from issue body — store only the usernames, not the body
+      const body = node.body || '';
+      const mentions = new Set();
+      let m;
+      mentionRegex.lastIndex = 0;
+      while ((m = mentionRegex.exec(body)) !== null) {
+        if (m[1]) mentions.add(m[1]);
+      }
+
+      if (mentions.size === 0) continue;
+
+      const rows = Array.from(mentions).map(username => ({
+        week_start: weekStart,
+        author: username,
+        repo: repoFull,
+        spdx: spdx
+      }));
+      insertBatch(rows);
+      console.log(`  Recorded ${rows.length} meeting mention(s) from MEETING issue in ${repoFull} (${weekStart})`);
+    }
+
+    await sleep(300);
   }
 }
 
@@ -1017,7 +1245,7 @@ async function fetchSearchPage(client, query, cursor, contextLabel) {
       `, {
         q: query,
         cursor: cursor
-      });
+      }, contextLabel);
     } catch (err) {
       const isLastAttempt = attempt === MAX_RETRIES;
       const rateLimited = Array.isArray(err.errors) && err.errors.some(e => e.type === 'RATE_LIMIT' || e.type === 'RATE_LIMITED');

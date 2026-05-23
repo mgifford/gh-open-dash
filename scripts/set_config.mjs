@@ -5,7 +5,7 @@ import path from 'path';
 const CONFIG_PATH = path.join('scripts', 'config.json');
 
 function usage() {
-  console.log('Usage: node scripts/set_config.mjs [--collectAllPublic=true|false] [--licenseFilter=oss|all] [--collectOpenContributions=true|false] [--collectMeetingMentions=true|false] [--historyWeeks=N]');
+  console.log('Usage: node scripts/set_config.mjs [--collectAllPublic=true|false] [--licenseFilter=oss|all] [--collectOpenContributions=true|false] [--collectMeetingMentions=true|false] [--historyWeeks=N] [--maxWeeksPerRun=N]');
   process.exit(1);
 }
 
@@ -43,6 +43,13 @@ for (const a of args) {
       process.exit(2);
     }
     cfg.historyWeeks = v;
+  } else if (a.startsWith('--maxWeeksPerRun=')) {
+    const v = Number.parseInt(a.split('=')[1], 10);
+    if (!Number.isFinite(v) || v < 1) {
+      console.error('maxWeeksPerRun must be a positive integer');
+      process.exit(2);
+    }
+    cfg.maxWeeksPerRun = v;
   } else {
     usage();
   }
