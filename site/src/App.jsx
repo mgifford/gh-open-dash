@@ -164,9 +164,16 @@ function App() {
     const requestedOrgRepos = filterReposByOrg(data.repos || [], currentOrg);
     const orgHasData = requestedOrgRepos.length > 0;
 
+    // Orgs that actually have repos in the dataset (not just configured).
+    // data.orgs reflects the allowlist config, which can include orgs that have
+    // been added but whose data hasn't been collected yet. The banner must only
+    // list orgs with real data to avoid the contradictory message "no data found
+    // for X" / "this dataset contains data for X".
+    const orgsWithData = dataOrgs.filter(org => filterReposByOrg(data.repos || [], org).length > 0);
+
     // When the requested org has no repos in the dataset, fall back to the first
     // available collected org so charts and leaderboard still show data.
-    const effectiveOrg = orgHasData ? currentOrg : (dataOrgs[0] || currentOrg);
+    const effectiveOrg = orgHasData ? currentOrg : (orgsWithData[0] || dataOrgs[0] || currentOrg);
 
     const orgRepos = orgHasData ? requestedOrgRepos : filterReposByOrg(data.repos || [], effectiveOrg);
 
@@ -310,7 +317,7 @@ function App() {
     // remains accurate regardless of the active contributor type filter.
     // `visibleAuthors` contains only the filtered subset used by the Person
     // dropdown and chart aggregation.
-    return { leaderboard, chartData, authors: data.authors, visibleAuthors, staffSet, orgRepos, orgHasData, effectiveOrg, dataOrgs, filteredData };
+    return { leaderboard, chartData, authors: data.authors, visibleAuthors, staffSet, orgRepos, orgHasData, effectiveOrg, dataOrgs, orgsWithData, filteredData };
   }, [data, metric, range, selectedAuthor, currentOrg, contributorType]);
 
   // Calculate total workflow runs across visible weeks (must be before early returns)
@@ -407,8 +414,8 @@ function App() {
             <strong>No data found for organization &ldquo;{currentOrg}&rdquo;</strong>
             <p>
               Showing data for <strong>{processedData.effectiveOrg}</strong> instead.
-              {processedData.dataOrgs.length > 0 && (
-                <> This dataset contains data for: <strong>{processedData.dataOrgs.join(', ')}</strong>.</>
+              {processedData.orgsWithData.length > 0 && (
+                <> This dataset contains data for: <strong>{processedData.orgsWithData.join(', ')}</strong>.</>
               )}
             </p>
             <p>To add <strong>{currentOrg}</strong> to the dashboard, choose one of these options:</p>

@@ -114,6 +114,35 @@ test('org-mismatch banner includes SCAN issue instructions', async () => {
   expect(alerts[0].textContent).toMatch(/GitHub issue/i);
 });
 
+test('banner does not claim to contain data for orgs with no repos (logic error fix)', async () => {
+  // Simulate scenario: chaoss is in data.orgs (configured) but has no repos yet.
+  // The banner must NOT say "contains data for: civicactions, chaoss" while
+  // simultaneously saying "No data found for chaoss" — that is the logic error.
+  const metricsWithChaossInOrgsOnly = {
+    ...sampleMetrics,
+    orgs: ['civicactions', 'chaoss'], // chaoss configured but no repos collected
+    repos: sampleMetrics.repos,       // only civicactions repos
+  };
+  mockGetCurrentOrg.mockReturnValue('chaoss');
+  global.fetch = vi.fn(() => Promise.resolve({
+    ok: true,
+    text: () => Promise.resolve(JSON.stringify(metricsWithChaossInOrgsOnly)),
+    json: () => Promise.resolve(metricsWithChaossInOrgsOnly)
+  }));
+
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  const alerts = screen.getAllByRole('alert');
+  expect(alerts.length).toBeGreaterThan(0);
+  // Banner correctly says no data for chaoss
+  expect(alerts[0].textContent).toMatch(/No data found for organization/i);
+  // Must NOT claim chaoss is in the "contains data for" list (no period in [^.]* stops at sentence end)
+  expect(alerts[0].textContent).not.toMatch(/contains data for[^.]*chaoss/i);
+  // Must only mention orgs that have actual repo data
+  expect(alerts[0].textContent).toMatch(/contains data for[^.]*civicactions/i);
+});
+
 test('org-mismatch banner shows "Open issue now" link when githubRepo is configured', async () => {
   mockGetCurrentOrg.mockReturnValue('chaoss');
 
