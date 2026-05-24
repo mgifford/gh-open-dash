@@ -186,8 +186,8 @@ test('shows requested org after scan results are cached in metrics dataset', asy
 
   // Once metrics include the requested org, the mismatch banner should disappear.
   expect(screen.queryByRole('alert')).toBeNull();
-  // Repo-level cards should include the newly cached org data.
-  expect(screen.getByText('chaoss/grimoirelab')).toBeDefined();
+  // The org selector should keep the requested org instead of falling back.
+  expect(screen.getByRole('textbox', { name: /Organization name or URL/i }).value).toBe('chaoss');
 });
 
 test('does not show org-mismatch banner when no org param is set (default org)', async () => {
