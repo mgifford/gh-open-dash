@@ -103,6 +103,27 @@ describe('OrgSelector', () => {
     expect(onOrgChange).toHaveBeenCalledWith('openplus');
   });
 
+
+  it('should cache a valid GitHub URL org in localStorage for future visits', () => {
+    const onOrgChange = vi.fn();
+    render(
+      <OrgSelector 
+        currentOrg="civicactions" 
+        defaultOrg="civicactions" 
+        onOrgChange={onOrgChange}
+      />
+    );
+
+    const input = screen.getByRole('textbox');
+    const applyButton = screen.getByRole('button', { name: /Apply/ });
+
+    fireEvent.change(input, { target: { value: 'https://github.com/chaoss' } });
+    fireEvent.click(applyButton);
+
+    expect(onOrgChange).toHaveBeenCalledWith('chaoss');
+    expect(localStorage.getItem('gh-open-dash-org')).toBe('chaoss');
+  });
+
   it('should call onOrgChange with default org on reset', () => {
     const onOrgChange = vi.fn();
     const { container } = render(

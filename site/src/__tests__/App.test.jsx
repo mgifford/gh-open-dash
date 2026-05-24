@@ -39,6 +39,16 @@ const sampleMetrics = {
   licenseFilter: 'oss'
 };
 
+
+const sampleMetricsWithChaoss = {
+  ...sampleMetrics,
+  repos: [
+    ...sampleMetrics.repos,
+    { repo: 'chaoss/grimoirelab', spdx: 'GPL-3.0', totals: { prs_opened: 2, prs_merged: 1, prs_closed: 1, issues_opened: 3, issues_closed: 1, commits: 4 }, byAuthor: { bob: { prs_opened: 2, prs_merged: 1, prs_closed: 1, issues_opened: 3, issues_closed: 1, commits: 4 } }, weekly: [] }
+  ],
+  orgs: ['civicactions', 'chaoss']
+};
+
 let mockGetCurrentOrg;
 
 beforeEach(async () => {
@@ -159,6 +169,25 @@ test('does not show org-mismatch banner when requested org matches dataset', asy
 
   // No banner should appear
   expect(screen.queryByRole('alert')).toBeNull();
+});
+
+
+test('shows requested org after scan results are cached in metrics dataset', async () => {
+  mockGetCurrentOrg.mockReturnValue('chaoss');
+
+  global.fetch = vi.fn(() => Promise.resolve({
+    ok: true,
+    text: () => Promise.resolve(JSON.stringify(sampleMetricsWithChaoss)),
+    json: () => Promise.resolve(sampleMetricsWithChaoss)
+  }));
+
+  render(<App />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+
+  // Once metrics include the requested org, the mismatch banner should disappear.
+  expect(screen.queryByRole('alert')).toBeNull();
+  // Repo-level cards should include the newly cached org data.
+  expect(screen.getByText('chaoss/grimoirelab')).toBeDefined();
 });
 
 test('does not show org-mismatch banner when no org param is set (default org)', async () => {
