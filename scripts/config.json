@@ -1,6 +1,7 @@
 {
   "orgAllowlist": [
-    "civicactions"
+    "civicactions",
+    "chaoss"
   ],
   "historyWeeks": 52,
   "maxWeeksPerRun": 2,
