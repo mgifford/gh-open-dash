@@ -1,0 +1,12 @@
+project:
+  uuid: d932bf27-6482-4066-b4a0-7e7a64707c17
+  slug: gh-open-dash
+  node_id: b805cd5cee74
+  build_id: 54848374-d1d7-5b03-bf97-6aec43f30858
+vcs:
+  type: git
+agents:
+  available:
+  - claude
+  auto_commit: true
+  lint_on_edit: false
