@@ -23,6 +23,7 @@ subtasks:
 - T011
 - T012
 agent: claude
+assignee: "claude"
 history:
 - event: implemented
   note: Core view landed in commit ffb1cc7; Impact Score sort + companyImpact.js added in commit 40ee172, both on claude/company-contributions-tracking-u22693, prior to this WP file being authored (backfill).
@@ -161,3 +162,7 @@ disagree).
   inside SVG `<title>` elements needed `getAllByText`/scoped queries to
   avoid "multiple elements found" failures — noted here in case future WPs
   hit the same pattern.
+
+## Activity Log
+
+- 2026-07-06T10:07:13Z – user – Backfill: implementation already existed in commit ffb1cc7/40ee172 before mission tracking was set up.
