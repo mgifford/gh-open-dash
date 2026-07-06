@@ -77,6 +77,7 @@ Tables:
 - `pr_closed(week_start, author, repo, spdx)`
 - `issue_opened(week_start, author, repo, spdx)`
 - `issue_closed(week_start, author, repo, spdx)`
+- `contributor_company(author, company, team, source, updated_at)` — optional, populated only when `collectCompanyData` is enabled
 - `meta(key, value)`
 
 Primary keys prevent duplicates:
@@ -102,6 +103,13 @@ Primary keys prevent duplicates:
    - `maxWeeksPerRun`: how many weekly buckets to process per run
    - `collectAllPublic`: boolean; when `true` the collector will run queries across all public repos (opt-in, rate-limit heavy)
    - `licenseFilter`: `oss` (default) or `all`
+   - `collectCompanyData`: boolean (default `false`); when `true`, attributes each distinct contributor to a company/team once per run (see below)
+
+### Company/team attribution (optional)
+- Controlled by `collectCompanyData` in `scripts/config.json`; disabled by default.
+- `scripts/company_roster.json` (same pattern as `staff_allowlist.json`, with an optional `COMPANY_ROSTER_JSON` env override) maps `username -> {company, team}`. Roster entries always take priority and require no API calls.
+- For any contributor not in the roster, the collector reads only the public, self-reported `company` field from their GitHub profile via a batched GraphQL query (`user(login) { company }`) — no issue/PR content is touched. Profile lookups are cached in `contributor_company` and refreshed on a rolling window (default 90 days), not every run.
+- This runs once per collector run (like Ecosyste.ms and open-contributions), not per week, and is bounded to the distinct authors already observed in that run's tables.
 
 There is a tiny helper CLI to update `scripts/config.json`:
 
@@ -199,6 +207,7 @@ Security review must be treated as a recurring requirement for every meaningful 
  - [ ] `data/metrics.json` is present in the deployed Pages site (workflow `update-metrics.yml` produces and includes it).
  - [ ] Closed metrics (`pr_closed`, `issue_closed`) are present in `data/metrics.json` after export.
  - [ ] `scripts/config.json` flags `collectAllPublic` and `licenseFilter` are documented and used intentionally.
+ - [ ] If `collectCompanyData` is enabled, `contributor_company` only stores the public `company` profile field (or roster values) — no issue/PR content.
  - [ ] UI changes meet WCAG 2.2 AA (keyboard access, contrast, ARIA labels, chart alternatives).
  - [ ] If an AI agent contributed to this PR, the `README.md` AI Disclosure section has been updated to reflect that contribution.
  - [ ] Security review was completed and `SBOM.md` is up to date with versions and licenses.

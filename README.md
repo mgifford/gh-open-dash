@@ -18,6 +18,7 @@ An open-source transparency dashboard inspired by cal.com/open and other open st
   - Dependency and impact analysis
   - Community engagement metrics
 - 👥 **Contributor Leaderboard**: Celebrate your top contributors
+- 🏢 **Company & Team Attribution**: See which companies (and teams) are behind the contributions — a company→project flow diagram, a company leaderboard, and per-project contribution history broken down by company
 - 📉 **Weekly Trends**: Visualize activity over time with interactive charts
 - 🏢 **Multi-Organization Support**: Track multiple GitHub organizations
 - 🔄 **Dynamic Organization Switching**: View any public organization's metrics via URL parameter or UI selector
@@ -145,6 +146,7 @@ Options:
 - `licenseFilter`: "oss" (only open source) or "all"
 - `collectEcosystemsData`: Enable Ecosyste.ms integration for repository health and community metrics (default: false)
 - `collectOpenContributions`: Check tracked repos for `.well-known/open-contributions.json` descriptors and surface them in the dashboard (default: false)
+- `collectCompanyData`: Attribute each contributor to a company/team and expose company-level aggregates in the dashboard (default: false). See [Company & Team Attribution](#company--team-attribution) below.
 
 ## Setup & Local Development
 
@@ -300,6 +302,37 @@ node scripts/update_sqlite.mjs
 node scripts/export_metrics.mjs
 ```
 
+## Company & Team Attribution
+
+The dashboard can optionally attribute each contributor to a company (and, where known, a team), so contributions can be sliced by company alongside the existing per-author and per-repo aggregates — useful for recognizing and incentivizing the organizations behind the work, not just individuals.
+
+Two sources are used, and a maintained roster always takes priority over the public profile fallback:
+
+1. **`scripts/company_roster.json`** — a maintained `username -> { company, team }` map, edited the same way as `scripts/staff_allowlist.json`. This is the accurate, no-API-call source of truth for known contributors.
+2. **GitHub public profile field** — for any contributor not listed in the roster, the collector reads the self-reported, public `company` field from their GitHub profile via a batched GraphQL query. This is unverified and often blank or stale, so it's a fallback, not a primary source.
+
+Only the public `company` profile field is read — no issue/PR titles, bodies, or comments are touched, consistent with the "no content leakage" rule in [AGENTS.md](./AGENTS.md).
+
+To enable, set `"collectCompanyData": true` in `scripts/config.json`:
+
+```bash
+node scripts/set_config.mjs --collectCompanyData=true
+```
+
+Then re-run the collector and exporter:
+
+```bash
+node scripts/update_sqlite.mjs
+node scripts/export_metrics.mjs
+```
+
+Once enabled, the dashboard exposes:
+
+- A **Companies** tab with a company → project contribution flow diagram (with an accessible data-table alternative showing every company/team/contributor/project combination) and a **company leaderboard** ranking companies (and their teams) either by raw contribution count or by an **Impact Score**.
+- **Impact Score**: an all-time score that weights each contribution by the reach (GitHub star count) of the project it went to, so contributions to widely-used projects count for more than contributions to a small personal repo. This is the closest GitHub-native analog to how [Drupal.org's marketplace](https://www.drupal.org/drupalorg/docs/marketplace/contribution-credit-weight-and-impact-on-ranking) scales issue credit by how many sites run a module — GitHub has no install-count signal, so star count is used as the reach proxy, on a log scale so mega-projects don't completely dominate the ranking.
+- A **project history** panel on each project's detail view (under the **Projects** tab) showing weekly contributions broken down by company, so you can see who has been active on a project over time and which companies they represent.
+- Company badges next to each project's top contributors.
+
 ## Inspired By
 
 This project is inspired by the open startup movement and transparency pages like:
@@ -317,6 +350,7 @@ This project is committed to transparency about AI usage. Below is a record of A
 |---|---|---|
 | [GitHub Copilot](https://github.com/features/copilot) (Coding Agent) | Claude Sonnet (via GitHub Copilot) | Used to write and refactor code, generate documentation, implement new features, and review pull requests throughout the development of this project. |
 | [GitHub Copilot](https://github.com/features/copilot) (Task Agent) | GPT-5 (via GitHub Copilot) | Used to implement data-pipeline improvements, update collector configuration, and revise project documentation during development. Not used at runtime. |
+| [Claude Code](https://claude.com/product/claude-code) | Claude (Anthropic) | Used to design and implement the company/team contribution attribution feature — collector, SQLite schema, metrics export, and the Companies/project-history dashboard UI — and to update related documentation. Not used at runtime. |
 
 ### AI used during CI/CD or data collection
 

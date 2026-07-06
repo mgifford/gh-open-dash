@@ -274,12 +274,23 @@ const ensureRepo = (repo, spdx) => {
       spdx: spdx || null,
       totals: { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 },
       byAuthor: {},
-      weekly: new Map() // week_start -> totals
+      weekly: new Map() // week_start -> { week_start, totals, byAuthor }
     });
   }
   const e = repoMap.get(repo);
   if (!e.spdx && spdx) e.spdx = spdx;
   return e;
+};
+
+const ensureRepoWeek = (entry, week) => {
+  if (!entry.weekly.has(week)) {
+    entry.weekly.set(week, {
+      week_start: week,
+      totals: { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 },
+      byAuthor: {}
+    });
+  }
+  return entry.weekly.get(week);
 };
 
 const addRepoRow = (row, key) => {
@@ -297,12 +308,14 @@ const addRepoWeekRow = (row, key) => {
   const repo = row.repo;
   const spdx = row.spdx || null;
   const entry = ensureRepo(repo, spdx);
-  const week = row.week_start;
-  if (!entry.weekly.has(week)) {
-    entry.weekly.set(week, { week_start: week, totals: { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 } });
-  }
-  const w = entry.weekly.get(week);
+  const w = ensureRepoWeek(entry, row.week_start);
   w.totals[key] = (w.totals[key] || 0) + row.count;
+  if (row.author) {
+    if (!w.byAuthor[row.author]) {
+      w.byAuthor[row.author] = { prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0, commits: 0 };
+    }
+    w.byAuthor[row.author][key] = (w.byAuthor[row.author][key] || 0) + row.count;
+  }
 };
 
 // fetch per-repo per-author counts for each table (all-time)
@@ -328,13 +341,14 @@ commentsByRepo.forEach(r => {
   if (key) addRepoRow({ repo: r.repo, spdx: r.spdx, author: r.author, count: r.count }, key);
 });
 
-// fetch per-repo per-week totals so the UI can produce time-windowed repo aggregates
-const prOpenedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM pr_opened GROUP BY repo, week_start`).all();
-const prMergedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM pr_merged GROUP BY repo, week_start`).all();
-const prClosedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM pr_closed GROUP BY repo, week_start`).all();
-const issuesOpenedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM issue_opened GROUP BY repo, week_start`).all();
-const issuesClosedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM issue_closed GROUP BY repo, week_start`).all();
-const commitsByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, count(*) as count FROM commits GROUP BY repo, week_start`).all();
+// fetch per-repo per-week (per-author) totals so the UI can produce time-windowed
+// repo aggregates and a per-project history broken down by contributor/company.
+const prOpenedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, author, count(*) as count FROM pr_opened GROUP BY repo, week_start, author`).all();
+const prMergedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, author, count(*) as count FROM pr_merged GROUP BY repo, week_start, author`).all();
+const prClosedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, author, count(*) as count FROM pr_closed GROUP BY repo, week_start, author`).all();
+const issuesOpenedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, author, count(*) as count FROM issue_opened GROUP BY repo, week_start, author`).all();
+const issuesClosedByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, author, count(*) as count FROM issue_closed GROUP BY repo, week_start, author`).all();
+const commitsByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, author, count(*) as count FROM commits GROUP BY repo, week_start, author`).all();
 
 prOpenedByRepoWeek.forEach(r => addRepoWeekRow(r, 'prs_opened'));
 prMergedByRepoWeek.forEach(r => addRepoWeekRow(r, 'prs_merged'));
@@ -592,6 +606,27 @@ if (openContribTable) {
     console.log(`Exported open-contributions data: ${rows.length} repos checked, ${withDescriptor} have a descriptor`);
   } catch (err) {
     console.warn('Error exporting open-contributions data:', err.message);
+  }
+}
+
+// Export contributor company/team attribution (optional; populated only when
+// collectCompanyData has been enabled and the collector has run at least once).
+if (tableExists('contributor_company')) {
+  try {
+    const rows = db.prepare(`SELECT author, company, team, source FROM contributor_company`).all();
+    const contributorCompany = {};
+    for (const row of rows) {
+      contributorCompany[row.author] = {
+        company: row.company || null,
+        team: row.team || null,
+        source: row.source || null
+      };
+    }
+    output.contributor_company = contributorCompany;
+    const withCompany = Object.values(contributorCompany).filter(c => c.company).length;
+    console.log(`Exported contributor_company: ${rows.length} authors, ${withCompany} with a known company`);
+  } catch (err) {
+    console.warn('Error exporting contributor_company data:', err.message);
   }
 }
 

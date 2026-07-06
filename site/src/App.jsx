@@ -10,6 +10,8 @@ import DependencyHealthChart from "./DependencyHealthChart.jsx";
 import CommunityEngagement from "./CommunityEngagement.jsx";
 import OpenContributions from "./OpenContributions.jsx";
 import Projects from "./Projects.jsx";
+import CompanyFlow from "./CompanyFlow.jsx";
+import CompanyLeaderboard from "./CompanyLeaderboard.jsx";
 import Hero from "./Hero.jsx";
 import MetricCard from "./MetricCard.jsx";
 import WhyOpen from "./WhyOpen.jsx";
@@ -114,7 +116,7 @@ function App() {
   useEffect(() => {
     const loadFromHash = () => {
       const h = (window.location.hash || '').replace(/^#\/?/, '');
-      if (h === 'projects' || h === 'dashboard') setView(h);
+      if (h === 'projects' || h === 'dashboard' || h === 'companies') setView(h);
     };
     loadFromHash();
     const onHash = () => loadFromHash();
@@ -397,6 +399,7 @@ function App() {
           <div style={{ display: 'flex', gap: 8 }}>
             <a href="#/dashboard" onClick={() => setView('dashboard')} className={view === 'dashboard' ? 'active' : ''} aria-current={view === 'dashboard' ? 'page' : undefined}>Dashboard</a>
             <a href="#/projects" onClick={() => setView('projects')} className={view === 'projects' ? 'active' : ''} aria-current={view === 'projects' ? 'page' : undefined}>Projects</a>
+            <a href="#/companies" onClick={() => setView('companies')} className={view === 'companies' ? 'active' : ''} aria-current={view === 'companies' ? 'page' : undefined}>Companies</a>
           </div>
         </div>
       </header>
@@ -705,8 +708,27 @@ function App() {
             <h2>Projects & Repositories</h2>
             {/* lazy-load Projects to avoid increasing bundle size too much */}
               <React.Suspense fallback={<div>Loading projects...</div>}>
-                <Projects data={processedData.filteredData} selectedAuthor={selectedAuthor} metric={metric} />
+                <Projects data={processedData.filteredData} selectedAuthor={selectedAuthor} metric={metric} contributorCompany={data.contributor_company} />
               </React.Suspense>
+          </section>
+        )}
+
+        {view === 'companies' && (
+          <section className="companies-section">
+            <h2>Contributions by Company</h2>
+            <p className="meta">
+              Which companies (and, where known, teams) are contributing to which projects — useful for
+              recognizing and incentivizing the organizations behind the work.
+            </p>
+            <CompanyFlow repos={processedData.filteredData.repos} contributorCompany={data.contributor_company} />
+
+            <h2 style={{ marginTop: 24 }}>Company Leaderboard</h2>
+            <CompanyLeaderboard
+              items={processedData.leaderboard}
+              contributorCompany={data.contributor_company}
+              repos={processedData.filteredData.repos}
+              repoStars={data.repo_stars}
+            />
           </section>
         )}
       </div>

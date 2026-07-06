@@ -55,6 +55,15 @@ This document lists the key features of the transparency dashboard inspired by c
 - Filtering by metric type, time range, and contributor
 - Legend with visual indicators
 
+### Company & Team Attribution (Optional)
+- **Companies tab**: a company → project contribution flow diagram plus a company leaderboard, ranking companies (and known teams) by raw contribution volume or by an Impact Score
+- **Impact Score**: weights contributions by the reach (GitHub stars) of the project contributed to, inspired by Drupal.org's marketplace contribution credit weighting
+- **Project history**: a per-project panel (under Projects) showing weekly contributions broken down by contributing company
+- **Company badges**: shown next to each project's top contributors
+- Attribution source: a maintained `scripts/company_roster.json` (priority) with a fallback to each contributor's public GitHub profile `company` field
+- Every chart includes an accessible data-table alternative
+- Can be enabled/disabled via `collectCompanyData` config flag
+
 ## Technical Features
 
 ### Enhanced Data Collection

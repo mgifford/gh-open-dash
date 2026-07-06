@@ -5,7 +5,7 @@ import path from 'path';
 const CONFIG_PATH = path.join('scripts', 'config.json');
 
 function usage() {
-  console.log('Usage: node scripts/set_config.mjs [--collectAllPublic=true|false] [--licenseFilter=oss|all] [--collectOpenContributions=true|false] [--collectMeetingMentions=true|false] [--historyWeeks=N] [--maxWeeksPerRun=N]');
+  console.log('Usage: node scripts/set_config.mjs [--collectAllPublic=true|false] [--licenseFilter=oss|all] [--collectOpenContributions=true|false] [--collectMeetingMentions=true|false] [--collectCompanyData=true|false] [--historyWeeks=N] [--maxWeeksPerRun=N]');
   process.exit(1);
 }
 
@@ -36,6 +36,9 @@ for (const a of args) {
   } else if (a.startsWith('--collectMeetingMentions=')) {
     const v = a.split('=')[1];
     cfg.collectMeetingMentions = v === 'true' || v === '1';
+  } else if (a.startsWith('--collectCompanyData=')) {
+    const v = a.split('=')[1];
+    cfg.collectCompanyData = v === 'true' || v === '1';
   } else if (a.startsWith('--historyWeeks=')) {
     const v = Number.parseInt(a.split('=')[1], 10);
     if (!Number.isFinite(v) || v < 1) {

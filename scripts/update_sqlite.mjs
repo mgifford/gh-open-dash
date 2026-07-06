@@ -11,10 +11,15 @@ import {
   createOpenContributionsTable,
   collectOpenContributions
 } from './open_contributions_collector.mjs';
+import {
+  createCompanyTable,
+  collectCompanyData
+} from './company_collector.mjs';
 
 const DB_PATH = path.join('data', 'participation.sqlite');
 const ALLOWLIST_PATH = path.join('scripts', 'oss_spdx_allowlist.json');
 const STAFF_ALLOWLIST_PATH = path.join('scripts', 'staff_allowlist.json');
+const COMPANY_ROSTER_PATH = path.join('scripts', 'company_roster.json');
 const CONFIG_PATH = path.join('scripts', 'config.json');
 
 const defaultConfig = {
@@ -42,6 +47,7 @@ if (typeof fileConfig.collectEcosystemsData === 'undefined') fileConfig.collectE
 if (typeof fileConfig.collectOpenContributions === 'undefined') fileConfig.collectOpenContributions = false;
 if (typeof fileConfig.collectWorkflowRuns === 'undefined') fileConfig.collectWorkflowRuns = false;
 if (typeof fileConfig.collectMeetingMentions === 'undefined') fileConfig.collectMeetingMentions = false;
+if (typeof fileConfig.collectCompanyData === 'undefined') fileConfig.collectCompanyData = false;
 
 function parseAllowlist(input, fallback) {
   const raw = (typeof input === 'undefined' || input === null) ? fallback : input;
@@ -72,6 +78,7 @@ if (!fs.existsSync('data')) {
 // Load allowlist
 const allowList = JSON.parse(fs.readFileSync(ALLOWLIST_PATH, 'utf8'));
 const staffAllowList = loadStaffAllowList();
+const companyRoster = loadCompanyRoster();
 // Load repo exclude patterns from config (owner or owner/repo or substring)
 const repoExcludePatterns = (fileConfig.repoExcludePatterns && Array.isArray(fileConfig.repoExcludePatterns)) ? fileConfig.repoExcludePatterns.map(p => String(p).trim()).filter(Boolean) : [];
 
@@ -208,6 +215,8 @@ db.exec(`
 createEcosystemsTables(db);
 // Create open-contributions descriptor table
 createOpenContributionsTable(db);
+// Create contributor company/team attribution table
+createCompanyTable(db);
 
 const getMeta = (key) => {
   const row = db.prepare('SELECT value FROM meta WHERE key = ?').get(key);
@@ -297,6 +306,25 @@ function loadStaffAllowList() {
     }
   }
   return [];
+}
+
+function loadCompanyRoster() {
+  if (process.env.COMPANY_ROSTER_JSON) {
+    try {
+      return JSON.parse(process.env.COMPANY_ROSTER_JSON);
+    } catch (err) {
+      console.warn('Failed to parse COMPANY_ROSTER_JSON env; falling back to file if present:', err.message);
+    }
+  }
+  if (fs.existsSync(COMPANY_ROSTER_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(COMPANY_ROSTER_PATH, 'utf8'));
+    } catch (err) {
+      console.warn('Failed to parse company_roster.json; defaulting to empty roster:', err.message);
+      return {};
+    }
+  }
+  return {};
 }
 
 function loadConfig() {
@@ -733,6 +761,33 @@ async function run() {
       }
     } catch (err) {
       console.error('Error collecting open-contributions descriptors:', err);
+      // Don't fail the entire update if this optional step fails
+    }
+  }
+
+  // Collect contributor company/team attribution if enabled (once per run)
+  if (fileConfig.collectCompanyData) {
+    try {
+      console.log('\n=== Collecting contributor company/team attribution ===');
+      const authorRows = db.prepare(`
+        SELECT DISTINCT author FROM (
+          SELECT DISTINCT author FROM pr_opened
+          UNION
+          SELECT DISTINCT author FROM pr_merged
+          UNION
+          SELECT DISTINCT author FROM issue_opened
+          UNION
+          SELECT DISTINCT author FROM commits
+        )
+      `).all();
+      const distinctAuthors = authorRows.map(r => r.author).filter(Boolean);
+      if (distinctAuthors.length > 0) {
+        await collectCompanyData(db, distinctAuthors, companyRoster, token);
+      } else {
+        console.log('No authors found for company attribution collection');
+      }
+    } catch (err) {
+      console.error('Error collecting company attribution data:', err);
       // Don't fail the entire update if this optional step fails
     }
   }
