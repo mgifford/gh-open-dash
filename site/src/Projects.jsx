@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import ProjectsBubble from './ProjectsBubble.jsx';
+import ProjectHistory from './ProjectHistory.jsx';
 
-function RepoCard({ repo, hasDescriptor }) {
+function RepoCard({ repo, hasDescriptor, contributorCompany = {} }) {
   const topContributors = Object.entries(repo.byAuthor || {})
     .map(([author, counts]) => ({ author, total: Object.values(counts).reduce((s, v) => s + v, 0), counts }))
     .sort((a, b) => b.total - a.total)
@@ -33,16 +34,22 @@ function RepoCard({ repo, hasDescriptor }) {
       <div className="repo-top">
         <strong>Top contributors:</strong>
         <ul>
-          {topContributors.map(t => (
-            <li key={t.author}>{t.author} — {t.total}</li>
-          ))}
+          {topContributors.map(t => {
+            const company = contributorCompany[t.author]?.company;
+            return (
+              <li key={t.author}>
+                {t.author} — {t.total}
+                {company && <span className="meta"> ({company})</span>}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
   );
 }
 
-export default function Projects({ data, selectedAuthor = 'all', metric = 'issues_opened' }) {
+export default function Projects({ data, selectedAuthor = 'all', metric = 'issues_opened', contributorCompany = {} }) {
   const [search, setSearch] = useState('');
   const [orgFilter, setOrgFilter] = useState('all');
   const [selectedRepo, setSelectedRepo] = useState(null);
@@ -109,14 +116,21 @@ export default function Projects({ data, selectedAuthor = 'all', metric = 'issue
             {(() => {
               const repoObj = data.repos.find(r => r.repo === selectedRepo);
               if (!repoObj) return <div>Repository data not found.</div>;
-              return <RepoCard repo={repoObj} hasDescriptor={descriptorRepos.has(repoObj.repo)} />;
+              return (
+                <>
+                  <RepoCard repo={repoObj} hasDescriptor={descriptorRepos.has(repoObj.repo)} contributorCompany={contributorCompany} />
+                  <div style={{ marginTop: 16 }}>
+                    <ProjectHistory repo={repoObj} contributorCompany={contributorCompany} />
+                  </div>
+                </>
+              );
             })()}
           </div>
         </div>
       )}
 
       <div className="projects-grid" style={{ marginTop: 12 }}>
-        {filtered.map(r => <div key={r.repo} onClick={() => setSelectedRepo(r.repo)}><RepoCard repo={r} hasDescriptor={descriptorRepos.has(r.repo)} /></div>)}
+        {filtered.map(r => <div key={r.repo} onClick={() => setSelectedRepo(r.repo)}><RepoCard repo={r} hasDescriptor={descriptorRepos.has(r.repo)} contributorCompany={contributorCompany} /></div>)}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 Software Bill of Materials for direct dependencies used by this repository.
 
-- Last reviewed: 2026-05-23 (UTC)
+- Last reviewed: 2026-07-06 (UTC) — no new dependencies introduced by the company/team contribution tracking feature (company roster + attribution flow use only existing packages).
 - Scope: direct dependencies from `/package.json` and `/site/package.json`
 - Source of truth: installed package metadata in `node_modules/*/package.json`
 
