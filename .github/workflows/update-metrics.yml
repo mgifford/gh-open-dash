@@ -3,7 +3,14 @@ name: Update metrics
 on:
   schedule:
     - cron: '0 7 * * 1' # weekly on Monday UTC
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      reprocess_from_week:
+        description: "ISO Monday date (YYYY-MM-DD) to restart processing from"
+        required: false
+      reprocess_weeks:
+        description: "Number of full weeks to reprocess from the last complete week"
+        required: false
   push:
     branches:
       - main
@@ -48,7 +55,13 @@ jobs:
           # Collect data (default to 52 weeks if starting empty, or respect vars)
           MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 52 }}
           HISTORY_WEEKS: ${{ vars.HISTORY_WEEKS || 52 }}
-          ORG_ALLOWLIST: ${{ vars.ORG_ALLOWLIST || 'civicactions' }}
+          # Org list intentionally NOT overridden here: scripts/config.json's
+          # orgAllowlist is the single source of truth (kept in sync by the
+          # scan-org-from-issue workflow). Overriding via a separate
+          # ORG_ALLOWLIST repo variable previously caused orgs added to
+          # config.json to be silently dropped from every scheduled run.
+          REPROCESS_FROM_WEEK: ${{ inputs.reprocess_from_week || '' }}
+          REPROCESS_WEEKS: ${{ inputs.reprocess_weeks || '' }}
         run: |
           node scripts/update_sqlite.mjs || true
 
