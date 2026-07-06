@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { test, expect, describe, afterEach } from 'vitest';
 import CompanyLeaderboard from '../CompanyLeaderboard.jsx';
 
@@ -58,5 +58,45 @@ describe('CompanyLeaderboard', () => {
     render(<CompanyLeaderboard items={sampleItems} contributorCompany={sampleCompanies} />);
     const rows = document.querySelectorAll('.company-leaderboard tbody tr');
     expect(rows[0].cells[1].textContent).toContain('CivicActions');
+  });
+
+  test('does not show an Impact Score column when repos/repoStars are not provided', () => {
+    render(<CompanyLeaderboard items={sampleItems} contributorCompany={sampleCompanies} />);
+    expect(screen.queryByText('Impact Score')).toBeNull();
+  });
+});
+
+describe('CompanyLeaderboard impact score', () => {
+  // alice has fewer raw contributions but to a far more widely-used project,
+  // so Impact Score and raw Contributions should disagree on the ranking.
+  const repos = [
+    { repo: 'org/popular', byAuthor: { alice: { prs_opened: 1 } } },
+    { repo: 'org/tiny', byAuthor: { carol: { prs_opened: 5 } } },
+  ];
+  const repoStars = [
+    { week_start: '2026-06-01', repo: 'org/popular', stars: 100000 },
+    { week_start: '2026-06-01', repo: 'org/tiny', stars: 0 },
+  ];
+
+  test('shows an Impact Score column when repos and repoStars are provided', () => {
+    render(<CompanyLeaderboard items={sampleItems} contributorCompany={sampleCompanies} repos={repos} repoStars={repoStars} />);
+    const headerRow = document.querySelector('.company-leaderboard thead tr');
+    expect(headerRow.textContent).toContain('Impact Score');
+  });
+
+  test('ranks by Impact Score by default, weighting contributions to popular repos higher', () => {
+    render(<CompanyLeaderboard items={sampleItems} contributorCompany={sampleCompanies} repos={repos} repoStars={repoStars} />);
+    const rows = document.querySelectorAll('.company-leaderboard tbody tr');
+    // alice's single contribution to a 100k-star repo outranks carol's 5
+    // contributions to a 0-star repo once reach is weighted in.
+    expect(rows[0].textContent).toContain('CivicActions');
+  });
+
+  test('switching sort to Contributions re-ranks by raw count', () => {
+    render(<CompanyLeaderboard items={sampleItems} contributorCompany={sampleCompanies} repos={repos} repoStars={repoStars} />);
+    fireEvent.change(screen.getByLabelText('Sort by:'), { target: { value: 'contributions' } });
+    const rows = document.querySelectorAll('.company-leaderboard tbody tr');
+    // Acme Corp (carol, 5 contributions) now outranks CivicActions (alice, 1 contribution).
+    expect(rows[0].textContent).toContain('Acme Corp');
   });
 });

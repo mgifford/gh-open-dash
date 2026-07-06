@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
+import { computeRepoStarWeights, computeCompanyImpact } from './companyImpact.js';
 
 function groupByCompany(items, contributorCompany) {
   const map = new Map();
@@ -7,37 +8,65 @@ function groupByCompany(items, contributorCompany) {
     const company = (info && info.company) || 'Unattributed';
     const team = info && info.team;
     if (!map.has(company)) {
-      map.set(company, { company, count: 0, contributors: new Set(), teams: new Map() });
+      map.set(company, { company, rawCount: 0, contributors: new Set(), teams: new Map() });
     }
     const entry = map.get(company);
-    entry.count += item.count;
+    entry.rawCount += item.count;
     entry.contributors.add(item.author);
     if (team) {
       entry.teams.set(team, (entry.teams.get(team) || 0) + item.count);
     }
   }
 
-  return Array.from(map.values())
-    .map(e => ({
-      company: e.company,
-      count: e.count,
-      contributorCount: e.contributors.size,
-      teams: Array.from(e.teams.entries())
-        .map(([team, count]) => ({ team, count }))
-        .sort((a, b) => b.count - a.count)
-    }))
-    .sort((a, b) => b.count - a.count);
+  return Array.from(map.values()).map(e => ({
+    company: e.company,
+    rawCount: e.rawCount,
+    impactScore: null,
+    contributorCount: e.contributors.size,
+    teams: Array.from(e.teams.entries())
+      .map(([team, count]) => ({ team, count }))
+      .sort((a, b) => b.count - a.count)
+  }));
 }
 
-// Ranks companies (and, where known, teams within them) by total contribution
-// volume so maintainers can recognize and incentivize the organizations behind
-// the work, not just individual contributors.
-export default function CompanyLeaderboard({ items = [], contributorCompany = {} }) {
-  const grouped = groupByCompany(items, contributorCompany);
-  const top = grouped.slice(0, 25);
+// Ranks companies (and, where known, teams within them) so maintainers can
+// recognize and incentivize the organizations behind the work, not just
+// individual contributors. When `repos` + `repoStars` are supplied, also
+// computes an all-time Impact Score that weights each contribution by the
+// reach (stars) of the project it went to — the GitHub-native analog of how
+// Drupal.org's marketplace scales credit by how many sites run a module.
+export default function CompanyLeaderboard({ items = [], contributorCompany = {}, repos, repoStars }) {
+  const hasImpactData = Array.isArray(repos) && repos.length > 0;
+  const [sortBy, setSortBy] = useState(hasImpactData ? 'impact' : 'contributions');
+
+  const grouped = useMemo(() => {
+    if (hasImpactData) {
+      const weights = computeRepoStarWeights(repoStars || []);
+      return computeCompanyImpact(repos, contributorCompany, weights);
+    }
+    return groupByCompany(items, contributorCompany);
+  }, [items, contributorCompany, repos, repoStars, hasImpactData]);
+
+  const sorted = useMemo(() => {
+    const key = sortBy === 'impact' && hasImpactData ? 'impactScore' : 'rawCount';
+    return [...grouped].sort((a, b) => b[key] - a[key]);
+  }, [grouped, sortBy, hasImpactData]);
+
+  const top = sorted.slice(0, 25);
 
   return (
     <div className="leaderboard company-leaderboard">
+      {hasImpactData && top.length > 0 && (
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginBottom: 8 }}>
+          <label>
+            Sort by:{' '}
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <option value="impact">Impact Score</option>
+              <option value="contributions">Contributions</option>
+            </select>
+          </label>
+        </div>
+      )}
       {top.length === 0 ? (
         <p>No company-attributed activity found in this period.</p>
       ) : (
@@ -48,6 +77,7 @@ export default function CompanyLeaderboard({ items = [], contributorCompany = {}
               <th>Company</th>
               <th className="num">Contributors</th>
               <th className="num">Contributions</th>
+              {hasImpactData && <th className="num">Impact Score</th>}
             </tr>
           </thead>
           <tbody>
@@ -63,13 +93,21 @@ export default function CompanyLeaderboard({ items = [], contributorCompany = {}
                   )}
                 </td>
                 <td className="num">{entry.contributorCount}</td>
-                <td className="num">{entry.count}</td>
+                <td className="num">{entry.rawCount}</td>
+                {hasImpactData && <td className="num">{entry.impactScore}</td>}
               </tr>
             ))}
           </tbody>
         </table>
       )}
-      {grouped.length > 25 && <p className="more-info">...and {grouped.length - 25} more.</p>}
+      {hasImpactData && top.length > 0 && (
+        <p className="meta">
+          Impact Score weights each contribution by the reach (GitHub stars) of the project it went to,
+          so contributions to widely-used projects count for more. All-time; not affected by the
+          Range/Metric filters above.
+        </p>
+      )}
+      {sorted.length > 25 && <p className="more-info">...and {sorted.length - 25} more.</p>}
     </div>
   );
 }

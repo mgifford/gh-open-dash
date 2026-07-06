@@ -328,7 +328,8 @@ node scripts/export_metrics.mjs
 
 Once enabled, the dashboard exposes:
 
-- A **Companies** tab with a company → project contribution flow diagram (with an accessible data-table alternative showing every company/team/contributor/project combination) and a **company leaderboard** ranking companies (and their teams) by total contribution volume.
+- A **Companies** tab with a company → project contribution flow diagram (with an accessible data-table alternative showing every company/team/contributor/project combination) and a **company leaderboard** ranking companies (and their teams) either by raw contribution count or by an **Impact Score**.
+- **Impact Score**: an all-time score that weights each contribution by the reach (GitHub star count) of the project it went to, so contributions to widely-used projects count for more than contributions to a small personal repo. This is the closest GitHub-native analog to how [Drupal.org's marketplace](https://www.drupal.org/drupalorg/docs/marketplace/contribution-credit-weight-and-impact-on-ranking) scales issue credit by how many sites run a module — GitHub has no install-count signal, so star count is used as the reach proxy, on a log scale so mega-projects don't completely dominate the ranking.
 - A **project history** panel on each project's detail view (under the **Projects** tab) showing weekly contributions broken down by company, so you can see who has been active on a project over time and which companies they represent.
 - Company badges next to each project's top contributors.
 

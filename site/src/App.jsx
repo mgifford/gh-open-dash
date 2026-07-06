@@ -722,8 +722,13 @@ function App() {
             </p>
             <CompanyFlow repos={processedData.filteredData.repos} contributorCompany={data.contributor_company} />
 
-            <h2 style={{ marginTop: 24 }}>Company Leaderboard ({range === 'all' ? 'All Time' : `Last ${range} Weeks`})</h2>
-            <CompanyLeaderboard items={processedData.leaderboard} contributorCompany={data.contributor_company} />
+            <h2 style={{ marginTop: 24 }}>Company Leaderboard</h2>
+            <CompanyLeaderboard
+              items={processedData.leaderboard}
+              contributorCompany={data.contributor_company}
+              repos={processedData.filteredData.repos}
+              repoStars={data.repo_stars}
+            />
           </section>
         )}
       </div>
