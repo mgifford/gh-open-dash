@@ -19,7 +19,7 @@ subtasks:
 - T015
 - T016
 - T017
-agent: claude
+agent: "claude"
 assignee: "claude"
 history:
 - event: implemented
@@ -145,3 +145,4 @@ columns, "Unattributed" bucketing).
 ## Activity Log
 
 - 2026-07-06T10:07:18Z – user – Backfill: implementation already existed in commit ffb1cc7/40ee172 before mission tracking was set up.
+- 2026-07-06T10:08:50Z – claude – Backfill: implementation, tests, and docs already existed and were verified before mission tracking was set up.
