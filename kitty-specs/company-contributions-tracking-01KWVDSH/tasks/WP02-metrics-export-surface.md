@@ -15,6 +15,7 @@ subtasks:
 - T006
 - T007
 agent: claude
+assignee: "claude"
 history:
 - event: implemented
   note: Landed in commit ffb1cc7 on claude/company-contributions-tracking-u22693, prior to this WP file being authored (backfill).
@@ -103,3 +104,7 @@ committed)
   length — acceptable at current dataset size (already ~1.8MB before this
   change), but worth monitoring if the configured history window grows
   substantially.
+
+## Activity Log
+
+- 2026-07-06T10:07:07Z – user – Backfill: implementation already existed in commit ffb1cc7/40ee172 before mission tracking was set up.
