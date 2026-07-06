@@ -1,7 +1,7 @@
 {
-  "event_count": 12,
-  "last_event_id": "01KWVEAZV8H1V9Q8FM8VHAVJVF",
-  "materialized_at": "2026-07-06T10:07:17.864365+00:00",
+  "event_count": 13,
+  "last_event_id": "01KWVEDCNP5RC6CMPYEKA621JH",
+  "materialized_at": "2026-07-06T10:08:36.534084+00:00",
   "mission_number": "",
   "mission_slug": "company-contributions-tracking-01KWVDSH",
   "mission_type": "software-dev",
@@ -11,18 +11,18 @@
     "canceled": 0,
     "claimed": 0,
     "done": 0,
-    "for_review": 0,
-    "in_progress": 4,
+    "for_review": 1,
+    "in_progress": 3,
     "in_review": 0,
     "planned": 0
   },
   "work_packages": {
     "WP01": {
-      "actor": "user",
+      "actor": "claude",
       "force_count": 0,
-      "lane": "in_progress",
-      "last_event_id": "01KWVEAG3B8TEE3WHN4MSQWZ51",
-      "last_transition_at": "2026-07-06T10:07:01.739725+00:00"
+      "lane": "for_review",
+      "last_event_id": "01KWVEDCNP5RC6CMPYEKA621JH",
+      "last_transition_at": "2026-07-06T10:08:36.534084+00:00"
     },
     "WP02": {
       "actor": "user",
