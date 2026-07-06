@@ -20,6 +20,7 @@ subtasks:
 - T016
 - T017
 agent: claude
+assignee: "claude"
 history:
 - event: implemented
   note: Landed in commit ffb1cc7 on claude/company-contributions-tracking-u22693, prior to this WP file being authored (backfill).
@@ -140,3 +141,7 @@ columns, "Unattributed" bucketing).
 - None blocking. The same bucketing/accessible-table pattern from WP03 was
   reused deliberately here for UI consistency rather than inventing a
   second interaction pattern.
+
+## Activity Log
+
+- 2026-07-06T10:07:18Z – user – Backfill: implementation already existed in commit ffb1cc7/40ee172 before mission tracking was set up.
