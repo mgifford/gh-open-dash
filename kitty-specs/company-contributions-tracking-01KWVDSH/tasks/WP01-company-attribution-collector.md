@@ -20,6 +20,7 @@ subtasks:
 - T003
 - T004
 agent: claude
+assignee: "claude"
 history:
 - event: implemented
   note: Landed in commit ffb1cc7 on claude/company-contributions-tracking-u22693, prior to this WP file being authored (backfill).
@@ -141,3 +142,7 @@ parsing convention.
 - No dedicated test harness exists for `.mjs` collector scripts in this
   repo; validation was manual (fixture DB + `node --check` syntax
   validation), matching the existing convention for `scripts/*.mjs`.
+
+## Activity Log
+
+- 2026-07-06T10:07:02Z – user – Backfill: implementation already existed in commit ffb1cc7/40ee172 before mission tracking was set up.
