@@ -12,7 +12,7 @@ requirement_refs:
 tracker_refs: []
 planning_base_branch: claude/company-contributions-tracking-u22693
 merge_target_branch: claude/company-contributions-tracking-u22693
-branch_strategy: single_branch — implemented directly on the mission's target branch, no lane worktree
+branch_strategy: Planning artifacts for this mission were generated on claude/company-contributions-tracking-u22693. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into claude/company-contributions-tracking-u22693 unless the human explicitly redirects the landing branch.
 subtasks:
 - T013
 - T014

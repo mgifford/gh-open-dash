@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "mission_slug": "company-contributions-tracking-01KWVDSH",
+  "mission_id": "01KWVDSHY5MRVW5N2XHET3XCMW",
+  "mission_branch": "kitty/mission-company-contributions-tracking-01KWVDSH",
+  "target_branch": "claude/company-contributions-tracking-u22693",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "scripts/company_collector.mjs",
+        "scripts/company_roster.json",
+        "scripts/set_config.mjs",
+        "scripts/update_sqlite.mjs"
+      ],
+      "predicted_surfaces": [
+        "api"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-b",
+      "wp_ids": [
+        "WP02"
+      ],
+      "write_scope": [
+        "scripts/export_metrics.mjs"
+      ],
+      "predicted_surfaces": [
+        "api"
+      ],
+      "depends_on_lanes": [
+        "lane-a"
+      ],
+      "parallel_group": 1
+    },
+    {
+      "lane_id": "lane-c",
+      "wp_ids": [
+        "WP03"
+      ],
+      "write_scope": [
+        "site/src/App.jsx",
+        "site/src/CompanyFlow.jsx",
+        "site/src/CompanyLeaderboard.jsx",
+        "site/src/__tests__/CompanyFlow.test.jsx",
+        "site/src/__tests__/CompanyLeaderboard.test.jsx",
+        "site/src/companyImpact.js"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "artifact-rendering"
+      ],
+      "depends_on_lanes": [
+        "lane-b"
+      ],
+      "parallel_group": 2
+    },
+    {
+      "lane_id": "lane-d",
+      "wp_ids": [
+        "WP04"
+      ],
+      "write_scope": [
+        "AGENTS.md",
+        "FEATURES.md",
+        "README.md",
+        "SBOM.md",
+        "site/src/ProjectHistory.jsx",
+        "site/src/Projects.jsx",
+        "site/src/__tests__/ProjectHistory.test.jsx"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "artifact-rendering",
+        "tests"
+      ],
+      "depends_on_lanes": [
+        "lane-b"
+      ],
+      "parallel_group": 2
+    }
+  ],
+  "computed_at": "2026-07-06T10:06:23.023485+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}
