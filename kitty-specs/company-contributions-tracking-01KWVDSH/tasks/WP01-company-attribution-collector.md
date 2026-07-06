@@ -19,7 +19,7 @@ subtasks:
 - T002
 - T003
 - T004
-agent: claude
+agent: "claude"
 assignee: "claude"
 history:
 - event: implemented
@@ -146,3 +146,4 @@ parsing convention.
 ## Activity Log
 
 - 2026-07-06T10:07:02Z – user – Backfill: implementation already existed in commit ffb1cc7/40ee172 before mission tracking was set up.
+- 2026-07-06T10:08:37Z – claude – Backfill: implementation, tests, and docs already existed and were verified before mission tracking was set up.
