@@ -744,6 +744,7 @@ function App() {
               contributorCompany={data.contributor_company}
               repos={processedData.filteredData.repos}
               repoStars={data.repo_stars}
+              ecosystemsRepos={processedData.filteredData.ecosystems?.repositories}
             />
           </section>
         )}

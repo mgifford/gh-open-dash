@@ -99,4 +99,31 @@ describe('CompanyLeaderboard impact score', () => {
     // Acme Corp (carol, 5 contributions) now outranks CivicActions (alice, 1 contribution).
     expect(rows[0].textContent).toContain('Acme Corp');
   });
+
+  test('blends in Ecosyste.ms dependent-repo counts when provided, mentioning it in the footnote', () => {
+    // org/tiny has no stars but a large number of dependents, so carol's
+    // contributions there should now outrank alice's single contribution to
+    // the (merely popular) starred repo.
+    const ecosystemsRepos = [
+      { repo: 'org/popular', dependent_repos_count: 0 },
+      { repo: 'org/tiny', dependent_repos_count: 5000 },
+    ];
+    render(
+      <CompanyLeaderboard
+        items={sampleItems}
+        contributorCompany={sampleCompanies}
+        repos={repos}
+        repoStars={repoStars}
+        ecosystemsRepos={ecosystemsRepos}
+      />
+    );
+    const rows = document.querySelectorAll('.company-leaderboard tbody tr');
+    expect(rows[0].textContent).toContain('Acme Corp');
+    expect(screen.getByText(/blended with Ecosyste\.ms dependent-repo counts/i)).toBeDefined();
+  });
+
+  test('does not mention Ecosyste.ms blending in the footnote when no ecosystems data is provided', () => {
+    render(<CompanyLeaderboard items={sampleItems} contributorCompany={sampleCompanies} repos={repos} repoStars={repoStars} />);
+    expect(screen.queryByText(/blended with Ecosyste\.ms/i)).toBeNull();
+  });
 });
