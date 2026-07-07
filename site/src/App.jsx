@@ -17,7 +17,7 @@ import MetricCard from "./MetricCard.jsx";
 import WhyOpen from "./WhyOpen.jsx";
 import OrgSelector from "./OrgSelector.jsx";
 import WorkflowRunsChart from "./WorkflowRunsChart.jsx";
-import { getCurrentOrg, filterReposByOrg } from "./orgUtils.js";
+import { getCurrentOrg, filterReposByOrg, buildSeriesFromRepos, filterRowsByRepoSet } from "./orgUtils.js";
 import "./styles.css";
 
 async function loadMetrics() {
@@ -179,7 +179,14 @@ function App() {
 
     const orgRepos = orgHasData ? requestedOrgRepos : filterReposByOrg(data.repos || [], effectiveOrg);
 
-    // Build a filtered-data view for repo-level components
+    // Org-scoped weekly series, built from each repo's own weekly/byAuthor
+    // breakdown rather than the flat, all-repos data.series. This is what
+    // makes org filtering apply to the leaderboard, weekly trend chart, and
+    // metric cards — not just repo-shaped views like Projects/Ecosyste.ms.
+    const orgSeriesFull = buildSeriesFromRepos(orgRepos, data.weeks || []);
+    const orgPrDetails = filterRowsByRepoSet(data.pr_details || [], orgRepos);
+
+    // Build a filtered-data view for repo-level and org-scoped components
     const filteredEcosystems = data.ecosystems ? {
       ...data.ecosystems,
       repositories: filterReposByOrg(data.ecosystems.repositories || [], effectiveOrg),
@@ -191,12 +198,15 @@ function App() {
       repos: orgRepos,
       repo_stars: filterReposByOrg(data.repo_stars || [], effectiveOrg),
       ecosystems: filteredEcosystems,
+      series: orgSeriesFull,
+      pr_details: orgPrDetails,
+      workflow_runs: filterRowsByRepoSet(data.workflow_runs || [], orgRepos),
     };
 
     // 1. Filter weeks based on range
     let weeks = data.weeks;
-    let series = data.series;
-    
+    let series = orgSeriesFull;
+
     if (range !== "all") {
       const count = parseInt(range, 10);
       weeks = weeks.slice(-count);
@@ -324,23 +334,29 @@ function App() {
 
   // Calculate total workflow runs across visible weeks (must be before early returns)
   const totalWorkflowRuns = useMemo(() => {
-    if (!data || !data.workflow_runs || data.workflow_runs.length === 0) return null;
     if (!processedData) return null;
+    const orgWorkflowRuns = processedData.filteredData?.workflow_runs || [];
+    if (orgWorkflowRuns.length === 0) return null;
     const weekSet = new Set(processedData.chartData.labels || []);
-    return data.workflow_runs
+    return orgWorkflowRuns
       .filter(r => weekSet.size === 0 || weekSet.has(r.week_start))
       .reduce((sum, r) => sum + r.run_count, 0);
-  }, [data, processedData]);
+  }, [processedData]);
 
   if (!data) return <div className="loading">Loading participation data...</div>;
   if (!processedData) return <div className="loading">Processing...</div>;
 
-  // Calculate overview metrics
+  // Calculate overview metrics — all scoped to the currently selected org via
+  // processedData.filteredData.series / .pr_details (see buildSeriesFromRepos).
+  const orgSeries = processedData.filteredData.series || [];
+  const orgPrDetails = processedData.filteredData.pr_details || [];
   const totalContributions = processedData.leaderboard.reduce((sum, item) => sum + item.count, 0);
-  const totalContributors = data.authors.length;
+  const totalContributors = new Set(
+    orgSeries.flatMap(week => Object.keys(week.byAuthor || {}))
+  ).size;
   const totalRepos = processedData.orgRepos.length;
   const activeContributors = processedData.leaderboard.filter(item => item.count > 0).length;
-  
+
   // Helper function to calculate weekly activity
   const calculateWeeklyActivity = (weekData) => {
     if (!weekData || !weekData.byAuthor) return 0;
@@ -348,33 +364,33 @@ function App() {
       return sum + Object.values(metrics).reduce((s, v) => s + (typeof v === 'number' ? v : 0), 0);
     }, 0);
   };
-  
-  const thisWeekActivity = data.series && data.series.length > 0 
-    ? calculateWeeklyActivity(data.series[data.series.length - 1])
+
+  const thisWeekActivity = orgSeries.length > 0
+    ? calculateWeeklyActivity(orgSeries[orgSeries.length - 1])
     : 0;
 
   // Calculate PR merge success rate
   const calculatePRSuccessRate = () => {
-    if (!data.series || data.series.length === 0) return 0;
+    if (orgSeries.length === 0) return 0;
     let totalMerged = 0;
     let totalClosed = 0;
-    
-    data.series.forEach(week => {
+
+    orgSeries.forEach(week => {
       Object.values(week.byAuthor || {}).forEach(metrics => {
         totalMerged += metrics.prs_merged || 0;
         totalClosed += metrics.prs_closed || 0;
       });
     });
-    
+
     if (totalClosed === 0) return 0;
     return Math.round((totalMerged / totalClosed) * 100);
   };
 
   // Calculate average PR merge time
   const calculateAvgMergeTime = () => {
-    if (!data.pr_details || data.pr_details.length === 0) return null;
-    
-    const mergeTimes = data.pr_details
+    if (orgPrDetails.length === 0) return null;
+
+    const mergeTimes = orgPrDetails
       .filter(pr => pr.merge_time_hours !== null && pr.was_merged)
       .map(pr => pr.merge_time_hours);
     
@@ -649,17 +665,17 @@ function App() {
 
             <section className="chart-section">
               <h2>PR Success Rate</h2>
-              <PRSuccessChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+              <PRSuccessChart data={processedData.filteredData} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
             </section>
 
             <section className="chart-section">
               <h2>Issues vs PRs Over Time</h2>
-              <IssuesPRsRatioChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+              <IssuesPRsRatioChart data={processedData.filteredData} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
             </section>
 
             <section className="chart-section">
               <h2>PR Merge Time & Size</h2>
-              <PRMetricsChart data={data} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
+              <PRMetricsChart data={processedData.filteredData} weeks={processedData.chartData.labels} selectedAuthor={selectedAuthor} />
             </section>
 
             <section className="chart-section">
@@ -670,7 +686,7 @@ function App() {
             {/* GitHub Actions Workflow Runs */}
             <section className="chart-section">
               <h2>GitHub Actions Workflow Runs</h2>
-              <WorkflowRunsChart data={data} weeks={processedData.chartData.labels} />
+              <WorkflowRunsChart data={processedData.filteredData} weeks={processedData.chartData.labels} />
             </section>
 
             {/* Ecosyste.ms Enhanced Visualizations */}

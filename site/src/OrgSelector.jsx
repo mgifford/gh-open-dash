@@ -114,11 +114,13 @@ function OrgSelector({ currentOrg, defaultOrg, onOrgChange, effectiveOrg }) {
         Examples: <code>openplus</code> or <code>https://github.com/openplus</code>
         <br />
         The selected organization is saved in browser storage and reflected in the URL (<code>?org=</code>).
-        Repository charts and counts will update to show only repos from the selected org.
+        All charts, metric cards, and the leaderboard update to show only activity on repos owned by the
+        selected org.
         <br />
-        <strong>Note:</strong> contribution trends and leaderboards reflect all data in the pre-generated
-        dataset. To collect metrics <em>for a different org</em>, add it to{' '}
-        <code>orgAllowlist</code> in <code>scripts/config.json</code> and re-run the data pipeline.
+        <strong>Note:</strong> this only works for orgs already present in the pre-generated dataset. To
+        collect metrics <em>for a different org</em>, add it to{' '}
+        <code>orgAllowlist</code> in <code>scripts/config.json</code> and re-run the data pipeline (or open
+        a <code>SCAN: orgname</code> issue on this repository).
       </div>
     </div>
   );

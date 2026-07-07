@@ -308,6 +308,8 @@ At the bottom of the page, you'll find the "Choose Organization" section where y
 
 **Note**: The URL parameter always takes precedence over localStorage settings.
 
+**Scope**: switching orgs only works for organizations already present in the pre-generated dataset (i.e. in `scripts/config.json`'s `orgAllowlist`, with data actually collected). Selecting an org filters the *entire* dashboard — metric cards, the weekly trend chart, the leaderboard, PR success/merge-time/issues charts, GitHub Actions runs, and the Projects/Companies tabs — to that org's repos, not just the repo-shaped views. (Prior to a July 2026 fix, only the repo-shaped views were actually filtered; the rest of the dashboard silently showed unfiltered, all-orgs data regardless of the selected org.)
+
 ## Ecosyste.ms Integration
 
 The dashboard can optionally integrate with [Ecosyste.ms](https://ecosyste.ms) to provide enhanced repository insights:

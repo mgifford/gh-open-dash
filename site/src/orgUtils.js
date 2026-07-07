@@ -126,3 +126,69 @@ export function filterReposByOrg(repos, org) {
     return owner && owner.toLowerCase() === orgLower;
   });
 }
+
+const EMPTY_AUTHOR_METRICS = () => ({
+  prs_opened: 0, prs_merged: 0, prs_closed: 0, issues_opened: 0, issues_closed: 0,
+  commits: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0, meeting_mentions: 0
+});
+
+/**
+ * Build a weekly per-author activity series (the same shape as the
+ * top-level `metrics.json#series`) scoped to only the given repos, by
+ * aggregating each repo's `weekly[].byAuthor` breakdown across repos for
+ * every week.
+ *
+ * This is what makes org filtering apply to the dashboard's leaderboard,
+ * weekly trend chart, and metric cards — not just the repo-shaped views
+ * (Projects, Ecosyste.ms charts) — since those repo-level weekly breakdowns
+ * carry a repo/org dimension that the flat, all-repos `series` never had.
+ *
+ * Note: `meeting_mentions` has no per-repo breakdown in the export, so it
+ * is always 0 in the returned series regardless of org scope.
+ *
+ * @param {Array} repos - repo objects (already filtered to the desired org),
+ *   each with a `weekly` array of `{ week_start, byAuthor }`.
+ * @param {Array<string>} allWeeks - the full ordered list of week_start
+ *   strings to index the returned series by (so positions line up with
+ *   any downstream range-slicing of the caller's `weeks` array).
+ * @returns {Array<{week_start: string, byAuthor: Object}>}
+ */
+export function buildSeriesFromRepos(repos, allWeeks) {
+  const weekMap = new Map();
+  for (const week of (allWeeks || [])) {
+    weekMap.set(week, {});
+  }
+
+  for (const repo of (repos || [])) {
+    for (const w of (repo.weekly || [])) {
+      let byAuthor = weekMap.get(w.week_start);
+      if (!byAuthor) {
+        byAuthor = {};
+        weekMap.set(w.week_start, byAuthor);
+      }
+      for (const [author, counts] of Object.entries(w.byAuthor || {})) {
+        if (!byAuthor[author]) byAuthor[author] = EMPTY_AUTHOR_METRICS();
+        for (const [key, value] of Object.entries(counts)) {
+          byAuthor[author][key] = (byAuthor[author][key] || 0) + (value || 0);
+        }
+      }
+    }
+  }
+
+  return (allWeeks || Array.from(weekMap.keys()).sort())
+    .map(week_start => ({ week_start, byAuthor: weekMap.get(week_start) || {} }));
+}
+
+/**
+ * Filter an array of pr_details-style rows (which carry a `repo` field) to
+ * only those belonging to the given set of repo names.
+ *
+ * @param {Array} rows - objects with a `repo` property
+ * @param {Array} repos - repo objects (already filtered to the desired org)
+ * @returns {Array}
+ */
+export function filterRowsByRepoSet(rows, repos) {
+  if (!Array.isArray(rows)) return [];
+  const repoNames = new Set((repos || []).map(r => r.repo));
+  return rows.filter(row => row && repoNames.has(row.repo));
+}

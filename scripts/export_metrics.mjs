@@ -357,12 +357,13 @@ issuesOpenedByRepoWeek.forEach(r => addRepoWeekRow(r, 'issues_opened'));
 issuesClosedByRepoWeek.forEach(r => addRepoWeekRow(r, 'issues_closed'));
 commitsByRepoWeek.forEach(r => addRepoWeekRow(r, 'commits'));
 
-// comment counts per-repo per-week
-const commentsByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, kind, SUM(count) as count FROM comment_counts GROUP BY repo, week_start, kind`).all();
+// comment counts per-repo per-week per-author, so org-scoped views can
+// include comment activity alongside PRs/issues/commits.
+const commentsByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, author, kind, SUM(count) as count FROM comment_counts GROUP BY repo, week_start, author, kind`).all();
 commentsByRepoWeek.forEach(r => {
   const kindKeyMap = { issue_comment: 'comments_issue', pr_review_comment: 'comments_pr_review', commit_comment: 'comments_commit' };
   const key = kindKeyMap[r.kind];
-  if (key) addRepoWeekRow({ repo: r.repo, spdx: r.spdx, week_start: r.week_start, count: r.count }, key);
+  if (key) addRepoWeekRow({ repo: r.repo, spdx: r.spdx, week_start: r.week_start, author: r.author, count: r.count }, key);
 });
 
 // finalize repos array, converting weekly Maps to arrays sorted by week_start

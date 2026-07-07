@@ -32,7 +32,18 @@ const sampleMetrics = {
     { week_start: '2025-12-08', byAuthor: { alice: { prs_opened: 0, prs_closed: 1, prs_merged: 1, issues_opened: 0, issues_closed: 1 }, bob: { prs_opened: 1, prs_closed: 0, prs_merged: 0, issues_opened: 1, issues_closed: 0 } } }
   ],
   repos: [
-    { repo: 'civicactions/project-a', spdx: 'MIT', totals: { prs_opened: 1, prs_merged: 1, prs_closed: 1, issues_opened: 0, issues_closed: 0, commits: 0 }, byAuthor: {}, weekly: [] }
+    {
+      repo: 'civicactions/project-a',
+      spdx: 'MIT',
+      totals: { prs_opened: 1, prs_merged: 1, prs_closed: 1, issues_opened: 0, issues_closed: 0, commits: 0 },
+      byAuthor: {},
+      // Mirrors `series` above so buildSeriesFromRepos() reconstructs the same
+      // per-week/per-author activity when scoped to this repo's org.
+      weekly: [
+        { week_start: '2025-12-01', totals: {}, byAuthor: { alice: { prs_opened: 1, prs_closed: 0, prs_merged: 0, issues_opened: 2, issues_closed: 0 }, bob: { prs_opened: 0, prs_closed: 0, prs_merged: 0, issues_opened: 0, issues_closed: 0 } } },
+        { week_start: '2025-12-08', totals: {}, byAuthor: { alice: { prs_opened: 0, prs_closed: 1, prs_merged: 1, issues_opened: 0, issues_closed: 1 }, bob: { prs_opened: 1, prs_closed: 0, prs_merged: 0, issues_opened: 1, issues_closed: 0 } } }
+      ]
+    }
   ],
   orgs: ['civicactions'],
   collectAllPublic: false,
