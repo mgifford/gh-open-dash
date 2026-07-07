@@ -420,7 +420,7 @@ function App() {
         </div>
       </header>
 
-      <Hero config={config} />
+      <Hero config={config} viewingOrg={processedData.effectiveOrg} defaultOrg={defaultOrg} />
 
       {processedData.effectiveOrg !== currentOrg && (() => {
         const scanIssueTitle = `SCAN: ${currentOrg}`;

@@ -47,6 +47,28 @@ describe('Hero', () => {
     const { container } = render(<Hero />);
     expect(container.querySelector('.hero')).not.toBeNull();
   });
+
+  test('does not show a "viewing" badge when viewingOrg matches defaultOrg', () => {
+    render(<Hero viewingOrg="civicactions" defaultOrg="civicactions" />);
+    expect(screen.queryByRole('status')).toBeNull();
+  });
+
+  test('does not show a "viewing" badge when viewingOrg or defaultOrg is missing', () => {
+    render(<Hero viewingOrg="chaoss" />);
+    expect(screen.queryByRole('status')).toBeNull();
+  });
+
+  test('shows a prominent "viewing" badge naming the org when it differs from the default', () => {
+    render(<Hero viewingOrg="chaoss" defaultOrg="civicactions" />);
+    const badge = screen.getByRole('status');
+    expect(badge.textContent).toContain('chaoss');
+    expect(badge.textContent).toContain('CivicActions');
+  });
+
+  test('"viewing" badge comparison is case-insensitive', () => {
+    render(<Hero viewingOrg="CivicActions" defaultOrg="civicactions" />);
+    expect(screen.queryByRole('status')).toBeNull();
+  });
 });
 
 // ---------------------------------------------------------------------------
