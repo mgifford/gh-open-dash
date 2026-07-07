@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { computeRepoStarWeights, computeCompanyImpact } from './companyImpact.js';
+import { computeRepoReachWeights, computeCompanyImpact } from './companyImpact.js';
 
 function groupByCompany(items, contributorCompany) {
   const map = new Map();
@@ -33,19 +33,21 @@ function groupByCompany(items, contributorCompany) {
 // recognize and incentivize the organizations behind the work, not just
 // individual contributors. When `repos` + `repoStars` are supplied, also
 // computes an all-time Impact Score that weights each contribution by the
-// reach (stars) of the project it went to — the GitHub-native analog of how
+// reach of the project it went to — the GitHub-native analog of how
 // Drupal.org's marketplace scales credit by how many sites run a module.
-export default function CompanyLeaderboard({ items = [], contributorCompany = {}, repos, repoStars }) {
+// Reach blends GitHub stars with Ecosyste.ms's dependent-repo count when
+// `ecosystemsRepos` is supplied (see companyImpact.js for why).
+export default function CompanyLeaderboard({ items = [], contributorCompany = {}, repos, repoStars, ecosystemsRepos }) {
   const hasImpactData = Array.isArray(repos) && repos.length > 0;
   const [sortBy, setSortBy] = useState(hasImpactData ? 'impact' : 'contributions');
 
   const grouped = useMemo(() => {
     if (hasImpactData) {
-      const weights = computeRepoStarWeights(repoStars || []);
+      const weights = computeRepoReachWeights(repoStars || [], ecosystemsRepos || []);
       return computeCompanyImpact(repos, contributorCompany, weights);
     }
     return groupByCompany(items, contributorCompany);
-  }, [items, contributorCompany, repos, repoStars, hasImpactData]);
+  }, [items, contributorCompany, repos, repoStars, ecosystemsRepos, hasImpactData]);
 
   const sorted = useMemo(() => {
     const key = sortBy === 'impact' && hasImpactData ? 'impactScore' : 'rawCount';
@@ -102,7 +104,10 @@ export default function CompanyLeaderboard({ items = [], contributorCompany = {}
       )}
       {hasImpactData && top.length > 0 && (
         <p className="meta">
-          Impact Score weights each contribution by the reach (GitHub stars) of the project it went to,
+          Impact Score weights each contribution by the reach of the project it went to — GitHub stars
+          {Array.isArray(ecosystemsRepos) && ecosystemsRepos.length > 0
+            ? ', blended with Ecosyste.ms dependent-repo counts when available,'
+            : ''}{' '}
           so contributions to widely-used projects count for more. All-time; not affected by the
           Range/Metric filters above.
         </p>

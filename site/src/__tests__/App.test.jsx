@@ -32,7 +32,18 @@ const sampleMetrics = {
     { week_start: '2025-12-08', byAuthor: { alice: { prs_opened: 0, prs_closed: 1, prs_merged: 1, issues_opened: 0, issues_closed: 1 }, bob: { prs_opened: 1, prs_closed: 0, prs_merged: 0, issues_opened: 1, issues_closed: 0 } } }
   ],
   repos: [
-    { repo: 'civicactions/project-a', spdx: 'MIT', totals: { prs_opened: 1, prs_merged: 1, prs_closed: 1, issues_opened: 0, issues_closed: 0, commits: 0 }, byAuthor: {}, weekly: [] }
+    {
+      repo: 'civicactions/project-a',
+      spdx: 'MIT',
+      totals: { prs_opened: 1, prs_merged: 1, prs_closed: 1, issues_opened: 0, issues_closed: 0, commits: 0 },
+      byAuthor: {},
+      // Mirrors `series` above so buildSeriesFromRepos() reconstructs the same
+      // per-week/per-author activity when scoped to this repo's org.
+      weekly: [
+        { week_start: '2025-12-01', totals: {}, byAuthor: { alice: { prs_opened: 1, prs_closed: 0, prs_merged: 0, issues_opened: 2, issues_closed: 0 }, bob: { prs_opened: 0, prs_closed: 0, prs_merged: 0, issues_opened: 0, issues_closed: 0 } } },
+        { week_start: '2025-12-08', totals: {}, byAuthor: { alice: { prs_opened: 0, prs_closed: 1, prs_merged: 1, issues_opened: 0, issues_closed: 1 }, bob: { prs_opened: 1, prs_closed: 0, prs_merged: 0, issues_opened: 1, issues_closed: 0 } } }
+      ]
+    }
   ],
   orgs: ['civicactions'],
   collectAllPublic: false,
@@ -332,15 +343,21 @@ test('selecting Meeting Attendance metric shows correct heading', async () => {
 });
 
 test('contribution score leaderboard ranks author with more weighted contributions higher', async () => {
+  // The leaderboard's per-week activity is now sourced from repos[].weekly
+  // (org-scoped), not the flat top-level `series` — see buildSeriesFromRepos
+  // in orgUtils.js. Both must be overridden consistently or the test would
+  // silently exercise different numbers than it asserts about.
+  const weekByAuthor = {
+    alice: { prs_merged: 2, commits: 1, prs_opened: 0, issues_opened: 0, prs_closed: 0, issues_closed: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0, meeting_mentions: 0 },
+    bob:   { prs_merged: 0, commits: 0, prs_opened: 1, issues_opened: 1, prs_closed: 0, issues_closed: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0, meeting_mentions: 3 }
+  };
   const metricsWithScore = {
     ...sampleMetrics,
-    series: [
+    series: [{ week_start: '2025-12-01', byAuthor: weekByAuthor }],
+    repos: [
       {
-        week_start: '2025-12-01',
-        byAuthor: {
-          alice: { prs_merged: 2, commits: 1, prs_opened: 0, issues_opened: 0, prs_closed: 0, issues_closed: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0, meeting_mentions: 0 },
-          bob:   { prs_merged: 0, commits: 0, prs_opened: 1, issues_opened: 1, prs_closed: 0, issues_closed: 0, comments_issue: 0, comments_pr_review: 0, comments_commit: 0, meeting_mentions: 3 }
-        }
+        ...sampleMetrics.repos[0],
+        weekly: [{ week_start: '2025-12-01', totals: {}, byAuthor: weekByAuthor }]
       }
     ]
   };
@@ -362,5 +379,11 @@ test('contribution score leaderboard ranks author with more weighted contributio
     expect(rows.length).toBeGreaterThan(0);
     // alice should be ranked first (higher score)
     expect(rows[0].textContent).toContain('alice');
+    // Exact scores pin down that meeting_mentions weighting is actually
+    // applied via the org-scoped (repos-derived) series, not just that some
+    // arbitrary ranking happens to put alice first.
+    expect(rows[0].textContent).toContain('14');
+    expect(rows[1].textContent).toContain('bob');
+    expect(rows[1].textContent).toContain('11');
   });
 });

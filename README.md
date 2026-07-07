@@ -216,14 +216,57 @@ npm install
 
 ### Reprocessing history after allowlist changes
 
-If you change the org allowlist or staff allowlist and need historical data recomputed with the new lists:
+`scripts/config.json`'s `orgAllowlist` is the single source of truth for which
+orgs get collected — the collector and exporter both read it directly, and
+the deploy workflow no longer overrides it with a separate repo variable (see
+[Known issue: two data workflows](#known-issue-two-data-workflows) below for
+why that mattered).
 
-1. Update allowlists: set `ORG_ALLOWLIST` repo variable and/or `STAFF_ALLOWLIST_JSON` secret (JSON array of usernames). Keep them public-only per AGENTS.md rules.
-2. Trigger **Update participation data** via **Run workflow** and supply one of:
+If you change the org allowlist (or staff allowlist) and need historical data
+recomputed with the new lists:
+
+1. Update `scripts/config.json`'s `orgAllowlist` (this happens automatically
+   when you open a `SCAN: orgname` issue — see "Viewing Other Organizations"
+   above) and/or the `STAFF_ALLOWLIST_JSON` secret (JSON array of usernames,
+   public-only per AGENTS.md rules).
+2. Trigger the **Update metrics** workflow (`update-metrics.yml`) via **Run
+   workflow** and supply one of:
    - `reprocess_from_week` (YYYY-MM-DD Monday) to restart from that week, or
-   - `reprocess_weeks` (number) to rebuild that many full weeks back from the last complete week.
-   These map to `REPROCESS_FROM_WEEK` / `REPROCESS_WEEKS` envs consumed by `scripts/update_sqlite.mjs`.
-3. Let the workflow finish; it will rewrite `data/participation.sqlite` and `data/metrics.json` for the specified window, then the Pages deploy will publish the new aggregates.
+   - `reprocess_weeks` (number) to rebuild that many full weeks back from the
+     last complete week.
+   These map to `REPROCESS_FROM_WEEK` / `REPROCESS_WEEKS` envs consumed by
+   `scripts/update_sqlite.mjs`.
+3. Let the workflow finish; it rewrites the persisted `data/participation.sqlite`
+   cache and `data/metrics.json` for the specified window, builds the site,
+   and deploys it to GitHub Pages in the same run.
+
+**Why a reprocess is needed for newly added orgs**: the collector tracks
+"already collected" per week, not per org. Once a week is marked complete
+(which happens quickly for a long-running dashboard), adding a new org to
+`orgAllowlist` does *not* retroactively query that org for already-complete
+weeks — only a `reprocess_weeks`/`reprocess_from_week` run clears that flag
+and re-queries the specified window for every currently configured org.
+
+#### Known issue: two data workflows
+
+This repository currently has two workflows that both run the data pipeline:
+
+- **`update-metrics.yml`** ("Update metrics") — runs weekly, on push to
+  `main`, and on manual dispatch. This is the **only** workflow that builds
+  and deploys the GitHub Pages site, and it maintains its own persisted
+  SQLite cache (`sqlite-db-*`).
+- **`update-data.yml`** ("Update participation data") — runs weekly and on
+  manual dispatch (with `reprocess_from_week`/`reprocess_weeks` inputs), but
+  only commits `data/metrics.json` to git; it does **not** deploy the site,
+  and it maintains a *separate* persisted SQLite cache (`participation-data-*`)
+  from `update-metrics.yml`.
+
+Because these two workflows never share a cache, data collected by
+`update-data.yml` (or by `scan-org-from-issue.yml`, which shares
+`update-data.yml`'s cache) never reaches the deployed dashboard on its own —
+only `update-metrics.yml`'s own cache and org list determine what's actually
+live. Use **`update-metrics.yml`** for the reprocessing steps above. The two
+workflows should probably be consolidated; that has not been done yet.
 
 ## Deployment
 
@@ -264,6 +307,8 @@ At the bottom of the page, you'll find the "Choose Organization" section where y
 4. Click "Reset" to return to the default organization
 
 **Note**: The URL parameter always takes precedence over localStorage settings.
+
+**Scope**: switching orgs only works for organizations already present in the pre-generated dataset (i.e. in `scripts/config.json`'s `orgAllowlist`, with data actually collected). Selecting an org filters the *entire* dashboard — metric cards, the weekly trend chart, the leaderboard, PR success/merge-time/issues charts, GitHub Actions runs, and the Projects/Companies tabs — to that org's repos, not just the repo-shaped views. (Prior to a July 2026 fix, only the repo-shaped views were actually filtered; the rest of the dashboard silently showed unfiltered, all-orgs data regardless of the selected org.)
 
 ## Ecosyste.ms Integration
 
@@ -329,7 +374,7 @@ node scripts/export_metrics.mjs
 Once enabled, the dashboard exposes:
 
 - A **Companies** tab with a company → project contribution flow diagram (with an accessible data-table alternative showing every company/team/contributor/project combination) and a **company leaderboard** ranking companies (and their teams) either by raw contribution count or by an **Impact Score**.
-- **Impact Score**: an all-time score that weights each contribution by the reach (GitHub star count) of the project it went to, so contributions to widely-used projects count for more than contributions to a small personal repo. This is the closest GitHub-native analog to how [Drupal.org's marketplace](https://www.drupal.org/drupalorg/docs/marketplace/contribution-credit-weight-and-impact-on-ranking) scales issue credit by how many sites run a module — GitHub has no install-count signal, so star count is used as the reach proxy, on a log scale so mega-projects don't completely dominate the ranking.
+- **Impact Score**: an all-time score that weights each contribution by the reach of the project it went to, so contributions to widely-used projects count for more than contributions to a small personal repo. This is the closest GitHub-native analog to how [Drupal.org's marketplace](https://www.drupal.org/drupalorg/docs/marketplace/contribution-credit-weight-and-impact-on-ranking) scales issue credit by how many sites run a module. GitHub itself has no install-count signal, so star count is used as a baseline reach proxy; when [Ecosyste.ms integration](#ecosystems-integration) is enabled, its `dependent_repos_count` (the number of other repos that depend on this one as a package) is blended in too — a much closer analog to Drupal's real "sites running this module" signal than stars alone, since it measures actual downstream reliance rather than popularity. Each signal is log-scaled independently so mega-projects don't completely dominate the ranking, and the weight degrades gracefully to stars-only for repos without Ecosyste.ms data.
 - A **project history** panel on each project's detail view (under the **Projects** tab) showing weekly contributions broken down by company, so you can see who has been active on a project over time and which companies they represent.
 - Company badges next to each project's top contributors.
 
@@ -350,7 +395,7 @@ This project is committed to transparency about AI usage. Below is a record of A
 |---|---|---|
 | [GitHub Copilot](https://github.com/features/copilot) (Coding Agent) | Claude Sonnet (via GitHub Copilot) | Used to write and refactor code, generate documentation, implement new features, and review pull requests throughout the development of this project. |
 | [GitHub Copilot](https://github.com/features/copilot) (Task Agent) | GPT-5 (via GitHub Copilot) | Used to implement data-pipeline improvements, update collector configuration, and revise project documentation during development. Not used at runtime. |
-| [Claude Code](https://claude.com/product/claude-code) | Claude (Anthropic) | Used to design and implement the company/team contribution attribution feature — collector, SQLite schema, metrics export, and the Companies/project-history dashboard UI — and to update related documentation. Not used at runtime. |
+| [Claude Code](https://claude.com/product/claude-code) | Claude (Anthropic) | Used to design and implement the company/team contribution attribution feature (collector, SQLite schema, metrics export, Companies/project-history dashboard UI), fix org-filtering and data-pipeline bugs, blend Ecosyste.ms dependent-repo data into the Impact Score, and update related documentation. Not used at runtime. |
 
 ### AI used during CI/CD or data collection
 

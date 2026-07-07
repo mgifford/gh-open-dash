@@ -1,11 +1,19 @@
 // Weights company contributions by the reach of the project they were made
 // to, so a PR to a widely-used project counts for more than one to a tiny
 // repo — the closest GitHub-native analog to how Drupal.org's marketplace
-// scales issue credit by how many sites run a module. GitHub has no
-// install-count signal, so star count (already collected for every tracked
-// repo) is used as the reach proxy. A log scale keeps mega-projects from
-// completely dominating the ranking, mirroring Drupal's capped 1-10 scale.
-export function computeRepoStarWeights(repoStars = []) {
+// scales issue credit by how many sites run a module.
+//
+// GitHub itself has no install-count signal, so star count (collected for
+// every tracked repo) is used as a baseline reach proxy. When Ecosyste.ms
+// data is available (collectEcosystemsData), its `dependent_repos_count` —
+// the number of other repositories that depend on this one as a package —
+// is blended in too: it measures real downstream reliance rather than mere
+// popularity, much closer to Drupal's actual "sites running this module"
+// signal. Each signal is log-scaled independently (so mega-projects don't
+// dominate) and summed, so a repo with real dependents but few stars still
+// scores well, and the weight degrades gracefully to stars-only when no
+// Ecosyste.ms data exists for a repo.
+export function computeRepoReachWeights(repoStars = [], ecosystemsRepos = []) {
   const maxStars = new Map();
   for (const row of repoStars) {
     if (!row || !row.repo) continue;
@@ -14,9 +22,18 @@ export function computeRepoStarWeights(repoStars = []) {
       maxStars.set(row.repo, stars);
     }
   }
+  const dependents = new Map();
+  for (const row of ecosystemsRepos) {
+    if (!row || !row.repo) continue;
+    const count = typeof row.dependent_repos_count === 'number' ? row.dependent_repos_count : 0;
+    dependents.set(row.repo, count);
+  }
+  const repos = new Set([...maxStars.keys(), ...dependents.keys()]);
   const weights = new Map();
-  for (const [repo, stars] of maxStars.entries()) {
-    weights.set(repo, 1 + Math.log10(1 + Math.max(0, stars)));
+  for (const repo of repos) {
+    const stars = maxStars.get(repo) || 0;
+    const dependentCount = dependents.get(repo) || 0;
+    weights.set(repo, 1 + Math.log10(1 + Math.max(0, stars)) + Math.log10(1 + Math.max(0, dependentCount)));
   }
   return weights;
 }

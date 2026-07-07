@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseOrgInput, getCurrentOrg, saveOrgOverride, clearOrgOverride, filterReposByOrg } from '../orgUtils.js';
+import { parseOrgInput, getCurrentOrg, saveOrgOverride, clearOrgOverride, filterReposByOrg, buildSeriesFromRepos, filterRowsByRepoSet } from '../orgUtils.js';
 
 describe('parseOrgInput', () => {
   it('should parse plain org names', () => {
@@ -167,5 +167,77 @@ describe('filterReposByOrg', () => {
   it('should handle repos with missing repo field', () => {
     const mixed = [{ repo: 'civicactions/a' }, { spdx: 'MIT' }, null];
     expect(filterReposByOrg(mixed, 'civicactions')).toEqual([{ repo: 'civicactions/a' }]);
+  });
+});
+
+describe('buildSeriesFromRepos', () => {
+  const allWeeks = ['2026-01-05', '2026-01-12', '2026-01-19'];
+
+  it('aggregates weekly byAuthor data across the given repos only', () => {
+    const repos = [
+      {
+        repo: 'org-a/repo-1',
+        weekly: [
+          { week_start: '2026-01-05', byAuthor: { alice: { prs_opened: 2 } } },
+          { week_start: '2026-01-12', byAuthor: { alice: { prs_opened: 1 }, bob: { issues_opened: 3 } } },
+        ],
+      },
+      {
+        repo: 'org-b/repo-2',
+        weekly: [
+          { week_start: '2026-01-05', byAuthor: { carol: { prs_merged: 1 } } },
+        ],
+      },
+    ];
+
+    // Scoping to only org-a/repo-1 must exclude carol's org-b activity entirely.
+    const series = buildSeriesFromRepos([repos[0]], allWeeks);
+    expect(series.map(w => w.week_start)).toEqual(allWeeks);
+    expect(series[0].byAuthor.alice.prs_opened).toBe(2);
+    expect(series[0].byAuthor.carol).toBeUndefined();
+    expect(series[1].byAuthor.bob.issues_opened).toBe(3);
+    expect(series[2].byAuthor).toEqual({});
+  });
+
+  it('sums the same metric key across multiple repos in the same org/week', () => {
+    const repos = [
+      { repo: 'org-a/repo-1', weekly: [{ week_start: '2026-01-05', byAuthor: { alice: { prs_opened: 2 } } }] },
+      { repo: 'org-a/repo-2', weekly: [{ week_start: '2026-01-05', byAuthor: { alice: { prs_opened: 3 } } }] },
+    ];
+    const series = buildSeriesFromRepos(repos, ['2026-01-05']);
+    expect(series[0].byAuthor.alice.prs_opened).toBe(5);
+  });
+
+  it('returns an empty-but-shaped series when given no repos', () => {
+    const series = buildSeriesFromRepos([], allWeeks);
+    expect(series).toEqual(allWeeks.map(week_start => ({ week_start, byAuthor: {} })));
+  });
+
+  it('defaults untouched metric keys to 0 rather than leaving them undefined', () => {
+    const repos = [{ repo: 'org-a/repo-1', weekly: [{ week_start: '2026-01-05', byAuthor: { alice: { prs_opened: 1 } } }] }];
+    const series = buildSeriesFromRepos(repos, ['2026-01-05']);
+    expect(series[0].byAuthor.alice.prs_merged).toBe(0);
+    expect(series[0].byAuthor.alice.comments_issue).toBe(0);
+  });
+});
+
+describe('filterRowsByRepoSet', () => {
+  const rows = [
+    { repo: 'org-a/repo-1', week_start: '2026-01-05', author: 'alice' },
+    { repo: 'org-b/repo-2', week_start: '2026-01-05', author: 'carol' },
+  ];
+
+  it('keeps only rows whose repo is in the given repo set', () => {
+    const repos = [{ repo: 'org-a/repo-1' }];
+    expect(filterRowsByRepoSet(rows, repos)).toEqual([rows[0]]);
+  });
+
+  it('returns an empty array for non-array input', () => {
+    expect(filterRowsByRepoSet(null, [{ repo: 'org-a/repo-1' }])).toEqual([]);
+    expect(filterRowsByRepoSet(undefined, [{ repo: 'org-a/repo-1' }])).toEqual([]);
+  });
+
+  it('returns an empty array when repos is empty', () => {
+    expect(filterRowsByRepoSet(rows, [])).toEqual([]);
   });
 });

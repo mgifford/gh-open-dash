@@ -357,13 +357,26 @@ issuesOpenedByRepoWeek.forEach(r => addRepoWeekRow(r, 'issues_opened'));
 issuesClosedByRepoWeek.forEach(r => addRepoWeekRow(r, 'issues_closed'));
 commitsByRepoWeek.forEach(r => addRepoWeekRow(r, 'commits'));
 
-// comment counts per-repo per-week
-const commentsByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, kind, SUM(count) as count FROM comment_counts GROUP BY repo, week_start, kind`).all();
+// comment counts per-repo per-week per-author, so org-scoped views can
+// include comment activity alongside PRs/issues/commits.
+const commentsByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, author, kind, SUM(count) as count FROM comment_counts GROUP BY repo, week_start, author, kind`).all();
 commentsByRepoWeek.forEach(r => {
   const kindKeyMap = { issue_comment: 'comments_issue', pr_review_comment: 'comments_pr_review', commit_comment: 'comments_commit' };
   const key = kindKeyMap[r.kind];
-  if (key) addRepoWeekRow({ repo: r.repo, spdx: r.spdx, week_start: r.week_start, count: r.count }, key);
+  if (key) addRepoWeekRow({ repo: r.repo, spdx: r.spdx, week_start: r.week_start, author: r.author, count: r.count }, key);
 });
+
+// meeting mentions per-repo (all-time) and per-repo-per-week-per-author, so
+// org-scoped views built from repos[].weekly (see site/src/orgUtils.js
+// buildSeriesFromRepos) include meeting attendance alongside every other
+// tracked metric instead of it always reading as zero once scoped by repo.
+if (tableExists('meeting_mentions')) {
+  const meetingMentionsByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM meeting_mentions GROUP BY repo, author`).all();
+  meetingMentionsByRepo.forEach(r => addRepoRow(r, 'meeting_mentions'));
+
+  const meetingMentionsByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, author, count(*) as count FROM meeting_mentions GROUP BY repo, week_start, author`).all();
+  meetingMentionsByRepoWeek.forEach(r => addRepoWeekRow(r, 'meeting_mentions'));
+}
 
 // finalize repos array, converting weekly Maps to arrays sorted by week_start
 const repos = Array.from(repoMap.values()).map(e => {

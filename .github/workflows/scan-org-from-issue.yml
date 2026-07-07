@@ -79,11 +79,6 @@ jobs:
     needs: parse-title
     if: needs.parse-title.outputs.is-scan == 'true' && needs.parse-title.outputs.org != ''
     runs-on: ubuntu-latest
-    # Build the combined allowlist once at the job level to avoid duplication
-    env:
-      # GH_READ_ORG_TOKEN is an optional PAT with read:org scope for higher rate limits;
-      # falls back to the default GITHUB_TOKEN if not set.
-      COMBINED_ORG_ALLOWLIST: "${{ vars.ORG_ALLOWLIST || 'civicactions' }},${{ needs.parse-title.outputs.org }}"
     steps:
       - uses: actions/checkout@v6
 
@@ -136,16 +131,18 @@ jobs:
           "
 
       - name: Collect data for requested org
+        # ORG_ALLOWLIST intentionally not set here: scripts/config.json was
+        # just updated above to include the new org, so both scripts read it
+        # directly as their single source of truth (see update-metrics.yml
+        # for why a separate ORG_ALLOWLIST variable caused orgs to be
+        # silently dropped from scheduled collection).
         env:
           GITHUB_TOKEN: ${{ secrets.GH_READ_ORG_TOKEN || secrets.GITHUB_TOKEN }}
-          ORG_ALLOWLIST: ${{ env.COMBINED_ORG_ALLOWLIST }}
           HISTORY_WEEKS: ${{ vars.HISTORY_WEEKS || 52 }}
           MAX_WEEKS_PER_RUN: ${{ vars.MAX_WEEKS_PER_RUN || 4 }}
         run: node scripts/update_sqlite.mjs
 
       - name: Export metrics
-        env:
-          ORG_ALLOWLIST: ${{ env.COMBINED_ORG_ALLOWLIST }}
         run: node scripts/export_metrics.mjs
 
       - name: Commit updated config and metrics
