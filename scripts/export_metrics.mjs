@@ -366,6 +366,18 @@ commentsByRepoWeek.forEach(r => {
   if (key) addRepoWeekRow({ repo: r.repo, spdx: r.spdx, week_start: r.week_start, author: r.author, count: r.count }, key);
 });
 
+// meeting mentions per-repo (all-time) and per-repo-per-week-per-author, so
+// org-scoped views built from repos[].weekly (see site/src/orgUtils.js
+// buildSeriesFromRepos) include meeting attendance alongside every other
+// tracked metric instead of it always reading as zero once scoped by repo.
+if (tableExists('meeting_mentions')) {
+  const meetingMentionsByRepo = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, author, count(*) as count FROM meeting_mentions GROUP BY repo, author`).all();
+  meetingMentionsByRepo.forEach(r => addRepoRow(r, 'meeting_mentions'));
+
+  const meetingMentionsByRepoWeek = db.prepare(`SELECT repo, COALESCE(spdx, '') as spdx, week_start, author, count(*) as count FROM meeting_mentions GROUP BY repo, week_start, author`).all();
+  meetingMentionsByRepoWeek.forEach(r => addRepoWeekRow(r, 'meeting_mentions'));
+}
+
 // finalize repos array, converting weekly Maps to arrays sorted by week_start
 const repos = Array.from(repoMap.values()).map(e => {
   const weekly = Array.from(e.weekly.values()).sort((a,b) => a.week_start.localeCompare(b.week_start));
